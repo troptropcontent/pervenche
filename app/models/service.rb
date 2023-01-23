@@ -1,4 +1,3 @@
 class Service < ApplicationRecord
-  encrypts :username
-  encrypts :password
+  encrypts :username, :password
 end

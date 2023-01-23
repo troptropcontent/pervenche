@@ -10,9 +10,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_23_070249) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_23_180243) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "robots", force: :cascade do |t|
+    t.bigint "service_id", null: false
+    t.string "license_plate", null: false
+    t.string "payment_method", null: false
+    t.string "zipcode", null: false
+    t.integer "duration", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["service_id"], name: "index_robots_on_service_id"
+  end
+
+  create_table "services", force: :cascade do |t|
+    t.string "integer", default: "0", null: false
+    t.string "name", null: false
+    t.string "username", null: false
+    t.string "password", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -28,4 +48,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_23_070249) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "robots", "services"
 end
