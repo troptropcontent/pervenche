@@ -8,6 +8,9 @@
   .btn-primary {
     @apply py-2 px-4 bg-blue-200;
   }
+   .field_with_errors > input {
+    @apply py-2 px-4 bg-blue-200;
+  }
 }
 
 */
