@@ -5,4 +5,6 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root 'robots#index'
+  resources :services, only: %i[index new create]
+  resources :robots, only: %i[index new create]
 end
