@@ -1,0 +1,8 @@
+<div class="flex bg-background-dark p-2 justify-between"> 
+    <%= link_to root_path do %>
+        <h1 class='text-background-light text-xl font-bold'>Pervenche</h1>
+    <% end %>
+    <div class="flex flex-col justify-center">
+        <%= button_to "Logout", destroy_user_session_path, method: :delete, class: 'text-background-light', data: {turbo: :false}  %>
+    </div>
+</div>
