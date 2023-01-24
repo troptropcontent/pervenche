@@ -1,0 +1,10 @@
+en:
+  views:
+    services:
+      form:
+        name:
+          placeholder: "Your service name"
+        username:
+          placeholder: "Your service username"
+        password:
+          placeholder: "Your service password"

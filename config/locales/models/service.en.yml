@@ -1,0 +1,9 @@
+en:
+  models:
+    service:
+      attributes:
+        kind:
+          enum:
+            pay_by_phone: "PayByPhone"
+      validations:
+        credentials: "invalid. The email or password provided seems not to be correct."

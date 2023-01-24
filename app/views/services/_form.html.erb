@@ -1,0 +1,30 @@
+<%= form_with model: service, class: 'grow flex flex-col justify-between py-4' do |form| %>
+  <div class="flex flex-col gap-4">
+    <div class='flex flex-col'>
+        <%= form.label :name %>
+        <%= form.text_field :name, placeholder: t('views.services.form.name.placeholder') %>
+    </div>
+    <div class='flex flex-col'>
+        <%= form.label :kind %>
+        <%= form.select :kind, kinds %>
+    </div>
+    <div class='flex flex-col'>
+        <%= form.label :username %>
+        <%= form.text_field :username, placeholder: t('views.services.form.username.placeholder') %>
+    </div>
+    <div class='flex flex-col'>
+        <%= form.label :password %>
+        <%= form.password_field :password, placeholder: t('views.services.form.password.placeholder')  %>
+    </div>
+    <% if service.errors.any? %>
+        <div id="error_explanation">
+            <ul>
+            <% service.errors.each do |error| %>
+                <li><%= error.full_message %></li>
+            <% end %>
+            </ul>
+        </div>
+    <% end %>
+  </div>
+  <%= form.submit class: 'bg-blue p-2 rounded-md text-background-light font-bold' %>
+<% end %>
