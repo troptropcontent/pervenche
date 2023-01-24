@@ -1,0 +1,16 @@
+en:
+  views:
+    robots:
+      index:
+        empty: "It seems that you do not have any rebot set up. Create one with the + button bellow"
+      form:
+        name:
+          placeholder: "Your robot name"
+        payment_method:
+          placeholder: "Payment method used"
+        zipcode:
+          placeholder: "Zipcode of the parking"
+        duration:
+          placeholder: "Number of days"
+        license_plate:
+          placeholder: "License plate of the car"

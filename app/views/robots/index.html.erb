@@ -1,1 +1,13 @@
-<h1>Hello from the robot index</h1>
+<main class="h-screen flex flex-col">
+    <%= render 'components/navbar'%>
+    <div class="robots container mx-auto overflow-y-auto scrollbar-hide py-4">
+        <%= render @robots %>
+        <p class='invisible only:visible text-center'><%= t('views.robots.index.empty') %></p>
+    </div>
+
+    <button class=>
+    </button>
+    <%= link_to (@services_setup ? new_robot_path : new_service_path), class: "fixed z-90 bottom-10 right-8 bg-blue w-16 h-16 rounded-full drop-shadow-lg flex justify-center items-center hover:bg-background-dark hover:drop-shadow-2xl duration-300" do %>
+        <%= inline_svg_tag('plus', class: 'text-4xl text-background-light') %>
+    <% end %>
+</main>

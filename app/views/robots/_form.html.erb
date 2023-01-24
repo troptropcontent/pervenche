@@ -1,0 +1,38 @@
+<%= form_with model: robot, class: 'grow flex flex-col justify-between py-4' do |form| %>
+  <div class="flex flex-col gap-4">
+    <div class='flex flex-col'>
+        <%= form.label :name %>
+        <%= form.text_field :name, placeholder: t('views.robots.form.name.placeholder') %>
+    </div>
+    <div class='flex flex-col'>
+        <%= form.label :license_plate %>
+        <%= form.text_field :license_plate, placeholder: t('views.robots.form.license_plate.placeholder') %>
+    </div>
+    <div class='flex flex-col'>
+        <%= form.label :service_id %>
+        <%= form.collection_select :service_id, @services, :id, :name %>
+    </div>
+    <div class='flex flex-col'>
+        <%= form.label :payment_method %>
+        <%= form.text_field :payment_method, placeholder: t('views.robots.form.payment_method.placeholder') %>
+    </div>
+    <div class='flex flex-col'>
+        <%= form.label :zipcode %>
+        <%= form.text_field :zipcode, placeholder: t('views.robots.form.zipcode.placeholder')  %>
+    </div>
+    <div class='flex flex-col'>
+        <%= form.label :duration %>
+        <%= form.text_field :duration, value: (robot.duration || 1), placeholder: t('views.robots.form.duration.placeholder')  %>
+    </div>
+    <% if robot.errors.any? %>
+        <div id="error_explanation">
+            <ul>
+            <% robot.errors.each do |error| %>
+                <li><%= error.full_message %></li>
+            <% end %>
+            </ul>
+        </div>
+    <% end %>
+  </div>
+  <%= form.submit class: 'bg-blue p-2 rounded-md text-background-light font-bold' %>
+<% end %>
