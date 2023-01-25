@@ -1,3 +1,12 @@
-<div>
-    <%= robot.name %>
+<div class='shadow-md flex p-4 gap-4'>
+    <%= image_tag("logo_pay_by_phone.png", alt: "PayByPhone logo", class: "h-24 w-24 my-auto") %>
+    <div class="grow flex flex-col">
+        <div class="flex flex-row-reverse">
+            <%= render 'components/switcher', status: robot.active %>
+        </div>
+        <h2 class='font-bold'><%= t('views.robots.robot.vehicle') %></h2>
+        <p><%= robot.license_plate %></p>
+        <h2 class='font-bold'><%= t('views.robots.robot.last_ticket') %></h2>
+        <p>Ticket dates(to setup)</p>
+    </div>
 </div>

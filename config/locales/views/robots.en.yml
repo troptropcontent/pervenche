@@ -3,6 +3,9 @@ en:
     robots:
       index:
         empty: "It seems that you do not have any rebot set up. Create one with the + button bellow"
+      robot:
+        vehicle: "Vehicle :"
+        last_ticket: "Last ticket :"
       form:
         name:
           placeholder: "Your robot name"
