@@ -21,6 +21,10 @@ class Robot < ApplicationRecord
     running_ticket_in_client && tickets.create!(running_ticket_in_client)
   end
 
+  def renew
+    !running_ticket_in_client? && client.renew
+  end
+
   private
 
   def client
