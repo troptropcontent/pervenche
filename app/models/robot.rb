@@ -13,10 +13,16 @@ class Robot < ApplicationRecord
     !!running_ticket_in_database
   end
 
+  def running_ticket_in_client
+    @running_ticket_in_client ||= client.current_ticket
+  end
+
   def save_running_ticket_in_client!
-    tickets.create!(
-      running_ticket_in_client.except(:client)
-    )
+    running_ticket_in_client &&
+
+      tickets.create!(
+        running_ticket_in_client.except(:client)
+      )
   end
 
   private
@@ -32,9 +38,5 @@ class Robot < ApplicationRecord
         card_number: payment_method
       }
     )
-  end
-
-  def running_ticket_in_client
-    @running_ticket_in_client ||= client.current_ticket
   end
 end
