@@ -42,6 +42,9 @@ gem 'redis', '~> 4.0'
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
+# svgs
+gem 'inline_svg'
+
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', require: false
 
@@ -55,6 +58,9 @@ gem 'bootsnap', require: false
 gem 'sorbet', group: :development
 gem 'sorbet-runtime'
 gem 'tapioca', require: false, group: :development
+
+# Money
+gem 'money-rails', '~>1.12'
 
     gem 'factory_bot_rails'
 group :development, :test do
@@ -86,3 +92,5 @@ gem 'cancancan'
 gem 'devise'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-rails_csrf_protection'
+
+gem "sidekiq", "~> 7.0"
