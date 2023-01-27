@@ -17,12 +17,8 @@ class Robot < ApplicationRecord
     @running_ticket_in_client ||= client.current_ticket
   end
 
-  def save_running_ticket_in_client!
-    running_ticket_in_client &&
-
-      tickets.create!(
-        running_ticket_in_client.except(:client)
-      )
+  def save_running_ticket_from_client!
+    running_ticket_in_client && tickets.create!(running_ticket_in_client)
   end
 
   private
