@@ -1,7 +1,7 @@
 
 <div class="cover">
     <div class='box'>
-      <h2><%= t('devise.sessions.title')%></h2>
+      <h2 class='text__align--center'><%= t('devise.sessions.title')%></h2>
       <%= button_to omniauth_authorize_path(resource_name, 'google_oauth2'), method: :post, data: {turbo: :false}, class: 'btn' do %>
         <%= image_tag  "btn_google_signin_1x.png" %>
       <% end %>
@@ -11,6 +11,7 @@
       <%= simple_form_for resource, 
                           as: resource_name, 
                           url: session_path(resource_name),
+                          method: :post,
                           html: {
                             class: "quote form form--column",
                             data: { turbo: false }
