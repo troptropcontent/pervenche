@@ -1,0 +1,20 @@
+// Mixins
+@import "mixins/media";
+
+// Configuration
+@import "config/variables";
+@import "config/reset";
+
+// Components
+@import "components/btn";
+@import "components/text_divider";
+@import "components/switcher";
+@import "components/form";
+@import "components/visually_hidden";
+@import "components/error_message";
+
+
+// Layouts
+@import "layouts/container";
+@import "layouts/cover";
+@import "layouts/box";

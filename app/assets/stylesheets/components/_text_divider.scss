@@ -1,0 +1,11 @@
+.text-divider {
+    display: flex;
+    align-items: center; 
+    gap: var(--space-xs);
+    &::before, &::after {
+        content: '';
+        height: 1px;
+        background-color: var(--color-dark);
+        flex-grow: 1; 
+      }
+  }
