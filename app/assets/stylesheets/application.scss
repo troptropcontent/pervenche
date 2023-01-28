@@ -12,12 +12,15 @@
 @import "components/form";
 @import "components/visually_hidden";
 @import "components/error_message";
+@import "components/navbar";
+@import "components/robot";
 
 
 // Layouts
 @import "layouts/container";
 @import "layouts/cover";
 @import "layouts/box";
+@import "layouts/stack";
 
 
 //utilities

@@ -1,8 +1,11 @@
-<main class="h-screen flex flex-col">
-    <%= render 'components/navbar'%>
-    <div class="robots container mx-auto overflow-y-auto scrollbar-hide p-4">
-        <%= render @robots %>
-        <p class='invisible only:visible text-center'><%= t('views.robots.index.empty') %></p>
+<main class="container">
+    <div class="stack">
+        
+        <% 10.times do |single| %>
+            <%= render @robots %>
+        <% end %>
+        
+        <p class='stack__only'><%= t('views.robots.index.empty') %></p>
     </div>
 
     <button class=>
