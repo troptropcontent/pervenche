@@ -2,6 +2,9 @@ en:
   views:
     robots:
       index:
+        header:
+          title: "Robots"
+          new: "Add robot"
         empty: "It seems that you do not have any rebot set up. Create one with the + button bellow"
       robot:
         vehicle: "Vehicle :"

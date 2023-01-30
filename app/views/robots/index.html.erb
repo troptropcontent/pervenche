@@ -1,16 +1,13 @@
 <main class="container">
-    <div class="stack">
-        
-        <% 10.times do |single| %>
-            <%= render @robots %>
-        <% end %>
-        
-        <p class='stack__only'><%= t('views.robots.index.empty') %></p>
+   <div class="header">
+    <h1><%= t('views.robots.index.header.title') %></h1>
+    <%= link_to t('views.robots.index.header.new'),
+                new_robot_path,
+                class: "btn btn--primary",
+                data: { turbo: false } %>
     </div>
-
-    <button class=>
-    </button>
-    <%= link_to (@services_setup ? new_robot_path : new_service_path), class: "fixed z-90 bottom-10 right-8 bg-blue w-16 h-16 rounded-full drop-shadow-lg flex justify-center items-center hover:bg-background-dark hover:drop-shadow-2xl duration-300" do %>
-        <%= inline_svg_tag('plus', class: 'text-4xl text-background-light') %>
-    <% end %>
+    <div class="stack">
+        <%= render @robots %>
+        <p class='stack__only'><%= t('views.robots.index.empty') %></p>
+    </div>    
 </main>

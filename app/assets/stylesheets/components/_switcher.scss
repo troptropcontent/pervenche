@@ -13,7 +13,7 @@
         height: 0;
 
         &:checked + .slider {
-            background-color: var(--color-secondary);
+            background-color: var(--color-success);
           }
         &:checked + .slider:before {
             -webkit-transform: translateX(16px);
@@ -30,7 +30,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: var(--color-primary);
+    background-color: var(--color-danger);
     -webkit-transition: .4s;
     transition: .4s;
     &:before {

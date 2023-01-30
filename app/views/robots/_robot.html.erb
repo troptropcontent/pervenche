@@ -3,10 +3,14 @@
         <%= image_tag("logo_pay_by_phone.png", alt: "PayByPhone logo", class: "robot__image") %>
         <%= render 'components/switcher', status: robot.active %>
     </div>
-    <div class='robot__content'>
-        <h3><%= t('views.robots.robot.vehicle') %></h3>
-        <p><%= robot.license_plate %></p>
-        <h3><%= t('views.robots.robot.running_ticket') %></h3>
-        <p><%= ticket_coverage(robot.running_ticket_in_database) %></p>
+    <div class='stack'>
+        <div>
+            <h3><%= t('views.robots.robot.vehicle') %></h3>
+            <p><%= robot.license_plate %></p>
+        </div>
+        <div>
+            <h3><%= t('views.robots.robot.running_ticket') %></h3>
+            <p><%= ticket_coverage(robot.running_ticket_in_database) %></p>
+        </div>
     </div>
 </div>

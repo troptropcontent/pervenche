@@ -1,6 +1,7 @@
 .robot {
     display: flex;
     flex-direction: column;
+    gap: var(--space-xs);
 
     background-color: var(--color-white);
     border-radius: var(--border-radius);
