@@ -1,9 +1,12 @@
 
 <div class="cover">
-    <div class='box'>
+    <div class='box stack'>
       <h2 class='text__align--center'><%= t('devise.sessions.title')%></h2>
-      <%= button_to omniauth_authorize_path(resource_name, 'google_oauth2'), method: :post, data: {turbo: :false}, class: 'btn' do %>
-        <%= image_tag  "btn_google_signin_1x.png" %>
+      <%= button_to omniauth_authorize_path(resource_name, 'google_oauth2'), 
+          method: :post, data: {turbo: :false}, 
+          class: 'btn btn--sign-in', 
+          form_class: 'form form--column' do %>
+          <%= t 'devise.sessions.oauth.google' %>
       <% end %>
 
       <div class="text-divider"><%= t('devise.sessions.sign_in_with_username_and_password') %></div>

@@ -69,4 +69,28 @@
           color: var(--color-white);
         }
       }
+      &--sign-in {
+        display: flex;
+        gap: var(--space-xs);
+        color: var(--color-text-body);
+        border-color: var(--color-light);
+        background-color: var(--color-white);
+    
+        &:hover,
+        &:focus,
+        &:focus-within,
+        &:active {
+          background-color: var(--color-light);
+        }
+        &::before {
+          background-image: url(google_logo.svg);
+          
+          content: '';
+          height: var(--image-l);
+          width: var(--image-l);
+          display: inline-block;
+          margin-top: auto;
+          margin-bottom: auto;
+        }
+      }
   }
