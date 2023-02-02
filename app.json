@@ -1,0 +1,8 @@
+{
+    "cron": [
+      {
+        "command": "bundle exec rails robot:renew_ticket_if_required",
+        "schedule": "* * * * *"
+      }
+    ]
+  }
