@@ -278,6 +278,11 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
+    sentry-rails (5.4.1)
+      railties (>= 5.0)
+      sentry-ruby (~> 5.4.1)
+    sentry-ruby (5.4.2)
+      concurrent-ruby (~> 1.0, >= 1.0.2)
     sidekiq (7.0.3)
       concurrent-ruby (< 2)
       connection_pool (>= 2.3.0)
@@ -383,6 +388,8 @@ DEPENDENCIES
   rspec-rails
   sassc-rails
   selenium-webdriver
+  sentry-rails
+  sentry-ruby
   sidekiq (~> 7.0)
   simple_form
   sorbet

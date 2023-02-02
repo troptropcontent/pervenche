@@ -27,6 +27,10 @@ gem 'stimulus-rails'
 # gem that wraps the parkign apps
 gem 'parking_ticket'
 
+# Sentry to catch all errrors
+gem 'sentry-rails'
+gem 'sentry-ruby'
+
 # Use Tailwind CSS [https://github.com/rails/tailwindcss-rails]
 # gem 'tailwindcss-rails'
 
