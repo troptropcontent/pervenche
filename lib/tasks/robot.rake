@@ -1,7 +1,7 @@
 namespace :robot do
   desc 'This task will save a new ticket or renew a ticket if needed'
   task renew_ticket_if_required: :environment do
-    robots_with_no_ticket_in_database = Robot.where.missing(:running_ticket_in_database)
+    robot_with_no_ticket_in_database = Robot.where.missing(:running_ticket_in_database)
     if robots_with_no_ticket_in_database.empty?
       puts 'All robots have a running ticket in database'
     else
