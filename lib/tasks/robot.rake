@@ -7,7 +7,7 @@ namespace :robot do
     else
       robots_with_no_ticket_in_database.find_each do |robot|
         puts "Checking Robot #{robot.id}"
-        result = Robot::RenewTicketIfRequiredService.new(robot).call
+        result = Robots::RenewTicketIfRequiredService.new(robot).call
         puts "Result : #{result}"
       end
     end
