@@ -4,8 +4,8 @@
 .switch {
     position: relative;
     display: inline-block;
-    width: var(--font-size-xxxxl);
-    height: var(--font-size-xxl);
+    width: var(--image-xxxxxl);
+    height: var(--image-xxl);
 
     input {
         opacity: 0;
@@ -16,9 +16,9 @@
             background-color: var(--color-success);
           }
         &:checked + .slider:before {
-            -webkit-transform: translateX(16px);
-            -ms-transform: translateX(16px);
-            transform: translateX(16px);
+            -webkit-transform: translateX(24px);
+            -ms-transform: translateX(24px);
+            transform: translateX(24px);
           }
     }
   }
@@ -36,8 +36,8 @@
     &:before {
         position: absolute;
         content: "";
-        height: var(--font-size-xl);
-        width: var(--font-size-xl);
+        height: var(--image-xl);
+        width: var(--image-xl);
         left: 2px;
         bottom: 2px;
         background-color: var(--color-white);

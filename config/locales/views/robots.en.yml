@@ -7,8 +7,12 @@ en:
           new: "Add robot"
         empty: "It seems that you do not have any rebot set up. Create one with the + button bellow"
       robot:
+        status: "Status :"
+        covered: "Covered"
+        uncovered: "Not covered"
         vehicle: "Vehicle :"
         running_ticket: "Running ticket :"
+        no_ticket_found: "No ticket found, renewing."
       form:
         name:
           placeholder: "Your robot name"

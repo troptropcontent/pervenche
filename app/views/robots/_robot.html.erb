@@ -1,7 +1,7 @@
 <div class='robot'>
     <div class="robot__header">
         <%= image_tag("logo_pay_by_phone.png", alt: "PayByPhone logo", class: "robot__image") %>
-        <%= render 'components/switcher', status: robot.active %>
+        <%= render 'components/switcher', resource: robot, resource_boolean: 'active' %>
     </div>
     <div class='stack'>
         <div>
@@ -9,8 +9,20 @@
             <p><%= robot.license_plate %></p>
         </div>
         <div>
-            <h3><%= t('views.robots.robot.running_ticket') %></h3>
-            <p><%= ticket_coverage(robot.running_ticket_in_database) %></p>
+
+            <% if robot.running_ticket_in_database %>    
+                    <div class='cluster'>
+                        <h3><%= t('views.robots.robot.status') %></h3>
+                        <p class='text__color--success'><%=  t('views.robots.robot.covered')%></p>
+                    </div>
+                    <p><%= ticket_coverage(robot.running_ticket_in_database) %></p>
+                <% else %>
+                    <div class='cluster'>
+                        <h3><%= t('views.robots.robot.status') %></h3>
+                        <p class='text__color--danger'><%=  t('views.robots.robot.uncovered')%></p>
+                    </div>
+                    <p><%= t('views.robots.robot.no_ticket_found') %></p>
+            <% end %>
         </div>
     </div>
 </div>

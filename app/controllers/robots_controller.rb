@@ -17,9 +17,18 @@ class RobotsController < ApplicationController
     end
   end
 
+  def update
+    @robot = Robot.find(params[:id])
+    if @robot.update(robot_params)
+      head :no_content
+    else
+      head :unprocessable_entity
+    end
+  end
+
   private
 
   def robot_params
-    params.require(:robot).permit(:name, :license_plate, :zipcode, :payment_method, :duration, :service_id)
+    params.require(:robot).permit(:name, :active, :license_plate, :zipcode, :payment_method, :duration, :service_id)
   end
 end
