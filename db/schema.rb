@@ -10,9 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_25_123558) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_06_065254) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "automated_tickets", force: :cascade do |t|
+    t.bigint "service_id", null: false
+    t.string "type", null: false
+    t.string "rate_option_client_internal_id", null: false
+    t.string "license_plate", null: false
+    t.string "zipcode", null: false
+    t.integer "quantity", null: false
+    t.string "time_unit", null: false
+    t.string "payment_method_client_internal_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["service_id"], name: "index_automated_tickets_on_service_id"
+  end
 
   create_table "robots", force: :cascade do |t|
     t.bigint "service_id", null: false
@@ -65,6 +79,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_25_123558) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "automated_tickets", "services"
   add_foreign_key "robots", "services"
   add_foreign_key "services", "users"
   add_foreign_key "tickets", "robots"
