@@ -23,6 +23,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_06_065254) do
     t.integer "quantity", null: false
     t.string "time_unit", null: false
     t.string "payment_method_client_internal_id", null: false
+    t.integer "status", default: 0, null: false
+    t.boolean "active", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["service_id"], name: "index_automated_tickets_on_service_id"

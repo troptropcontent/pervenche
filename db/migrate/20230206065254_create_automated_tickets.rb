@@ -9,6 +9,8 @@ class CreateAutomatedTickets < ActiveRecord::Migration[7.0]
       t.integer :quantity, null: false
       t.string :time_unit, null: false
       t.string :payment_method_client_internal_id, null: false
+      t.integer :status, null: false, default: 0
+      t.boolean :active, null: false, default: false
 
       t.timestamps
     end
