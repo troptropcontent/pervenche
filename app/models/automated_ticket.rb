@@ -39,7 +39,7 @@ class AutomatedTicket < ApplicationRecord
 
   private
 
-  def required_for_step(step)
+  def required_for_step?(step)
     return true unless setup_step
 
     ordered_steps = self.class.setup_steps.keys
