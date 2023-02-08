@@ -15,19 +15,21 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_06_065254) do
   enable_extension "plpgsql"
 
   create_table "automated_tickets", force: :cascade do |t|
-    t.bigint "service_id", null: false
-    t.string "type", null: false
-    t.string "rate_option_client_internal_id", null: false
-    t.string "license_plate", null: false
-    t.string "zipcode", null: false
-    t.integer "quantity", null: false
-    t.string "time_unit", null: false
-    t.string "payment_method_client_internal_id", null: false
+    t.bigint "service_id"
+    t.bigint "user_id", null: false
+    t.string "type"
+    t.string "rate_option_client_internal_id"
+    t.string "license_plate"
+    t.string "zipcode"
+    t.integer "minutes"
+    t.string "client_time_unit"
+    t.string "payment_method_client_internal_id"
     t.integer "status", default: 0, null: false
     t.boolean "active", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["service_id"], name: "index_automated_tickets_on_service_id"
+    t.index ["user_id"], name: "index_automated_tickets_on_user_id"
   end
 
   create_table "robots", force: :cascade do |t|
@@ -82,6 +84,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_06_065254) do
   end
 
   add_foreign_key "automated_tickets", "services"
+  add_foreign_key "automated_tickets", "users"
   add_foreign_key "robots", "services"
   add_foreign_key "services", "users"
   add_foreign_key "tickets", "robots"
