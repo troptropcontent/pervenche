@@ -1,0 +1,6 @@
+en:
+  views:
+    automated_tickets:
+      new:
+        header:
+          title: "New automated ticket"
