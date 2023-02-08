@@ -7,5 +7,7 @@ Rails.application.routes.draw do
   root 'robots#index'
   resources :services, only: %i[index new create]
   resources :robots, only: %i[index new create update]
-  resources :automated_tickets, only: %i[new]
+  resources :automated_tickets, only: %i[new] do
+    resources :setups, only: %i[show update], controller: 'automated_tickets/setups'
+  end
 end
