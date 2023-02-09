@@ -72,16 +72,99 @@ RSpec.describe 'AutomatedTickets::Setups', type: :request do
 
     context '200' do
       let!(:automated_ticket) do
-        automated_ticket = FactoryBot.build(:automated_ticket, user_id: user.id, service: nil)
+        automated_ticket = FactoryBot.build(
+          :automated_ticket,
+          user_id: user.id,
+          service: service,
+          rate_option_client_internal_id: rate_option_client_internal_id,
+          license_plate: license_plate,
+          zipcode: zipcode,
+          minutes: minutes,
+          client_time_unit: client_time_unit,
+          payment_method_client_internal_id: payment_method_client_internal_id,
+          status: status
+        )
         automated_ticket.save(validate: false)
         automated_ticket
       end
+      let(:service) { nil }
+      let(:rate_option_client_internal_id) { nil }
+      let(:license_plate) { nil }
+      let(:zipcode) { nil }
+      let(:minutes) { nil }
+      let(:client_time_unit) { nil }
+      let(:payment_method_client_internal_id) { nil }
+      let(:status) { 'initialized' }
+
       let(:automated_ticket_id) { automated_ticket.id }
       let(:id) { 'service' }
       context 'service step' do
-        it 'returns a 403' do
-          get path
-          expect(response).to have_http_status(200)
+        context 'when the step is already done' do
+          let(:service) do
+            service = FactoryBot.build(:service, user_id: user.id)
+            service.save(validate: false)
+            service
+          end
+          it 'redirects to the next step' do
+            get path
+            expect(response).to redirect_to("/automated_tickets/#{automated_ticket.id}/setups/license_plate_and_zipcode")
+          end
+        end
+
+        context 'when the step not done' do
+          it 'renders the correct template' do
+            get path
+            expect(response).to have_http_status(200)
+            expect(response).to render_template('automated_tickets/setups/service')
+          end
+        end
+      end
+      context 'license_plate_and_zipcode step' do
+        let(:id) { 'license_plate_and_zipcode' }
+        context 'when the step is already done' do
+          it 'redirects to the next step' do
+            get path
+            expect(response).to redirect_to("/automated_tickets/#{automated_ticket.id}/setups/rate_option")
+          end
+        end
+
+        context 'when the step not done' do
+          it 'renders the correct template' do
+            get path
+            expect(response).to have_http_status(200)
+          end
+        end
+      end
+      context 'rate_option step' do
+        let(:id) { 'rate_option' }
+        context 'when the step is already done' do
+          it 'redirects to the next step' do
+            get path
+            expect(response).to redirect_to("/automated_tickets/#{automated_ticket.id}/setups/duration_and_payment_method")
+          end
+        end
+
+        context 'when the step not done' do
+          it 'renders the correct template' do
+            get path
+            expect(response).to have_http_status(200)
+          end
+        end
+      end
+      context 'duration_and_payment_method step' do
+        let(:id) { 'duration_and_payment_method' }
+        context 'when the step is already done' do
+          it 'redirects to the index page' do
+            get path
+            expect(response).to redirect_to('/automated_tickets')
+          end
+        end
+
+        context 'when the step not done' do
+          it 'renders the correct template' do
+            get path
+            expect(response).to have_http_status(200)
+          end
         end
       end
     end
