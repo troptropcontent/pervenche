@@ -43,6 +43,6 @@ class AutomatedTicket < ApplicationRecord
     return true unless setup_step
 
     ordered_steps = self.class.setup_steps.keys
-    !!(ordered_steps.index(step) <= ordered_steps.index(setup_step))
+    !!(ordered_steps.index(step) <= ordered_steps.index(setup_step.to_sym))
   end
 end

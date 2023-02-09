@@ -1,1 +1,40 @@
-Hello from the rate option step
+<main class="container">
+   <div class="header">
+    <h1><%= t('views.automated_tickets.new.header.title') %></h1>
+   </div>
+    <%= simple_form_for @automated_ticket, 
+                          url: @submit_path,
+                          method: :put,
+                          html: {
+                            class: "form form--column",
+                            data: { turbo: false, controller: "form" }
+                          } do |f| %>
+
+        <% if @automated_ticket.errors.any? %>
+          <div class="error-message">
+            <%= @automated_ticket.errors.full_messages.to_sentence.capitalize %>
+          </div>
+        <% end %>
+
+        <h3><%= t('views.automated_tickets.new.form.inputs.rate_option') %></h3>
+        <%= f.input :rate_option, wrapper_html: {class: 'stack'} do %>
+          <% @rate_options.each do |rate_option| %>
+            <%= f.label rate_option_dom_id(rate_option) do %>
+              <%= f.radio_button "rate_option_client_internal_id", 
+                                 rate_option[:client_internal_id], 
+                                 id: "automated_ticket_#{rate_option_dom_id(rate_option)}", 
+                                 class: 'visually-hidden',
+                                 data: {
+                                    "form-hidden-input-value-param": rate_option[:accepted_time_units],
+                                    action: "change->form#updateHiddenInput"
+                                } %>
+                                 
+              <p class= 'form__input'><%=  rate_option[:name] %> - (<%= t("views.automated_tickets.new.form.inputs.client_time_unit.#{rate_option[:accepted_time_units]}") %>)</p>
+            <% end %>
+          <% end %>
+        <% end %>
+        <%= f.input :client_time_unit, as: :hidden, input_html: {data: {"form-target"=>"hiddenInput"}}  %>
+        <%= f.input :id, as: :hidden  %>
+        <%= f.submit t('views.automated_tickets.new.header.next'), class: "btn btn--primary" %>
+    <% end %>
+</main>
