@@ -9,6 +9,10 @@
   
     &__group {
       flex: 1;
+      &--column {
+        display: flex;
+        flex-direction: column;
+      }
     }
   
     &__input {
@@ -28,5 +32,9 @@
       &--invalid {
         border-color: var(--color-primary);
       }
+    }
+
+    input[type="radio"]:checked + .form__input {
+      border: var(--border-primary);
     }
   }
