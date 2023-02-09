@@ -4,3 +4,13 @@ en:
       new:
         header:
           title: "New automated ticket"
+          next: "Next step"
+        form:
+          inputs:
+            license_plate: "Wich vehicle do you want to cover ?"
+            zipcode: "For which zipcode is the ticket ?"
+            rate_option: "Wich rate option do you want to use ?"
+            client_time_unit:
+              days: "by the day"
+              minutes: "by the minute"
+              hours: "by the hour"
