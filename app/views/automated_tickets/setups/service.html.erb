@@ -1,23 +1,4 @@
-<main class="container">
-   <div class="header">
-    <h1><%= t('views.robots.index.header.title') %></h1>
-   </div>
-    <%= simple_form_for @automated_ticket, 
-                          url: @submit_path,
-                          method: :put,
-                          html: {
-                            class: "form form--column",
-                            data: { turbo: false }
-                          } do |f| %>
+<%= render 'automated_tickets/setups/wizard' do |f| %>
+  <%= f.input :service_id, collection: @services, input_html: { autofocus: true } %>
+<% end %>
 
-        <% if @automated_ticket.errors.any? %>
-          <div class="error-message">
-            <%= @automated_ticket.errors.full_messages.to_sentence.capitalize %>
-          </div>
-        <% end %>
-
-        <%= f.input :service_id, collection: @services, input_html: { autofocus: true } %>
-
-        <%= f.submit "Prochaine étape", class: "btn btn--primary" %>
-    <% end %>
-</main>

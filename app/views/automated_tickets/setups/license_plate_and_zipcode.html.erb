@@ -1,22 +1,5 @@
-<main class="container">
-   <div class="header">
-    <h1><%= t('views.automated_tickets.new.header.title') %></h1>
-   </div>
-    <%= simple_form_for @automated_ticket, 
-                          url: @submit_path,
-                          method: :put,
-                          html: {
-                            class: "form form--column",
-                            data: { turbo: false }
-                          } do |f| %>
-
-        <% if @automated_ticket.errors.any? %>
-          <div class="error-message">
-            <%= @automated_ticket.errors.full_messages.to_sentence.capitalize %>
-          </div>
-        <% end %>
-
-        <h3><%= t('views.automated_tickets.new.form.inputs.license_plate') %></h3>
+<%= render 'automated_tickets/setups/wizard' do |f| %>
+    <h3><%= t('views.automated_tickets.new.form.inputs.license_plate') %></h3>
         <%= f.input :license_plate, wrapper_html: {class: 'stack'} do %>
           <% @vehicles.each do |vehicle| %>
             <%= f.label "license_plate_#{vehicle[:license_plate].downcase}" do %>
@@ -26,9 +9,6 @@
           <% end %>
         <% end %>
 
-        <h3><%= t('views.automated_tickets.new.form.inputs.zipcode') %></h3>
-        <%= f.input :zipcode %>
-        <%= f.input :id, as: :hidden  %>
-        <%= f.submit t('views.automated_tickets.new.header.next'), class: "btn btn--primary" %>
-    <% end %>
-</main>
+    <h3><%= t('views.automated_tickets.new.form.inputs.zipcode') %></h3>
+    <%= f.input :zipcode %>
+<% end %>

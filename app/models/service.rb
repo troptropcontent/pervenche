@@ -17,6 +17,10 @@ class Service < ApplicationRecord
     client.rate_options(zipcode, license_plate)
   end
 
+  def payment_methods
+    client.payment_methods
+  end
+
   private
 
   def valid_credentials

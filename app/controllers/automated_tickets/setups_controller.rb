@@ -10,6 +10,7 @@ class AutomatedTickets::SetupsController < ApplicationController
       redirect_to_next_step!
     else
       load_data_required_for_step
+      @final_step = next_step.nil?
       @submit_path = automated_ticket_setup_path(@automated_ticket.id, @step)
       render @step
     end
@@ -18,7 +19,7 @@ class AutomatedTickets::SetupsController < ApplicationController
   def update
     @automated_ticket.setup_step = @step
     if @automated_ticket.update(permited_params_for_step)
-      redirect_to_next_step!
+      next_step ? redirect_to_next_step! : update_status_and_redirect_to_root!
     else
       load_data_required_for_step
       @submit_path = automated_ticket_setup_path(@automated_ticket.id, @step)
@@ -52,6 +53,11 @@ class AutomatedTickets::SetupsController < ApplicationController
     redirect_to automated_ticket_setup_path(@automated_ticket.id, next_step)
   end
 
+  def update_status_and_redirect_to_root!
+    @automated_ticket.ready!
+    redirect_to(root_path)
+  end
+
   def step_already_completed?
     @automated_ticket.valid?.tap do
       @automated_ticket.errors.clear
@@ -78,10 +84,10 @@ class AutomatedTickets::SetupsController < ApplicationController
   end
 
   def load_data_required_for_rate_option_step
-    # @rate_options = @automated_ticket.service.rate_options(@automated_ticket.zipcode, @automated_ticket.license_plate)
-    @rate_options = [{ client_internal_id: '75101', name: 'Résident', type: 'RES', accepted_time_units: 'days' },
-                     { client_internal_id: '1085252721', name: 'Voiture - Visiteur - 75012-75020', type: 'CUSTOM', accepted_time_units: 'minutes' }, { client_internal_id: '1085252721', name: 'Voiture - Visiteur - 75012-75020', type: 'CUSTOM', accepted_time_units: 'hours' }]
+    @rate_options = @automated_ticket.service.rate_options(@automated_ticket.zipcode, @automated_ticket.license_plate)
   end
 
-  def load_data_required_for_duration_and_payment_method_step; end
+  def load_data_required_for_duration_and_payment_method_step
+    @payment_methods = @automated_ticket.service.payment_methods
+  end
 end
