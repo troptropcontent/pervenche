@@ -7,7 +7,7 @@
                           method: :put,
                           html: {
                             class: "form form--column",
-                            data: { turbo: false, controller: "form" }
+                            data: { turbo: false, controller: "form wizard" }
                           } do |f| %>
 
         <% if @automated_ticket.errors.any? %>
@@ -15,12 +15,14 @@
             <%= @automated_ticket.errors.full_messages.to_sentence.capitalize %>
           </div>
         <% end %>
-        <%= yield(f) %>
+        <div data-wizard-target="loadable">
+          <%= yield(f) %>
+        </div>
         <%= f.input :id, as: :hidden  %>
         <% if @final_step %>
             <%= f.submit t('views.automated_tickets.new.header.final_step'), class: "btn btn--primary" %>
           <% else %>
-            <%= f.submit t('views.automated_tickets.new.header.next'), class: "btn btn--primary" %>
+            <%= f.submit t('views.automated_tickets.new.header.next'), class: "btn btn--primary", data: {action: 'wizard#toggleLoading'} %>
         <% end %>
     <% end %>
 </main>
