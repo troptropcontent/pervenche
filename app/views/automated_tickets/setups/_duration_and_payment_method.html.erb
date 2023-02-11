@@ -11,12 +11,8 @@
           <% end %>
         <% end %>
 
-        <h3><%= t("views.automated_tickets.new.form.inputs.duration") %></h3>
-        <div class='cluster cluster__align-items--center'>
-            <p>Every </p>
-            <%= f.input :minutes %>
-            <p><%=  @automated_ticket.client_time_unit %></p>
-        </div>
+        <h3><%= t("views.automated_tickets.new.form.inputs.weekdays") %></h3>
+        
     </div>
   <% end %>
 </turbo-frame>

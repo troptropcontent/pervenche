@@ -17,7 +17,7 @@ class AutomatedTickets::SetupsController < ApplicationController
     load_data_required_for_step
     @final_step = next_step.nil?
     @submit_path = automated_ticket_setup_path(@automated_ticket.id, @step)
-    render @step
+    render partial: @step
   end
 
   def update

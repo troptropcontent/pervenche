@@ -28,7 +28,7 @@ class AutomatedTicket < ApplicationRecord
   end
 
   with_options if: -> { required_for_step?(:duration_and_payment_method) } do
-    validates :payment_method_client_internal_id, :minutes, presence: true
+    validates :payment_method_client_internal_id, :weekdays, presence: true
   end
 
   attr_accessor :setup_step

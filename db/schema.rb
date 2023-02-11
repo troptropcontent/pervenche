@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_06_065254) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_11_062851) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -21,13 +21,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_06_065254) do
     t.string "rate_option_client_internal_id"
     t.string "license_plate"
     t.string "zipcode"
-    t.integer "minutes"
     t.string "client_time_unit"
     t.string "payment_method_client_internal_id"
     t.integer "status", default: 0, null: false
     t.boolean "active", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "weekdays", array: true
     t.index ["service_id"], name: "index_automated_tickets_on_service_id"
     t.index ["user_id"], name: "index_automated_tickets_on_user_id"
   end

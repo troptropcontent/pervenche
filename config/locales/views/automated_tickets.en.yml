@@ -16,6 +16,7 @@ en:
               minutes: "by the minute"
               hours: "by the hour"
             payment_method: "Wich card do you want to use ?"
+            weekdays: "Wich days do you want to cover ?"
             payment_methods:
               master_card: "MasterCard"
               visa: "Visa"
