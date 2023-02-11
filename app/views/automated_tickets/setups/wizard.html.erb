@@ -1,0 +1,10 @@
+<main class="container grow stack container--padding--bottom-xs">
+  <div class="header">
+    <h1><%= t('views.automated_tickets.new.header.title') %></h1>
+  </div>
+  <turbo-frame id="automated_ticket_form_content" src=<%= content_automated_ticket_setup_path( @automated_ticket, @step)%> class="grow stack">
+    <div class="grow center">
+      <div class="loader--ring"><div></div><div></div><div></div><div></div></div>
+    </div>
+  </turbo-frame>
+</main>

@@ -1,0 +1,23 @@
+<%= simple_form_for @automated_ticket, 
+                          url: @submit_path,
+                          method: :put,
+                          html: {
+                            class: "form form--column grow",
+                            data: { turbo: false, controller: "form"}
+                          } do |f| %>
+
+    <div class="form__group">
+        <% if @automated_ticket.errors.any? %>
+        <div class="error-message">
+        <%= @automated_ticket.errors.full_messages.to_sentence.capitalize %>
+        </div>
+    <% end %>
+    <%= yield(f) %>
+    <%= f.input :id, as: :hidden  %>
+    </div>
+    <% if @final_step %>
+        <%= f.submit t('views.automated_tickets.new.header.final_step'), class: "btn btn--primary" %>
+        <% else %>
+        <%= f.submit t('views.automated_tickets.new.header.next'), class: "btn btn--primary" %>
+    <% end %>
+<% end %>

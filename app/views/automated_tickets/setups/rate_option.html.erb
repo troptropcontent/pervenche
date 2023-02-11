@@ -1,5 +1,7 @@
-<%= render 'automated_tickets/setups/wizard' do |f| %>
-            <h3><%= t('views.automated_tickets.new.form.inputs.rate_option') %></h3>
+<turbo-frame id="automated_ticket_form_content" class="grow stack" >
+  <%= render 'automated_tickets/setups/form' do |f| %>
+    <div class="stack">
+        <h3><%= t('views.automated_tickets.new.form.inputs.rate_option') %></h3>
         <%= f.input :rate_option, wrapper_html: {class: 'stack'} do %>
           <% @rate_options.each do |rate_option| %>
             <%= f.label rate_option_dom_id(rate_option) do %>
@@ -17,5 +19,6 @@
           <% end %>
         <% end %>
         <%= f.input :client_time_unit, as: :hidden, input_html: {data: {"form-target"=>"hiddenInput"}}  %>
-<% end %>
-
+    </div>
+  <% end %>
+</turbo-frame>

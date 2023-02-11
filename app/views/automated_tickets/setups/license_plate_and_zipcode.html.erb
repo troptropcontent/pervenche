@@ -1,5 +1,7 @@
-<%= render 'automated_tickets/setups/wizard' do |f| %>
-    <h3><%= t('views.automated_tickets.new.form.inputs.license_plate') %></h3>
+<turbo-frame id="automated_ticket_form_content" class="grow stack" >
+  <%= render 'automated_tickets/setups/form' do |f| %>
+    <div class="stack">
+      <h3><%= t('views.automated_tickets.new.form.inputs.license_plate') %></h3>
         <%= f.input :license_plate, wrapper_html: {class: 'stack'} do %>
           <% @vehicles.each do |vehicle| %>
             <%= f.label "license_plate_#{vehicle[:license_plate].downcase}" do %>
@@ -9,6 +11,8 @@
           <% end %>
         <% end %>
 
-    <h3><%= t('views.automated_tickets.new.form.inputs.zipcode') %></h3>
-    <%= f.input :zipcode %>
-<% end %>
+      <h3><%= t('views.automated_tickets.new.form.inputs.zipcode') %></h3>
+      <%= f.input :zipcode %>
+    </div>
+  <% end %>
+</turbo-frame>

@@ -9,11 +9,15 @@ class AutomatedTickets::SetupsController < ApplicationController
     if step_already_completed?
       redirect_to_next_step!
     else
-      load_data_required_for_step
-      @final_step = next_step.nil?
-      @submit_path = automated_ticket_setup_path(@automated_ticket.id, @step)
-      render @step
+      render 'wizard'
     end
+  end
+
+  def content
+    load_data_required_for_step
+    @final_step = next_step.nil?
+    @submit_path = automated_ticket_setup_path(@automated_ticket.id, @step)
+    render @step
   end
 
   def update
