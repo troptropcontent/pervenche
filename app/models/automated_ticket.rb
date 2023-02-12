@@ -6,7 +6,7 @@ class AutomatedTicket < ApplicationRecord
     service: [:service_id],
     license_plate_and_zipcode: %i[license_plate zipcode],
     rate_option: %i[rate_option_client_internal_id client_time_unit],
-    duration_and_payment_method: %i[minutes payment_method_client_internal_id]
+    duration_and_payment_method: %i[weekdays payment_method_client_internal_id]
   }.freeze
 
   enum status: {

@@ -1,4 +1,5 @@
 class AutomatedTickets::SetupsController < ApplicationController
+  ARRAY_FIELDS = [:weekdays].freeze
   before_action :load_automated_ticket
   before_action :load_step!
   before_action :authorize_access!
@@ -6,6 +7,7 @@ class AutomatedTickets::SetupsController < ApplicationController
   # GET /automated_tickets/:automated_ticket_id/setups/:id
   def show
     @automated_ticket.setup_step = @step
+    @load_content_later = true
     if step_already_completed?
       redirect_to_next_step!
     else
@@ -14,9 +16,7 @@ class AutomatedTickets::SetupsController < ApplicationController
   end
 
   def content
-    load_data_required_for_step
-    @final_step = next_step.nil?
-    @submit_path = automated_ticket_setup_path(@automated_ticket.id, @step)
+    load_content_data
     render partial: @step
   end
 
@@ -25,13 +25,19 @@ class AutomatedTickets::SetupsController < ApplicationController
     if @automated_ticket.update(permited_params_for_step)
       next_step ? redirect_to_next_step! : update_status_and_redirect_to_root!
     else
-      load_data_required_for_step
-      @submit_path = automated_ticket_setup_path(@automated_ticket.id, @step)
-      render @step
+      load_content_data
+      @load_content_later = false
+      render 'wizard'
     end
   end
 
   private
+
+  def load_content_data
+    load_data_required_for_step
+    @final_step = next_step.nil?
+    @submit_path = automated_ticket_setup_path(@automated_ticket.id, @step)
+  end
 
   def load_automated_ticket
     @automated_ticket = AutomatedTicket.find(params[:automated_ticket_id])
@@ -69,7 +75,7 @@ class AutomatedTickets::SetupsController < ApplicationController
   end
 
   def permited_params_for_step
-    params.require(:automated_ticket).permit(AutomatedTicket.setup_steps[@step.to_sym])
+    params.require(:automated_ticket).permit(permitted_fields_for_step)
   end
 
   def load_data_required_for_step
@@ -93,5 +99,11 @@ class AutomatedTickets::SetupsController < ApplicationController
 
   def load_data_required_for_duration_and_payment_method_step
     @payment_methods = @automated_ticket.service.payment_methods
+  end
+
+  def permitted_fields_for_step
+    AutomatedTicket.setup_steps[@step.to_sym].map do |field|
+      ARRAY_FIELDS.include?(field) ? { field => [] } : field
+    end
   end
 end

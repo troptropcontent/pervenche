@@ -10,9 +10,8 @@
             <% end %>
           <% end %>
         <% end %>
-
         <h3><%= t("views.automated_tickets.new.form.inputs.weekdays") %></h3>
-        
+        <%= f.input :weekdays, as: :check_boxes, collection: weekdays_collection, boolean_style: :inline, include_hidden: false, wrapper_html: {class: 'form__input__weekdays'}, input_html: {class: 'visually-hidden'} %>
     </div>
   <% end %>
 </turbo-frame>

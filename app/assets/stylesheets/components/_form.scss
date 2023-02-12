@@ -33,6 +33,31 @@
       &--invalid {
         border-color: var(--color-primary);
       }
+
+      &__weekdays {
+        display: flex;
+        gap: var(--space-xs);
+        flex-wrap: wrap;
+
+        .checkbox{
+          width: var(--image-xxxxxxl);
+          height: var(--image-xxxxxxl);
+          display: flex;
+          label{
+            border: var(--border);
+            border-radius: var(--border-radius-round);
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+           }
+           input:checked + label {
+            border: var(--border-primary);
+            background-color: var(--color-primary);
+            color: var(--color-white);
+           }
+        }
+      }
     }
 
     input[type="radio"]:checked + .form__input {
