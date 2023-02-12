@@ -5,7 +5,7 @@ class AutomatedTicket < ApplicationRecord
   SETUP_STEPS = {
     service: [:service_id],
     license_plate_and_zipcode: %i[license_plate zipcode],
-    rate_option: %i[rate_option_client_internal_id client_time_unit],
+    rate_option: %i[rate_option_client_internal_id accepted_time_units],
     duration_and_payment_method: %i[weekdays payment_method_client_internal_id]
   }.freeze
 
@@ -24,7 +24,7 @@ class AutomatedTicket < ApplicationRecord
   end
 
   with_options if: -> { required_for_step?(:rate_option) } do
-    validates :rate_option_client_internal_id, :client_time_unit, presence: true
+    validates :rate_option_client_internal_id, :accepted_time_units, presence: true
   end
 
   with_options if: -> { required_for_step?(:duration_and_payment_method) } do

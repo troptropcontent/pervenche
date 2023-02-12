@@ -1,5 +1,5 @@
 class AutomatedTickets::SetupsController < ApplicationController
-  ARRAY_FIELDS = [:weekdays].freeze
+  ARRAY_FIELDS = %i[weekdays accepted_time_units].freeze
   before_action :load_automated_ticket
   before_action :load_step!
   before_action :authorize_access!

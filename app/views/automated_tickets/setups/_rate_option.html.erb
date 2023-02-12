@@ -11,6 +11,7 @@
                                  class: 'visually-hidden',
                                  data: {
                                     "form-hidden-input-value-param": rate_option[:accepted_time_units],
+                                    "form-hidden-input-name-param": 'automated_ticket[accepted_time_units]',
                                     action: "change->form#updateHiddenInput"
                                 } %>
                                  
@@ -18,7 +19,8 @@
             <% end %>
           <% end %>
         <% end %>
-        <%= f.input :client_time_unit, as: :hidden, input_html: {data: {"form-target"=>"hiddenInput"}}  %>
+        <div class="visually-hidden" data-form-target='hiddenInputsGroup'>
+        </div>
     </div>
   <% end %>
 </turbo-frame>
