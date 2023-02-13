@@ -6,8 +6,8 @@ FactoryBot.define do
     rate_option_client_internal_id { 'MyString' }
     license_plate { 'MyString' }
     zipcode { 'MyString' }
-    minutes { 1 }
-    client_time_unit { 'MyString' }
+    weekdays { [] }
+    accepted_time_units { ['days'] }
     payment_method_client_internal_id { 'MyString' }
   end
 end

@@ -79,8 +79,8 @@ RSpec.describe 'AutomatedTickets::Setups', type: :request do
           rate_option_client_internal_id: rate_option_client_internal_id,
           license_plate: license_plate,
           zipcode: zipcode,
-          minutes: minutes,
-          client_time_unit: client_time_unit,
+          weekdays: weekdays,
+          accepted_time_units: accepted_time_units,
           payment_method_client_internal_id: payment_method_client_internal_id,
           status: status
         )
@@ -91,20 +91,39 @@ RSpec.describe 'AutomatedTickets::Setups', type: :request do
       let(:rate_option_client_internal_id) { nil }
       let(:license_plate) { nil }
       let(:zipcode) { nil }
-      let(:minutes) { nil }
-      let(:client_time_unit) { nil }
+      let(:weekdays) { nil }
+      let(:accepted_time_units) { nil }
       let(:payment_method_client_internal_id) { nil }
       let(:status) { 'initialized' }
+      RSpec.shared_context 'service step done', shared_context: :metadata do
+        let(:service) do
+          service = FactoryBot.build(:service, user_id: user.id)
+          service.save(validate: false)
+          service
+        end
+      end
+      RSpec.shared_context 'license_plate_and_zipcode step done', shared_context: :metadata do
+        include_context 'service step done'
+        let(:license_plate) { 'XXXXXXXX' }
+        let(:zipcode) { '75018' }
+      end
+      RSpec.shared_context 'rate_option step done', shared_context: :metadata do
+        include_context 'license_plate_and_zipcode step done'
+        let(:rate_option_client_internal_id) { 'XXXXXXXX' }
+        let(:accepted_time_units) { ['days'] }
+      end
+      RSpec.shared_context 'duration_and_payment_method step done', shared_context: :metadata do
+        include_context 'rate_option step done'
+        let(:payment_method_client_internal_id) { 'XXXXXXXX' }
+        let(:weekdays) { [1, 2, 3] }
+        let(:status) { 'ready' }
+      end
 
       let(:automated_ticket_id) { automated_ticket.id }
       let(:id) { 'service' }
       context 'service step' do
         context 'when the step is already done' do
-          let(:service) do
-            service = FactoryBot.build(:service, user_id: user.id)
-            service.save(validate: false)
-            service
-          end
+          include_context 'service step done'
           it 'redirects to the next step' do
             get path
             expect(response).to redirect_to("/automated_tickets/#{automated_ticket.id}/setups/license_plate_and_zipcode")
@@ -115,13 +134,14 @@ RSpec.describe 'AutomatedTickets::Setups', type: :request do
           it 'renders the correct template' do
             get path
             expect(response).to have_http_status(200)
-            expect(response).to render_template('automated_tickets/setups/service')
+            expect(response).to render_template('automated_tickets/setups/wizard')
           end
         end
       end
       context 'license_plate_and_zipcode step' do
         let(:id) { 'license_plate_and_zipcode' }
         context 'when the step is already done' do
+          include_context 'license_plate_and_zipcode step done'
           it 'redirects to the next step' do
             get path
             expect(response).to redirect_to("/automated_tickets/#{automated_ticket.id}/setups/rate_option")
@@ -132,12 +152,14 @@ RSpec.describe 'AutomatedTickets::Setups', type: :request do
           it 'renders the correct template' do
             get path
             expect(response).to have_http_status(200)
+            expect(response).to render_template('automated_tickets/setups/wizard')
           end
         end
       end
       context 'rate_option step' do
         let(:id) { 'rate_option' }
         context 'when the step is already done' do
+          include_context 'rate_option step done'
           it 'redirects to the next step' do
             get path
             expect(response).to redirect_to("/automated_tickets/#{automated_ticket.id}/setups/duration_and_payment_method")
@@ -148,22 +170,17 @@ RSpec.describe 'AutomatedTickets::Setups', type: :request do
           it 'renders the correct template' do
             get path
             expect(response).to have_http_status(200)
+            expect(response).to render_template('automated_tickets/setups/wizard')
           end
         end
       end
       context 'duration_and_payment_method step' do
         let(:id) { 'duration_and_payment_method' }
-        context 'when the step is already done' do
-          it 'redirects to the index page' do
-            get path
-            expect(response).to redirect_to('/automated_tickets')
-          end
-        end
-
         context 'when the step not done' do
           it 'renders the correct template' do
             get path
             expect(response).to have_http_status(200)
+            expect(response).to render_template('automated_tickets/setups/wizard')
           end
         end
       end
