@@ -15,11 +15,13 @@ class AutomatedTickets::SetupsController < ApplicationController
     end
   end
 
+  # GET /automated_tickets/:automated_ticket_id/setups/:id/content
   def content
     load_content_data
     render partial: @step
   end
 
+  # PUT /automated_tickets/:automated_ticket_id/setups/:id
   def update
     @automated_ticket.setup_step = @step
     if @automated_ticket.update(permited_params_for_step)
@@ -27,7 +29,7 @@ class AutomatedTickets::SetupsController < ApplicationController
     else
       load_content_data
       @load_content_later = false
-      render 'wizard'
+      render 'wizard', status: :unprocessable_entity
     end
   end
 
