@@ -6,58 +6,58 @@ RSpec.describe 'AutomatedTickets::Setups', type: :request do
     user.save(validate: false)
     user
   end
+  let!(:automated_ticket) do
+    automated_ticket = FactoryBot.build(
+      :automated_ticket,
+      user_id: user.id,
+      service: service,
+      rate_option_client_internal_id: rate_option_client_internal_id,
+      license_plate: license_plate,
+      zipcode: zipcode,
+      weekdays: weekdays,
+      accepted_time_units: accepted_time_units,
+      payment_method_client_internal_id: payment_method_client_internal_id,
+      status: status
+    )
+    automated_ticket.save(validate: false)
+    automated_ticket
+  end
+  let(:service) { nil }
+  let(:rate_option_client_internal_id) { nil }
+  let(:license_plate) { nil }
+  let(:zipcode) { nil }
+  let(:weekdays) { nil }
+  let(:accepted_time_units) { nil }
+  let(:payment_method_client_internal_id) { nil }
+  let(:status) { 'initialized' }
+  RSpec.shared_context 'service step done', shared_context: :metadata do
+    let(:service) do
+      service = FactoryBot.build(:service, user_id: user.id)
+      service.save(validate: false)
+      service
+    end
+  end
+  RSpec.shared_context 'license_plate_and_zipcode step done', shared_context: :metadata do
+    include_context 'service step done'
+    let(:license_plate) { 'XXXXXXXX' }
+    let(:zipcode) { '75018' }
+  end
+  RSpec.shared_context 'rate_option step done', shared_context: :metadata do
+    include_context 'license_plate_and_zipcode step done'
+    let(:rate_option_client_internal_id) { 'XXXXXXXX' }
+    let(:accepted_time_units) { ['days'] }
+  end
+  RSpec.shared_context 'duration_and_payment_method step done', shared_context: :metadata do
+    include_context 'rate_option step done'
+    let(:payment_method_client_internal_id) { 'XXXXXXXX' }
+    let(:weekdays) { [1, 2, 3] }
+    let(:status) { 'ready' }
+  end
 
   describe '/automated_tickets/:automated_ticket_id/setups/:id' do
     let(:path) { "/automated_tickets/#{automated_ticket_id}/setups/#{id}" }
     let(:automated_ticket_id) {}
     let(:id) {}
-    let!(:automated_ticket) do
-      automated_ticket = FactoryBot.build(
-        :automated_ticket,
-        user_id: user.id,
-        service: service,
-        rate_option_client_internal_id: rate_option_client_internal_id,
-        license_plate: license_plate,
-        zipcode: zipcode,
-        weekdays: weekdays,
-        accepted_time_units: accepted_time_units,
-        payment_method_client_internal_id: payment_method_client_internal_id,
-        status: status
-      )
-      automated_ticket.save(validate: false)
-      automated_ticket
-    end
-    let(:service) { nil }
-    let(:rate_option_client_internal_id) { nil }
-    let(:license_plate) { nil }
-    let(:zipcode) { nil }
-    let(:weekdays) { nil }
-    let(:accepted_time_units) { nil }
-    let(:payment_method_client_internal_id) { nil }
-    let(:status) { 'initialized' }
-    RSpec.shared_context 'service step done', shared_context: :metadata do
-      let(:service) do
-        service = FactoryBot.build(:service, user_id: user.id)
-        service.save(validate: false)
-        service
-      end
-    end
-    RSpec.shared_context 'license_plate_and_zipcode step done', shared_context: :metadata do
-      include_context 'service step done'
-      let(:license_plate) { 'XXXXXXXX' }
-      let(:zipcode) { '75018' }
-    end
-    RSpec.shared_context 'rate_option step done', shared_context: :metadata do
-      include_context 'license_plate_and_zipcode step done'
-      let(:rate_option_client_internal_id) { 'XXXXXXXX' }
-      let(:accepted_time_units) { ['days'] }
-    end
-    RSpec.shared_context 'duration_and_payment_method step done', shared_context: :metadata do
-      include_context 'rate_option step done'
-      let(:payment_method_client_internal_id) { 'XXXXXXXX' }
-      let(:weekdays) { [1, 2, 3] }
-      let(:status) { 'ready' }
-    end
 
     describe 'GET' do
       before do
@@ -487,7 +487,62 @@ RSpec.describe 'AutomatedTickets::Setups', type: :request do
 
   describe '/automated_tickets/:automated_ticket_id/setups/:id/content' do
     let(:path) { "/automated_tickets/#{automated_ticket_id}/setups/#{id}/content" }
-    let(:automated_ticket_id) {}
-    let(:id) {}
+    context '200' do
+      before do
+        sign_in(user)
+      end
+      let(:automated_ticket_id) { automated_ticket.id }
+      context 'service step' do
+        let(:id) { 'service' }
+        it 'loads the correct data and render the relevant partial' do
+          get path
+          expect(response).to have_http_status(200)
+        end
+      end
+      context 'license_plate_and_zipcode step' do
+        let(:id) { 'license_plate_and_zipcode' }
+
+        it 'loads the correct data and render the relevant partial' do
+          service_double = instance_double(Service, vehicles: [{ license_plate: '123' }, { license_plate: '456' }])
+          allow(AutomatedTicket).to receive(:find).and_return(automated_ticket)
+          allow(automated_ticket).to receive(:service).and_return(service_double)
+          get path
+          expect(assigns(:final_step)).to eq false
+          expect(assigns(:submit_path)).to eq "/automated_tickets/#{automated_ticket.id}/setups/license_plate_and_zipcode"
+          expect(assigns(:vehicles)).to eq [{ license_plate: '123' }, { license_plate: '456' }]
+          expect(response).to have_http_status(200)
+        end
+      end
+      context 'rate_option step' do
+        let(:id) { 'rate_option' }
+        it 'loads the correct data and render the relevant partial' do
+          service_double = instance_double(Service,
+                                           rate_options: [{ rate_option_id: '123' }, { rate_option_id: '456' }])
+          allow(AutomatedTicket).to receive(:find).and_return(automated_ticket)
+          allow(automated_ticket).to receive(:service).and_return(service_double)
+          get path
+          expect(assigns(:final_step)).to eq false
+          expect(assigns(:submit_path)).to eq "/automated_tickets/#{automated_ticket.id}/setups/rate_option"
+          expect(assigns(:rate_options)).to eq [{ rate_option_id: '123' }, { rate_option_id: '456' }]
+          expect(response).to have_http_status(200)
+        end
+      end
+      context 'duration_and_payment_method step' do
+        let(:id) { 'duration_and_payment_method' }
+        it 'loads the correct data and render the relevant partial' do
+          service_double = instance_double(Service,
+                                           payment_methods: [{ client_internal_id: '123' },
+                                                             { client_internal_id: '456' }])
+          allow(AutomatedTicket).to receive(:find).and_return(automated_ticket)
+          allow(automated_ticket).to receive(:service).and_return(service_double)
+          get path
+          expect(assigns(:final_step)).to eq true
+          expect(assigns(:submit_path)).to eq "/automated_tickets/#{automated_ticket.id}/setups/duration_and_payment_method"
+          expect(assigns(:payment_methods)).to eq [{ client_internal_id: '123' },
+                                                   { client_internal_id: '456' }]
+          expect(response).to have_http_status(200)
+        end
+      end
+    end
   end
 end
