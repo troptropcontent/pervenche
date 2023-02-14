@@ -1,8 +1,8 @@
 <%= form_with model: resource, data: {controller: 'checkbox'} do |form| %>
-  <%= form.label resource_boolean, class: 'switch' do %>
+  <label class='switch'>
     <%= form.check_box resource_boolean, data: {
       action: "change->checkbox#submitForm",
     } %>
     <span class="slider round"></span>
-  <% end %>
+  </label>
 <% end %>
