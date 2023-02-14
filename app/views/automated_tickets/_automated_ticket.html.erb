@@ -1,0 +1,20 @@
+<div class='robot'>
+    <div class="robot__header">
+        <%= image_tag("logo_pay_by_phone.png", alt: "PayByPhone logo", class: "robot__image") %>
+        <%= render 'components/switcher', resource: automated_ticket, resource_boolean: 'active' %>
+    </div>
+    <div class='stack'>
+        <div class='cluster'>
+            <h3><%= t('views.automated_tickets.automated_ticket.vehicle') %></h3>
+            <p><%= automated_ticket.license_plate %></p>
+        </div>
+        <div class='cluster'>
+            <h3><%= t('views.automated_tickets.automated_ticket.zipcode') %></h3>
+            <p><%= automated_ticket.zipcode %></p>
+        </div>
+        <div>
+
+            
+        </div>
+    </div>
+</div>

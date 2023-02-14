@@ -1,6 +1,11 @@
 en:
   views:
     automated_tickets:
+      index:
+        header:
+          title: Automated Tickets
+          cta: New ticket
+        empty: You have no automated tickets for now, you can create one with the button just above.
       new:
         header:
           title: "New automated ticket"
@@ -21,3 +26,10 @@ en:
               master_card: "MasterCard"
               visa: "Visa"
             duration: "How often do you want to renew your ticket ?"
+      automated_ticket:
+        vehicle: "Vehicle :"
+        zipcode: "Zipcode :"
+        coverage:
+          covered: Covered
+          not_covered: Not covered
+          day_not_covered: Not covered today as configured
