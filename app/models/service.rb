@@ -6,8 +6,9 @@ class Service < ApplicationRecord
     pay_by_phone: 0
   }
 
-  validate :valid_credentials
+  validates :username, uniqueness: { scope: :kind }
   validates_presence_of :name, :username, :password
+  validate :valid_credentials
 
   def vehicles
     Rails.cache.fetch("#{cache_key_with_version}/#{kind}/#{username}/vehicles", expires_in: 1.minutes) do
