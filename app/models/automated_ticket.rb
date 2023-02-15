@@ -39,6 +39,10 @@ class AutomatedTicket < ApplicationRecord
     SETUP_STEPS
   end
 
+  def running_ticket
+    service.running_ticket(license_plate, zipcode)
+  end
+
   private
 
   def required_for_step?(step)
