@@ -1,6 +1,6 @@
-<div class='robot'>
-    <div class="robot__header">
-        <%= image_tag("logo_pay_by_phone.png", alt: "PayByPhone logo", class: "robot__image") %>
+<div class='automated_ticket'>
+    <div class="automated_ticket__header">
+        <%= image_tag([automated_ticket.service.kind, 'png'].join('.'), alt: automated_ticket.service.kind , class: "automated_ticket__image") %>
         <%= render 'components/switcher', resource: automated_ticket, resource_boolean: 'active' %>
     </div>
     <div class='stack'>
