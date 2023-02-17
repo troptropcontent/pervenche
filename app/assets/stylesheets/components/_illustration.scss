@@ -1,0 +1,11 @@
+.illustration {
+    &--small {
+        width: 25vh;
+    }
+    &--medium {
+        width: 50vh;
+    }
+    &--large {
+        width: 75vh;
+    }
+}
