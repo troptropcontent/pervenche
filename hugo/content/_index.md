@@ -1,7 +1,7 @@
 ---
 {
   title: "Home",
-  draft: true,
+  draft: false,
   cover:
     {
       title: "Fini les oublis, fini les amendes !",
