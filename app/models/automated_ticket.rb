@@ -1,4 +1,5 @@
 class AutomatedTicket < ApplicationRecord
+  encrypts :payment_method_client_internal_id, :zipcode, :license_plate
   belongs_to :service, optional: true
   belongs_to :user
 
