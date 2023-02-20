@@ -16,7 +16,7 @@ class AutomatedTicket < ApplicationRecord
     ready: 2
   }
 
-  validates :license_plate, uniqueness: { scope: %i[user_id service_id] }
+  validates :license_plate, uniqueness: { scope: %i[user_id service_id] }, if: :license_plate
 
   with_options if: -> { required_for_step?(:service) } do
     validates :service_id, presence: true

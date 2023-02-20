@@ -12,7 +12,7 @@
         <% end %>
 
       <h3><%= t('views.automated_tickets.new.form.inputs.zipcode') %></h3>
-      <%= f.input :zipcode %>
+      <%= f.input :zipcode, as: :string %>
     </div>
   <% end %>
 </turbo-frame>
