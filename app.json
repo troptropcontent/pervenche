@@ -2,7 +2,7 @@
     "cron": [
       {
         "command": "bundle exec rails automated_ticket:renew_ticket_if_required",
-        "schedule": "* * * * *"
+        "schedule": "* 6-22 * * *"
       }
     ]
   }
