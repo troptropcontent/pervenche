@@ -37,6 +37,10 @@ class Service < ApplicationRecord
     end
   end
 
+  def request_new_ticket!(license_plate, zipcode, rate_option_id, quantity, time_unit, payment_method_id)
+    client.new_ticket(license_plate, zipcode, rate_option_id, quantity, time_unit, payment_method_id)
+  end
+
   private
 
   def valid_credentials
