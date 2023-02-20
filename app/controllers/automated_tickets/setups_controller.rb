@@ -66,7 +66,7 @@ class AutomatedTickets::SetupsController < ApplicationController
   end
 
   def update_status_and_redirect_to_root!
-    @automated_ticket.ready!
+    @automated_ticket.update!(status: :ready, active: true)
     redirect_to(root_path)
   end
 
