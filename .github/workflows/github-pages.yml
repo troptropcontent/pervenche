@@ -5,7 +5,7 @@ on:
     branches:
       - main # Set a branch to deploy
     paths:
-      - ./hugo
+      - ./hugo/**
 jobs:
   deploy:
     runs-on: ubuntu-22.04
