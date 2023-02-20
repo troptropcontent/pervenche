@@ -5,7 +5,7 @@ on:
     branches:
       - master # Set a branch to deploy
     paths:
-      - ./hugo/**
+      - ./hugo/**/*
   workflow_dispatch:
 
 jobs:
