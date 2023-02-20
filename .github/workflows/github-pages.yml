@@ -4,8 +4,8 @@ on:
   push:
     branches:
       - main # Set a branch to deploy
-  paths:
-    - ./hugo
+    paths:
+      - ./hugo
   pull_request:
 
 jobs:
