@@ -30,6 +30,9 @@ jobs:
           bundler-cache: true
 
       - name: Assets precompile
+        env:
+          GOOGLE_CLIENT_ID: "."
+          GOOGLE_CLIENT_SECRET: "."
         run: bundle exec rake assets:precompile --trace
 
       - name: Move the css file to hugo/static/css
@@ -50,4 +53,4 @@ jobs:
         if: ${{ github.ref == 'refs/heads/main' }}
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./public/www
+          publish_dir: ./docs
