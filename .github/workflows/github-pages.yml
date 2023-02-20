@@ -43,7 +43,7 @@ jobs:
           done
 
       - name: Remove files from public/assets
-        run: rm -rf ./public/assets/{*,.*}
+        run: rm -rf ./public/assets
 
       - name: Build
         run: hugo --minify
