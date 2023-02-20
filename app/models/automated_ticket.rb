@@ -1,5 +1,7 @@
 class AutomatedTicket < ApplicationRecord
   encrypts :payment_method_client_internal_id, :zipcode, :license_plate
+  has_many :tickets
+  has_one :running_ticket_in_database, -> { running }, class_name: 'Ticket'
   belongs_to :service, optional: true
   belongs_to :user
 
@@ -40,8 +42,14 @@ class AutomatedTicket < ApplicationRecord
     SETUP_STEPS
   end
 
-  def running_ticket
+  def running_ticket_in_client
     service.running_ticket(license_plate, zipcode)
+  end
+
+  def renew!
+    time_unit = accepted_time_units.include?('days') ? 'days' : 'hours'
+    service.request_new_ticket!(license_plate, zipcode, rate_option_client_internal_id, 1, time_unit,
+                                payment_method_client_internal_id)
   end
 
   private
