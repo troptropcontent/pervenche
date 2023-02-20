@@ -1,0 +1,782 @@
+/* line 1, app/assets/stylesheets/config/_variables.scss */
+:root {
+  --font-family-sans: 'Lato', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  --line-height-headers: 1.1;
+  --line-height-body:    1.5;
+  --font-size-xs: 0.75rem;
+  --font-size-s: 0.875rem;
+  --font-size-m: 1rem;
+  --font-size-l: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --font-size-xxl: 1.5rem;
+  --font-size-xxxl: 2rem;
+  --font-size-xxxxl: 2.5rem;
+  --image-xs: 0.75rem;
+  --image-s: 0.875rem;
+  --image-m: 1rem;
+  --image-l: 1.125rem;
+  --image-xl: 1.25rem;
+  --image-xxl: 1.5rem;
+  --image-xxxl: 2rem;
+  --image-xxxxl: 2.5rem;
+  --image-xxxxxl: 3rem;
+  --image-xxxxxxl: 3.5rem;
+  --image-xxxxxxxl: 4rem;
+  --image-xxxxxxxxl: 4.5rem;
+  --image-xxxxxxxxxl: 5rem;
+  --image-xxxxxxxxxxl: 5.5rem;
+  --image-xxxxxxxxxxxl: 5.5rem;
+  --image-xxxxxxxxxxxxl: 6rem;
+  --image-xxxxxxxxxxxxxl: 6.5rem;
+  --image-xxxxxxxxxxxxxxl: 7rem;
+  --image-xxxxxxxxxxxxxxxl: 7.5rem;
+  --image-xxxxxxxxxxxxxxxxl: 8rem;
+  --color-text-header: hsl(0, 1%, 16%);
+  --color-text-body:   hsl(0, 5%, 25%);
+  --color-text-muted:  hsl(0, 1%, 44%);
+  --space-xxxs: 0.25rem;
+  --space-xxs: 0.375rem;
+  --space-xs: 0.5rem;
+  --space-s: 0.75rem;
+  --space-m: 1rem;
+  --space-l: 1.5rem;
+  --space-xl: 2rem;
+  --space-xxl: 2.5rem;
+  --space-xxxl: 3rem;
+  --space-xxxxl: 4rem;
+  --color-primary:          hsl(198, 43%, 48%);
+  --color-primary-rotate:   hsl(197, 51%, 69%);
+  --color-primary-bg:       hsl(0, 85%, 96%);
+  --color-secondary:        hsl(164, 95%, 43%);
+  --color-secondary-rotate: hsl(120, 45%, 56%);
+  --color-tertiary:         hsl(42, 100%, 70%);
+  --color-glint:            hsl(195, 83%, 38%);
+  --color-success:            hsl(164, 95%, 43%);
+  --color-danger:            hsl(357, 46%, 52%);
+  --color-white:      hsl(0, 0%, 100%);
+  --color-background: hsl(30, 50%, 98%);
+  --color-light:      hsl(0, 6%, 93%);
+  --color-dark:       var(--color-text-header);
+  --border-radius: 0.375rem;
+  --border-radius-round: 50%;
+  --border: solid 2px var(--color-light);
+  --border-dark: solid 2px var(--color-dark);
+  --border-primary: solid 2px var(--color-primary);
+  --shadow-large:  2px 4px 10px hsl(0 0% 0% / 0.1);
+  --shadow-small:  1px 3px 6px hsl(0 0% 0% / 0.1);
+}
+
+/* line 1, app/assets/stylesheets/config/_reset.scss */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* line 7, app/assets/stylesheets/config/_reset.scss */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+/* line 12, app/assets/stylesheets/config/_reset.scss */
+html {
+  overflow-y: scroll;
+  height: 100%;
+}
+
+/* line 17, app/assets/stylesheets/config/_reset.scss */
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  background-color: var(--color-background);
+  color: var(--color-text-body);
+  line-height: var(--line-height-body);
+  font-family: var(--font-family-sans);
+}
+
+/* line 28, app/assets/stylesheets/config/_reset.scss */
+img,
+picture,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+/* line 35, app/assets/stylesheets/config/_reset.scss */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* line 42, app/assets/stylesheets/config/_reset.scss */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--color-text-header);
+  line-height: var(--line-height-headers);
+}
+
+/* line 52, app/assets/stylesheets/config/_reset.scss */
+h1 {
+  font-size: var(--font-size-xxxl);
+}
+
+/* line 56, app/assets/stylesheets/config/_reset.scss */
+h2 {
+  font-size: var(--font-size-xxl);
+}
+
+/* line 60, app/assets/stylesheets/config/_reset.scss */
+h3 {
+  font-size: var(--font-size-xl);
+}
+
+/* line 64, app/assets/stylesheets/config/_reset.scss */
+h4 {
+  font-size: var(--font-size-l);
+}
+
+/* line 68, app/assets/stylesheets/config/_reset.scss */
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: color 200ms;
+}
+
+/* line 73, app/assets/stylesheets/config/_reset.scss */
+a:hover, a:focus, a:active {
+  color: var(--color-primary-rotate);
+}
+
+/* line 1, app/assets/stylesheets/components/_btn.scss */
+.btn {
+  display: inline-block;
+  padding: var(--space-xxs) var(--space-m);
+  border-radius: var(--border-radius);
+  background-origin: border-box;
+  background-color: transparent;
+  border: solid 2px transparent;
+  font-weight: bold;
+  text-decoration: none;
+  cursor: pointer;
+  outline: none;
+  transition: filter 400ms, color 200ms;
+}
+
+/* line 14, app/assets/stylesheets/components/_btn.scss */
+.btn:hover, .btn:focus, .btn:focus-within, .btn:active {
+  transition: filter 250ms, color 200ms;
+}
+
+/* line 21, app/assets/stylesheets/components/_btn.scss */
+.btn--primary {
+  color: var(--color-white);
+  background-image: linear-gradient(to right, var(--color-primary), var(--color-primary-rotate));
+}
+
+/* line 25, app/assets/stylesheets/components/_btn.scss */
+.btn--primary:hover, .btn--primary:focus, .btn--primary:focus-within, .btn--primary:active {
+  color: var(--color-white);
+  filter: saturate(1.4) brightness(115%);
+}
+
+/* line 34, app/assets/stylesheets/components/_btn.scss */
+.btn--secondary {
+  color: var(--color-white);
+  background-image: linear-gradient(to right, var(--color-secondary), var(--color-secondary-rotate));
+}
+
+/* line 38, app/assets/stylesheets/components/_btn.scss */
+.btn--secondary:hover, .btn--secondary:focus, .btn--secondary:focus-within, .btn--secondary:active {
+  color: var(--color-white);
+  filter: saturate(1.2) brightness(110%);
+}
+
+/* line 47, app/assets/stylesheets/components/_btn.scss */
+.btn--light {
+  color: var(--color-dark);
+  background-color: var(--color-light);
+}
+
+/* line 51, app/assets/stylesheets/components/_btn.scss */
+.btn--light:hover, .btn--light:focus, .btn--light:focus-within, .btn--light:active {
+  color: var(--color-dark);
+  filter: brightness(92%);
+}
+
+/* line 60, app/assets/stylesheets/components/_btn.scss */
+.btn--dark {
+  color: var(--color-white);
+  border-color: var(--color-dark);
+  background-color: var(--color-dark);
+}
+
+/* line 65, app/assets/stylesheets/components/_btn.scss */
+.btn--dark:hover, .btn--dark:focus, .btn--dark:focus-within, .btn--dark:active {
+  color: var(--color-white);
+}
+
+/* line 72, app/assets/stylesheets/components/_btn.scss */
+.btn--sign-in {
+  display: flex;
+  gap: var(--space-xs);
+  color: var(--color-text-body);
+  border-color: var(--color-light);
+  background-color: var(--color-white);
+}
+
+/* line 79, app/assets/stylesheets/components/_btn.scss */
+.btn--sign-in:hover, .btn--sign-in:focus, .btn--sign-in:focus-within, .btn--sign-in:active {
+  background-color: var(--color-light);
+}
+
+/* line 85, app/assets/stylesheets/components/_btn.scss */
+.btn--sign-in::before {
+  background-image: url(/assets/google_logo-7852f7e9e8f35093d0b1c75fb3c5d8e7d20fae2f911636c5905bd9b7f78f86d0.svg);
+  content: '';
+  height: var(--image-l);
+  width: var(--image-l);
+  display: inline-block;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+/* line 1, app/assets/stylesheets/components/_text_divider.scss */
+.text-divider {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+/* line 5, app/assets/stylesheets/components/_text_divider.scss */
+.text-divider::before, .text-divider::after {
+  content: '';
+  height: 1px;
+  background-color: var(--color-dark);
+  flex-grow: 1;
+}
+
+/* line 4, app/assets/stylesheets/components/_switcher.scss */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: var(--image-xxxxxl);
+  height: var(--image-xxl);
+}
+
+/* line 10, app/assets/stylesheets/components/_switcher.scss */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* line 15, app/assets/stylesheets/components/_switcher.scss */
+.switch input:checked + .slider {
+  background-color: var(--color-success);
+}
+
+/* line 18, app/assets/stylesheets/components/_switcher.scss */
+.switch input:checked + .slider:before {
+  -webkit-transform: translateX(24px);
+  -ms-transform: translateX(24px);
+  transform: translateX(24px);
+}
+
+/* line 26, app/assets/stylesheets/components/_switcher.scss */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--color-danger);
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+/* line 36, app/assets/stylesheets/components/_switcher.scss */
+.slider:before {
+  position: absolute;
+  content: "";
+  height: var(--image-xl);
+  width: var(--image-xl);
+  left: 2px;
+  bottom: 2px;
+  background-color: var(--color-white);
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+/* line 47, app/assets/stylesheets/components/_switcher.scss */
+.slider.round {
+  border-radius: 34px;
+}
+
+/* line 50, app/assets/stylesheets/components/_switcher.scss */
+.slider.round:before {
+  border-radius: 50%;
+}
+
+/* line 1, app/assets/stylesheets/components/_form.scss */
+.form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+}
+
+/* line 6, app/assets/stylesheets/components/_form.scss */
+.form--column {
+  flex-direction: column;
+}
+
+/* line 10, app/assets/stylesheets/components/_form.scss */
+.form__group {
+  flex: 1;
+}
+
+/* line 12, app/assets/stylesheets/components/_form.scss */
+.form__group--column {
+  display: flex;
+  flex-direction: column;
+}
+
+/* line 18, app/assets/stylesheets/components/_form.scss */
+.form__input {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  padding: var(--space-xxs) var(--space-xs);
+  border: var(--border);
+  border-radius: var(--border-radius);
+  outline: none;
+  transition: box-shadow 250ms;
+  background-color: var(--color-white);
+}
+
+/* line 29, app/assets/stylesheets/components/_form.scss */
+.form__input:focus {
+  box-shadow: 0 0 0 2px var(--color-glint);
+}
+
+/* line 33, app/assets/stylesheets/components/_form.scss */
+.form__input--invalid {
+  border-color: var(--color-primary);
+}
+
+/* line 37, app/assets/stylesheets/components/_form.scss */
+.form__input__weekdays {
+  display: flex;
+  gap: var(--space-xs);
+  flex-wrap: wrap;
+}
+
+/* line 42, app/assets/stylesheets/components/_form.scss */
+.form__input__weekdays .checkbox {
+  width: var(--image-xxxxxxl);
+  height: var(--image-xxxxxxl);
+  display: flex;
+}
+
+/* line 46, app/assets/stylesheets/components/_form.scss */
+.form__input__weekdays .checkbox label {
+  border: var(--border);
+  border-radius: var(--border-radius-round);
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* line 54, app/assets/stylesheets/components/_form.scss */
+.form__input__weekdays .checkbox input:checked + label {
+  border: var(--border-primary);
+  background-color: var(--color-primary);
+  color: var(--color-white);
+}
+
+/* line 62, app/assets/stylesheets/components/_form.scss */
+.form__input__tiles {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+}
+
+/* line 67, app/assets/stylesheets/components/_form.scss */
+.form__input__tiles__tile_with_icon {
+  height: var(--image-xxxxxxxxxxxxxxxxl);
+  width: var(--image-xxxxxxxxxxxxxxxxl);
+  display: flex;
+}
+
+/* line 71, app/assets/stylesheets/components/_form.scss */
+.form__input__tiles__tile_with_icon > span {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  border: var(--border);
+  border-radius: var(--border-radius);
+  align-items: center;
+  justify-content: center;
+}
+
+/* line 80, app/assets/stylesheets/components/_form.scss */
+.form__input__tiles__tile_with_icon > span img {
+  width: var(--image-xxxxxxxl);
+  border-radius: var(--border-radius);
+}
+
+/* line 86, app/assets/stylesheets/components/_form.scss */
+.form__input__tiles__tile_with_icon > input:checked + span {
+  background-color: var(--color-light);
+  border: var(--border-primary);
+}
+
+/* line 91, app/assets/stylesheets/components/_form.scss */
+.form__input__tiles__tile_with_icon--disabled {
+  flex-direction: column;
+}
+
+/* line 93, app/assets/stylesheets/components/_form.scss */
+.form__input__tiles__tile_with_icon--disabled > span {
+  background-color: var(--color-text-muted);
+  color: var(--color-white);
+}
+
+/* line 96, app/assets/stylesheets/components/_form.scss */
+.form__input__tiles__tile_with_icon--disabled > span img {
+  filter: grayscale(0.7);
+}
+
+/* line 105, app/assets/stylesheets/components/_form.scss */
+.form input[type="radio"]:checked + .form__input {
+  border: var(--border-primary);
+}
+
+/* line 1, app/assets/stylesheets/components/_visually_hidden.scss */
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+/* line 1, app/assets/stylesheets/components/_error_message.scss */
+.error-message {
+  width: 100%;
+  background-color: var(--color-primary-bg);
+  padding: var(--space-xs);
+  border-radius: var(--border-radius);
+}
+
+/* line 1, app/assets/stylesheets/components/_navbar.scss */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+  padding: var(--space-xs);
+  margin-bottom: var(--space-xl);
+  background-color: var(--color-primary);
+}
+
+/* line 1, app/assets/stylesheets/components/_robot.scss */
+.robot {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  background-color: var(--color-white);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-small);
+  margin-bottom: var(--space-m);
+  padding: var(--space-xs);
+}
+
+/* line 12, app/assets/stylesheets/components/_robot.scss */
+.robot__header {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* line 16, app/assets/stylesheets/components/_robot.scss */
+.robot__image {
+  height: var(--image-xxxxl);
+  margin-block: auto;
+  border-radius: var(--border-radius);
+}
+
+/* line 2, app/assets/stylesheets/components/_loader.scss */
+.loader--ring {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+
+/* line 8, app/assets/stylesheets/components/_loader.scss */
+.loader--ring div {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border: 8px solid var(--color-primary);
+  border-radius: 50%;
+  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: var(--color-primary) transparent transparent transparent;
+}
+
+/* line 20, app/assets/stylesheets/components/_loader.scss */
+.loader--ring div:nth-child(1) {
+  animation-delay: -0.45s;
+}
+
+/* line 23, app/assets/stylesheets/components/_loader.scss */
+.loader--ring div:nth-child(2) {
+  animation-delay: -0.3s;
+}
+
+/* line 26, app/assets/stylesheets/components/_loader.scss */
+.loader--ring div:nth-child(3) {
+  animation-delay: -0.15s;
+}
+
+@keyframes lds-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* line 1, app/assets/stylesheets/components/_automated_ticket.scss */
+.automated_ticket {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  background-color: var(--color-white);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-small);
+  margin-bottom: var(--space-m);
+  padding: var(--space-xs);
+}
+
+/* line 12, app/assets/stylesheets/components/_automated_ticket.scss */
+.automated_ticket__header {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* line 16, app/assets/stylesheets/components/_automated_ticket.scss */
+.automated_ticket__image {
+  height: var(--image-xxxxl);
+  margin-block: auto;
+  border-radius: var(--border-radius);
+}
+
+/* line 2, app/assets/stylesheets/components/_illustration.scss */
+.illustration--small {
+  width: 25vh;
+}
+
+/* line 5, app/assets/stylesheets/components/_illustration.scss */
+.illustration--medium {
+  width: 50vh;
+}
+
+/* line 8, app/assets/stylesheets/components/_illustration.scss */
+.illustration--large {
+  width: 75vh;
+}
+
+/* line 1, app/assets/stylesheets/components/_features.scss */
+.features {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-s);
+}
+
+/* line 5, app/assets/stylesheets/components/_features.scss */
+.features__row {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-s);
+  align-items: center;
+}
+
+/* line 10, app/assets/stylesheets/components/_features.scss */
+.features__row__content {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* line 15, app/assets/stylesheets/components/_features.scss */
+.features__row__content__appendix {
+  font-size: var(--font-size-xs);
+}
+
+@media (min-width: 50rem) {
+  /* line 21, app/assets/stylesheets/components/_features.scss */
+  .features__row {
+    flex-direction: row;
+  }
+  /* line 23, app/assets/stylesheets/components/_features.scss */
+  .features__row:nth-child(even) {
+    flex-direction: row-reverse;
+  }
+}
+
+/* line 1, app/assets/stylesheets/layouts/_container.scss */
+.container {
+  width: 100%;
+  padding-right: var(--space-xs);
+  padding-left: var(--space-xs);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* line 8, app/assets/stylesheets/layouts/_container.scss */
+.container--grow {
+  flex-grow: 1;
+}
+
+/* line 13, app/assets/stylesheets/layouts/_container.scss */
+.container--padding--bottom-xs {
+  padding-bottom: var(--space-xs);
+}
+
+@media (min-width: 50rem) {
+  /* line 1, app/assets/stylesheets/layouts/_container.scss */
+  .container {
+    padding-right: var(--space-m);
+    padding-left: var(--space-m);
+    max-width: 60rem;
+  }
+}
+
+/* line 1, app/assets/stylesheets/layouts/_cover.scss */
+.cover {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* line 1, app/assets/stylesheets/layouts/_box.scss */
+.box {
+  padding: var(--space-s);
+  border: var(--border);
+  background-color: var(--color-white);
+  border-radius: var(--border-radius);
+}
+
+/* line 1, app/assets/stylesheets/layouts/_stack.scss */
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-s);
+}
+
+/* line 6, app/assets/stylesheets/layouts/_stack.scss */
+.stack__only {
+  display: none;
+}
+
+/* line 8, app/assets/stylesheets/layouts/_stack.scss */
+.stack__only:only-child {
+  display: block;
+}
+
+/* line 1, app/assets/stylesheets/layouts/_header.scss */
+.header {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-s);
+  justify-content: space-between;
+  margin-top: var(--space-m);
+  margin-bottom: var(--space-l);
+}
+
+@media (min-width: 50rem) {
+  /* line 1, app/assets/stylesheets/layouts/_header.scss */
+  .header {
+    margin-bottom: var(--space-xl);
+  }
+}
+
+/* line 1, app/assets/stylesheets/layouts/_cluster.scss */
+.cluster {
+  display: flex;
+  gap: var(--space-s);
+  flex-wrap: wrap;
+}
+
+/* line 7, app/assets/stylesheets/layouts/_cluster.scss */
+.cluster__align-items--center {
+  align-items: center;
+}
+
+/* line 1, app/assets/stylesheets/layouts/_center.scss */
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* line 1, app/assets/stylesheets/layouts/_banner.scss */
+.banner {
+  width: 100%;
+  padding-top: var(--space-xl);
+  padding-bottom: var(--space-xl);
+  display: flex;
+  flex-direction: column;
+}
+
+/* line 2, app/assets/stylesheets/utilities/_basics.scss */
+.text__align--center {
+  text-align: center  !important;
+}
+
+/* line 7, app/assets/stylesheets/utilities/_basics.scss */
+.text__color--light {
+  color: var(--color-light) !important;
+}
+
+/* line 10, app/assets/stylesheets/utilities/_basics.scss */
+.text__color--success {
+  color: var(--color-success) !important;
+}
+
+/* line 13, app/assets/stylesheets/utilities/_basics.scss */
+.text__color--danger {
+  color: var(--color-danger) !important;
+}
+
+/* line 19, app/assets/stylesheets/utilities/_basics.scss */
+.grow {
+  flex-grow: 1 !important;
+}
