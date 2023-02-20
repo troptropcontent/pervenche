@@ -6,6 +6,8 @@ on:
       - master # Set a branch to deploy
     paths:
       - ./hugo/**
+  workflow_dispatch:
+
 jobs:
   deploy:
     runs-on: ubuntu-22.04
