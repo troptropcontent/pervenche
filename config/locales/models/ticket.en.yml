@@ -1,4 +1,0 @@
-en:
-  models:
-    ticket:
-      coverage: "From %{starts_on} to %{ends_on}"
