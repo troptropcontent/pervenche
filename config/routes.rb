@@ -14,4 +14,5 @@ Rails.application.routes.draw do
       end
     end
   end
+  resource :onboarding, only: :show
 end
