@@ -89,8 +89,6 @@ GEM
     crass (1.0.6)
     date (3.3.3)
     debug (1.7.1)
-      irb (>= 1.5.0)
-      reline (>= 0.3.1)
     devise (4.9.0)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -120,9 +118,6 @@ GEM
     inline_svg (1.8.0)
       activesupport (>= 3.0)
       nokogiri (>= 1.6)
-    io-console (0.6.0)
-    irb (1.6.2)
-      reline (>= 0.3.0)
     jbuilder (2.11.5)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
@@ -238,8 +233,6 @@ GEM
     redis-client (0.12.2)
       connection_pool
     regexp_parser (2.7.0)
-    reline (0.3.2)
-      io-console (~> 0.5)
     responders (3.1.0)
       actionpack (>= 5.2)
       railties (>= 5.2)
@@ -397,7 +390,7 @@ DEPENDENCIES
   webdrivers
 
 RUBY VERSION
-   ruby 3.0.2p107
+   ruby 3.2.1p31
 
 BUNDLED WITH
    2.3.10
