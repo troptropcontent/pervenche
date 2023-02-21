@@ -26,7 +26,7 @@ class RadioTilesWithIconInput < SimpleForm::Inputs::Base
         @builder.input_field(attribute_name, type: 'radio', class: 'visually-hidden', value: value),
         template.content_tag(:span) do
           [
-            template.image_tag(value),
+            template.image_tag(value + '.png'),
             template.tag.p(title)
           ].join('').html_safe
         end
