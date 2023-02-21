@@ -40,7 +40,7 @@ class RadioTilesWithIconInput < SimpleForm::Inputs::Base
       [
         template.content_tag(:span) do
           [
-            template.image_tag(value),
+            template.image_tag(value + '.png'),
             template.tag.p("#{title} *")
           ].join('').html_safe
         end
