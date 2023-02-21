@@ -17,6 +17,6 @@ class User < ApplicationRecord
   end
 
   def operationnal?
-    services.joins(:automated_tickets).where(status: :ready).present?
+    services.joins(:automated_tickets).where(automated_tickets: { status: :ready }).present?
   end
 end
