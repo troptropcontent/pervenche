@@ -1,6 +1,6 @@
 class Service < ApplicationRecord
   belongs_to :user
-  has_many :robots
+  has_many :automated_tickets
   encrypts :username, :password
   enum :kind, {
     pay_by_phone: 0,
