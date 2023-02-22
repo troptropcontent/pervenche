@@ -100,7 +100,8 @@ class AutomatedTickets::SetupsController < ApplicationController
   end
 
   def load_data_required_for_duration_and_payment_method_step
-    @payment_methods = @automated_ticket.service.payment_methods
+    @free = @automated_ticket.free?
+    @payment_methods = (@automated_ticket.service.payment_methods unless @free)
   end
 
   def permitted_fields_for_step

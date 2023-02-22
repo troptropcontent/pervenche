@@ -1,12 +1,16 @@
 <turbo-frame id="automated_ticket_form_content" class="grow stack" >
   <%= render 'automated_tickets/setups/form' do |f| %>
     <div class="stack">
-        <h3><%= t('views.automated_tickets.new.form.inputs.payment_method') %></h3>
-        <%= f.input :payment_method_client_internal_id, wrapper_html: {class: 'stack'} do %>
-          <% @payment_methods.each do |payment_method| %>
-            <%= f.label "payment_method_client_internal_id_#{payment_method[:client_internal_id].downcase}" do %>
-              <%= f.radio_button "payment_method_client_internal_id", payment_method[:client_internal_id], class: 'visually-hidden' %>
-              <p class= 'form__input'><%=  payment_method[:anonymised_card_number] %> - <%=  t("views.automated_tickets.new.form.inputs.pyment_methods.#{payment_method[:payment_card_type]}") %></p>
+        <% if @free %>
+          <%= f.input :payment_method_client_internal_id, :as => :hidden, :input_html => { :value => "free" } %>
+          <% else %>
+          <h3><%= t('views.automated_tickets.new.form.inputs.payment_method') %></h3>
+          <%= f.input :payment_method_client_internal_id, wrapper_html: {class: 'stack'} do %>
+            <% @payment_methods.each do |payment_method| %>
+              <%= f.label "payment_method_client_internal_id_#{payment_method[:client_internal_id].downcase}" do %>
+                <%= f.radio_button "payment_method_client_internal_id", payment_method[:client_internal_id], class: 'visually-hidden' %>
+                <p class= 'form__input'><%=  payment_method[:anonymised_card_number] %> - <%=  t("views.automated_tickets.new.form.inputs.pyment_methods.#{payment_method[:payment_card_type]}") %></p>
+              <% end %>
             <% end %>
           <% end %>
         <% end %>

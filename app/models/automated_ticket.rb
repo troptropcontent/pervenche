@@ -46,10 +46,16 @@ class AutomatedTicket < ApplicationRecord
     service.running_ticket(license_plate, zipcode)
   end
 
+  def free?
+    time_unit = accepted_time_units.include?('days') ? 'days' : 'hours'
+    service.quote(rate_option_client_internal_id, zipcode, license_plate, 1, time_unit)[:cost].zero?
+  end
+
   def renew!
     time_unit = accepted_time_units.include?('days') ? 'days' : 'hours'
+    payment_method_id = payment_method_client_internal_id unless payment_method_client_internal_id == 'free'
     service.request_new_ticket!(license_plate, zipcode, rate_option_client_internal_id, 1, time_unit,
-                                payment_method_client_internal_id)
+                                payment_method_id: payment_method_id)
   end
 
   private
