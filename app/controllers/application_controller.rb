@@ -20,6 +20,6 @@ class ApplicationController < ActionController::Base
   private
 
   def operationnal_controller?
-    !devise_controller? && controller_name != 'onboardings'
+    !devise_controller? && %w[onboardings setups].exclude?(controller_name)
   end
 end
