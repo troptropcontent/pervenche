@@ -186,7 +186,7 @@ GEM
       omniauth (~> 2.0)
     orm_adapter (0.5.0)
     parallel (1.22.1)
-    parking_ticket (1.0.41)
+    parking_ticket (1.0.42)
       faraday
     parser (3.2.1.0)
       ast (~> 2.4.1)
@@ -214,6 +214,10 @@ GEM
       activesupport (= 7.0.4.2)
       bundler (>= 1.15.0)
       railties (= 7.0.4.2)
+    rails-controller-testing (1.0.5)
+      actionpack (>= 5.0.1.rc1)
+      actionview (>= 5.0.1.rc1)
+      activesupport (>= 5.0.1.rc1)
     rails-dom-testing (2.0.3)
       activesupport (>= 4.2.0)
       nokogiri (>= 1.6)
@@ -276,7 +280,9 @@ GEM
       sentry-ruby (~> 5.8.0)
     sentry-ruby (5.8.0)
       concurrent-ruby (~> 1.0, >= 1.0.2)
-    sidekiq (7.0.5)
+    shoulda-matchers (5.3.0)
+      activesupport (>= 5.2.0)
+    sidekiq (7.0.6)
       concurrent-ruby (< 2)
       connection_pool (>= 2.3.0)
       rack (>= 2.2.4)
@@ -287,14 +293,14 @@ GEM
     snaky_hash (2.0.1)
       hashie
       version_gem (~> 1.1, >= 1.1.1)
-    sorbet (0.5.10676)
-      sorbet-static (= 0.5.10676)
-    sorbet-runtime (0.5.10676)
-    sorbet-static (0.5.10676-universal-darwin-20)
-    sorbet-static (0.5.10676-x86_64-linux)
-    sorbet-static-and-runtime (0.5.10676)
-      sorbet (= 0.5.10676)
-      sorbet-runtime (= 0.5.10676)
+    sorbet (0.5.10679)
+      sorbet-static (= 0.5.10679)
+    sorbet-runtime (0.5.10679)
+    sorbet-static (0.5.10679-universal-darwin-20)
+    sorbet-static (0.5.10679-x86_64-linux)
+    sorbet-static-and-runtime (0.5.10679)
+      sorbet (= 0.5.10679)
+      sorbet-runtime (= 0.5.10679)
     spoom (1.1.15)
       sorbet (>= 0.5.10187)
       sorbet-runtime (>= 0.5.9204)
@@ -308,7 +314,7 @@ GEM
       sprockets (>= 3.0.0)
     stimulus-rails (1.2.1)
       railties (>= 6.0.0)
-    tapioca (0.10.5)
+    tapioca (0.11.0)
       bundler (>= 1.17.3)
       netrc (>= 0.11.0)
       parallel (>= 1.21.0)
@@ -377,12 +383,14 @@ DEPENDENCIES
   pg (~> 1.1)
   puma (~> 5.0)
   rails (~> 7.0.4, >= 7.0.4.1)
+  rails-controller-testing
   redis (~> 4.0)
   rspec-rails
   sassc-rails
   selenium-webdriver
   sentry-rails
   sentry-ruby
+  shoulda-matchers (~> 5.0)
   sidekiq (~> 7.0)
   simple_form
   sorbet

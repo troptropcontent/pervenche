@@ -26,6 +26,7 @@ gem 'stimulus-rails'
 
 # gem that wraps the parkign apps
 gem 'parking_ticket'
+# gem 'parking_ticket', path: '../parking_ticket'
 
 # Sentry to catch all errrors
 gem 'sentry-rails'
@@ -95,7 +96,9 @@ end
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem 'capybara'
+  gem 'rails-controller-testing'
   gem 'selenium-webdriver'
+  gem 'shoulda-matchers', '~> 5.0'
   gem 'webdrivers'
 end
 gem 'cancancan'
