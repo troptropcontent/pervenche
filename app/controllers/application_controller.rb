@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   before_action :authenticate_user!
-  # before_action :require_operationnal, if: :operationnal_controller?
+  before_action :require_operationnal, if: :operationnal_controller?
 
   rescue_from ActiveRecord::RecordNotFound do |_exception|
     not_found
