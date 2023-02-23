@@ -55,7 +55,6 @@
     --space-xxxl: 3rem;    // 48px
     --space-xxxxl: 4rem;   // 64px
 
-
       // Application colors
     --color-primary:          hsl(198, 43%, 48%);
     --color-primary-rotate:   hsl(197, 51%, 69%);
@@ -64,8 +63,10 @@
     --color-secondary-rotate: hsl(120, 45%, 56%);
     --color-tertiary:         hsl(42, 100%, 70%);
     --color-glint:            hsl(195, 83%, 38%);
-    --color-success:            hsl(164, 95%, 43%);
-    --color-danger:            hsl(357, 46%, 52%);
+    --color-success:            hsl(164 95% 43%);
+    --color-success-light:      hsl(164 95% 43% / 25%);
+    --color-danger:            hsl(357 46% 52%);
+    --color-danger-light:      hsl(357 46% 52% / 25%);
 
     // Neutral colors
     --color-white:      hsl(0, 0%, 100%);
