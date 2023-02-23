@@ -1,0 +1,7 @@
+en:
+  views:
+    onboardings:
+      show:
+        header:
+          title: "Welcome"
+          subtitle: "In order to set up your account you need to complete the following steps."

@@ -1,1 +1,11 @@
-hello from the future onboarding
+<main class='container'>
+    <section class="header">
+        <span class="stack">
+        <h1><%= t('views.onboardings.show.header.title') %></h1>
+        <p><%= t('views.onboardings.show.header.subtitle') %></p>
+        </span>
+    </section>
+    <section>
+        <%= render 'components/step', name: 'hello', done: @service_set_up %>
+    </section>
+</main>
