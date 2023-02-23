@@ -1,0 +1,13 @@
+.tag {
+    display: inline-block;
+    padding: var(--space-xxs) var(--space-m);
+    border-radius: var(--border-radius);
+
+
+    &--danger{
+        background-color: var(--color-danger-light);
+    }
+    &--success{
+        background-color: var(--color-success-light);
+    }
+}
