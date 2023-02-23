@@ -269,7 +269,11 @@ Devise.setup do |config|
   config.sign_out_via = :delete
 
   # ==> OmniAuth
-  config.omniauth :google_oauth2, (ENV['GOOGLE_CLIENT_ID'] || Rails.application.credentials.google_oauth2.client_id), (ENV['GOOGLE_CLIENT_SECRET'] || Rails.application.credentials.google_oauth2.client_secret)
+  config.omniauth :google_oauth2,
+                  (ENV['GOOGLE_CLIENT_ID'] || Rails.application.credentials.google_oauth2.dig(Rails.env.to_sym,
+                                                                                              :client_id)),
+                  (ENV['GOOGLE_CLIENT_SECRET'] || Rails.application.credentials.google_oauth2.dig(Rails.env.to_sym,
+                                                                                                  :client_secret))
 
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
