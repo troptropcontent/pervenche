@@ -1,0 +1,10 @@
+<div class="box">
+    <div class="header">
+        <h1><%= name %></h1>
+        <% if done %>
+            <%= render 'components/tag', color: 'success', text: t('application.done') %>
+            <% else %>
+            <%= render 'components/tag', color: 'danger', text: t('application.to_do') %>
+        <% end %>
+    </div>
+</div>
