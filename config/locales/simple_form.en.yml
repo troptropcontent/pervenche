@@ -14,3 +14,4 @@ en:
       user:
         email: "Your email"
         password: "Your password"
+        password_confirmation: "Confirm your password"

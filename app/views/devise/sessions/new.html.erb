@@ -33,6 +33,10 @@
         <% end %>
         <%= f.submit "Sign in", class: "btn btn--primary" %>
       <% end %>
+      <span>
+        <%= t 'devise.sessions.not_registered_yet'%>
+        <%= link_to t('devise.sessions.create_an_account'), new_user_registration_path %>
+      </span>
     </div>
 </div>
   

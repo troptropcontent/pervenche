@@ -37,6 +37,7 @@ en:
       updated: "Your password has been changed successfully. You are now signed in."
       updated_not_active: "Your password has been changed successfully."
     registrations:
+      title: Sign up
       destroyed: "Bye! Your account has been successfully cancelled. We hope to see you again soon."
       signed_up: "Welcome! You have signed up successfully."
       signed_up_but_inactive: "You have signed up successfully. However, we could not sign you in because your account is not yet activated."
@@ -47,6 +48,8 @@ en:
       updated_but_not_signed_in: "Your account has been updated successfully, but since your password was changed, you need to sign in again."
     sessions:
       title: Sign in
+      not_registered_yet: "Not registered yet ?"
+      create_an_account: "Create an accont"
       sign_in_with_username_and_password: "Or use username/password"
       signed_in: "Signed in successfully."
       signed_out: "Signed out successfully."
