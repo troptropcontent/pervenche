@@ -22,5 +22,9 @@
 
         <%= f.submit "Sign in", class: "btn btn--primary" %>
       <% end %>
+      <span>
+        <%= t 'devise.registrations.registered_already'%>
+        <%= link_to t('devise.sessions.title'), new_user_session_path %>
+      </span>
     </div>
 </div>
