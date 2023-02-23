@@ -6,6 +6,22 @@
         </span>
     </section>
     <section>
-        <%= render 'components/step', name: 'hello', done: @service_set_up %>
+        <%= render 'components/step', 
+            title: t('views.onboardings.show.steps.service.title'), 
+            text: t('views.onboardings.show.steps.service.text'),
+            cta:  t('views.onboardings.show.steps.service.cta'),
+            cta_path:  new_service_path,
+            done: @service_set_up 
+        %>
+        <%= render 'components/step', 
+            title: t('views.onboardings.show.steps.automated_ticket.title'), 
+            text: t('views.onboardings.show.steps.automated_ticket.text'),
+            cta:  t('views.onboardings.show.steps.automated_ticket.cta'),
+            cta_path:  new_automated_ticket_path,
+            done: @automated_ticket_set_up
+         %>
+    </section>
+    <section>
+        
     </section>
 </main>

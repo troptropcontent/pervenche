@@ -5,3 +5,12 @@ en:
         header:
           title: "Welcome"
           subtitle: "In order to set up your account you need to complete the following steps."
+        steps:
+          service:
+            title: "Parking account"
+            text: "In order for us to request new tickets atomatically for you we need to know how to connect to the application on your behalf. You'll be able to add other accounts later."
+            cta: "Connect an account"
+          automated_ticket:
+            title: "Parking ticket"
+            text: "Create your first automated parkiong ticket, tell us which vehicle you want to cover, where, whith with rate and when do you want your vehicle to be covered. We'll take care of the rest."
+            cta: "Create automated ticket"

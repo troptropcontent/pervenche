@@ -20,6 +20,7 @@ class ApplicationController < ActionController::Base
   private
 
   def operationnal_controller?
-    !devise_controller? && %w[onboardings setups].exclude?(controller_name)
+    !devise_controller? && %w[onboardings
+                              setups].exclude?(controller_name) && %w[new create update].exclude?(action_name)
   end
 end
