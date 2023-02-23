@@ -37,8 +37,15 @@ class Service < ApplicationRecord
     end
   end
 
-  def request_new_ticket!(license_plate, zipcode, rate_option_id, quantity, time_unit, payment_method_id:)
-    client.new_ticket(license_plate, zipcode, rate_option_id, quantity, time_unit, payment_method_id: payment_method_id)
+  def request_new_ticket!(license_plate:, zipcode:, rate_option_client_internal_id:, quantity:, time_unit:, payment_method_id:)
+    client.new_ticket(
+      license_plate: license_plate,
+      zipcode: zipcode,
+      rate_option_client_internal_id: rate_option_client_internal_id,
+      quantity: 1,
+      time_unit: time_unit,
+      payment_method_id: payment_method_id
+    )
   end
 
   def quote(rate_option_id, zipcode, license_plate, quantity, time_unit)
