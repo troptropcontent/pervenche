@@ -4,12 +4,12 @@
   draft: false,
   cover:
     {
-      title: "Fini les oublis, fini les amendes !",
+      title: "Fini les oublis, fini les amendes!",
       subtitle: "Renouvellez automatiquement vos tickets de stationnement grâce à Pervenche.",
     },
   ctas:
     {
-      primary: { title: "C'est parti !", href: "#" },
+      primary: { title: "C'est parti !", href: "https://app.pervenche.eu" },
       light: { title: "Comment ça marche", href: "#how_it_works" },
     },
   how_it_works:
@@ -41,7 +41,7 @@
   pricing:
     {
       title: "Combien ça coute ?",
-      text: "Aprés la période d'éssai d'un mois, le service sera facturé **8€ par mois**. A Paris le forfait post stationnement est fixé à 50 € et il est possible de prebdre dex amendes par jours soit 100€ d'amende potentiel en cas d'oublis de ticket.",
+      text: "Aprés la période d'éssai d'un mois, le service sera facturé **8€ par mois**. A Paris le forfait post stationnement est fixé à 50 € et il est possible d'etre verbailser deux fois par jour soit 100€ d'amende potentiel en cas d'oublis de ticket.",
     },
 }
 ---
