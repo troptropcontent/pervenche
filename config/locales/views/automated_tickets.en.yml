@@ -30,6 +30,7 @@ en:
         vehicle: "Vehicle :"
         zipcode: "Zipcode :"
         coverage:
+          title: "Coverage :"
           covered: Covered
           not_covered: Not covered
           day_not_covered: Not covered today as configured

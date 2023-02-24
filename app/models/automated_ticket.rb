@@ -51,6 +51,21 @@ class AutomatedTicket < ApplicationRecord
     service.quote(rate_option_client_internal_id, zipcode, license_plate, 1, time_unit)[:cost].zero?
   end
 
+  def coverage
+    return 'covered' if running_ticket
+    return 'day_not_covered' if weekdays.exclude?(Date.today.wday)
+
+    'not_covered'
+  end
+
+  def running_ticket
+    @running_ticket = if running_ticket_in_database
+                        running_ticket_in_database
+                      elsif (ticket_to_save = running_ticket_in_client)
+                        tickets.create(ticket_to_save.except(:client))
+                      end
+  end
+
   def renew!
     time_unit = accepted_time_units.include?('days') ? 'days' : 'hours'
     payment_method_id = payment_method_client_internal_id unless payment_method_client_internal_id == 'free'
