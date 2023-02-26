@@ -1,21 +1,14 @@
 module ApplicationHelper
-  def collection_table(collection:, fields:)
-    # thead = content_tag :thead do
-    #   content_tag :tr do
-    #     fields.map { |field| concat content_tag(:th, field[:display_name]) }.join.html_safe
-    #   end
-    # end
+  def table_data(collection:, fields:)
+    klass = collection.klass
+    header = fields.map { |field| klass.human_attribute_name(field) }
+    rows = collection.map do |element|
+      fields.map { |field| element.send(field) }
+    end
+    {
+      header:,
+      rows:
 
-    # tbody = content_tag :tbody do
-    #   collection.collect do |elem|
-    #     content_tag :tr do
-    #       columns.collect do |column|
-    #         concat content_tag(:td, elem.attributes[column[:name]])
-    #       end.to_s.html_safe
-    #     end
-    #   end.join.html_safe
-    # end
-
-    # content_tag :table, thead.concat(tbody)
+    }
   end
 end

@@ -1,4 +1,4 @@
-<main class="container">
+<main class="container stack">
    <header class="header">
     <h1>
         <%= t(
@@ -28,7 +28,12 @@
         </div>
     </section>
     <section>
-        <%= collection_table collection: @last_tickets, fields: [:starts_on, :ends_on, :cost_cents, :client_internal_id] %>
+        <h2 class="header">Last tickets taken automatically :</h2>
+        <%= render 'components/table', 
+        data: table_data(collection: @last_tickets, fields: [:starts_on, :ends_on, :cost, :client_internal_id]) 
+        %>
     </section>
-    
+    <%= button_to automated_ticket_path(@automated_ticket), method: :delete, class: 'btn btn--danger' do %>
+        <%= t 'views.automated_tickets.show.delete.cta.title' %>
+    <% end %>
 </main>
