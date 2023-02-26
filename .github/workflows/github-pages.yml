@@ -33,7 +33,7 @@ jobs:
         env:
           GOOGLE_CLIENT_ID: "."
           GOOGLE_CLIENT_SECRET: "."
-        run: rails pervenche:sync_css
+        run: bundle exec rails pervenche:sync_css
 
       - name: Build
         run: hugo --minify
