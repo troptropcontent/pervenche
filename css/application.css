@@ -44,15 +44,17 @@
   --space-xxl: 2.5rem;
   --space-xxxl: 3rem;
   --space-xxxxl: 4rem;
-  --color-primary:          hsl(198, 43%, 48%);
-  --color-primary-rotate:   hsl(197, 51%, 69%);
+  --color-primary:          hsl(203 77% 43%);
+  --color-primary-rotate:   hsl(203 77% 43% / 75%);
   --color-primary-bg:       hsl(0, 85%, 96%);
   --color-secondary:        hsl(164, 95%, 43%);
   --color-secondary-rotate: hsl(120, 45%, 56%);
   --color-tertiary:         hsl(42, 100%, 70%);
   --color-glint:            hsl(195, 83%, 38%);
-  --color-success:            hsl(164, 95%, 43%);
-  --color-danger:            hsl(357, 46%, 52%);
+  --color-success:            hsl(83 68% 47%);
+  --color-success-light:      hsl(83 68% 47% / 25%);
+  --color-danger:            hsl(358 100% 67%);
+  --color-danger-light:      hsl(358 100% 67% / 25%);
   --color-white:      hsl(0, 0%, 100%);
   --color-background: hsl(30, 50%, 98%);
   --color-light:      hsl(0, 6%, 93%);
@@ -153,6 +155,11 @@ a {
 /* line 73, app/assets/stylesheets/config/_reset.scss */
 a:hover, a:focus, a:active {
   color: var(--color-primary-rotate);
+}
+
+/* line 80, app/assets/stylesheets/config/_reset.scss */
+html {
+  scroll-behavior: smooth;
 }
 
 /* line 1, app/assets/stylesheets/components/_btn.scss */
@@ -263,7 +270,7 @@ a:hover, a:focus, a:active {
   flex-grow: 1;
 }
 
-/* line 4, app/assets/stylesheets/components/_switcher.scss */
+/* line 4, app/assets/stylesheets/components/_toggle.scss */
 .switch {
   position: relative;
   display: inline-block;
@@ -271,26 +278,26 @@ a:hover, a:focus, a:active {
   height: var(--image-xxl);
 }
 
-/* line 10, app/assets/stylesheets/components/_switcher.scss */
+/* line 10, app/assets/stylesheets/components/_toggle.scss */
 .switch input {
   opacity: 0;
   width: 0;
   height: 0;
 }
 
-/* line 15, app/assets/stylesheets/components/_switcher.scss */
+/* line 15, app/assets/stylesheets/components/_toggle.scss */
 .switch input:checked + .slider {
   background-color: var(--color-success);
 }
 
-/* line 18, app/assets/stylesheets/components/_switcher.scss */
+/* line 18, app/assets/stylesheets/components/_toggle.scss */
 .switch input:checked + .slider:before {
   -webkit-transform: translateX(24px);
   -ms-transform: translateX(24px);
   transform: translateX(24px);
 }
 
-/* line 26, app/assets/stylesheets/components/_switcher.scss */
+/* line 26, app/assets/stylesheets/components/_toggle.scss */
 .slider {
   position: absolute;
   cursor: pointer;
@@ -303,7 +310,7 @@ a:hover, a:focus, a:active {
   transition: .4s;
 }
 
-/* line 36, app/assets/stylesheets/components/_switcher.scss */
+/* line 36, app/assets/stylesheets/components/_toggle.scss */
 .slider:before {
   position: absolute;
   content: "";
@@ -316,12 +323,12 @@ a:hover, a:focus, a:active {
   transition: .4s;
 }
 
-/* line 47, app/assets/stylesheets/components/_switcher.scss */
+/* line 47, app/assets/stylesheets/components/_toggle.scss */
 .slider.round {
   border-radius: 34px;
 }
 
-/* line 50, app/assets/stylesheets/components/_switcher.scss */
+/* line 50, app/assets/stylesheets/components/_toggle.scss */
 .slider.round:before {
   border-radius: 50%;
 }
@@ -486,6 +493,7 @@ a:hover, a:focus, a:active {
 
 /* line 1, app/assets/stylesheets/components/_navbar.scss */
 .navbar {
+  height: 80px;
   position: sticky;
   top: 0;
   z-index: 20;
@@ -495,8 +503,22 @@ a:hover, a:focus, a:active {
   flex-wrap: wrap;
   gap: var(--space-xs);
   padding: var(--space-xs);
-  margin-bottom: var(--space-xl);
   background-color: var(--color-primary);
+}
+
+/* line 14, app/assets/stylesheets/components/_navbar.scss */
+.navbar .logo {
+  color: var(--color-background);
+}
+
+/* line 18, app/assets/stylesheets/components/_navbar.scss */
+.navbar--inverted {
+  background-color: var(--color-background);
+}
+
+/* line 21, app/assets/stylesheets/components/_navbar.scss */
+.navbar--inverted .logo {
+  color: var(--color-primary);
 }
 
 /* line 1, app/assets/stylesheets/components/_robot.scss */
@@ -595,19 +617,19 @@ a:hover, a:focus, a:active {
   border-radius: var(--border-radius);
 }
 
-/* line 2, app/assets/stylesheets/components/_illustration.scss */
-.illustration--small {
-  width: 25vh;
-}
-
-/* line 5, app/assets/stylesheets/components/_illustration.scss */
-.illustration--medium {
-  width: 50vh;
+/* line 3, app/assets/stylesheets/components/_illustration.scss */
+.illustration--small > img, .illustration--small svg {
+  max-width: 25vw;
 }
 
 /* line 8, app/assets/stylesheets/components/_illustration.scss */
-.illustration--large {
-  width: 75vh;
+.illustration--medium > img, .illustration--medium svg {
+  max-width: 50vw;
+}
+
+/* line 13, app/assets/stylesheets/components/_illustration.scss */
+.illustration--large > img, .illustration--large svg {
+  max-width: 75vw;
 }
 
 /* line 1, app/assets/stylesheets/components/_features.scss */
@@ -649,6 +671,23 @@ a:hover, a:focus, a:active {
   }
 }
 
+/* line 1, app/assets/stylesheets/components/_tag.scss */
+.tag {
+  display: inline-block;
+  padding: var(--space-xxs) var(--space-m);
+  border-radius: var(--border-radius);
+}
+
+/* line 7, app/assets/stylesheets/components/_tag.scss */
+.tag--danger {
+  background-color: var(--color-danger-light);
+}
+
+/* line 10, app/assets/stylesheets/components/_tag.scss */
+.tag--success {
+  background-color: var(--color-success-light);
+}
+
 /* line 1, app/assets/stylesheets/layouts/_container.scss */
 .container {
   width: 100%;
@@ -684,6 +723,13 @@ a:hover, a:focus, a:active {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
+}
+
+/* line 8, app/assets/stylesheets/layouts/_cover.scss */
+.cover--background-primary {
+  background-blend-mode: overlay;
+  background-image: url(https://www.elegantthemes.com/layouts/wp-content/uploads/2018/01/geometric-bg-overlay-01.jpg), linear-gradient(135deg, var(--color-primary-rotate), var(--color-primary));
+  color: var(--color-background);
 }
 
 /* line 1, app/assets/stylesheets/layouts/_box.scss */
@@ -740,9 +786,15 @@ a:hover, a:focus, a:active {
   align-items: center;
 }
 
+/* line 10, app/assets/stylesheets/layouts/_cluster.scss */
+.cluster__align-items--end {
+  align-items: end;
+}
+
 /* line 1, app/assets/stylesheets/layouts/_center.scss */
 .center {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 }
@@ -752,8 +804,81 @@ a:hover, a:focus, a:active {
   width: 100%;
   padding-top: var(--space-xl);
   padding-bottom: var(--space-xl);
+}
+
+/* line 6, app/assets/stylesheets/layouts/_banner.scss */
+.banner__large {
+  min-height: 75vh;
+}
+
+/* line 9, app/assets/stylesheets/layouts/_banner.scss */
+.banner__medium {
+  min-height: 50vh;
+}
+
+/* line 12, app/assets/stylesheets/layouts/_banner.scss */
+.banner__small {
+  min-height: 25vh;
+}
+
+/* line 16, app/assets/stylesheets/layouts/_banner.scss */
+.banner--primary {
+  background-image: linear-gradient(135deg, var(--color-primary), var(--color-primary-rotate));
+  color: var(--color-background);
+}
+
+/* line 1, app/assets/stylesheets/layouts/_switcher.scss */
+.switcher {
   display: flex;
   flex-direction: column;
+  gap: var(--space-m);
+}
+
+/* line 6, app/assets/stylesheets/layouts/_switcher.scss */
+.switcher > * {
+  flex: 1 1 0px;
+}
+
+@media (min-width: 50rem) {
+  /* line 1, app/assets/stylesheets/layouts/_switcher.scss */
+  .switcher {
+    flex-direction: row;
+    gap: var(--space-s);
+  }
+  /* line 13, app/assets/stylesheets/layouts/_switcher.scss */
+  .switcher--reverse {
+    flex-direction: row-reverse;
+  }
+}
+
+@keyframes appear {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* line 11, app/assets/stylesheets/animations/animations.scss */
+  [data-appearable] {
+    opacity: 0;
+  }
+  /* line 14, app/assets/stylesheets/animations/animations.scss */
+  .appear {
+    animation-name: appear;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: forwards;
+    /* Chrome 16+, Safari 4+ */
+    -moz-animation-fill-mode: forwards;
+    /* FF 5+ */
+    -o-animation-fill-mode: forwards;
+    /* Not implemented yet */
+    -ms-animation-fill-mode: forwards;
+    /* IE 10+ */
+    animation-fill-mode: forwards;
+  }
 }
 
 /* line 2, app/assets/stylesheets/utilities/_basics.scss */
@@ -767,16 +892,21 @@ a:hover, a:focus, a:active {
 }
 
 /* line 10, app/assets/stylesheets/utilities/_basics.scss */
+.text__color--primary {
+  color: var(--color-primary) !important;
+}
+
+/* line 13, app/assets/stylesheets/utilities/_basics.scss */
 .text__color--success {
   color: var(--color-success) !important;
 }
 
-/* line 13, app/assets/stylesheets/utilities/_basics.scss */
+/* line 16, app/assets/stylesheets/utilities/_basics.scss */
 .text__color--danger {
   color: var(--color-danger) !important;
 }
 
-/* line 19, app/assets/stylesheets/utilities/_basics.scss */
+/* line 22, app/assets/stylesheets/utilities/_basics.scss */
 .grow {
   flex-grow: 1 !important;
 }
