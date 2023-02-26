@@ -1,18 +1,15 @@
-<section class='container cover'>
-    <div class="features__row">
-        <div class="features__row__content stack">
+<section class='cover cover--background-primary' id="hero">
+    <div class="container switcher switcher--reverse">
+        <div class="illustration--medium center">
+            {{ partial "svgs/by_my_car" }}
+        </div>
+        <div class="stack">
             <div>
-                <h1>{{ .Params.cover.title }}</h1>
+                <h1 class="text__color--light">{{ .Params.cover.title }}</h1>
                 <p>{{ .Params.cover.subtitle }}</p>
             </div>
             <div class="cluster">
-                <a class='btn btn--primary' href={{ .Params.ctas.primary.href }} >{{ .Params.ctas.primary.title }}</a>
-                <a class='btn btn--light' href={{ .Params.ctas.light.href }} >{{ .Params.ctas.light.title }}</a>
-            </div>
-        </div>
-        <div class="center grow">
-            <div class="illustration--medium">
-                {{ partial "svgs/by_my_car" }}
+                <a class='btn btn--light' href={{ .Params.cta.href }} >{{ .Params.cta.title }}</a>
             </div>
         </div>
     </div>

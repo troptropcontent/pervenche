@@ -1,11 +1,17 @@
 .illustration {
     &--small {
-        width: 25vh;
+        > img,svg {
+            max-width: 25vw;
+        }
     }
     &--medium {
-        width: 50vh;
+        > img,svg {
+            max-width: 50vw;
+        }
     }
     &--large {
-        width: 75vh;
+        > img,svg {
+            max-width: 75vw;
+        }
     }
 }

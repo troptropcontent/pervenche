@@ -1,38 +1,43 @@
 {{ define "main" }}
     <main >
-      <nav class="navbar">
-        <h1 class="text__color--light">Pervenche</h1>
+      <nav class="navbar navbar--inverted">
+        <a href="/#hero" class="logo">
+          <h1 class="logo">Pervenche</h1>
+        </a>
+        <div class="cluster">
+          
+          <a href="/#how_it_works">{{ .Params.nav.links.how_it_works.title }}</a>
+          <a href="/#pricing">{{ .Params.nav.links.pricing.title }}</a>
+        </div>
       </nav>
       {{ partial "cover" . }}
       <section id="how_it_works" class="container stack">
-        <div class="header center">
+        <div class="banner banner__small center">
           <h1>{{  .Params.how_it_works.header }}</h1>
         </div>
-        <div class="features">
-          {{ $.Scratch.Set "step_number" .Params.how_it_works.step_number }}
+        {{ $.Scratch.Set "step_number" .Params.how_it_works.step_number }}
           {{ range $index, $element := .Params.how_it_works.steps }}
           {{ partial "step" (dict "context" . "index" $index  "element" $element "title" ($.Scratch.Get "step_number")) }}
-          {{ end }}
+        {{ end }}
+      </section>
+      <section id="pricing" class="banner banner__small banner--primary center">
+        <div class="container stack">
+          <h1 class="text__color--light center">{{ .Params.pricing.title }}</h1>
+        <span>
+          <p>{{ .Params.pricing.text | markdownify }}</p>
+        </span>
         </div>
       </section>
       <section id="call_to_action" class="container">
-        <div class="banner">
+        <div class="banner banner__small center">
           <div class="center">
-            <a class='btn btn--primary' href={{ .Params.ctas.primary.href }} >{{ .Params.ctas.primary.title }}</a>
+            <a class='btn btn--primary' href={{ .Params.cta.href }} >{{ .Params.cta.title }}</a>
           </div>
         </div>
       </section>
-      <section id="#pricing" class="container">
-        <div class="box stack">
-          <h1>Combien ça coute ?</h1>
-          <span>
-            <p>{{ .Params.pricing.text | markdownify }}</p>
-          </span>
-        </div>
-      </section>
-
-      <footer class="banner center">
+      <footer class="banner banner__small banner--primary center">
         <p>© 2022 Pervenche All Rights Reserved</p>
       </footer>
     </main>
 {{ end }}
+

@@ -1,0 +1,17 @@
+.switcher {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-m);
+
+    & > * {
+        flex: 1 1 0px;
+    }
+
+    @include media(tabletAndUp) {
+        flex-direction: row;
+        gap: var(--space-s);
+        &--reverse {
+            flex-direction: row-reverse; 
+        }
+      }
+}

@@ -4,4 +4,11 @@
     justify-content: center;
     align-items: center;
     min-height: 100vh;
+
+    &--background-primary{
+        // background-color: var(--color-primary);
+        background-blend-mode: overlay;
+        background-image: url(https://www.elegantthemes.com/layouts/wp-content/uploads/2018/01/geometric-bg-overlay-01.jpg),linear-gradient(135deg,var(--color-primary-rotate), var(--color-primary));
+        color: var(--color-background)
+    }
 }

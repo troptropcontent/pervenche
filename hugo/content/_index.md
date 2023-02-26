@@ -2,16 +2,20 @@
 {
   title: "Home",
   draft: false,
+  nav:
+    {
+      links:
+        {
+          pricing: { title: "Prix" },
+          how_it_works: { title: "Comment ça marche" },
+        },
+    },
   cover:
     {
       title: "Fini les oublis, fini les amendes!",
       subtitle: "Renouvellez automatiquement vos tickets de stationnement grâce à Pervenche.",
     },
-  ctas:
-    {
-      primary: { title: "C'est parti !", href: "https://app.pervenche.eu" },
-      light: { title: "Comment ça marche", href: "#how_it_works" },
-    },
+  cta: { title: "C'est parti !", href: "https://app.pervenche.eu" },
   how_it_works:
     {
       header: "Comment ça marche",

@@ -2,6 +2,19 @@
     width: 100%;
     padding-top: var(--space-xl);
     padding-bottom: var(--space-xl);
-    display: flex;
-    flex-direction: column;
+
+    &__large {
+        min-height: 75vh;
+    }
+    &__medium {
+        min-height: 50vh;
+    }
+    &__small {
+        min-height: 25vh;
+    }
+
+    &--primary{
+        background-image: linear-gradient(135deg, var(--color-primary), var(--color-primary-rotate));
+        color: var(--color-background);
+    }
 }

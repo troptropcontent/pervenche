@@ -1,12 +1,14 @@
-<div class="features__row">
-    <div class="features__row__content">
-        {{ partial (printf "svgs/%s" .context.illustration) }}
-    </div>
-    <div class="features__row__content box stack" >
-        <span class="stack">
-            <h1>{{ .title }} {{(add (.index) 1)}}</h1>
-            <p>{{ .context.text }}</p>
+<article class="banner banner__medium">
+    <div class="switcher {{ cond (modBool (.index) 2) "" "switcher--reverse" }}">
+        <span class="illustration--medium center" data-appearable>
+            {{ partial (printf "svgs/%s" .context.illustration) }}
         </span>
-        <p class="features__row__content__appendix">{{ .context.appendix }}</p>  
+        <div class="stack" >
+            <span class="stack">
+                <h1 class="text__color--primary">{{ .title }} {{(add (.index) 1)}}</h1>
+                <p>{{ .context.text }}</p>
+            </span>
+            <p class="features__row__content__appendix">{{ .context.appendix }}</p>  
+        </div>
     </div>
-</div>
+</article>

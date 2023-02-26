@@ -26,24 +26,14 @@ jobs:
 
       - name: Setup Ruby and install gems
         uses: ruby/setup-ruby@v1
-        # with:
-        #   bundler-cache: true
+        with:
+          bundler-cache: true
 
       - name: Assets precompile
         env:
           GOOGLE_CLIENT_ID: "."
           GOOGLE_CLIENT_SECRET: "."
-        run: bundle exec rake assets:precompile --trace
-
-      - name: Move the css file to hugo/static/css
-        run: |
-          find ./public/assets -type f -iname "application-*.css" | while read line; do
-              echo "Copying '$line' to /hugo/static/css"
-              cp -- "$line" hugo/static/css/application.css
-          done
-
-      - name: Remove files from public/assets
-        run: rm -rf ./public/assets
+        run: rails pervenche:sync_css
 
       - name: Build
         run: hugo --minify
