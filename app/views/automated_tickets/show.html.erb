@@ -1,0 +1,34 @@
+<main class="container">
+   <header class="header">
+    <h1>
+        <%= t(
+            'views.automated_tickets.show.header.title', 
+            license_plate: @automated_ticket.license_plate, 
+            zipcode: @automated_ticket.zipcode
+        ) %>
+    </h1>
+   </header>
+    <section class="stack">
+        <div class="stack">
+            <% if @automated_ticket.coverage == 'uncovered' %>                
+                    <%= render 'coverage', icon: 'cross.svg', coverage: @automated_ticket.coverage,  details: t('views.automated_tickets.show.coverage.uncovered.details'), color: 'danger' %>
+                <% elsif @automated_ticket.coverage == 'covered' %>
+                    <%= render 'coverage', 
+                            icon: 'check.svg', 
+                            coverage: @automated_ticket.coverage,  
+                            details: t(
+                                'views.automated_tickets.show.coverage.covered.details', 
+                                starts_on: l(@automated_ticket.running_ticket.starts_on), 
+                                ends_on: l(@automated_ticket.running_ticket.ends_on)),
+                                color: 'success'
+                    %>
+                <% else %>
+                    <%= render 'coverage', icon: 'check.svg', coverage: @automated_ticket.coverage,  details: t("views.automated_tickets.show.coverage.#{@automated_ticket.coverage}.details"), color: 'success' %>
+            <% end %>            
+        </div>
+    </section>
+    <section>
+        <%= collection_table collection: @last_tickets, fields: [:starts_on, :ends_on, :cost_cents, :client_internal_id] %>
+    </section>
+    
+</main>

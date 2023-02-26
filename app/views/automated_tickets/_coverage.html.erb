@@ -1,0 +1,8 @@
+<span class="cluster cluster__align-items--end">
+    <h2><%= t('views.automated_tickets.show.coverage.title') %></h2>
+    <span class="<%= class_names('cluster', "text__color--#{color}") %>" >    
+        <p><%= t("views.automated_tickets.show.coverage.#{coverage}.title") %></p>
+        <%= inline_svg icon %>
+    </span>
+</span>
+<p><%= details %></p>

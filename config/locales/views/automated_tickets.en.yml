@@ -6,6 +6,21 @@ en:
           title: Automated Tickets
           cta: New ticket
         empty: You have no automated tickets for now, you can create one with the button just above.
+      show:
+        header:
+          title: Automated Ticket for %{license_plate} in %{zipcode} area
+        coverage:
+          title: "Coverage :"
+          covered:
+            details: Covered from %{starts_on} to %{ends_on}
+            title: Covered
+          uncovered:
+            details: No running ticket have been found, we're on it.
+            title: Not covered
+          day_not_covered:
+            details: Day of the week not required.
+            title: Not covered as configured
+
       new:
         header:
           title: "New automated ticket"

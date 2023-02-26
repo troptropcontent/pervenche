@@ -7,6 +7,8 @@ class AutomatedTicketsController < ApplicationController
     redirect_to automated_ticket_setup_path(automated_ticket.id, AutomatedTicket.setup_steps.keys.first)
   end
 
+  # GET   /automated_tickets/:id
+  def show; end
   # GET   /automated_tickets
   def index; end
 

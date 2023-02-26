@@ -3,18 +3,20 @@
         <%= image_tag([automated_ticket.service.kind, 'png'].join('.'), alt: automated_ticket.service.kind , class: "automated_ticket__image") %>
         <%= render 'components/switcher', resource: automated_ticket, resource_boolean: 'active' %>
     </div>
-    <div class='stack'>
-        <div class='cluster'>
-            <h3><%= t('views.automated_tickets.automated_ticket.vehicle') %></h3>
-            <p><%= automated_ticket.license_plate %></p>
+    <%= link_to automated_ticket_path(automated_ticket) do %>
+        <div class='stack'>
+            <div class='cluster'>
+                <h3><%= t('views.automated_tickets.automated_ticket.vehicle') %></h3>
+                <p><%= automated_ticket.license_plate %></p>
+            </div>
+            <div class='cluster'>
+                <h3><%= t('views.automated_tickets.automated_ticket.zipcode') %></h3>
+                <p><%= automated_ticket.zipcode %></p>
+            </div>
+            <div class='cluster'>
+                <h3><%= t("views.automated_tickets.automated_ticket.coverage.title") %></h3>
+                <p class="<%= class_names('text__color--danger': automated_ticket.coverage == 'not_covered', 'text__color--success': automated_ticket.coverage != 'not_covered') %>"><%= t("views.automated_tickets.automated_ticket.coverage.#{automated_ticket.coverage}") %></p>
+            </div>    
         </div>
-        <div class='cluster'>
-            <h3><%= t('views.automated_tickets.automated_ticket.zipcode') %></h3>
-            <p><%= automated_ticket.zipcode %></p>
-        </div>
-        <div class='cluster'>
-            <h3><%= t("views.automated_tickets.automated_ticket.coverage.title") %></h3>
-            <p class="<%= class_names('text__color--danger': automated_ticket.coverage == 'not_covered', 'text__color--success': automated_ticket.coverage != 'not_covered') %>"><%= t("views.automated_tickets.automated_ticket.coverage.#{automated_ticket.coverage}") %></p>
-        </div>    
-    </div>
+    <% end %>
 </div>
