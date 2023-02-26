@@ -28,7 +28,10 @@
         </div>
     </section>
     <section>
-        <%= collection_table collection: @last_tickets, fields: [:starts_on, :ends_on, :cost_cents, :client_internal_id] %>
+        <h2 class="header">Last tickets taken automatically :</h2>
+        <%= render 'components/table', 
+        data: table_data(collection: @last_tickets, fields: [:starts_on, :ends_on, :cost, :client_internal_id]) 
+        %>
     </section>
     
 </main>

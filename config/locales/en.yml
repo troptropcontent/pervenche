@@ -33,3 +33,12 @@ en:
   time:
     formats:
       default: "%m/%d/%Y - %H:%M"
+  activerecord:
+    attributes:
+      ticket:
+        starts_on: Start date
+        ends_on: End date
+        license_plate: License Plate
+        cost_cents: Cost in cents
+        cost: Cost
+        client_internal_id: Application internal number

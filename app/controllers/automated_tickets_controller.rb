@@ -8,7 +8,10 @@ class AutomatedTicketsController < ApplicationController
   end
 
   # GET   /automated_tickets/:id
-  def show; end
+  def show
+    @last_tickets = @automated_ticket.tickets.order(starts_on: :desc).limit(10)
+  end
+
   # GET   /automated_tickets
   def index; end
 
