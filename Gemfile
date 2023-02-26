@@ -77,11 +77,6 @@ gem 'factory_bot_rails'
 group :development, :test do
   gem 'byebug', platform: :mri
   gem 'rspec-rails'
-
-  # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
-  gem 'debug', platforms: %i[mri mingw x64_mingw]
-  gem 'irb', '~>1.5.0'
-  gem 'reline', '~>0.3.1'
 end
 
 group :development do
