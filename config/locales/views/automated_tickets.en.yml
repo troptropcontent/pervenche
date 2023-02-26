@@ -20,7 +20,9 @@ en:
           day_not_covered:
             details: Day of the week not required.
             title: Not covered as configured
-
+        delete:
+          cta:
+            title: "Delete automated ticket"
       new:
         header:
           title: "New automated ticket"

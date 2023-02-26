@@ -56,6 +56,19 @@
           filter: brightness(92%);
         }
       }
+
+      &--danger {
+        color: var(--color-white);
+        background-color: var(--color-danger);
+    
+        &:hover,
+        &:focus,
+        &:focus-within,
+        &:active {
+          color: var(--color-white);
+          filter: brightness(92%);
+        }
+      }
     
       &--dark {
         color: var(--color-white);
