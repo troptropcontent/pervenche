@@ -119,6 +119,9 @@ GEM
     inline_svg (1.8.0)
       activesupport (>= 3.0)
       nokogiri (>= 1.6)
+    io-console (0.6.0)
+    irb (1.5.1)
+      reline (>= 0.3.0)
     jbuilder (2.11.5)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
@@ -240,6 +243,8 @@ GEM
     redis-client (0.12.2)
       connection_pool
     regexp_parser (2.7.0)
+    reline (0.3.2)
+      io-console (~> 0.5)
     responders (3.1.0)
       actionpack (>= 5.2)
       railties (>= 5.2)
@@ -375,6 +380,7 @@ DEPENDENCIES
   factory_bot_rails
   importmap-rails
   inline_svg
+  irb (~> 1.5.0)
   jbuilder
   money-rails (~> 1.12)
   omniauth-google-oauth2
@@ -385,6 +391,7 @@ DEPENDENCIES
   rails (~> 7.0.4, >= 7.0.4.1)
   rails-controller-testing
   redis (~> 4.0)
+  reline (~> 0.3.1)
   rspec-rails
   sassc-rails
   selenium-webdriver
