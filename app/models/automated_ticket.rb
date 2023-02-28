@@ -1,6 +1,7 @@
 class AutomatedTicket < ApplicationRecord
   encrypts :payment_method_client_internal_id, :zipcode, :license_plate
   has_many :tickets, dependent: :destroy
+  has_many :ticket_requests, dependent: :destroy
   has_one :running_ticket_in_database, -> { running }, class_name: 'Ticket'
   belongs_to :service, optional: true
   belongs_to :user
