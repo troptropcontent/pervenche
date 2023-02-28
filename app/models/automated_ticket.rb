@@ -42,6 +42,13 @@ class AutomatedTicket < ApplicationRecord
     SETUP_STEPS
   end
 
+  def find_or_create_running_ticket_if_it_exists
+    return running_ticket_in_database if running_ticket_in_database
+    ticket_to_save = running_ticket_in_client
+    tickets.create!(running_ticket_in_client.except(:client)) if ticket_to_save
+  end
+    
+
   def running_ticket_in_client
     service.running_ticket(license_plate, zipcode)
   end
