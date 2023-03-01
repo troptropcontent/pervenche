@@ -5,5 +5,11 @@ RSpec.shared_context 'a user with a service with an automated ticket' do
         service.save(validate: false)
         service
     end
-    let(:automated_ticket) {FactoryBot.create(:automated_ticket, user:, service:) }
+    let(:automated_ticket) {FactoryBot.create(
+        :automated_ticket, 
+        user:, 
+        service:, 
+        payment_method_client_internal_id: automated_ticket_payment_method_client_internal_id) 
+    }
+    let(:automated_ticket_payment_method_client_internal_id) {'AFakePaymentMethodId'}
 end
