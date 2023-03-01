@@ -9,7 +9,10 @@ RSpec.shared_context 'a user with a service with an automated ticket' do
         :automated_ticket, 
         user:, 
         service:, 
-        payment_method_client_internal_id: automated_ticket_payment_method_client_internal_id) 
+        payment_method_client_internal_id: automated_ticket_payment_method_client_internal_id,
+        accepted_time_units: automated_ticket_accepted_time_units, 
+    ) 
     }
     let(:automated_ticket_payment_method_client_internal_id) {'AFakePaymentMethodId'}
+    let(:automated_ticket_accepted_time_units){['days']}
 end
