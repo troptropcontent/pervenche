@@ -219,18 +219,30 @@ html {
 }
 
 /* line 60, app/assets/stylesheets/components/_btn.scss */
+.btn--danger {
+  color: var(--color-white);
+  background-color: var(--color-danger);
+}
+
+/* line 64, app/assets/stylesheets/components/_btn.scss */
+.btn--danger:hover, .btn--danger:focus, .btn--danger:focus-within, .btn--danger:active {
+  color: var(--color-white);
+  filter: brightness(92%);
+}
+
+/* line 73, app/assets/stylesheets/components/_btn.scss */
 .btn--dark {
   color: var(--color-white);
   border-color: var(--color-dark);
   background-color: var(--color-dark);
 }
 
-/* line 65, app/assets/stylesheets/components/_btn.scss */
+/* line 78, app/assets/stylesheets/components/_btn.scss */
 .btn--dark:hover, .btn--dark:focus, .btn--dark:focus-within, .btn--dark:active {
   color: var(--color-white);
 }
 
-/* line 72, app/assets/stylesheets/components/_btn.scss */
+/* line 85, app/assets/stylesheets/components/_btn.scss */
 .btn--sign-in {
   display: flex;
   gap: var(--space-xs);
@@ -239,12 +251,12 @@ html {
   background-color: var(--color-white);
 }
 
-/* line 79, app/assets/stylesheets/components/_btn.scss */
+/* line 92, app/assets/stylesheets/components/_btn.scss */
 .btn--sign-in:hover, .btn--sign-in:focus, .btn--sign-in:focus-within, .btn--sign-in:active {
   background-color: var(--color-light);
 }
 
-/* line 85, app/assets/stylesheets/components/_btn.scss */
+/* line 98, app/assets/stylesheets/components/_btn.scss */
 .btn--sign-in::before {
   background-image: url(/assets/google_logo-7852f7e9e8f35093d0b1c75fb3c5d8e7d20fae2f911636c5905bd9b7f78f86d0.svg);
   content: '';
@@ -686,6 +698,17 @@ html {
 /* line 10, app/assets/stylesheets/components/_tag.scss */
 .tag--success {
   background-color: var(--color-success-light);
+}
+
+/* line 1, app/assets/stylesheets/components/_table.scss */
+table {
+  background-color: var(--color-light);
+  border-radius: var(--border-radius);
+}
+
+/* line 5, app/assets/stylesheets/components/_table.scss */
+table tbody {
+  background-color: var(--color-white);
 }
 
 /* line 1, app/assets/stylesheets/layouts/_container.scss */
