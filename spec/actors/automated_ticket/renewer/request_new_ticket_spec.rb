@@ -18,13 +18,12 @@ RSpec.describe AutomatedTicket::Renewer::RequestNewTicket, type: :actor do
       )
       ticket_request_count = TicketRequest.count
       subject  
-      last_ticket_request_saved = TicketRequest.last
       expect(TicketRequest.count).to eq(ticket_request_count + 1)
-      expect(last_ticket_request_saved.automated_ticket_id).to eq(automated_ticket.id)
-      expect(last_ticket_request_saved.payment_method_client_internal_id).to eq('AFakePaymentMethodId')
-      expect(last_ticket_request_saved.time_unit).to eq('days')
-      expect(last_ticket_request_saved.quantity).to eq(1)
-      expect(last_ticket_request_saved.requested_on).to be_within(0.1).of(Time.now)
+      expect(subject.ticket_request.automated_ticket_id).to eq(automated_ticket.id)
+      expect(subject.ticket_request.payment_method_client_internal_id).to eq('AFakePaymentMethodId')
+      expect(subject.ticket_request.time_unit).to eq('days')
+      expect(subject.ticket_request.quantity).to eq(1)
+      expect(subject.ticket_request.requested_on).to be_within(0.1).of(Time.now)
     end
   end
 end

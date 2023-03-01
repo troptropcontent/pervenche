@@ -2,9 +2,9 @@
 
 class AutomatedTicket::Renewer::RequestNewTicket < Actor
   input :automated_ticket
-  input :payment_method_id
   input :time_unit
   input :quantity
+  input :payment_method_id
   output :ticket_request
 
   def call
