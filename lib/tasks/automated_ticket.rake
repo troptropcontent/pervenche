@@ -7,8 +7,8 @@ namespace :automated_ticket do
     else
       automated_tickets.find_each do |automated_ticket|
         puts "Checking automated_ticket #{automated_ticket.id}"
-        result = AutomatedTickets::Renewer.new(automated_ticket).call
-        puts "Result : #{result}"
+        AutomatedTicket::Renewer.call(automated_ticket:)
+        puts "automated_ticket #{automated_ticket.id} checked"
       end
     end
   end
