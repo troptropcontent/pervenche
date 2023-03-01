@@ -61,7 +61,7 @@ class AutomatedTicket < ApplicationRecord
 
   def coverage
     return 'covered' if running_ticket
-    return 'day_not_covered' if weekdays.exclude?(Date.today.wday)
+    return 'day_not_covered' unless should_renew_today?
 
     'not_covered'
   end
@@ -83,6 +83,10 @@ class AutomatedTicket < ApplicationRecord
       time_unit: time_unit,
       payment_method_id: payment_method_client_internal_id
     )
+  end
+
+  def should_renew_today?
+    weekdays.include?(Date.today.wday)
   end
 
   private

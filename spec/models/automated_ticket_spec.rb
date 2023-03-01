@@ -2,8 +2,9 @@ require 'rails_helper'
 
 RSpec.describe AutomatedTicket, type: :model do
   subject { 
-    FactoryBot.create(:automated_ticket, user:, service:) 
+    FactoryBot.create(:automated_ticket, user:, service:, weekdays: weekdays) 
   }
+  let(:weekdays){[1]}
   let(:service) do
     service = FactoryBot.build(:service, user:)
     service.save(validate: false)
@@ -73,6 +74,20 @@ RSpec.describe AutomatedTicket, type: :model do
           it "return null" do
             expect(subject.find_or_create_running_ticket_if_it_exists).to eq(nil)
           end
+        end
+      end
+    end
+    context "#should_renew_today?" do
+      let(:weekdays){[Date.today.wday]}
+      context "when today's weekday is included in automated_ticket.weekdays" do
+        it "should return true" do
+          expect(subject.should_renew_today?).to eq(true)
+        end
+      end
+      context "when today's weekday is not included in automated_ticket.weekdays" do
+        let(:weekdays){[Date.today.tomorrow.wday]}
+        it "should return true" do
+          expect(subject.should_renew_today?).to eq(false)
         end
       end
     end
