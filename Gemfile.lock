@@ -279,6 +279,11 @@ GEM
       sentry-ruby (~> 5.8.0)
     sentry-ruby (5.8.0)
       concurrent-ruby (~> 1.0, >= 1.0.2)
+    service_actor (3.6.1)
+      zeitwerk
+    service_actor-rails (1.0.0)
+      rails (>= 4.2)
+      service_actor
     shoulda-matchers (5.3.0)
       activesupport (>= 5.2.0)
     sidekiq (7.0.6)
@@ -388,6 +393,7 @@ DEPENDENCIES
   selenium-webdriver
   sentry-rails
   sentry-ruby
+  service_actor-rails (~> 1.0)
   shoulda-matchers (~> 5.0)
   sidekiq (~> 7.0)
   simple_form
