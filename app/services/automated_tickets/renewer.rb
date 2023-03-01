@@ -38,7 +38,22 @@ module AutomatedTickets
     end
 
     def request_new_ticket!
-      @automated_ticket.renew!
+      @automated_ticket.renew!(quantity: 1, time_unit: time_unit, payment_method_client_internal_id: payment_method_client_internal_id)
+      TicketRequest.insert({
+        automated_ticket_id: @automated_ticket.id,
+        payment_method_client_internal_id: payment_method_client_internal_id,
+        requested_on: Time.current,
+        quantity: 1, 
+        time_unit: time_unit})
+    end
+
+    def payment_method_client_internal_id
+      return if @automated_ticket.payment_method_client_internal_id == 'free'
+      @automated_ticket.payment_method_client_internal_id 
+    end
+
+    def time_unit
+      @automated_ticket.accepted_time_units.include?('days') ? 'days' : 'hours'
     end
   end
 end

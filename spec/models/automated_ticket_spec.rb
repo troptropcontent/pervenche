@@ -1,7 +1,17 @@
 require 'rails_helper'
 
 RSpec.describe AutomatedTicket, type: :model do
-  subject { automated_ticket }
+  subject { 
+    FactoryBot.create(:automated_ticket, user:, service:, weekdays: weekdays) 
+  }
+  let(:weekdays){[1]}
+  let(:service) do
+    service = FactoryBot.build(:service, user:)
+    service.save(validate: false)
+    service
+  end
+  let(:user){FactoryBot.create(:user)}
+
   describe 'validations' do
     context 'uniqueness' do
       let(:user) do
@@ -29,4 +39,58 @@ RSpec.describe AutomatedTicket, type: :model do
       it 'We should have here all specs related to the conditionnal validation that we have on the model'
     end
   end
+  describe "#instance_methods" do
+    context "#find_or_create_running_ticket_if_it_exists" do
+      before do
+        allow(subject).to receive(:running_ticket_in_client).and_return(running_ticket_in_client)
+      end
+      let(:running_ticket_in_client){nil}
+      context "when a running ticket exists in the database" do
+        let!(:running_ticket_in_database) {FactoryBot.create(:ticket, automated_ticket: subject, ends_on: 2.minutes.from_now)}
+        it "returns the running ticket" do
+          expect(subject.find_or_create_running_ticket_if_it_exists).to eq(running_ticket_in_database)
+        end
+      end
+      context "when a running ticket does not exist in the database" do
+        
+        context "when a ticket exist in the client" do
+          let(:running_ticket_in_client){{
+            starts_on: "2023-01-25 13:35:58".to_datetime.in_time_zone,
+            ends_on: "2023-01-25 13:35:58".to_datetime.in_time_zone,
+            license_plate: "MyLicensePlate",
+            cost: 1,
+            client_internal_id: "FakeClientInternalId",
+            client: 'pay_by_phone',
+          }}
+          it "creates a new ticket in the database and returns it" do
+            ticket_count = Ticket.count
+            result = subject.find_or_create_running_ticket_if_it_exists
+            expect(**result.attributes).to include(**running_ticket_in_client.except(:client, :cost).stringify_keys)
+            expect(result.cost_cents).to eq(100)
+            expect( Ticket.count).to eq(ticket_count + 1)
+          end
+        end
+        context "when a ticket does not exist in the client" do
+          it "return null" do
+            expect(subject.find_or_create_running_ticket_if_it_exists).to eq(nil)
+          end
+        end
+      end
+    end
+    context "#should_renew_today?" do
+      let(:weekdays){[Date.today.wday]}
+      context "when today's weekday is included in automated_ticket.weekdays" do
+        it "should return true" do
+          expect(subject.should_renew_today?).to eq(true)
+        end
+      end
+      context "when today's weekday is not included in automated_ticket.weekdays" do
+        let(:weekdays){[Date.today.tomorrow.wday]}
+        it "should return true" do
+          expect(subject.should_renew_today?).to eq(false)
+        end
+      end
+    end
+  end
+  
 end

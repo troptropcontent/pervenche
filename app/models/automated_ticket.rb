@@ -1,6 +1,7 @@
 class AutomatedTicket < ApplicationRecord
   encrypts :payment_method_client_internal_id, :zipcode, :license_plate
   has_many :tickets, dependent: :destroy
+  has_many :ticket_requests, dependent: :destroy
   has_one :running_ticket_in_database, -> { running }, class_name: 'Ticket'
   belongs_to :service, optional: true
   belongs_to :user
@@ -42,6 +43,13 @@ class AutomatedTicket < ApplicationRecord
     SETUP_STEPS
   end
 
+  def find_or_create_running_ticket_if_it_exists
+    return running_ticket_in_database if running_ticket_in_database
+    ticket_to_save = running_ticket_in_client
+    tickets.create!(running_ticket_in_client.except(:client)) if ticket_to_save
+  end
+    
+
   def running_ticket_in_client
     service.running_ticket(license_plate, zipcode)
   end
@@ -53,7 +61,7 @@ class AutomatedTicket < ApplicationRecord
 
   def coverage
     return 'covered' if running_ticket
-    return 'day_not_covered' if weekdays.exclude?(Date.today.wday)
+    return 'day_not_covered' unless should_renew_today?
 
     'not_covered'
   end
@@ -66,17 +74,19 @@ class AutomatedTicket < ApplicationRecord
                       end
   end
 
-  def renew!
-    time_unit = accepted_time_units.include?('days') ? 'days' : 'hours'
-    payment_method_id = payment_method_client_internal_id unless payment_method_client_internal_id == 'free'
+  def renew!(quantity: , time_unit: , payment_method_client_internal_id:)
     service.request_new_ticket!(
       license_plate: license_plate,
       zipcode: zipcode,
       rate_option_client_internal_id: rate_option_client_internal_id,
       quantity: 1,
       time_unit: time_unit,
-      payment_method_id: payment_method_id
+      payment_method_id: payment_method_client_internal_id
     )
+  end
+
+  def should_renew_today?
+    weekdays.include?(Date.today.wday)
   end
 
   private
