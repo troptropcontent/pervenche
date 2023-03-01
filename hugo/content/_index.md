@@ -45,7 +45,7 @@
   pricing:
     {
       title: "Combien ça coute ?",
-      text: "Aprés la période d'éssai d'un mois, le service sera facturé **8€ par mois**. A Paris le forfait post stationnement est fixé à 50 € et il est possible d'etre verbailser deux fois par jour soit 100€ d'amende potentiel en cas d'oublis de ticket.",
+      text: "Aprés la période d'éssai d'un mois, le service sera facturé **10€ par mois**. A Paris le forfait post stationnement est fixé à 50 € et il est possible d'etre verbailser deux fois par jour soit 100€ d'amende potentiel en cas d'oublis de ticket.",
     },
 }
 ---
