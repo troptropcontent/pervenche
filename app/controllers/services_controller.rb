@@ -5,6 +5,7 @@ class ServicesController < ApplicationController
   def create
     if @service.save
       assign_default_name unless service_params[:name]
+      flash[:success] = t('views.services.new.flash.success')
       redirect_to root_path
     else
       render 'new', status: :unprocessable_entity

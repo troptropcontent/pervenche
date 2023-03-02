@@ -1,0 +1,27 @@
+.flash {
+  position:fixed; 
+  top: 0px; 
+  left: 0px; 
+  width: 100%;
+  z-index:9999; 
+  color: var(--color-white);
+
+  > .flash__content {
+    margin: var(--space-l);
+    border-radius: var(--border-radius);
+    padding-block: var(--space-xs);
+  }
+
+  &--success{
+    > .flash__content {
+      background-color: var(--color-success);
+    }
+  }
+  &--warning{
+    > .flash__content {
+      background-color: var(--color-danger);
+    }
+  }
+}
+
+

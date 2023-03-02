@@ -2,6 +2,8 @@ fr:
   views:
     services:
       new:
+        flash:
+          success: "Compte connecté  👍"
         header:
           title: "Connecte ton compte de ticket de stationnement"
         form:
