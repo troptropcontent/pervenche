@@ -1,0 +1,19 @@
+fr:
+  views:
+    services:
+      new:
+        header:
+          title: "Connecte ton compte de ticket de stationnement"
+        form:
+          kind:
+            label: App de stationnement utilisée
+            disabled_subtitle: Bientôt dispo
+          name:
+            placeholder: "Your service name"
+          phone_number:
+            label: Numéro de téléphone
+            placeholder: "Your service username"
+          password:
+            label: Mot de passe
+            placeholder: "Your service password"
+        cta: Continuer
