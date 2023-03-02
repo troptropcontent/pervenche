@@ -3,6 +3,12 @@
     text-align: center  !important;;
   }
 
+  &__size {
+    &--s{
+      font-size:  var(--font-size-s) !important;;
+    }
+  }
+
   &__color{
     &--light{
       color: var(--color-light)  !important;;
@@ -15,6 +21,9 @@
     }
     &--danger{
       color: var(--color-danger)  !important;;
+    }
+    &--muted{
+      color: var(--color-text-muted)  !important;;
     }
   }
 }
