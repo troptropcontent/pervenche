@@ -4,7 +4,8 @@ class Service < ApplicationRecord
   encrypts :username, :password
   enum :kind, {
     pay_by_phone: 0,
-    easy_park: 1
+    easy_park: 1,
+    flow_bird: 2,
   }
 
   validates :username, uniqueness: { scope: :kind }

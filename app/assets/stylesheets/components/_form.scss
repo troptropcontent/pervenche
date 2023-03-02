@@ -60,10 +60,37 @@
       }
 
       &__tiles{
-        display: flex;
-        justify-content: center;
-        flex-wrap: wrap;
-        gap: var(--space-xs);
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: var(--space-xs);
+        &__tile {
+          display: flex;
+          flex-direction: column;
+          > .clickable {
+            flex: 1;
+            border: var(--border);
+            padding: var(--space-m) 0;
+            border-radius: var(--border-radius);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+          }
+          > input:checked + .clickable {
+            background-color: var(--color-primary-light);
+            border: var(--border-primary);
+            > * {
+              color: var(--color-primary)
+            }
+          }
+          
+          .disabled {
+            > * {
+              color: var(--color-text-muted)
+            }
+          }
+        }
         &__tile_with_icon{
           height: var(--image-xxxxxxxxxxxxxxxxl);
           width: var(--image-xxxxxxxxxxxxxxxxl);
