@@ -1,6 +1,8 @@
 class ServicesController < ApplicationController
   load_and_authorize_resource
-  def new; end
+  def new
+    @with_navbar = false
+  end
 
   def create
     if @service.save

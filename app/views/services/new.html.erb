@@ -1,4 +1,4 @@
-<main class="grow container stack">
+<main class="grow container stack stack--no-gap">
     <section class="header">
       <h2><%= t('views.services.new.header.title') %></h2>
     </section>
@@ -6,8 +6,8 @@
       class: "form form--column grow",
                               data: { turbo: false, controller: "form"}
                             } do |f| %>
-    <section class="content grow stack">
-      <div class="form_group stack">
+    <section class="content grow stack stack--l">
+      <div class="form_group stack stack--xs">
           <h4><%= t('views.services.new.form.kind.label') %></h4>
           <%= f.input :kind, as: :radio_tiles, 
           collection: [
@@ -17,18 +17,17 @@
           ], 
           wrapper: false %>
       </div>
-      <div class="form_group stack" data-controller="phone-input">
+      <div class="form_group stack stack--xs" data-controller="phone-input">
           <h4><%= t('views.services.new.form.phone_number.label') %></h4>
           <%= f.input :username, as: :tel, wrapper_html: {class: 'form__group--column'}, input_html: {data: {"phone-input-target"=>"input"}} %>
       </div>
-      <div class="form_group stack" >
+      <div class="form_group stack stack--xs" >
           <h4><%= t('views.services.new.form.password.label') %></h4>
           <%= f.input :password, as: :password %>
       </div>
     </section>
-    <section class="footer stack">
+    <section class="footer stack margin__bottom--l">
         <%= f.submit t('views.services.new.cta'), class: "btn btn--primary" %>
-        <br>
     </section>
     <% end %>  
 </main>

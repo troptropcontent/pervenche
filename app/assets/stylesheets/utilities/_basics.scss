@@ -28,6 +28,19 @@
   }
 }
 
+.margin {
+  &__bottom {
+    &--l {
+      margin-block-end: var(--space-l) !important;
+    }
+  }
+  &__top {
+    &--xl {
+      margin-block-start: var(--space-xl) !important;
+    }
+  }
+}
+
 .grow {
   flex-grow: 1 !important;
 }

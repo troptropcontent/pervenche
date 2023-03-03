@@ -1,7 +1,7 @@
 .container {
     width: 100%;
-    padding-right: var(--space-xs);
-    padding-left: var(--space-xs);
+    padding-right: var(--space-l);
+    padding-left: var(--space-l);
     margin-left: auto;
     margin-right: auto;
 
@@ -16,8 +16,8 @@
     }
   
     @include media(tabletAndUp) {
-      padding-right: var(--space-m);
-      padding-left: var(--space-m);
+      padding-right: var(--space-xxl);
+      padding-left: var(--space-xxl);
       max-width: 60rem;
     }
   }
