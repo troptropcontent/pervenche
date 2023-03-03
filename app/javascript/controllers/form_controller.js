@@ -1,7 +1,7 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = [ "hiddenInputs", "hiddenInputsGroup" ]
+  static targets = [ "hiddenInputs", "hiddenInputsGroup", "inputButton", "loader", "inputButtonContent" ]
   connect() {
   }
   updateHiddenInput({ params: {hiddenInputValue, hiddenInputName} }) {
@@ -25,5 +25,9 @@ export default class extends Controller {
       hidden_input.remove()
       createNewHiddenInput(hiddenInputName, hiddenInputValue)
     }
+  }
+  toggleSubmitButtonLoading() {
+    this.inputButtonContentTarget.classList.add("visually-hidden")
+    this.loaderTarget.classList.remove("visually-hidden")
   }
 }

@@ -4,7 +4,7 @@
     </section>
     <%= simple_form_for @service, html: {
       class: "form form--column grow",
-                              data: { turbo: false, controller: "form"}
+                              data: { turbo: false, controller: "form", action: "form#toggleSubmitButtonLoading"}
                             } do |f| %>
     <section class="content grow stack stack--l">
       <div class="form_group stack stack--xs">
@@ -27,7 +27,10 @@
       </div>
     </section>
     <section class="footer stack margin__bottom--l">
-        <%= f.submit t('views.services.new.cta'), class: "btn btn--primary" %>
+        <%= button_tag(type: 'submit', class: "btn btn--primary", data: {'form-target': 'inputButton'}) do %>
+          <p data-form-target='inputButtonContent'><%= t('views.services.new.cta') %></p>
+          <div data-form-target='loader' class="visually-hidden loader--ring loader--ring--small loader--ring--white"><div></div><div></div><div></div><div></div></div>
+        <% end %>
     </section>
     <% end %>  
 </main>
