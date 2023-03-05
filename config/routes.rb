@@ -17,4 +17,13 @@ Rails.application.routes.draw do
   resource :onboarding, only: :show do
     get 'welcome', to: 'onboardings#welcome'
   end
+  resource :setup, controller: :setup do
+    get 'service'
+    get 'localisation'
+    get 'vehicle'
+    get 'zipcode'
+    get 'rate_options'
+    get 'weekdays'
+    get 'payment_methods'
+  end
 end

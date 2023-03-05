@@ -23,7 +23,7 @@ class ApplicationController < ActionController::Base
 
   def operationnal_controller?
     !devise_controller? && %w[onboardings
-                              setups].exclude?(controller_name) && %w[new create update].exclude?(action_name)
+                              setups setup].exclude?(controller_name) && %w[new create update].exclude?(action_name)
   end
 
   def require_navbar
