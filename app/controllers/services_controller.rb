@@ -8,7 +8,7 @@ class ServicesController < ApplicationController
     if @service.save
       assign_default_name unless service_params[:name]
       flash[:success] = t('views.services.new.flash.success')
-      redirect_to root_path
+      redirect_to navigation_params[:redirect_to] || root_path
     else
       render 'new', status: :unprocessable_entity
     end
@@ -25,5 +25,9 @@ class ServicesController < ApplicationController
   def assign_default_name
     @service.name = "#{t("models.service.attributes.kind.enum.#{@service.kind}")} - #{@service.username}"
     @service.save
+  end
+
+  def navigation_params
+    params.permit(navigation: [:redirect_to])[:navigation]
   end
 end

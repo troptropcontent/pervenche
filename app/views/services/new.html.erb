@@ -25,6 +25,9 @@
           <h4><%= t('views.services.new.form.password.label') %></h4>
           <%= f.input :password, as: :password %>
       </div>
+      <% if @redirect_to %>
+        <%= hidden_field_tag 'navigation[redirect_to]', @redirect_to %>
+      <% end %>
     </section>
     <section class="footer stack margin__bottom--l">
         <%= button_tag(type: 'submit', class: "btn btn--primary", data: {'form-target': 'inputButton'}) do %>
