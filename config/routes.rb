@@ -14,5 +14,7 @@ Rails.application.routes.draw do
       end
     end
   end
-  resource :onboarding, only: :show
+  resource :onboarding, only: :show do
+    get 'welcome', to: 'onboardings#welcome'
+  end
 end

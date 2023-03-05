@@ -2,6 +2,10 @@
     display: flex;
     gap: var(--space-s);
     flex-wrap: wrap;
+
+    &--no-wrap {
+        flex-wrap: nowrap ;
+    }
     
     &__align-items {
         &--center {
