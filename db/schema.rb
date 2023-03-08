@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_08_060833) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_08_073030) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -30,8 +30,25 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_08_060833) do
     t.string "accepted_time_units", array: true
     t.string "zipcodes", array: true
     t.string "payment_method_client_internal_ids", array: true
+    t.string "vehicle_type"
+    t.string "vehicle_description"
+    t.string "localisation"
     t.index ["service_id"], name: "index_automated_tickets_on_service_id"
     t.index ["user_id"], name: "index_automated_tickets_on_user_id"
+  end
+
+  create_table "automated_tickets_setups", force: :cascade do |t|
+    t.bigint "service_id", null: false
+    t.string "localisation"
+    t.string "vehycle_type"
+    t.string "license_plate"
+    t.integer "weekdays", default: [1, 2, 3, 4, 5, 6, 0], array: true
+    t.string "payment_method_client_internal_ids", array: true
+    t.string "rate_option_client_internal_id"
+    t.integer "status", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["service_id"], name: "index_automated_tickets_setups_on_service_id"
   end
 
   create_table "robots", force: :cascade do |t|
@@ -98,6 +115,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_08_060833) do
 
   add_foreign_key "automated_tickets", "services"
   add_foreign_key "automated_tickets", "users"
+  add_foreign_key "automated_tickets_setups", "services"
   add_foreign_key "robots", "services"
   add_foreign_key "services", "users"
   add_foreign_key "ticket_requests", "automated_tickets"
