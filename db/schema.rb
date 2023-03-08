@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_08_055926) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_08_060833) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -29,6 +29,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_08_055926) do
     t.integer "weekdays", array: true
     t.string "accepted_time_units", array: true
     t.string "zipcodes", array: true
+    t.string "payment_method_client_internal_ids", array: true
     t.index ["service_id"], name: "index_automated_tickets_on_service_id"
     t.index ["user_id"], name: "index_automated_tickets_on_user_id"
   end
