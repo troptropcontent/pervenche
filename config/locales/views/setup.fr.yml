@@ -1,0 +1,14 @@
+fr:
+  views:
+    setup:
+      localisation:
+        header:
+          title: Votre vehicle est-il à Paris ?
+        links:
+            yes: "Oui, il est à Paris"
+            no: "Non, il est autre part en France"
+        cta: Continuer
+      vehicle:
+        header:
+          title: Sélectionne ton véhicule électrique
+        cta: Continuer

@@ -8,9 +8,12 @@ class AutomatedTicket < ApplicationRecord
 
   SETUP_STEPS = {
     service: [:service_id],
-    license_plate_and_zipcode: %i[license_plate zipcode],
+    localisation: [:localisation],
+    vehicle: %i[license_plate vehicle_description vehicle_type],
+    zipcodes: %i[zipcodes],
     rate_option: %i[rate_option_client_internal_id accepted_time_units],
-    duration_and_payment_method: %i[weekdays payment_method_client_internal_id]
+    weekdays: %i[weekdays],
+    payment_methods: %i[payment_method_client_internal_ids]
   }.freeze
 
   enum status: {
@@ -19,22 +22,32 @@ class AutomatedTicket < ApplicationRecord
     ready: 2
   }
 
-  validates :license_plate, uniqueness: { scope: %i[user_id service_id] }, if: :license_plate
-
   with_options if: -> { required_for_step?(:service) } do
     validates :service_id, presence: true
   end
 
-  with_options if: -> { required_for_step?(:license_plate_and_zipcode) } do
-    validates :license_plate, :zipcode, presence: true
+  with_options if: -> { required_for_step?(:localisation) } do
+    validates :localisation, presence: true
+  end
+
+  with_options if: -> { required_for_step?(:vehicle) } do
+    validates :license_plate, :vehicle_type, presence: true
+  end
+
+  with_options if: -> { required_for_step?(:zipcodes) } do
+    validates :zipcodes, presence: true
   end
 
   with_options if: -> { required_for_step?(:rate_option) } do
     validates :rate_option_client_internal_id, :accepted_time_units, presence: true
   end
 
-  with_options if: -> { required_for_step?(:duration_and_payment_method) } do
-    validates :payment_method_client_internal_id, :weekdays, presence: true
+  with_options if: -> { required_for_step?(:weekdays) } do
+    validates :weekdays, presence: true
+  end
+
+  with_options if: -> { required_for_step?(:payment_methods) } do
+    validates :payment_method_client_internal_ids, presence: true
   end
 
   attr_accessor :setup_step
@@ -56,7 +69,7 @@ class AutomatedTicket < ApplicationRecord
 
   def free?
     time_unit = accepted_time_units.include?('days') ? 'days' : 'hours'
-    service.quote(rate_option_client_internal_id, zipcode, license_plate, 1, time_unit)[:cost].zero?
+    service.quote(rate_option_client_internal_id, zipcodes[0], license_plate, 1, time_unit)[:cost].zero?
   end
 
   def coverage
@@ -67,11 +80,10 @@ class AutomatedTicket < ApplicationRecord
   end
 
   def running_ticket
-    @running_ticket = if running_ticket_in_database
-                        running_ticket_in_database
-                      elsif (ticket_to_save = running_ticket_in_client)
-                        tickets.create(ticket_to_save.except(:client))
-                      end
+    return running_ticket_in_database if running_ticket_in_database
+    if ticket_to_save = running_ticket_in_client
+      tickets.create(ticket_to_save.except(:client))
+    end
   end
 
   def renew!(quantity: , time_unit: , payment_method_client_internal_id:)

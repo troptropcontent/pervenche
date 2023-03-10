@@ -127,6 +127,29 @@
           }
         }
       }
+
+      &__type__picker {
+        &__type {
+          > .clickable {
+            flex: 1;
+            border: var(--border);
+            padding: var(--space-m) 0;
+            border-radius: var(--border-radius);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+          }
+          > input:checked + .clickable {
+            background-color: var(--color-primary-light);
+            border: var(--border-primary);
+            > * {
+              color: var(--color-primary)
+            }
+          }
+        }
+      }
     }
 
     input[type="radio"]:checked + .form__input {
