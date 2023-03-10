@@ -55,7 +55,7 @@ export default class extends Controller {
   }
 
   addAssociatedHiddenInputsToData (e) {
-    this.inputWithAssociatedHiddenInputTargets.forEach((input) => {
+    this.inputWithAssociatedHiddenInputTargets.filter(input => input.checked).forEach((input) => {
       this.addHiddenInputs(input.dataset.formHiddenInputValueParam, input.dataset.formHiddenInputNameParam)
     })
   }
