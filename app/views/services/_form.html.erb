@@ -1,37 +1,34 @@
 <%= simple_form_for service, html: {
-                            class: "form form--column grow",
-                            data: { turbo: false, controller: "form"}
-                          } do |f| %>
-
-    <div class="form__group">
-        <div class="form__group">
-            <% if service.errors.any? %>
-                <div class="error-message">
-                <%= service.errors.full_messages.to_sentence.capitalize %>
-                </div>
-            <% end %>
-        </div>
-
-        <div class="stack">
-            <div class="form_group stack">
-                <h3><%= t('views.services.new.service_radio') %></h3>
-                <%= f.input :kind, as: :radio_tiles_with_icon, collection: kinds(disabled: [:easy_park]), wrapper: false %>
-            </div>
-            <div class="form_group stack">
-                <h3><%= t('views.services.new.service_username') %></h3>
-                <%= f.input :username, as: :string, include_hidden: false %>
-            </div>
-            <div class="form_group stack">
-                <h3><%= t('views.services.new.service_password') %></h3>
-                <%= f.input :password, as: :password, include_hidden: false %>
-            </div>
-            <div class="form_group stack">
-                <h3><%= t('views.services.new.service_name') %></h3>
-                <%= f.input :name, as: :string, include_hidden: false%>
-                <p><%= t('views.services.new.service_name_hint') %></p>
-            </div>
-        </div>
+      class: "form form--column grow",
+                              data: { turbo: false, controller: "form", action: "form#toggleSubmitButtonLoading"}
+                            } do |f| %>
+    <section class="content grow stack stack--l">
+    <div class="form_group stack stack--xs">
+        <h4><%= t('views.services.new.form.kind.label') %></h4>
+        <%= f.input :kind, as: :radio_tiles, 
+        collection: [
+            [Service.human_enum_name(:kinds, 'pay_by_phone'), nil, 'pay_by_phone', checked: true],
+            [Service.human_enum_name(:kinds, 'easy_park'), t('views.services.new.form.kind.disabled_subtitle'), 'easy_park', disabled: true],
+            [Service.human_enum_name(:kinds, 'flow_bird'), t('views.services.new.form.kind.disabled_subtitle'), 'flow_bird', disabled: true]
+        ], 
+        wrapper: false %>
     </div>
-    <p><%= t('views.services.new.service_disabled') %></p>
-    <%= f.submit t('views.services.new.cta'), class: "btn btn--primary" %>
-<% end %>
+    <div class="form_group stack stack--xs" data-controller="phone-input">
+        <h4><%= t('views.services.new.form.phone_number.label') %></h4>
+        <%= f.input :username, as: :tel, wrapper_html: {class: 'form__group--column'}, input_html: {data: {"phone-input-target"=>"input"}} %>
+    </div>
+    <div class="form_group stack stack--xs" >
+        <h4><%= t('views.services.new.form.password.label') %></h4>
+        <%= f.input :password, as: :password %>
+    </div>
+    <% if local_assign[:redirect_to] %>
+        <%= hidden_field_tag 'navigation[redirect_to]', redirect_to %>
+    <% end %>
+    </section>
+    <section class="footer stack margin__bottom--l">
+        <%= button_tag(type: 'submit', class: "btn btn--primary", data: {'form-target': 'inputButton'}) do %>
+        <p data-form-target='inputButtonContent'><%= t('views.services.new.cta') %></p>
+        <div data-form-target='loader' class="visually-hidden loader--ring loader--ring--small loader--ring--white"><div></div><div></div><div></div><div></div></div>
+        <% end %>
+    </section>
+<% end %>  
