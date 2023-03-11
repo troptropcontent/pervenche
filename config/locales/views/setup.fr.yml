@@ -12,3 +12,7 @@ fr:
         header:
           title: Sélectionne ton véhicule électrique
         cta: Continuer
+      zipcodes:
+        header:
+          title: Dans quels arrondissements tu veux renouveler un ticket ?
+        cta: Continuer

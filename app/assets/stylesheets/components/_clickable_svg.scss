@@ -1,0 +1,16 @@
+.clickable_svg {
+    &__polygon {
+      fill: var(--color-light)
+    }
+
+    &__group[checked] {
+      .clickable_svg__polygon {
+        fill: var(--color-primary);
+        stroke: var(--color-primary)
+      }
+      .clickable_svg__text{
+        fill: var(--color-white)
+      }
+    }
+  }
+

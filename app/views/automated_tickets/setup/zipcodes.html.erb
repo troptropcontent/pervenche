@@ -1,0 +1,12 @@
+
+
+<main class="grow container stack stack--no-gap">
+    <section class="header">
+      <h2><%= t('views.setup.zipcodes.header.title') %></h2>
+    </section>
+    <%= render 'automated_tickets/setup/shared/form', automated_ticket: @automated_ticket, step: @step do |f| %>
+      <% if @localisation == 'paris' %>
+        <%= render 'automated_tickets/setup/zipcodes/paris' %>
+      <% end %>
+    <% end %>
+</main>

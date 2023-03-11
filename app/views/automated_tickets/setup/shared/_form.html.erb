@@ -2,16 +2,16 @@
                     url: automated_ticket_setup_path(automated_ticket.id, step),
                     html: {
                       class: "form form--column grow",
-                      data: { turbo: false, controller: "form", action: "form#toggleSubmitButtonLoading form#addAssociatedHiddenInputsToData" }
+                      data: { turbo: false, controller: "form clickable-svg", action: "form#toggleSubmitButtonLoading form#addAssociatedHiddenInputsToData" }
                     } do |f| %>
-    <section class="content grow">
+    <section class="content grow stack">
       <%= yield(f) %>
     </section>
     <section class="footer stack margin__bottom--l">
         <div class="visually-hidden" data-form-target='hiddenInputsGroup'>
         </div>
         <%= button_tag(type: 'submit', class: "btn btn--primary") do %>
-        <p data-form-target='inputButtonContent'><%= t('views.services.new.cta') %></p>
+        <p data-form-target='inputButtonContent'><%= t("views.setup.#{step}.cta") %></p>
         <div data-form-target='loader' class="visually-hidden loader--ring loader--ring--small loader--ring--white"><div></div><div></div><div></div><div></div></div>
         <% end %>
     </section>
