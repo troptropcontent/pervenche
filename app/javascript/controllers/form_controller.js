@@ -26,6 +26,7 @@ export default class extends Controller {
       createNewHiddenInput(hiddenInputName, hiddenInputValue)
     }
   }
+
   addHiddenInputs(hiddenInputValue, hiddenInputName) {
     const createNewHiddenInput = (name, value) => {
       let input = document.createElement("input");
@@ -35,16 +36,13 @@ export default class extends Controller {
       input.dataset.formTarget = 'hiddenInputs'
       this.hiddenInputsGroupTarget.appendChild(input);
     }
+
     if (Array.isArray(hiddenInputValue)) {
       hiddenInputName.slice(-2) != '[]' && (hiddenInputName = hiddenInputName + '[]')
-      const hidden_inputs = this.hiddenInputsTargets.filter((hidden_input) => hidden_input.name === hiddenInputName)  
-      hidden_inputs && hidden_inputs.forEach((hidden_input) => hidden_input.remove())
       hiddenInputValue.forEach((value) => {
         createNewHiddenInput(hiddenInputName, value)
       })
     } else {
-      const hidden_input = this.hiddenInputsTargets.find((hidden_input) => hidden_input.name === hiddenInputName)  
-      hidden_input && hidden_input.remove() 
       createNewHiddenInput(hiddenInputName, hiddenInputValue)
     }
   }
@@ -54,8 +52,9 @@ export default class extends Controller {
     this.loaderTarget.classList.remove("visually-hidden")
   }
 
-  addAssociatedHiddenInputsToData (e) {
-    this.inputWithAssociatedHiddenInputTargets.filter(input => input.checked).forEach((input) => {
+  addAssociatedHiddenInputsToData (e) { 
+    const checkedElements = this.inputWithAssociatedHiddenInputTargets.filter(el => el.attributes.getNamedItem('checked'))
+    checkedElements.forEach((input) => {
       this.addHiddenInputs(input.dataset.formHiddenInputValueParam, input.dataset.formHiddenInputNameParam)
     })
   }
