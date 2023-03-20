@@ -35,7 +35,7 @@ class AutomatedTicket < ApplicationRecord
   end
 
   with_options if: -> { required_for_step?(:zipcodes) } do
-    validates :zipcodes, presence: true
+    validates :zipcodes, length: { minimum: 1, message: I18n.t('errors.messages.empty_array') }
   end
 
   with_options if: -> { required_for_step?(:rate_option) } do
@@ -43,11 +43,11 @@ class AutomatedTicket < ApplicationRecord
   end
 
   with_options if: -> { required_for_step?(:weekdays) } do
-    validates :weekdays, presence: true
+    validates :weekdays, length: { minimum: 1, message: I18n.t('errors.messages.empty_array') }, unless: :free
   end
 
   with_options if: -> { required_for_step?(:payment_methods) } do
-    validates :payment_method_client_internal_ids, presence: true
+    validates :payment_method_client_internal_ids,  length: { minimum: 1, message: I18n.t('errors.messages.empty_array') }, unless: :free
   end
 
   attr_accessor :setup_step
