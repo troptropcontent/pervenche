@@ -6,7 +6,7 @@ class AutomatedTicket::Setup::Updater < Actor
   input :automated_ticket
 
   play UpdateAutomatedTicket
-  play CompleteUpcomingSteps, 
+  play CompleteAlreadyCompletableSteps, 
        FindNextStep, 
        LoadData,
        if: -> actor { actor.automated_ticket.valid? } 
