@@ -101,6 +101,17 @@ class AutomatedTicket < ApplicationRecord
     weekdays.include?(Date.today.wday)
   end
 
+  def rate_options_shared_between_zipcodes
+    return [] unless service_id && license_plate && zipcodes
+    rate_options = zipcodes.map{|zipcode|
+      service.rate_options(zipcode, license_plate)
+    }
+    
+    rate_options.flatten.uniq.filter do |rate_option| 
+      rate_options.all? { |possible_rates| possible_rates.include?(rate_option)}
+    end
+  end
+
   private
 
   def required_for_step?(step)
