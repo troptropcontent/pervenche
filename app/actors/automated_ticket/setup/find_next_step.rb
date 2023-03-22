@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class AutomatedTicket::Setup::Updater::FindNextStep < Actor
+class AutomatedTicket::Setup::FindNextStep < Actor
   input :automated_ticket
   output :next_step
   def call

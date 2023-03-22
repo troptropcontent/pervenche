@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class AutomatedTicket::Setup::Updater::CompleteAlreadyCompletableSteps < Actor
+class AutomatedTicket::Setup::CompleteAlreadyCompletableSteps < Actor
   input :automated_ticket
   output :automated_ticket
   def call

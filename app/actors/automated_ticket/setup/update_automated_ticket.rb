@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class AutomatedTicket::Setup::Updater::UpdateAutomatedTicket < Actor
+class AutomatedTicket::Setup::UpdateAutomatedTicket < Actor
   input :step
   input :params
   input :automated_ticket

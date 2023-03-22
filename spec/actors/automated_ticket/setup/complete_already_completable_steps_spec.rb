@@ -4,7 +4,7 @@ require 'rails_helper'
 require 'support/shared_context/a_user_with_a_service_with_an_automated_ticket'
 require 'support/shared_context/service_stubs'
 
-RSpec.describe AutomatedTicket::Setup::Updater::CompleteAlreadyCompletableSteps, type: :actor do
+RSpec.describe AutomatedTicket::Setup::CompleteAlreadyCompletableSteps, type: :actor do
   subject { described_class.call(automated_ticket:) }
   include_context 'a stubed service'
   

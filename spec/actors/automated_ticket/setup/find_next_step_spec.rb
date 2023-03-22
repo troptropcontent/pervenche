@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-RSpec.describe AutomatedTicket::Setup::Updater::FindNextStep, type: :actor do
+RSpec.describe AutomatedTicket::Setup::FindNextStep, type: :actor do
   describe '.call' do
     pending "add some examples to (or delete) #{__FILE__}"
   end

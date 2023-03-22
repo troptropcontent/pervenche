@@ -3,7 +3,7 @@
 require 'rails_helper'
 require 'support/shared_context/a_user_with_a_service_with_an_automated_ticket'
 
-RSpec.describe AutomatedTicket::Setup::Updater::UpdateAutomatedTicket, type: :actor do
+RSpec.describe AutomatedTicket::Setup::UpdateAutomatedTicket, type: :actor do
   include_context 'a user with a service with an automated ticket'
   let(:step) {'service'}
   let(:anothet_service) do
