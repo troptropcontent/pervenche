@@ -19,6 +19,7 @@ RSpec.describe AutomatedTicket::Setup::PermitedParams, type: :actor do
           accepted_time_units:,
           weekdays:,
           payment_method_client_internal_ids:,
+          free:, 
         }
       )
     }
@@ -30,6 +31,7 @@ RSpec.describe AutomatedTicket::Setup::PermitedParams, type: :actor do
     let(:zipcodes){['75001', '75002', '75018']}
     let(:rate_option_client_internal_id){'a_rate_option'}
     let(:accepted_time_units){['days', 'hours']}
+    let(:free){true}
     let(:weekdays){[1,2]}
     let(:payment_method_client_internal_ids){['some_payment_method_id', 'another_payment_method_id']}
 
