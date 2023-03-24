@@ -4,7 +4,6 @@ class AutomatedTicket::Setup::LoadData < Actor
   input :automated_ticket
   input :step
   output :data
-  output :next_step
   def call
     self.data = {}
     load_data_required_for_service_step if step == :service
