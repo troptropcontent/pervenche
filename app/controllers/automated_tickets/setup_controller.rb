@@ -1,111 +1,92 @@
-class AutomatedTickets::SetupController < ApplicationController
-  ALLOWED_VEHICLE_TYPES = ['electric_motorcycle']
-  ALLOWED_LOCALISATIONS = ['paris']
-  ARRAY_FIELDS = %i[weekdays accepted_time_units zipcodes payment_method_client_internal_ids].freeze
-  before_action :load_automated_ticket
-  before_action :load_step!
+# frozen_string_literal: true
 
-  def show
-    @with_navbar = false
-    @automated_ticket.setup_step = @step
-    if step_already_completed?
-      redirect_to_next_step!
-    else
-      load_data_for(step: @step)
-      render @step
+module AutomatedTickets
+  # This controller handles the automated_ticket setup wizard
+  class SetupController < ApplicationController
+    before_action :load_automated_ticket
+    before_action :load_step!
+
+    def show
+      @with_navbar = false
+      @automated_ticket.setup_step = @step
+      if step_already_completed?
+        path = next_step ? path_for(@step) : root_path
+        redirect_to(path)
+      else
+        load_instance_variables_for(step: @step)
+        render @step
+      end
     end
-  end
 
-  def update
-    @automated_ticket.setup_step = @step
-    if @automated_ticket.update(permited_params_for_step)
-      next_step ? redirect_to_next_step! : update_status_and_redirect_to_root!
-    else
-      load_data_for(step: @step)
-      render @step, status: :unprocessable_entity
+    def update
+      update_automated_ticket!
+
+      if @automated_ticket.valid?
+        @automated_ticket = automated_ticket_with_all_completable_steps_completed
+        @automated_ticket.update!(status: :ready, active: true) unless next_step
+        path = next_step ? path_for(next_step) : root_path
+        redirect_to path
+      else
+        load_instance_variables_for(step: @step)
+        render @step, status: :unprocessable_entity
+      end
     end
-  end
 
-  private
+    private
 
-  def load_automated_ticket
-    @automated_ticket = AutomatedTicket.find(params[:automated_ticket_id])
-  end
-
-  def load_step!
-    if AutomatedTicket.setup_steps[params[:step_name].to_sym]
-      @step = params[:step_name]
-    else
-      not_found
+    def load_automated_ticket
+      @automated_ticket = AutomatedTicket.find(params[:automated_ticket_id])
     end
-  end
 
-  def next_step
-    @next_step ||= AutomatedTicket.setup_steps.keys[AutomatedTicket.setup_steps.keys.index(@step.to_sym) + 1]
-  end
-
-  def redirect_to_next_step!
-    redirect_to path_for(step: next_step)
-  end
-
-  def step_already_completed?
-    @automated_ticket.valid?.tap do
-      @automated_ticket.errors.clear
+    def load_step!
+      if AutomatedTicket.setup_steps[params[:step_name].to_sym]
+        @step = params[:step_name]
+      else
+        not_found
+      end
     end
-  end
 
-  def load_data_for(step:)
-    load_vehicle_step_data if step == 'vehicle'
-    load_zipcodes_step_data! if step == 'zipcodes'
-    load_rate_option_step_data! if step == 'rate_option'
-  end
-
-  def load_vehicle_step_data
-    @vehicles = @automated_ticket.service.vehicles.filter {|vehicle| ALLOWED_VEHICLE_TYPES.include?(vehicle[:vehicle_type])}
-  end
-
-  def load_zipcodes_step_data!
-    if ALLOWED_LOCALISATIONS.include?(setup_params[:localisation])
-      @localisation = setup_params[:localisation]
-    else
-      not_found
+    def step_already_completed?
+      @automated_ticket.valid?.tap do
+        @automated_ticket.errors.clear
+      end
     end
-  end
 
-  def load_rate_option_step_data!
-    @rate_options = find_rate_options_shared_between_zipcodes
-  end
-
-  def find_rate_options_shared_between_zipcodes
-    byebug
-    @automated_ticket.zipcodes.map
-  end
-
-  def permited_params_for_step
-    params.require(:automated_ticket).permit(permitted_fields_for_step)
-  end
-
-  def permitted_fields_for_step
-    AutomatedTicket.setup_steps[@step.to_sym].map do |field|
-      ARRAY_FIELDS.include?(field) ? { field => [] } : field
+    def data_for(step:)
+      AutomatedTicket::Setup::LoadData.call(automated_ticket: @automated_ticket, step:, params:).data
     end
-  end
 
-  def path_for(step:)
-    params = base_params(step: step).merge(query_params_for(step: step))
-    automated_ticket_setup_path(**params)
-  end
+    def next_step
+      AutomatedTicket::Setup::FindNextStep.call(automated_ticket: @automated_ticket).next_step
+    end
 
-  def query_params_for(step:)
-    return {localisation: @automated_ticket.localisation} if step.to_sym == :zipcodes
-    {}
-  end
+    def permited_automated_ticket_params_for(step:)
+      AutomatedTicket::Setup::PermitedParams.call(
+        automated_ticket_params: params.require(:automated_ticket),
+        step:
+      ).permited_params
+    end
 
-  def base_params(step:)
-    {automated_ticket_id: @automated_ticket.id, step_name: step}
-  end
+    def path_for(step)
+      AutomatedTicket::Setup::FindPath.call(automated_ticket: @automated_ticket, step:).path
+    end
 
-  def setup_params
-    params.permit(:localisation)
+    def load_instance_variables_for(step:)
+      data_for(step: step.to_sym).each do |name, value|
+        instance_variable_set("@#{name}".to_sym, value)
+      end
+    end
+
+    def automated_ticket_with_all_completable_steps_completed
+      AutomatedTicket::Setup::CompleteAlreadyCompletableSteps.call(automated_ticket: @automated_ticket).automated_ticket
+    end
+
+    def update_automated_ticket!
+      AutomatedTicket::Setup::UpdateAutomatedTicket.call(
+        automated_ticket: @automated_ticket,
+        step: @step.to_sym,
+        params: permited_automated_ticket_params_for(step: @step)
+      ).automated_ticket
+    end
   end
 end
