@@ -13,9 +13,11 @@
                                  checked: (@vehicles.length == 1), 
                                  data: {
                                     'form-target': 'inputWithAssociatedHiddenInput',
-                                    "form-hidden-input-value-param": vehicle[:vehicle_type],
-                                    "form-hidden-input-name-param": 'automated_ticket[vehicle_type]'
+                                    "form-associated-hidden-inputs": {
+                                      'automated_ticket[vehicle_type]' => vehicle[:vehicle_type],
+                                    }.to_json,
                                 } %>
+                                
               <span class= 'clickable'>
                 <h4><%=  vehicle[:vehicle_description] || vehicle[:license_plate] %></h4>
                 <% if vehicle[:vehicle_description] %>
