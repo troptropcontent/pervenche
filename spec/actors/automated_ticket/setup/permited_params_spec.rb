@@ -3,9 +3,9 @@
 require 'rails_helper'
 
 RSpec.describe AutomatedTicket::Setup::PermitedParams, type: :actor do
-  subject { described_class.call(params:, step:).permited_params }
+  subject { described_class.call(automated_ticket_params:, step:).permited_params }
   describe '.call' do
-    let(:params) do
+    let(:automated_ticket_params) do
       ActionController::Parameters.new(
         {
           service_id:,
@@ -37,7 +37,7 @@ RSpec.describe AutomatedTicket::Setup::PermitedParams, type: :actor do
     context 'service' do
       let(:step) { :service }
       let(:expected_permited_params) do
-        params.permit(
+        automated_ticket_params.permit(
           :service_id
         )
       end
@@ -48,7 +48,7 @@ RSpec.describe AutomatedTicket::Setup::PermitedParams, type: :actor do
     context 'localisation' do
       let(:step) { :localisation }
       let(:expected_permited_params) do
-        params.permit(
+        automated_ticket_params.permit(
           :localisation
         )
       end
@@ -59,7 +59,7 @@ RSpec.describe AutomatedTicket::Setup::PermitedParams, type: :actor do
     context 'vehicle' do
       let(:step) { :vehicle }
       let(:expected_permited_params) do
-        params.permit(
+        automated_ticket_params.permit(
           :license_plate,
           :vehicle_description,
           :vehicle_type
@@ -72,7 +72,7 @@ RSpec.describe AutomatedTicket::Setup::PermitedParams, type: :actor do
     context 'zipcodes' do
       let(:step) { :zipcodes }
       let(:expected_permited_params) do
-        params.permit(
+        automated_ticket_params.permit(
           zipcodes: []
         )
       end
@@ -83,7 +83,7 @@ RSpec.describe AutomatedTicket::Setup::PermitedParams, type: :actor do
     context 'rate_option' do
       let(:step) { :rate_option }
       let(:expected_permited_params) do
-        params.permit(
+        automated_ticket_params.permit(
           :rate_option_client_internal_id,
           :free,
           accepted_time_units: []
@@ -96,7 +96,7 @@ RSpec.describe AutomatedTicket::Setup::PermitedParams, type: :actor do
     context 'weekdays' do
       let(:step) { :weekdays }
       let(:expected_permited_params) do
-        params.permit(
+        automated_ticket_params.permit(
           weekdays: []
         )
       end
@@ -107,7 +107,7 @@ RSpec.describe AutomatedTicket::Setup::PermitedParams, type: :actor do
     context 'payment_methods' do
       let(:step) { :payment_methods }
       let(:expected_permited_params) do
-        params.permit(
+        automated_ticket_params.permit(
           payment_method_client_internal_ids: []
         )
       end

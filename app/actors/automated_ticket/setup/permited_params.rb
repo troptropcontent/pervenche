@@ -2,12 +2,12 @@
 
 class AutomatedTicket::Setup::PermitedParams < Actor
   ARRAY_FIELDS = %i[weekdays accepted_time_units zipcodes payment_method_client_internal_ids].freeze
-  input :params
+  input :automated_ticket_params
   input :step
   output :permited_params
 
   def call
-    self.permited_params = params.permit(permitted_fields_for_step)
+    self.permited_params = automated_ticket_params.permit(permitted_fields_for_step)
   end
 
   private
