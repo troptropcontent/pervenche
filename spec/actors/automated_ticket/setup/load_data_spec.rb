@@ -5,10 +5,12 @@ require 'support/shared_context/a_user_with_a_service_with_an_automated_ticket'
 require 'support/shared_context/service_stubs'
 
 RSpec.describe AutomatedTicket::Setup::LoadData, type: :actor do
+  subject { described_class.call(automated_ticket:, step:, params:) }
   include_context 'a user with a service with an automated ticket', :payment_methods
   include_context 'a stubed service'
   let(:step) { :service }
-  subject { described_class.call(automated_ticket:, step:) }
+  let(:params) do
+  end
   describe '.call' do
     describe 'step' do
       context 'service' do
@@ -56,6 +58,23 @@ RSpec.describe AutomatedTicket::Setup::LoadData, type: :actor do
               client_internal_id: 'fake-payment-methof-id-9654e1084eb1',
               payment_card_type: 'visa' }
           ] }
+        end
+        it 'loads the correct data' do
+          expect(subject.data).to eq(expected_data)
+        end
+      end
+
+      context 'zipcodes' do
+        let(:params) do
+          ActionController::Parameters.new(
+            {
+              localisation: 'paris'
+            }
+          )
+        end
+        let(:step) { :zipcodes }
+        let(:expected_data) do
+          { localisation: 'paris' }
         end
         it 'loads the correct data' do
           expect(subject.data).to eq(expected_data)

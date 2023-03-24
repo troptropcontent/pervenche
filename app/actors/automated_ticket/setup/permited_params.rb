@@ -7,15 +7,14 @@ class AutomatedTicket::Setup::PermitedParams < Actor
   output :permited_params
 
   def call
-    self.permited_params = self.params.permit(permitted_fields_for_step)
+    self.permited_params = params.permit(permitted_fields_for_step)
   end
 
   private
 
   def permitted_fields_for_step
-    AutomatedTicket.setup_steps[self.step.to_sym].map do |field|
+    AutomatedTicket.setup_steps[step.to_sym].map do |field|
       ARRAY_FIELDS.include?(field) ? { field => [] } : field
     end
   end
 end
-

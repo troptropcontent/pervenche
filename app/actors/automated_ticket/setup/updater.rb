@@ -5,11 +5,11 @@ module AutomatedTicket::Setup
     input :step
     input :params
     input :automated_ticket
-  
+
     play UpdateAutomatedTicket
-    play CompleteAlreadyCompletableSteps, 
-         FindNextStep, 
+    play CompleteAlreadyCompletableSteps,
+         FindNextStep,
          LoadData,
-         if: -> actor { actor.automated_ticket.valid? } 
+         if: ->(actor) { actor.automated_ticket.valid? }
   end
 end

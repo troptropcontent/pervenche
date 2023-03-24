@@ -1,0 +1,6 @@
+fr:
+  views:
+    application:
+      done: "Terminé"
+      to_do: "À faire"
+      continue: "Continuer"

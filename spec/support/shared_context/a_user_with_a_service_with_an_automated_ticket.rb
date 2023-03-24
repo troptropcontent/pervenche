@@ -1,7 +1,7 @@
 RSpec.shared_context 'a user with a service with an automated ticket' do |last_validated_step|
   let(:user) { FactoryBot.create(:user) }
   let!(:service) do
-    service = FactoryBot.build(:service, user:)
+    service = FactoryBot.build(:service, user:, name: 'a_fake_service_name')
     service.save(validate: false)
     service
   end

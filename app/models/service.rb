@@ -5,7 +5,7 @@ class Service < ApplicationRecord
   enum :kind, {
     pay_by_phone: 0,
     easy_park: 1,
-    flow_bird: 2,
+    flow_bird: 2
   }
 
   validates :username, uniqueness: { scope: :kind }
@@ -14,7 +14,7 @@ class Service < ApplicationRecord
 
   def vehicles
     Rails.cache.fetch("#{cache_key_with_version}/#{kind}/#{username}/vehicles", expires_in: 1.minutes) do
-      client.vehicles
+      client.vehicles.filter { |vehicle| vehicle[:vehicle_type] == 'electric_motorcycle' }
     end
   end
 
@@ -38,14 +38,15 @@ class Service < ApplicationRecord
     end
   end
 
-  def request_new_ticket!(license_plate:, zipcode:, rate_option_client_internal_id:, quantity:, time_unit:, payment_method_id:)
+  def request_new_ticket!(license_plate:, zipcode:, rate_option_client_internal_id:, quantity:, time_unit:,
+                          payment_method_id:)
     client.new_ticket(
-      license_plate: license_plate,
-      zipcode: zipcode,
-      rate_option_client_internal_id: rate_option_client_internal_id,
+      license_plate:,
+      zipcode:,
+      rate_option_client_internal_id:,
       quantity: 1,
-      time_unit: time_unit,
-      payment_method_id: payment_method_id
+      time_unit:,
+      payment_method_id:
     )
   end
 

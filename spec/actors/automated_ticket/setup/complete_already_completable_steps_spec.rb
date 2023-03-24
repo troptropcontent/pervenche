@@ -7,7 +7,7 @@ require 'support/shared_context/service_stubs'
 RSpec.describe AutomatedTicket::Setup::CompleteAlreadyCompletableSteps, type: :actor do
   subject { described_class.call(automated_ticket:) }
   include_context 'a stubed service'
-  
+
   describe '.call' do
     include_context 'a user with a service with an automated ticket'
 
@@ -19,7 +19,7 @@ RSpec.describe AutomatedTicket::Setup::CompleteAlreadyCompletableSteps, type: :a
     end
     describe 'when there is only one vehicle' do
       include_context 'a user with a service with an automated ticket', :service
-      
+
       it 'automatically set the license_plate, vehicle_type and vehicle_description' do
         subject
         reloaded_automated_ticket = automated_ticket.reload
@@ -36,6 +36,15 @@ RSpec.describe AutomatedTicket::Setup::CompleteAlreadyCompletableSteps, type: :a
         expect(reloaded_automated_ticket.rate_option_client_internal_id).to eq('1085252721')
         expect(reloaded_automated_ticket.accepted_time_units).to eq(%w[minutes hours])
         expect(reloaded_automated_ticket.free).to eq(true)
+      end
+    end
+    describe 'when the rate option is free' do
+      include_context 'a user with a service with an automated ticket', :rate_option
+      let(:automated_ticket_free) { true }
+      it 'automatically set the weekdays to every day' do
+        subject
+        reloaded_automated_ticket = automated_ticket.reload
+        expect(reloaded_automated_ticket.weekdays).to eq([0, 1, 2, 3, 4, 5, 6])
       end
     end
 

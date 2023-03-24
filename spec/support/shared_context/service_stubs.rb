@@ -1,4 +1,4 @@
-RSpec.shared_context 'a stubed service' do 
+RSpec.shared_context 'a stubed service' do
   let(:service_vehicles_stub) do
     [
       {
@@ -35,16 +35,16 @@ RSpec.shared_context 'a stubed service' do
   end
   let(:service_payment_methods_stub) do
     [
-     { client_internal_id: 'fake-payment-methof-id-9654e1084eb1', anonymised_card_number: '6156',
-       payment_card_type: 'visa' }
-      ]
+      { client_internal_id: 'fake-payment-methof-id-9654e1084eb1', anonymised_card_number: '6156',
+        payment_card_type: 'visa' }
+    ]
   end
   before do
     allow(automated_ticket).to receive(:service).and_return(service)
     allow(service).to receive(:vehicles).and_return(service_vehicles_stub)
-    allow(service).to receive(:rate_options).with("75008", any_args).and_return(service_rate_options_75008_stub)
-    allow(service).to receive(:rate_options).with("75017", any_args).and_return(service_rate_options_75017_stub)
-    allow(service).to receive(:rate_options).with("75019", any_args).and_return(service_rate_options_75019_stub)
+    allow(service).to receive(:rate_options).with('75008', any_args).and_return(service_rate_options_75008_stub)
+    allow(service).to receive(:rate_options).with('75017', any_args).and_return(service_rate_options_75017_stub)
+    allow(service).to receive(:rate_options).with('75019', any_args).and_return(service_rate_options_75019_stub)
     allow(service).to receive(:payment_methods).and_return(service_payment_methods_stub)
   end
 end

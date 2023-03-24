@@ -33,8 +33,8 @@ class Robot < ApplicationRecord
       {
         username: service.username,
         password: service.password,
-        license_plate: license_plate,
-        zipcode: zipcode,
+        license_plate:,
+        zipcode:,
         card_number: payment_method
       }
     )
