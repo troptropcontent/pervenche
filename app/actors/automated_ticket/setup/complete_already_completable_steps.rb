@@ -84,7 +84,9 @@ class AutomatedTicket::Setup::CompleteAlreadyCompletableSteps < Actor
   end
 
   def rate_option_completable?
-    rate_options = automated_ticket.rate_options_shared_between_zipcodes
+    return false unless automated_ticket.zipcodes && automated_ticket.license_plate
+
+    rate_options = automated_ticket.service.rate_options(automated_ticket.zipcodes, automated_ticket.license_plate)
     return false if rate_options.count != 1
 
     automated_ticket.assign_attributes(
