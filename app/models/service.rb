@@ -17,7 +17,8 @@ class Service < ApplicationRecord
 
   def vehicles
     Rails.cache.fetch("#{cache_key_with_version}/#{kind}/#{username}/vehicles", expires_in: 1.minutes) do
-      client.vehicles
+      # for now we only permit the electric_motorcycle, we will later permit all kind of vehicles
+      client.vehicles.filter { |vehicle| vehicle[:vehicle_type] == 'electric_motorcycle' }
     end
   end
 
