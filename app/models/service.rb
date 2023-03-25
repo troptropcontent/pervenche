@@ -45,13 +45,14 @@ class Service < ApplicationRecord
       client.payment_methods
     end
   end
+
   def running_ticket(license_plate, zipcode)
     Rails.cache.fetch("#{cache_key_with_version}/#{kind}/#{username}/#{license_plate}/#{zipcode}/running_ticket",
-      expires_in: 1.minutes) do
-        client.running_ticket(license_plate, zipcode)
-      end
+                      expires_in: 1.minutes) do
+      client.running_ticket(license_plate, zipcode)
     end
-    
+  end
+
   # rubocop:disable Metrics/ParameterLists
   def request_new_ticket!(license_plate:, zipcode:, rate_option_client_internal_id:, time_unit:, payment_method_id:,
                           quantity: 1)
@@ -64,6 +65,7 @@ class Service < ApplicationRecord
       payment_method_id:
     )
   end
+
   # rubocop:enable Metrics/ParameterLists
   def quote(rate_option_id, zipcode, license_plate, quantity, time_unit)
     # rubocop:disable Layout/LineLength
