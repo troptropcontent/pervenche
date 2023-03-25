@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.shared_context 'a stubed service' do
   let(:service_vehicles_stub) do
     [
@@ -9,26 +11,8 @@ RSpec.shared_context 'a stubed service' do
       }
     ]
   end
-  let(:service_rate_options_75008_stub) do
+  let(:service_rate_options_stub) do
     [
-      { client_internal_id: '75008', name: 'Résident', type: 'RES', accepted_time_units: ['days'],
-        free: false },
-      { client_internal_id: '1085252721', name: 'shared rate option', type: 'CUSTOM',
-        accepted_time_units: %w[minutes hours], free: true }
-    ]
-  end
-  let(:service_rate_options_75017_stub) do
-    [
-      { client_internal_id: '75017', name: 'Résident', type: 'RES', accepted_time_units: ['days'],
-        free: false },
-      { client_internal_id: '1085252721', name: 'shared rate option', type: 'CUSTOM',
-        accepted_time_units: %w[minutes hours], free: true }
-    ]
-  end
-  let(:service_rate_options_75019_stub) do
-    [
-      { client_internal_id: '75019', name: 'Résident', type: 'RES', accepted_time_units: ['days'],
-        free: false },
       { client_internal_id: '1085252721', name: 'shared rate option', type: 'CUSTOM',
         accepted_time_units: %w[minutes hours], free: true }
     ]
@@ -42,9 +26,8 @@ RSpec.shared_context 'a stubed service' do
   before do
     allow(automated_ticket).to receive(:service).and_return(service)
     allow(service).to receive(:vehicles).and_return(service_vehicles_stub)
-    allow(service).to receive(:rate_options).with('75008', any_args).and_return(service_rate_options_75008_stub)
-    allow(service).to receive(:rate_options).with('75017', any_args).and_return(service_rate_options_75017_stub)
-    allow(service).to receive(:rate_options).with('75019', any_args).and_return(service_rate_options_75019_stub)
+    allow(service).to receive(:rate_options).with(%w[75008 75017 75019],
+                                                  any_args).and_return(service_rate_options_stub)
     allow(service).to receive(:payment_methods).and_return(service_payment_methods_stub)
   end
 end

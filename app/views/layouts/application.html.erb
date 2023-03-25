@@ -12,9 +12,6 @@
 
   <body>
     <%= render 'components/flash' %>
-    <% if current_user && @with_navbar %>
-      <%= render 'components/navbar' %>
-    <% end %>
     <%= yield %>  
   </body>
 </html>

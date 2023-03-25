@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AutomatedTicket < ApplicationRecord
   encrypts :payment_method_client_internal_id, :zipcode, :license_plate
   has_many :tickets, dependent: :destroy
@@ -83,7 +85,7 @@ class AutomatedTicket < ApplicationRecord
   def running_ticket
     return running_ticket_in_database if running_ticket_in_database
 
-    return unless ticket_to_save = running_ticket_in_client
+    return unless (ticket_to_save = running_ticket_in_client)
 
     tickets.create(ticket_to_save.except(:client))
   end
@@ -101,18 +103,6 @@ class AutomatedTicket < ApplicationRecord
 
   def should_renew_today?
     weekdays.include?(Date.today.wday)
-  end
-
-  def rate_options_shared_between_zipcodes
-    return [] unless service_id && license_plate && zipcodes
-
-    rate_options = zipcodes.map do |zipcode|
-      service.rate_options(zipcode, license_plate)
-    end
-
-    rate_options.flatten.uniq.filter do |rate_option|
-      rate_options.all? { |possible_rates| possible_rates.include?(rate_option) }
-    end
   end
 
   def next_uncompleted_step; end

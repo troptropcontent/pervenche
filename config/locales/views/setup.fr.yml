@@ -16,3 +16,9 @@ fr:
         header:
           title: Dans quels arrondissements tu veux renouveler un ticket ?
         cta: Continuer
+      rate_option:
+        header:
+          title: Quel tarif souhaitez vous ?
+        clickable: 
+          free: "Gratuit : "
+        cta: Continuer

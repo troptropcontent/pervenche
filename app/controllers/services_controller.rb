@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ServicesController < ApplicationController
   load_and_authorize_resource
   def new
@@ -8,7 +10,7 @@ class ServicesController < ApplicationController
     if @service.save
       assign_default_name unless service_params[:name]
       flash[:success] = t('views.services.new.flash.success')
-      redirect_to navigation_params[:redirect_to] || root_path
+      redirect_to root_path
     else
       render 'new', status: :unprocessable_entity
     end

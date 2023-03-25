@@ -2,5 +2,5 @@
     <section class="header">
       <h2><%= t('views.services.new.header.title') %></h2>
     </section>
-    <%= render 'service/form', service: @service %>
+    <%= render 'services/form', service: @service, redirect_to: @redirect_to %>
 </main>

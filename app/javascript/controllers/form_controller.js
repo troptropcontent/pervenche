@@ -52,10 +52,20 @@ export default class extends Controller {
     this.loaderTarget.classList.remove("visually-hidden")
   }
 
-  addAssociatedHiddenInputsToData (e) { 
-    const checkedElements = this.inputWithAssociatedHiddenInputTargets.filter(el => el.attributes.getNamedItem('checked'))
+  createAssociatedHiddenInputs(input) {
+    const inputObject = JSON.parse(input.dataset.formAssociatedHiddenInputs)
+    Object.entries(inputObject).forEach ( ([key, value]) => {
+      console.log({key, value})
+      this.addHiddenInputs(value, key)
+      }
+    )
+  }
+
+  addAssociatedHiddenInputsToData () { 
+    const checkedElements = this.inputWithAssociatedHiddenInputTargets.filter(el => el.attributes.getNamedItem('checked') || el.checked)
+    console.log({checkedElements})
     checkedElements.forEach((input) => {
-      this.addHiddenInputs(input.dataset.formHiddenInputValueParam, input.dataset.formHiddenInputNameParam)
+      this.createAssociatedHiddenInputs(input)
     })
   }
 }
