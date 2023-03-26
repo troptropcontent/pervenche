@@ -1,13 +1,8 @@
 
 AllCops:
   NewCops: enable
-  Exclude:
-    - 'vendor/**/*'
-    - 'spec/fixtures/**/*'
-    - 'tmp/**/*'
-    - '.git/**/*'
-    - 'bin/*'
-    - 'db/schema.rb'
+  Excludes:
+    - db/**
   TargetRubyVersion: 3.2.1
   SuggestExtensions: false
 
