@@ -66,7 +66,7 @@ class AutomatedTicket < ApplicationRecord
     tickets.create!(running_ticket_in_client.except(:client)) if ticket_to_save
   end
 
-  def running_ticket_in_client
+  def running_ticket_in_client_for(zipcode:)
     service.running_ticket(license_plate, zipcode)
   end
 
@@ -105,7 +105,9 @@ class AutomatedTicket < ApplicationRecord
     weekdays.include?(Date.today.wday)
   end
 
-  def next_uncompleted_step; end
+  def running_ticket_in_database_for(zipcode:)
+    tickets.running.find_by(zipcode:)
+  end
 
   private
 

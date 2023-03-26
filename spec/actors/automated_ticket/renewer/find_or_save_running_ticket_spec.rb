@@ -4,20 +4,24 @@ require 'rails_helper'
 require 'support/shared_context/a_user_with_a_service_with_an_automated_ticket'
 RSpec.describe AutomatedTicket::Renewer::FindOrSaveRunningTicket, type: :actor do
   include_context 'a user with a service with an automated ticket'
-  subject { described_class.call(automated_ticket:) }
+  let(:zipcode) { '75018' }
+  subject { described_class.call(automated_ticket:, zipcode:) }
   describe '.call' do
     context 'when a running ticket exists in the database' do
       let!(:running_ticket_in_database) do
-        FactoryBot.create(:ticket, automated_ticket:, ends_on: Time.current + 2.hours)
+        FactoryBot.create(:ticket, automated_ticket:, zipcode:, ends_on: Time.current + 2.hours)
       end
       it 'assigns actor.running_ticket with this ticket' do
         expect(subject.running_ticket).to eq(running_ticket_in_database)
       end
     end
     context 'when no running ticket is found in the database' do
-      let!(:running_ticket_in_client) {}
+      let!(:running_ticket_in_client) {nil}
       before do
-        allow(automated_ticket).to receive(:running_ticket_in_client).and_return(running_ticket_in_client)
+        allow(automated_ticket).to(
+          receive(:running_ticket_in_client_for).with(zipcode:)
+            .and_return(running_ticket_in_client)
+        )
       end
       context 'when a running ticket is found at the client' do
         let(:running_ticket_in_client) do
@@ -36,6 +40,7 @@ RSpec.describe AutomatedTicket::Renewer::FindOrSaveRunningTicket, type: :actor d
           expect(actor_running_ticket.ends_on).to be_within(0.01).of(running_ticket_in_client[:ends_on])
           expect(actor_running_ticket.cost_cents).to eq(100)
           expect(actor_running_ticket.automated_ticket).to eq(automated_ticket)
+          expect(actor_running_ticket.zipcode).to eq(zipcode)
           expect(Ticket.count).to eq(ticket_count + 1)
         end
       end
