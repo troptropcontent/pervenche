@@ -1,4 +1,6 @@
 fr:
+  application: 
+    name: Pervenche
   views:
     application:
       done: "Terminé"

@@ -27,9 +27,7 @@ class AutomatedTicketsController < ApplicationController
   end
 
   # GET   /automated_tickets
-  def index
-    @automated_tickets
-  end
+  def index; end
 
   def update
     if @automated_ticket.update(automated_ticket_params)

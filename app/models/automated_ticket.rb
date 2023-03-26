@@ -19,7 +19,7 @@ class AutomatedTicket < ApplicationRecord
   }.freeze
 
   enum status: {
-    initialized: 0,
+    started: 0,
     setup: 1,
     ready: 2
   }
@@ -90,12 +90,12 @@ class AutomatedTicket < ApplicationRecord
     tickets.create(ticket_to_save.except(:client))
   end
 
-  def renew!(quantity:, time_unit:, payment_method_client_internal_id:)
+  def renew!(quantity: 1, time_unit:, payment_method_client_internal_id:)
     service.request_new_ticket!(
       license_plate:,
       zipcode:,
       rate_option_client_internal_id:,
-      quantity: 1,
+      quantity: quantity,
       time_unit:,
       payment_method_id: payment_method_client_internal_id
     )

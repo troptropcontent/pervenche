@@ -1,22 +1,26 @@
-<div class='automated_ticket'>
-    <div class="automated_ticket__header">
-        <%= image_tag([automated_ticket.service.kind, 'png'].join('.'), alt: automated_ticket.service.kind , class: "automated_ticket__image") %>
-        <%= render 'components/switcher', resource: automated_ticket, resource_boolean: 'active' %>
-    </div>
-    <%= link_to automated_ticket_path(automated_ticket) do %>
-        <div class='stack'>
-            <div class='cluster'>
-                <h3><%= t('views.automated_tickets.automated_ticket.vehicle') %></h3>
+<span class='stack'>   
+  <%= render 'components/infocard', color: 'muted' do %>
+    <div class="stack stack--no-gap">
+        <span class="cluster">
+            <% if automated_ticket.vehicle_description %>
+                <b><%= automated_ticket.vehicle_description %></b>
                 <p><%= automated_ticket.license_plate %></p>
+                <% else %>
+                <b><%= automated_ticket.license_plate %></b>
+            <% end %>
+        </span>
+        <p class="text__color--primary">
+            <%= t 'partials.automated_ticket.ticket_count', count: automated_ticket.zipcodes.length %>
+        </p>
+    </div>
+  <% end %>
+  <% automated_ticket.zipcodes.each do |zipcode| %>
+     <span class='cluster'>
+            <div class="center">
+                <%= inline_svg 'ticket.svg'%>
             </div>
-            <div class='cluster'>
-                <h3><%= t('views.automated_tickets.automated_ticket.zipcode') %></h3>
-                <p><%= automated_ticket.zipcode %></p>
-            </div>
-            <div class='cluster'>
-                <h3><%= t("views.automated_tickets.automated_ticket.coverage.title") %></h3>
-                <p class="<%= class_names('text__color--danger': automated_ticket.coverage == 'not_covered', 'text__color--success': automated_ticket.coverage != 'not_covered') %>"><%= t("views.automated_tickets.automated_ticket.coverage.#{automated_ticket.coverage}") %></p>
-            </div>    
-        </div>
-    <% end %>
-</div>
+            <p><%= zipcode %></p>
+     </span>
+     <div class="divider divider--muted"></div>
+  <% end %>
+</span>

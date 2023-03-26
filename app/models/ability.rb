@@ -7,7 +7,7 @@ class Ability
     return unless user.present?
 
     can %i[new], AutomatedTicket
-    can %i[setup], AutomatedTicket, { user:, status: %i[initialized setup] }
+    can %i[setup], AutomatedTicket, { user:, status: %i[started setup] }
     can %i[read update destroy], AutomatedTicket, { user:, status: :ready }
     can %i[index create update], Robot, { service: { user: } }
     can %i[new], Robot
