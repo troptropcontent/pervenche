@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 20_230_311_173_346) do
+ActiveRecord::Schema[7.0].define(version: 20_230_326_092_841) do
   # These are extensions that must be enabled in order to support this database
   enable_extension 'plpgsql'
 
@@ -97,6 +97,7 @@ ActiveRecord::Schema[7.0].define(version: 20_230_311_173_346) do
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
     t.bigint 'automated_ticket_id', null: false
+    t.string 'zipcode'
     t.index ['automated_ticket_id'], name: 'index_tickets_on_automated_ticket_id'
   end
 
