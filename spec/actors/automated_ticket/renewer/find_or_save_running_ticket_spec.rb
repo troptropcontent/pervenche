@@ -16,7 +16,7 @@ RSpec.describe AutomatedTicket::Renewer::FindOrSaveRunningTicket, type: :actor d
       end
     end
     context 'when no running ticket is found in the database' do
-      let!(:running_ticket_in_client) {nil}
+      let!(:running_ticket_in_client) { nil }
       before do
         allow(automated_ticket).to(
           receive(:running_ticket_in_client_for).with(zipcode:)
