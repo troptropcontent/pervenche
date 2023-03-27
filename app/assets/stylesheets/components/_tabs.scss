@@ -1,0 +1,10 @@
+.tabs {
+    display: flex;
+    > * {
+      flex: 1 1 0px;
+    }
+
+    &--separated {
+      gap: var(--space-xs)
+    }
+  }
