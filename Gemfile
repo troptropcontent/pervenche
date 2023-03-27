@@ -26,7 +26,7 @@ gem 'stimulus-rails'
 
 # gem that wraps the parkign apps
 gem 'parking_ticket'
-#gem 'parking_ticket', path: '../parking_ticket'
+# gem 'parking_ticket', path: '../parking_ticket'
 
 # Sentry to catch all errrors
 gem 'sentry-rails'

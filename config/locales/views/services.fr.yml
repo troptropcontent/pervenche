@@ -15,6 +15,14 @@ fr:
           phone_number:
             label: Numéro de téléphone
             placeholder: "Your service username"
+          username_type: 
+            label: Mon identifiant est un
+            types:
+              phone: Téléphone
+              email: Email
+          email:
+            label: Addresse email
+            placeholder: "Votre addresse email"
           password:
             label: Mot de passe
             placeholder: "Your service password"

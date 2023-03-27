@@ -68,4 +68,11 @@ export default class extends Controller {
       this.createAssociatedHiddenInputs(input)
     })
   }
+
+  disableInputs ({params: {disableIds}}) {
+    disableIds.forEach(id => document.getElementById(id).disabled = true)
+  }
+  enableInputs ({params: {enableIds}}) {
+    enableIds.forEach(id => document.getElementById(id).disabled = false)
+  }
 }
