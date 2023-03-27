@@ -6,7 +6,7 @@
     </section>
     <%= render 'automated_tickets/setup/shared/form', automated_ticket: @automated_ticket, step: @step do |f| %>
       <% if @localisation == 'paris' %>
-        <%= render 'automated_tickets/setup/zipcodes/paris' %>
+        <%= render 'automated_tickets/setup/zipcodes/paris', zipcodes: @automated_ticket.zipcodes || [] %>
       <% end %>
     <% end %>
 </main>

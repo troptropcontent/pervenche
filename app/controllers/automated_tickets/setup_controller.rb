@@ -18,6 +18,14 @@ module AutomatedTickets
       end
     end
 
+    def edit
+      @with_navbar = false
+      @automated_ticket.setup_step = @step
+      load_instance_variables_for(step: @step)
+      byebug
+      render @step
+    end
+
     def update
       update_automated_ticket!
 

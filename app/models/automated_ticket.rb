@@ -90,7 +90,7 @@ class AutomatedTicket < ApplicationRecord
     tickets.create(ticket_to_save.except(:client))
   end
 
-  def renew!(time_unit:, payment_method_client_internal_id:, quantity: 1)
+  def renew!(zipcode:, time_unit:, payment_method_client_internal_id:, quantity:)
     service.request_new_ticket!(
       license_plate:,
       zipcode:,

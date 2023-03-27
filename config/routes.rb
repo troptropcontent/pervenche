@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   resources :robots, only: %i[index new create update]
 
   resources :automated_tickets, only: %i[new index show destroy update] do
-    resources :setup, only: %i[show update], controller: 'automated_tickets/setup', param: :step_name
+    resources :setup, only: %i[show update edit], controller: 'automated_tickets/setup', param: :step_name
   end
 
   resource :onboarding, only: :show do
