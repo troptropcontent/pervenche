@@ -1,22 +1,21 @@
 
 <div class="cover">
-    <div class='box stack'>
+    <section class="header center">
+        <span class='cluster'>
+            <div class="center">
+                <%= inline_svg 'ticket.svg'%>
+            </div>
+            <h2><%= t 'application.name' %></h2>
+        </span>
+    </section>
+    <section class="stack stack--l">
       <h2 class='text__align--center'><%= t('devise.sessions.title')%></h2>
-      <%= button_to omniauth_authorize_path(resource_name, 'google_oauth2'), 
-          method: :post, data: {turbo: :false}, 
-          class: 'btn btn--sign-in', 
-          form_class: 'form form--column' do %>
-          <%= t 'devise.sessions.oauth.google' %>
-      <% end %>
-
-      <div class="text-divider"><%= t('devise.sessions.sign_in_with_username_and_password') %></div>
-
       <%= simple_form_for resource, 
                           as: resource_name, 
                           url: session_path(resource_name),
                           method: :post,
                           html: {
-                            class: "quote form form--column",
+                            class: "quote form form--column stack stack--l",
                             data: { turbo: false }
                           } do |f| %>
 
@@ -26,17 +25,27 @@
           </div>
         <% end %>
 
-        <%= f.input :email, input_html: { autofocus: true } %>
-        <%= f.input :password, input_html: { autofocus: true } %>
-        <% if devise_mapping.rememberable? %>
-          <%= f.input_field :remember_me, inline_label: 'Remember me', as: :boolean %>
-        <% end %>
-        <%= f.submit "Sign in", class: "btn btn--primary" %>
+        <div class="form_group stack stack--s">
+            <h4><%= t('devise.sessions.inputs.username.label') %></h4>
+            <%= f.input :email, placeholder: t('devise.sessions.inputs.username.placeholder'), input_html: { autofocus: true } %>
+        </div>
+       <div class="form_group stack stack--s">
+            <h4><%= t('devise.sessions.inputs.password.label') %></h4>
+             <%= f.input :password, placeholder: t('devise.sessions.inputs.password.placeholder') %>
+        </div>
+        <%= f.submit  t('devise.sessions.title') , class: "btn btn--primary" %>
+      <% end %>
+      <div class="text-divider"><%= t('views.application.or') %></div>
+      <%= button_to omniauth_authorize_path(resource_name, 'google_oauth2'), 
+          method: :post, data: {turbo: :false}, 
+          class: 'btn btn--sign-in', 
+          form_class: 'form form--column' do %>
+          <%= t 'devise.sessions.oauth.google' %>
       <% end %>
       <span>
         <%= t 'devise.sessions.not_registered_yet'%>
         <%= link_to t('devise.sessions.create_an_account'), new_user_registration_path %>
       </span>
-    </div>
+    </section>
 </div>
   

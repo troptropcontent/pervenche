@@ -1,12 +1,20 @@
 <div class="cover">
-    <div class='box stack'>
+    <section class="header center">
+        <span class='cluster'>
+            <div class="center">
+                <%= inline_svg 'ticket.svg'%>
+            </div>
+             <h2><%= t 'application.name' %></h2>
+        </span>
+    </section>
+    <section class="stack stack--l">
       <h2 class='text__align--center'><%= t('devise.registrations.title')%></h2>
       <%= simple_form_for resource, 
                           as: resource_name, 
                           url: registration_path(resource_name),
                           method: :post,
                           html: {
-                            class: "quote form form--column",
+                            class: "quote form form--column stack stack--l",
                             data: { turbo: false }
                           } do |f| %>
 
@@ -16,15 +24,20 @@
           </div>
         <% end %>
 
-        <%= f.input :email, input_html: { autofocus: true } %>
-        <%= f.input :password, input_html: { autofocus: true } %>
-        <%= f.input :password_confirmation, input_html: { autofocus: true } %>
-
-        <%= f.submit "Sign in", class: "btn btn--primary" %>
-      <% end %>
-      <span>
+        <div class="form_group stack stack--s">
+            <h4><%= t('devise.sessions.inputs.username.label') %></h4>
+            <%= f.input :email, placeholder: t('devise.sessions.inputs.username.placeholder'), input_html: { autofocus: true } %>
+        </div>
+       <div class="form_group stack stack--s">
+            <h4><%= t('devise.sessions.inputs.password.label') %></h4>
+             <%= f.input :password, placeholder: t('devise.sessions.inputs.password.placeholder') %>
+        </div>
+        <%= f.submit  t('devise.registrations.title') , class: "btn btn--primary" %>
+        <% end %>
+       <span>
         <%= t 'devise.registrations.registered_already'%>
         <%= link_to t('devise.sessions.title'), new_user_session_path %>
       </span>
-    </div>
+    </section>
 </div>
+  

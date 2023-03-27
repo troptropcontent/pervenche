@@ -22,6 +22,11 @@
       background-color: var(--color-danger);
     }
   }
+  &--notice{
+    > .flash__content {
+      background-color: var(--color-success);
+    }
+  }
 }
 
 

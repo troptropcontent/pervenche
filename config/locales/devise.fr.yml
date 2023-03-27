@@ -1,0 +1,23 @@
+# Additional translations at https://github.com/heartcombo/devise/wiki/I18n
+
+fr:
+  devise:
+    registrations:
+      title: Créer mon compte
+      registered_already: "Déja inscrit ?"
+      signed_up: "Bienvenue! votre compte a bien été créé"
+    sessions:
+      title: Me connecter
+      not_registered_yet: "Pas encore inscrit ?"
+      create_an_account: "Créer un compte"
+      sign_in_with_username_and_password: "Ou utiliser vos identifiants"
+      oauth:
+        google: "Se connecter avec Google"
+      inputs: 
+        username: 
+          label: Email
+          placeholder: Votre email
+        password: 
+          placeholder: Votre mot de passe
+          
+
