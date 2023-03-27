@@ -1,0 +1,6 @@
+<label for=<%= input_value %> class='clickable'>
+    <%= radio_button_tag(input_name, input_value, local_assigns[:checked] , {id: input_value, class: 'visually-hidden'}.merge(local_assigns[:input_html])) %>
+    <div class="clickable__content">
+        <%= input_text %>
+    </div>
+</label>
