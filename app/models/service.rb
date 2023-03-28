@@ -57,6 +57,8 @@ class Service < ApplicationRecord
   # rubocop:disable Metrics/ParameterLists
   def request_new_ticket!(license_plate:, zipcode:, rate_option_client_internal_id:, time_unit:, payment_method_id:,
                           quantity: 1)
+    return unless Rails.env.production?
+
     client.new_ticket(
       license_plate:,
       zipcode:,
