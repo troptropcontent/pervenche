@@ -2,6 +2,7 @@
 
 class AutomatedTicket::Renewer::RequestNewTicket < Actor
   input :automated_ticket
+  input :zipcode
   input :time_unit
   input :quantity
   input :payment_method_id
@@ -16,6 +17,7 @@ class AutomatedTicket::Renewer::RequestNewTicket < Actor
 
   def request_new_ticket!
     automated_ticket.renew!(
+      zipcode:,
       quantity:,
       time_unit:,
       payment_method_client_internal_id: payment_method_id
@@ -25,6 +27,7 @@ class AutomatedTicket::Renewer::RequestNewTicket < Actor
   def save_ticket_request!
     self.ticket_request = TicketRequest.create!({
                                                   automated_ticket_id: automated_ticket.id,
+                                                  zipcode:,
                                                   payment_method_client_internal_id: payment_method_id,
                                                   requested_on: Time.current,
                                                   quantity:,
