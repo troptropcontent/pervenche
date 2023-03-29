@@ -1,13 +1,6 @@
 
-<div class="cover">
-    <section class="header center">
-        <span class='cluster'>
-            <div class="center">
-                <%= inline_svg 'ticket.svg'%>
-            </div>
-            <h2><%= t 'application.name' %></h2>
-        </span>
-    </section>
+<div class="container stack">
+    <%= render 'devise/shared/branded_header' %>
     <section class="stack stack--l">
       <h2 class='text__align--center'><%= t('devise.sessions.title')%></h2>
       <%= simple_form_for resource, 
@@ -26,11 +19,11 @@
         <% end %>
 
         <div class="form_group stack stack--s">
-            <h4><%= t('devise.sessions.inputs.username.label') %></h4>
+            <p ><%= t('devise.sessions.inputs.username.label') %></p >
             <%= f.input :email, placeholder: t('devise.sessions.inputs.username.placeholder'), input_html: { autofocus: true } %>
         </div>
        <div class="form_group stack stack--s">
-            <h4><%= t('devise.sessions.inputs.password.label') %></h4>
+            <p ><%= t('devise.sessions.inputs.password.label') %></p >
              <%= f.input :password, placeholder: t('devise.sessions.inputs.password.placeholder') %>
         </div>
         <%= f.submit  t('devise.sessions.title') , class: "btn btn--primary" %>

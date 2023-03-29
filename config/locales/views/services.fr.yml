@@ -6,6 +6,7 @@ fr:
           success: "Compte connecté  👍"
         header:
           title: "Connecte ton compte de ticket de stationnement"
+          subtitle: "On en a besoin pour prendre des tickets automatiquement à ta place et les renouveller"
         form:
           kind:
             label: App de stationnement utilisée

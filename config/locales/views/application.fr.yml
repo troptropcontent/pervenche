@@ -1,6 +1,7 @@
 fr:
   application: 
     name: Pervenche
+    slug: Fini les amendes inutiles
   views:
     application:
       done: "Terminé"
