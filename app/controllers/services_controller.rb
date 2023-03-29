@@ -4,6 +4,7 @@ class ServicesController < ApplicationController
   load_and_authorize_resource
   def new
     @with_navbar = false
+    @redirect_to = navigation_params&.dig(:redirect_to)
   end
 
   def create
@@ -30,6 +31,6 @@ class ServicesController < ApplicationController
   end
 
   def navigation_params
-    params.permit(navigation: [:redirect_to])[:navigation]
+    params.require(:navigation).permit(:redirect_to)
   end
 end
