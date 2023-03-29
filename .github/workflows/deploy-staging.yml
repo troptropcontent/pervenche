@@ -21,3 +21,4 @@ jobs:
         with:
           git_remote_url: 'ssh://dokku@staging.pervenche.eu/pervenche-staging'
           ssh_private_key: ${{ secrets.STAGING_GITHUB_ACTION_SSH }}
+          branch: main
