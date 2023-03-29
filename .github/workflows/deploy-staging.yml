@@ -1,0 +1,23 @@
+---
+name: 'deploy-staging'
+
+on:
+  push:
+    branches:
+      - development
+  workflow_dispatch:
+  
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cloning repo
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Push to dokku
+        uses: dokku/github-action@master
+        with:
+          git_remote_url: 'ssh://dokku@staging.pervenche.eu/pervenche-staging'
+          ssh_private_key: ${{ secrets.STAGING_GITHUB_ACTION_SSH }}
