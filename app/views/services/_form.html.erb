@@ -71,10 +71,15 @@
         <%= hidden_field_tag 'navigation[redirect_to]', redirect_to %>
     <% end %>
     </section>
-    <section class="footer stack margin__bottom--l">
-        <%= button_tag(type: 'submit', class: "btn btn--primary", data: {'form-target': 'inputButton'}) do %>
+    <section class="footer cluster margin__bottom--l">
+    <%= link_to redirect_to, class: 'btn btn--white center' do %>
+        <%= inline_svg 'chevron_left.svg' %>
+    <% end %>
+        <%= button_tag(type: 'submit', class: "btn btn--primary grow", data: {'form-target': 'inputButton'}) do %>
         <p data-form-target='inputButtonContent'><%= t('views.services.new.cta') %></p>
-        <div data-form-target='loader' class="visually-hidden loader--ring loader--ring--small loader--ring--white"><div></div><div></div><div></div><div></div></div>
+        <div class="center">
+            <div data-form-target='loader' class="visually-hidden loader--ring loader--ring--small loader--ring--white"><div></div><div></div><div></div><div></div></div>
+        </div>
         <% end %>
     </section>
 <% end %>  
