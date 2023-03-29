@@ -1,6 +1,7 @@
 <main class="grow container stack stack--no-gap">
     <section class="header">
       <h2><%= t('views.services.new.header.title') %></h2>
+      <p class='text__color--muted'><%= t('views.services.new.header.subtitle') %></p>
     </section>
     <%= render 'services/form', service: @service, redirect_to: @redirect_to %>
 </main>

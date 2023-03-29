@@ -18,6 +18,7 @@ fr:
           label: Email
           placeholder: Votre email
         password: 
+          label: Mot de passe
           placeholder: Votre mot de passe
           
 
