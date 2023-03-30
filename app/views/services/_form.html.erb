@@ -76,10 +76,10 @@
         <%= inline_svg 'chevron_left.svg' %>
     <% end %>
         <%= button_tag(type: 'submit', class: "btn btn--primary grow", data: {'form-target': 'inputButton'}) do %>
-        <p data-form-target='inputButtonContent'><%= t('views.services.new.cta') %></p>
-        <div class="center">
-            <div data-form-target='loader' class="visually-hidden loader--ring loader--ring--small loader--ring--white"><div></div><div></div><div></div><div></div></div>
-        </div>
+            <p data-form-target='inputButtonContent'><%= t('views.services.new.cta') %></p>
         <% end %>
+        <div class="btn btn--light grow visually-hidden" data-form-target='loader'>
+            <%= render 'components/loader' %>
+        </div>
     </section>
 <% end %>  

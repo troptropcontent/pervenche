@@ -48,7 +48,7 @@ export default class extends Controller {
   }
 
   toggleSubmitButtonLoading() {
-    this.inputButtonContentTarget.classList.add("visually-hidden")
+    this.inputButtonTarget.classList.add("visually-hidden")
     this.loaderTarget.classList.remove("visually-hidden")
   }
 
