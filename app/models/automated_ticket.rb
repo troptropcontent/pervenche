@@ -65,7 +65,7 @@ class AutomatedTicket < ApplicationRecord
       ON automated_tickets.id = tickets.automated_ticket_id AND unnested_automated_tickets.zipcode = tickets.zipcode
     }
     joins(join_sql)
-      .where(tickets: { id: nil })
+      .where(active: true, status: :ready, tickets: { id: nil })
       .pluck('automated_tickets.id', 'unnested_automated_tickets.zipcode')
   end
 

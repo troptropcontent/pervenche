@@ -12,7 +12,11 @@ RSpec.describe AutomatedTicket, type: :model do
 
   describe '.class_methods' do
     describe 'missing_running_tickets_in_database' do
-      let(:automated_ticket) { FactoryBot.create(:automated_ticket, :set_up, user:, service:, zipcodes:) }
+      let(:automated_ticket) do
+        FactoryBot.create(:automated_ticket, :set_up, user:, service:, zipcodes:, status:, active:)
+      end
+      let(:status) { :ready }
+      let(:active) { :true }
       let!(:running_ticket_in_database_75017) do
         FactoryBot.create(:ticket,
                           ends_on: Date.current.tomorrow,
@@ -37,6 +41,18 @@ RSpec.describe AutomatedTicket, type: :model do
                             automated_ticket_id: automated_ticket.id,
                             zipcode: '75016')
         end
+        it 'returns an empty array' do
+          expect(described_class.missing_running_tickets_in_database).to eq([])
+        end
+      end
+      context 'when there is automated tickets that are not ready' do
+        let(:status) { :started }
+        it 'returns an empty array' do
+          expect(described_class.missing_running_tickets_in_database).to eq([])
+        end
+      end
+      context 'when there is automated tickets that are not active' do
+        let(:active) { :false }
         it 'returns an empty array' do
           expect(described_class.missing_running_tickets_in_database).to eq([])
         end
