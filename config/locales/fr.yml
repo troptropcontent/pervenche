@@ -4,6 +4,11 @@ fr:
   false: Non
   activerecord:
     errors:
+      models:
+        service: 
+          attributes:
+            username: 
+              taken: "Ce compte est déja enregistré sur la plateforme"
       messages:
         record_invalid: "La validation a échoué : %{errors}"
         restrict_dependent_destroy:
