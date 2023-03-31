@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
 
@@ -14,5 +16,10 @@ Rails.application.routes.draw do
 
   resource :onboarding, only: :show do
     get 'welcome', to: 'onboardings#welcome'
+  end
+  resources :shared_views, only: [] do
+    collection do
+      get 'loading'
+    end
   end
 end

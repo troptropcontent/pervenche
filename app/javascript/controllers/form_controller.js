@@ -48,14 +48,19 @@ export default class extends Controller {
   }
 
   toggleSubmitButtonLoading() {
-    this.inputButtonContentTarget.classList.add("visually-hidden")
+    this.inputButtonTarget.classList.add("visually-hidden")
     this.loaderTarget.classList.remove("visually-hidden")
+  }
+  showLoadingWindow({params: {loadingUrl}}) {
+    const turbo_frame = `<turbo-frame id="loading" src="${loadingUrl}" class="grow stack"></turbo-frame>`
+
+    document.querySelector('body').innerHTML = "";
+    document.querySelector('body').innerHTML = turbo_frame
   }
 
   createAssociatedHiddenInputs(input) {
     const inputObject = JSON.parse(input.dataset.formAssociatedHiddenInputs)
     Object.entries(inputObject).forEach ( ([key, value]) => {
-      console.log({key, value})
       this.addHiddenInputs(value, key)
       }
     )

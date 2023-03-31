@@ -1,7 +1,7 @@
 
 AllCops:
   NewCops: enable
-  Excludes:
+  Exclude:
     - db/schema.rb
   TargetRubyVersion: 3.2.1
   SuggestExtensions: false
