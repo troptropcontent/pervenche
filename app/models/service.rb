@@ -4,7 +4,7 @@
 class Service < ApplicationRecord
   belongs_to :user
   has_many :automated_tickets, dependent: :destroy
-  encrypts :username, :password
+  encrypts :username, :password, deterministic: true
   enum :kind, {
     pay_by_phone: 0,
     easy_park: 1,
@@ -82,7 +82,7 @@ class Service < ApplicationRecord
   private
 
   def valid_credentials
-    return if kind && ParkingTicket::Base.valid_credentials?(kind, username, password)
+    return if (kind && username && password) && ParkingTicket::Base.valid_credentials?(kind, username, password)
 
     errors.add(:credentials, I18n.t('models.service.validations.credentials'))
   end

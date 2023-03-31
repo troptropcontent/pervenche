@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 20_230_326_093_726) do
+ActiveRecord::Schema[7.0].define(version: 20_230_331_113_718) do
   # These are extensions that must be enabled in order to support this database
   enable_extension 'plpgsql'
 
@@ -28,7 +28,7 @@ ActiveRecord::Schema[7.0].define(version: 20_230_326_093_726) do
     t.datetime 'updated_at', null: false
     t.integer 'weekdays', array: true
     t.string 'accepted_time_units', array: true
-    t.string 'zipcodes', array: true
+    t.string 'zipcodes', default: [], array: true
     t.string 'payment_method_client_internal_ids', array: true
     t.string 'vehicle_type'
     t.string 'vehicle_description'
@@ -75,6 +75,7 @@ ActiveRecord::Schema[7.0].define(version: 20_230_326_093_726) do
     t.bigint 'user_id', null: false
     t.integer 'kind'
     t.index ['user_id'], name: 'index_services_on_user_id'
+    t.index %w[username kind], name: 'index_services_on_username_and_kind', unique: true
   end
 
   create_table 'ticket_requests', force: :cascade do |t|

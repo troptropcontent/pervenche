@@ -13,3 +13,4 @@ Style/Documentation:
 Metrics/BlockLength:
   Exclude:
     - '**/*_spec.rb'
+    - 'spec/factories/**/*.rb'
