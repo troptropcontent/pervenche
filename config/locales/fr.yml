@@ -9,6 +9,12 @@ fr:
           attributes:
             username: 
               taken: "Ce compte est déja enregistré sur la plateforme"
+        automated_ticket: 
+          attributes:
+            zipcodes: 
+              similar_ticket_already_registered: 
+                one: "Un ticket est déja parametré pour ce tarif, cette plaque d'immatriclation et ce code postal"
+                other: "Des tickets sont déja paramétrés pour ce tarif, cette plaque d'immatriculation pour ces code postaux %{zipcodes}"
       messages:
         record_invalid: "La validation a échoué : %{errors}"
         restrict_dependent_destroy:

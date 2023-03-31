@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class AutomatedTicket < ApplicationRecord
-  encrypts :payment_method_client_internal_id, :zipcode, :license_plate
+  encrypts :license_plate, deterministic: true
   has_many :tickets, dependent: :destroy
   has_many :ticket_requests, dependent: :destroy
   has_one :running_ticket_in_database, -> { running }, class_name: 'Ticket'
@@ -53,17 +53,12 @@ class AutomatedTicket < ApplicationRecord
               length: { minimum: 1, message: I18n.t('errors.messages.empty_array') }, unless: :free
   end
 
+  validate :similar_ticket_already_registered
+
   attr_accessor :setup_step
 
   def self.setup_steps
     SETUP_STEPS
-  end
-
-  def find_or_create_running_ticket_if_it_exists
-    return running_ticket_in_database if running_ticket_in_database
-
-    ticket_to_save = running_ticket_in_client
-    tickets.create!(running_ticket_in_client.except(:client)) if ticket_to_save
   end
 
   def running_ticket_in_client_for(zipcode:)
@@ -116,5 +111,28 @@ class AutomatedTicket < ApplicationRecord
 
     ordered_steps = self.class.setup_steps.keys
     !!(ordered_steps.index(step) <= ordered_steps.index(setup_step.to_sym))
+  end
+
+  def similar_ticket_already_registered
+    return unless service_id && license_plate && rate_option_client_internal_id && zipcodes
+
+    zipcodes_already_covered = AutomatedTickets::FindSimilarTicket.call(automated_ticket: self).zipcodes_already_covered
+    return unless zipcodes_already_covered.length.positive?
+
+    errors.add(
+      :zipcodes,
+      I18n.t(
+        'activerecord.errors.models.automated_ticket.attributes.zipcodes.similar_ticket_already_registered',
+        count: zipcodes_already_covered.length,
+        zipcodes: zipcodes_already_covered.join(', ')
+      )
+    )
+  end
+
+  def similar_ticket_for_zipcode(zipcode)
+    self.class.where(service_id:, license_plate:, rate_option_client_internal_id:)
+        .where(':zipcode = ANY (zipcodes)', zipcode:)
+        .where.not(id:)
+        .exists?
   end
 end
