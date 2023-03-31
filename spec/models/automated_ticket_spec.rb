@@ -10,6 +10,40 @@ RSpec.describe AutomatedTicket, type: :model do
     service
   end
 
+  describe '.class_methods' do
+    describe 'missing_running_tickets_in_database' do
+      let(:automated_ticket) { FactoryBot.create(:automated_ticket, :set_up, user:, service:, zipcodes:) }
+      let!(:running_ticket_in_database_75017) do
+        FactoryBot.create(:ticket,
+                          ends_on: Date.current.tomorrow,
+                          automated_ticket_id: automated_ticket.id,
+                          zipcode: '75017')
+      end
+      it 'return the missing zipcodes' do
+        expect(described_class.missing_running_tickets_in_database).to contain_exactly([automated_ticket.id, '75016'],
+                                                                                       [automated_ticket.id, '75018'])
+      end
+
+      context 'when there no missing tickets' do
+        let!(:running_ticket_in_database_75018) do
+          FactoryBot.create(:ticket,
+                            ends_on: Date.current.tomorrow,
+                            automated_ticket_id: automated_ticket.id,
+                            zipcode: '75018')
+        end
+        let!(:running_ticket_in_database_75016) do
+          FactoryBot.create(:ticket,
+                            ends_on: Date.current.tomorrow,
+                            automated_ticket_id: automated_ticket.id,
+                            zipcode: '75016')
+        end
+        it 'returns an empty array' do
+          expect(described_class.missing_running_tickets_in_database).to eq([])
+        end
+      end
+    end
+  end
+
   describe 'validations' do
     context 'presence' do
       it { should validate_presence_of(:service_id) }

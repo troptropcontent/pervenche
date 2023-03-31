@@ -57,6 +57,18 @@ class AutomatedTicket < ApplicationRecord
 
   attr_accessor :setup_step
 
+  def self.missing_running_tickets_in_database
+    join_sql = %{
+      JOIN (select id, UNNEST(zipcodes) as zipcode from automated_tickets) as unnested_automated_tickets
+      ON unnested_automated_tickets.id = automated_tickets.id
+      LEFT OUTER JOIN tickets
+      ON automated_tickets.id = tickets.automated_ticket_id AND unnested_automated_tickets.zipcode = tickets.zipcode
+    }
+    joins(join_sql)
+      .where(tickets: { id: nil })
+      .pluck('automated_tickets.id', 'unnested_automated_tickets.zipcode')
+  end
+
   def self.setup_steps
     SETUP_STEPS
   end

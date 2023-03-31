@@ -4,7 +4,6 @@ FactoryBot.define do
   factory :automated_ticket do
     user
     service
-    type { 'pay_by_phone' }
 
     trait :with_localisation do
       localisation { 'paris' }
