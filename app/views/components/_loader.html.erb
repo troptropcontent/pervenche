@@ -1,3 +1,10 @@
 <div class="center">
-    <div class="loader--ring loader--ring--small loader--ring--white"><div></div><div></div><div></div><div></div></div>
+    <div class="<%= class_names(
+        'loader--ring', 
+        local_assigns[:size] ? "loader--ring--#{local_assigns[:size]}" :  "loader--ring--small", 
+        "loader--ring--#{local_assigns[:color] || 'white'}"
+        ) %>" >
+        <div></div><div></div><div></div><div></div>
+    </div>
 </div>
+
