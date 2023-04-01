@@ -1,11 +1,25 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
-require 'support/shared_context/a_user_with_a_service_with_an_automated_ticket'
 RSpec.describe AutomatedTicket::Renewer::FindOrSaveRunningTicket, type: :actor do
-  include_context 'a user with a service with an automated ticket'
-  let(:zipcode) { '75018' }
   subject { described_class.call(automated_ticket:, zipcode:) }
+  let(:zipcode) { '75018' }
+  let(:automated_ticket) do
+    FactoryBot.create(:automated_ticket, :set_up, user:, service:, zipcodes:, weekdays:, free:, accepted_time_units:,
+                                                  payment_method_client_internal_ids:)
+  end
+  let(:free) { false }
+  let(:payment_method_client_internal_ids) { ['azertyuiop'] }
+  let(:accepted_time_units) { ['days'] }
+  let(:weekdays) { [Date.today.wday] }
+  let(:zipcodes) { %w[75018 75017 75016] }
+  let(:user) { FactoryBot.create(:user) }
+  let(:service) do
+    service = FactoryBot.build(:service, user_id: user.id)
+    service.save(validate: false)
+    service
+  end
+
   describe '.call' do
     context 'when a running ticket exists in the database' do
       let!(:running_ticket_in_database) do
