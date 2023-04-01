@@ -5,7 +5,7 @@ class AutomatedTicket::Renewer::RequestNewTicket < Actor
   input :zipcode
   input :time_unit
   input :quantity
-  input :payment_method_id
+  input :payment_method_id, allow_nil: true
   output :ticket_request
 
   def call

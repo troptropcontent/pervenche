@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 20_230_331_113_718) do
+ActiveRecord::Schema[7.0].define(version: 20_230_331_140_743) do
   # These are extensions that must be enabled in order to support this database
   enable_extension 'plpgsql'
 
@@ -20,8 +20,6 @@ ActiveRecord::Schema[7.0].define(version: 20_230_331_113_718) do
     t.string 'type'
     t.string 'rate_option_client_internal_id'
     t.string 'license_plate'
-    t.string 'zipcode'
-    t.string 'payment_method_client_internal_id'
     t.integer 'status', default: 0, null: false
     t.boolean 'active', default: false, null: false
     t.datetime 'created_at', null: false

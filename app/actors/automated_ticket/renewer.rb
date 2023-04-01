@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 class AutomatedTicket::Renewer < Actor
-  play FindOrSaveRunningTicket
+  play ->(actor) { actor.automated_ticket ||= AutomatedTicket.find(actor.automated_ticket_id) },
+       FindOrSaveRunningTicket
   play FindPaymentMethod,
        FindTimeUnitAndQuantity,
        RequestNewTicket,
