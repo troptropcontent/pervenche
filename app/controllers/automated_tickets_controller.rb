@@ -27,7 +27,9 @@ class AutomatedTicketsController < ApplicationController
   end
 
   # GET   /automated_tickets
-  def index; end
+  def index
+    @automated_tickets = @automated_tickets.includes(:running_tickets_in_database)
+  end
 
   def update
     if @automated_ticket.update(automated_ticket_params)

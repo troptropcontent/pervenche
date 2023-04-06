@@ -4,7 +4,7 @@ class AutomatedTicket < ApplicationRecord
   encrypts :license_plate, deterministic: true
   has_many :tickets, dependent: :destroy
   has_many :ticket_requests, dependent: :destroy
-  has_one :running_ticket_in_database, -> { running }, class_name: 'Ticket'
+  has_many :running_tickets_in_database, -> { running }, class_name: 'Ticket'
   belongs_to :service, optional: true
   belongs_to :user
 
@@ -61,11 +61,11 @@ class AutomatedTicket < ApplicationRecord
     join_sql = %{
       JOIN (select id, UNNEST(zipcodes) as zipcode from automated_tickets) as unnested_automated_tickets
       ON unnested_automated_tickets.id = automated_tickets.id
-      LEFT OUTER JOIN tickets
-      ON automated_tickets.id = tickets.automated_ticket_id AND unnested_automated_tickets.zipcode = tickets.zipcode
+      LEFT OUTER JOIN (SELECT id, automated_ticket_id, zipcode FROM tickets where tickets.ends_on >= NOW()) as running_tickets
+      ON automated_tickets.id = running_tickets.automated_ticket_id AND unnested_automated_tickets.zipcode = running_tickets.zipcode
     }
     joins(join_sql)
-      .where(active: true, status: :ready, tickets: { id: nil })
+      .where(active: true, status: :ready, running_tickets: { id: nil })
       .pluck('automated_tickets.id', 'unnested_automated_tickets.zipcode')
   end
 

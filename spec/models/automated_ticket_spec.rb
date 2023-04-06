@@ -23,6 +23,12 @@ RSpec.describe AutomatedTicket, type: :model do
                           automated_ticket_id: automated_ticket.id,
                           zipcode: '75017')
       end
+      let!(:old_ticket_in_database_75018) do
+        FactoryBot.create(:ticket,
+                          ends_on: Date.current.yesterday,
+                          automated_ticket_id: automated_ticket.id,
+                          zipcode: '75016')
+      end
       it 'return the missing zipcodes' do
         expect(described_class.missing_running_tickets_in_database).to contain_exactly([automated_ticket.id, '75016'],
                                                                                        [automated_ticket.id, '75018'])
