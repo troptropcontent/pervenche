@@ -11,7 +11,7 @@ class AutomatedTicket::Renewer::FindOrSaveRunningTicket < Actor
 
     self.running_ticket = if running_ticket_in_client
                             automated_ticket.tickets.create(
-                              running_ticket_in_client.except(:client).merge({ zipcode: })
+                              running_ticket_in_client.serialize.except('client').merge({ zipcode: })
                             )
                           end
   end
