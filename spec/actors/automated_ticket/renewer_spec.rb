@@ -42,12 +42,14 @@ RSpec.describe AutomatedTicket::Renewer, type: :actor do
         let(:running_ticket_in_client) {}
         context 'when a running ticket is found at the client' do
           let(:running_ticket_in_client) do
-            { client_internal_id: '34ae093a-37f4-4326-bdbf-7965c82b378a',
-              starts_on: Time.now - 1.days,
-              ends_on: Time.now + 1.days,
+            ParkingTicket::Clients::Models::Ticket.new(
+              client_internal_id: '34ae093a-37f4-4326-bdbf-7965c82b378a',
+              starts_on: (Time.now - 1.days).to_datetime,
+              ends_on: (Time.now + 1.days).to_datetime,
               license_plate: 'a fake license plate',
-              cost: 1,
-              client: 'PayByPhone' }
+              cost: 1.0,
+              client: 'PayByPhone'
+            )
           end
 
           it_behaves_like 'it does not request a new ticket'

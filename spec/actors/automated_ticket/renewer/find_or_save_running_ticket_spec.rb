@@ -39,19 +39,21 @@ RSpec.describe AutomatedTicket::Renewer::FindOrSaveRunningTicket, type: :actor d
       end
       context 'when a running ticket is found at the client' do
         let(:running_ticket_in_client) do
-          { client_internal_id: '34ae093a-37f4-4326-bdbf-7965c82b378a',
-            starts_on: Time.now - 1.days,
-            ends_on: Time.now + 1.days,
+          ParkingTicket::Clients::Models::Ticket.new(
+            client_internal_id: '34ae093a-37f4-4326-bdbf-7965c82b378a',
+            starts_on: (Time.now - 1.days).to_datetime,
+            ends_on: (Time.now + 1.days).to_datetime,
             license_plate: 'a fake license plate',
-            cost: 1,
-            client: 'PayByPhone' }
+            cost: 1.0,
+            client: 'PayByPhone'
+          )
         end
         it 'saves the running ticket in the database and assigns actor.running_ticket with this ticket' do
           ticket_count = Ticket.count
           actor_running_ticket = subject.running_ticket
           expect(actor_running_ticket.license_plate).to eq('a fake license plate')
-          expect(actor_running_ticket.starts_on).to be_within(0.01).of(running_ticket_in_client[:starts_on])
-          expect(actor_running_ticket.ends_on).to be_within(0.01).of(running_ticket_in_client[:ends_on])
+          expect(actor_running_ticket.starts_on).to be_within(0.01).of(running_ticket_in_client.starts_on)
+          expect(actor_running_ticket.ends_on).to be_within(0.01).of(running_ticket_in_client.ends_on)
           expect(actor_running_ticket.cost_cents).to eq(100)
           expect(actor_running_ticket.automated_ticket).to eq(automated_ticket)
           expect(actor_running_ticket.zipcode).to eq(zipcode)
