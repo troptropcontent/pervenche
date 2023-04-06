@@ -15,4 +15,10 @@
             align-items: end;
         }
     }
+    
+    &__justify-content{
+        &--between {
+            justify-content: space-between;
+        }
+    }
 }

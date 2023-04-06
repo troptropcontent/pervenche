@@ -15,12 +15,29 @@
     </div>
   <% end %>
   <% automated_ticket.zipcodes.each do |zipcode| %>
-     <span class='cluster'>
-            <div class="center">
-                <%= inline_svg 'ticket.svg'%>
-            </div>
-            <p><%= zipcode %></p>
-     </span>
+     <div class="cluster cluster__justify-content--between">
+            <span class='cluster'>
+                    <div class="center">
+                        <%= inline_svg 'ticket.svg'%>
+                    </div>
+                    <p><%= zipcode %></p>
+            </span>
+              <% if automated_ticket.running_tickets_in_database.find{|t| t.zipcode == zipcode} %>
+              <% end %>
+              
+              <% if !!automated_ticket.running_tickets_in_database.find{|t| t.zipcode == zipcode} %>
+                  <span class="cluster text__color--success" >
+                    <%= t 'partials.automated_ticket.covered' %>
+                    <%= inline_svg 'shield.svg' %>
+                  </span>
+                <% else %>
+                  <span class="cluster text__color--danger" >
+                    <%= t 'partials.automated_ticket.not_covered' %>
+                    <%= inline_svg 'cross.svg' %>
+                  </span>
+              <% end %>
+              
+     </div>
      <div class="divider divider--muted"></div>
   <% end %>
   <%= link_to edit_automated_ticket_setup_path(automated_ticket_id: automated_ticket.id, step_name: :zipcodes, params: {localisation: automated_ticket.localisation}) do %>
