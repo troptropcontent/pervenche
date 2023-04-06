@@ -7,7 +7,7 @@ RSpec.describe AutomatedTicket::Setup::UpdateAutomatedTicket, type: :actor do
   include_context 'a user with a service with an automated ticket'
   let(:step) { 'service' }
   let(:anothet_service) do
-    service = FactoryBot.build(:service, user:)
+    service = FactoryBot.build(:service, user:, username: 'another_username')
     service.save(validate: false)
     service
   end
