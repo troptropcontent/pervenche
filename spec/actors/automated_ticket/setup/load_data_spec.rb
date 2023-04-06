@@ -25,10 +25,12 @@ RSpec.describe AutomatedTicket::Setup::LoadData, type: :actor do
         let(:step) { :vehicle }
         let(:expected_data) do
           { vehicles: [
-            { client_internal_id: 'a_fake_client_id',
+            ParkingTicket::Clients::Models::Vehicle.new(
+              client_internal_id: 'a_fake_client_id',
               license_plate: 'a_fake_license_plate',
               vehicle_description: 'a_fake_name',
-              vehicle_type: 'electric_motorcycle' }
+              vehicle_type: 'electric_motorcycle'
+            )
           ] }
         end
         it 'loads the correct data' do
@@ -39,11 +41,13 @@ RSpec.describe AutomatedTicket::Setup::LoadData, type: :actor do
         let(:step) { :rate_option }
         let(:expected_data) do
           { rate_options: [
-            { accepted_time_units: %w[minutes hours],
+            ParkingTicket::Clients::Models::RateOption.new(
+              accepted_time_units: %w[minutes hours],
               client_internal_id: '1085252721',
               free: true,
               name: 'shared rate option',
-              type: 'CUSTOM' }
+              type: 'CUSTOM'
+            )
           ] }
         end
         it 'loads the correct data' do
@@ -54,9 +58,11 @@ RSpec.describe AutomatedTicket::Setup::LoadData, type: :actor do
         let(:step) { :payment_methods }
         let(:expected_data) do
           { payment_methods: [
-            { anonymised_card_number: '6156',
+            ParkingTicket::Clients::Models::PaymentMethod.new(
+              anonymised_card_number: '6156',
               client_internal_id: 'fake-payment-methof-id-9654e1084eb1',
-              payment_card_type: 'visa' }
+              payment_card_type: 'visa'
+            )
           ] }
         end
         it 'loads the correct data' do

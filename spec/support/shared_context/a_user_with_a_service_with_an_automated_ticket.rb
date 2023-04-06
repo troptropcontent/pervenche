@@ -13,7 +13,6 @@ RSpec.shared_context 'a user with a service with an automated ticket' do |last_v
       rate_option_client_internal_id:,
       license_plate:,
       payment_method_client_internal_ids:,
-      payment_method_client_internal_id: automated_ticket_payment_method_client_internal_id,
       localisation:,
       vehicle_type:,
       vehicle_description:,
@@ -28,7 +27,6 @@ RSpec.shared_context 'a user with a service with an automated ticket' do |last_v
   let(:rate_option_client_internal_id) {}
   let(:license_plate) {}
   let(:automated_ticket_service) {}
-  let(:automated_ticket_payment_method_client_internal_id) {}
   let(:payment_method_client_internal_ids) {}
   let(:localisation) {}
   let(:vehicle_type) {}
@@ -88,8 +86,7 @@ RSpec.shared_context 'a user with a service with an automated ticket' do |last_v
     let(:rate_option_client_internal_id) { 'a_fake_rate_option_id' }
     let(:automated_ticket_accepted_time_units) { ['days'] }
     let(:automated_ticket_weekdays) { [1] }
-    let(:automated_ticket_payment_method_client_internal_id) { 'AFakePaymentMethodId' }
-    let(:payment_method_client_internal_ids) { [automated_ticket_payment_method_client_internal_id] }
+    let(:payment_method_client_internal_ids) { ['AFakePaymentMethodId'] }
     let(:automated_ticket_free) { false }
   end
 end

@@ -18,7 +18,7 @@ class Service < ApplicationRecord
   def vehicles
     Rails.cache.fetch("#{cache_key_with_version}/#{kind}/#{username}/vehicles", expires_in: 1.minutes) do
       # for now we only permit the electric_motorcycle, we will later permit all kind of vehicles
-      client.vehicles.filter { |vehicle| vehicle[:vehicle_type] == 'electric_motorcycle' }
+      client.vehicles.filter { |vehicle| vehicle.vehicle_type == 'electric_motorcycle' }
     end
   end
 
@@ -30,8 +30,8 @@ class Service < ApplicationRecord
         client.rate_options(zipcode, license_plate)
       end
     end
-
-    shared_rate_option_between_zipcodes = rate_options.flatten.uniq.filter do |rate_option|
+    rate_options_unique = rate_options.flatten.uniq { |rate_option| rate_option.serialize }
+    shared_rate_option_between_zipcodes = rate_options_unique.filter do |rate_option|
       rate_options.all? { |possible_rates| possible_rates.include?(rate_option) }
     end
 
@@ -92,9 +92,8 @@ class Service < ApplicationRecord
   end
 
   def rate_option_with_free_property(rate_option, zipcodes, license_plate)
-    time_unit = rate_option[:accepted_time_units].include?('days') ? 'days' : 'hours'
-    rate_option.merge(
-      { free: quote(rate_option[:client_internal_id], zipcodes.first, license_plate, 1, time_unit)[:cost].zero? }
-    )
+    time_unit = rate_option.accepted_time_units.include?('days') ? 'days' : 'hours'
+    rate_option.free = quote(rate_option.client_internal_id, zipcodes.first, license_plate, 1, time_unit).cost.zero?
+    rate_option
   end
 end

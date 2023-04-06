@@ -59,9 +59,10 @@ class AutomatedTicket::Setup::CompleteAlreadyCompletableSteps < Actor
     services = automated_ticket.user.services
     return false if services.count != 1
 
+    service = services.first
     automated_ticket.assign_attributes(
       {
-        service_id: services[0].id
+        service_id: service.id
       }
     )
 
@@ -72,11 +73,12 @@ class AutomatedTicket::Setup::CompleteAlreadyCompletableSteps < Actor
     vehicles = automated_ticket.service&.vehicles || []
     return false if vehicles.count != 1
 
+    vehicle = vehicles.first
     automated_ticket.assign_attributes(
       {
-        license_plate: vehicles.dig(0, :license_plate),
-        vehicle_type: vehicles.dig(0, :vehicle_type),
-        vehicle_description: vehicles.dig(0, :vehicle_description)
+        license_plate: vehicle.license_plate,
+        vehicle_type: vehicle.vehicle_type,
+        vehicle_description: vehicle.vehicle_description
       }
     )
 
@@ -89,11 +91,12 @@ class AutomatedTicket::Setup::CompleteAlreadyCompletableSteps < Actor
     rate_options = automated_ticket.service.rate_options(automated_ticket.zipcodes, automated_ticket.license_plate)
     return false if rate_options.count != 1
 
+    rate_option = rate_options.first
     automated_ticket.assign_attributes(
       {
-        rate_option_client_internal_id: rate_options.dig(0, :client_internal_id),
-        accepted_time_units: rate_options.dig(0, :accepted_time_units),
-        free: rate_options.dig(0, :free)
+        rate_option_client_internal_id: rate_option.client_internal_id,
+        accepted_time_units: rate_option.accepted_time_units,
+        free: rate_option.free
       }
     )
 
@@ -116,9 +119,10 @@ class AutomatedTicket::Setup::CompleteAlreadyCompletableSteps < Actor
     payment_methods = automated_ticket.service&.payment_methods || []
     return false if !automated_ticket.free && payment_methods.count != 1
 
+    payment_method = payment_methods.first
     automated_ticket.assign_attributes(
       {
-        payment_method_client_internal_ids: [payment_methods.dig(0, :client_internal_id)]
+        payment_method_client_internal_ids: [payment_method.client_internal_id]
       }
     )
 
