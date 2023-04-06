@@ -30,7 +30,7 @@ class Service < ApplicationRecord
         client.rate_options(zipcode, license_plate)
       end
     end
-    rate_options_unique = rate_options.flatten.uniq { |rate_option| rate_option.serialize }
+    rate_options_unique = rate_options.flatten.uniq(&:serialize)
     shared_rate_option_between_zipcodes = rate_options_unique.filter do |rate_option|
       rate_options.all? { |possible_rates| possible_rates.include?(rate_option) }
     end
@@ -57,8 +57,6 @@ class Service < ApplicationRecord
   # rubocop:disable Metrics/ParameterLists
   def request_new_ticket!(license_plate:, zipcode:, rate_option_client_internal_id:, time_unit:, payment_method_id:,
                           quantity: 1)
-    return unless Rails.env.production?
-
     client.new_ticket(
       license_plate:,
       zipcode:,
