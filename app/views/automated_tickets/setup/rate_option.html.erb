@@ -6,20 +6,20 @@
       <div class="form_group stack stack--xs">
         <%= f.input :license_plate, wrapper_html: {class: 'stack'} do %>
           <% @rate_options.each do |rate_option| %>
-            <%= f.label "rate_option_client_internal_id_#{rate_option[:client_internal_id].downcase}", class: 'form__input__type__picker__type' do %>
+            <%= f.label "rate_option_client_internal_id_#{rate_option.client_internal_id.downcase}", class: 'form__input__type__picker__type' do %>
               <%= f.radio_button "rate_option_client_internal_id", 
-                                 rate_option[:client_internal_id], 
+                                 rate_option.client_internal_id, 
                                  class: 'visually-hidden', 
                                  data: {
                                     'form-target': 'inputWithAssociatedHiddenInput',
                                     "form-associated-hidden-inputs": {
-                                      'automated_ticket[accepted_time_units]' => rate_option[:accepted_time_units], 
-                                      'automated_ticket[free]' => rate_option[:free]
+                                      'automated_ticket[accepted_time_units]' => rate_option.accepted_time_units, 
+                                      'automated_ticket[free]' => rate_option.free
                                 }.to_json,
                                 } %>
               <span class= 'clickable'>
-                <h4><%=  rate_option[:name] %></h4>
-                <p><%=  t("views.setup.rate_option.clickable.free") + t(rate_option[:free]) %></p>
+                <h4><%=  rate_option.name %></h4>
+                <p><%=  t("views.setup.rate_option.clickable.free") + t(rate_option.free) %></p>
               </span>
             <% end %>
           <% end %>
