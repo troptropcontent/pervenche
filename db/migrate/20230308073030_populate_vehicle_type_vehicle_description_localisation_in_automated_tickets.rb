@@ -9,6 +9,6 @@ class PopulateVehicleTypeVehicleDescriptionLocalisationInAutomatedTickets < Acti
     #     vehicle_description: vehicle_in_client.vehicle_description,
     #     localisation: 'paris'
     #   )
-    end
+    # end
   end
 end
