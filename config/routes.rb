@@ -7,10 +7,8 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root 'automated_tickets#index'
-  resources :services, only: %i[index new create]
-  resources :robots, only: %i[index new create update]
-
-  resources :automated_tickets, only: %i[new index show destroy update] do
+  resources :services, only: %i[new create]
+  resources :automated_tickets, only: %i[new index destroy update] do
     resources :setup, only: %i[show update edit], controller: 'automated_tickets/setup', param: :step_name
   end
 
