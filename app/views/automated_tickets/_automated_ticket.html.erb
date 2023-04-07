@@ -14,7 +14,7 @@
         </p>
     </div>
   <% end %>
-  <% automated_ticket.zipcodes.each do |zipcode| %>
+  <% automated_ticket.zipcodes.sort.each do |zipcode| %>
      <div class="cluster cluster__justify-content--between">
             <span class='cluster'>
                     <div class="center">
@@ -22,9 +22,6 @@
                     </div>
                     <p><%= zipcode %></p>
             </span>
-              <% if automated_ticket.running_tickets_in_database.find{|t| t.zipcode == zipcode} %>
-              <% end %>
-              
               <% if !!automated_ticket.running_tickets_in_database.find{|t| t.zipcode == zipcode} %>
                   <span class="cluster text__color--success" >
                     <%= t 'partials.automated_ticket.covered' %>
