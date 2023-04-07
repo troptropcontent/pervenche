@@ -1,0 +1,24 @@
+---
+name: 'deploy-production'
+
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+  
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cloning repo
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Push to dokku
+        uses: dokku/github-action@master
+        with:
+          git_remote_url: 'ssh://dokku@production.pervenche.eu/pervenche-production'
+          ssh_private_key: ${{ secrets.PRODUCTION_GITHUB_ACTION_SSH }}
+          branch: main
