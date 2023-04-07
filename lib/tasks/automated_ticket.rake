@@ -9,12 +9,5 @@ namespace :automated_ticket do
         AutomatedTicket::Renewer.call(automated_ticket_id:, zipcode:)
       end
     end
-    if Rails.env.staging?
-      tickets_to_renew.filter do |(automated_ticket_id, _zipcode)|
-        automated_ticket_id == 15
-      end.each do |(automated_ticket_id, zipcode)|
-        AutomatedTicket::Renewer.call(automated_ticket_id:, zipcode:)
-      end
-    end
   end
 end
