@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::Base
-  add_flash_types :info, :error, :warning, :success
   before_action :authenticate_user!
   before_action :require_operationnal, if: :operationnal_required?
   before_action :require_navbar

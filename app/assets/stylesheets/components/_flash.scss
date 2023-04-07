@@ -12,12 +12,7 @@
     padding-block: var(--space-xs);
   }
 
-  &--success{
-    > .flash__content {
-      background-color: var(--color-success);
-    }
-  }
-  &--warning{
+  &--alert{
     > .flash__content {
       background-color: var(--color-danger);
     }
