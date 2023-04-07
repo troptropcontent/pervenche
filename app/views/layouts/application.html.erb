@@ -11,9 +11,7 @@
   </head>
 
   <body>
-    <% if current_user %>
-      <%= render 'components/navbar' %>
-    <% end %>
+    <%= render 'components/flash' %>
     <%= yield %>  
   </body>
 </html>

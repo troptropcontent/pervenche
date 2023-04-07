@@ -45,6 +45,7 @@
     --color-text-muted:  hsl(0, 1%, 44%);
 
       // Classical and robust spacing system
+    --space-xxxxs: 0.10rem;
     --space-xxxs: 0.25rem; // 4px
     --space-xxs: 0.375rem; // 6px
     --space-xs: 0.5rem;    // 8px
@@ -57,13 +58,15 @@
     --space-xxxxl: 4rem;   // 64px
 
       // Application colors
-    --color-primary:          hsl(203 77% 43%);
+    --color-primary:          hsla(230, 100%, 65%, 1);
     --color-primary-rotate:   hsl(203 77% 43% / 75%);
+    --color-primary-light:   hsl(203 77% 43% / 15%);
     --color-primary-bg:       hsl(0, 85%, 96%);
     --color-secondary:        hsl(164, 95%, 43%);
     --color-secondary-rotate: hsl(120, 45%, 56%);
     --color-tertiary:         hsl(42, 100%, 70%);
     --color-glint:            hsl(195, 83%, 38%);
+    --color-muted:            hsl(0, 6%, 93%);
     --color-success:            hsl(83 68% 47%);
     --color-success-light:      hsl(83 68% 47% / 25%);
     --color-danger:            hsl(358 100% 67%);

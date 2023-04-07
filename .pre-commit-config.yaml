@@ -1,0 +1,10 @@
+repos:
+  - repo: local
+    hooks:
+      - id: rubocop
+        name: Check Ruby style with rubocop
+        description: Enforce Ruby style guide with rubocop
+        entry: bin/rubocop
+        language: script
+        pass_filenames: true
+        types: ['ruby']

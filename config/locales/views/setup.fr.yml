@@ -1,0 +1,27 @@
+fr:
+  views:
+    setup:
+      loading:
+        title: Création des tickets en cours
+        subtitle: Ça peut prendre 1 à 2 min, plus il y a de tickets plus c’est long.
+      localisation:
+        header:
+          title: Votre vehicle est-il à Paris ?
+        links:
+            yes: "Oui, il est à Paris"
+            no: "Non, il est autre part en France"
+        cta: Continuer
+      vehicle:
+        header:
+          title: Sélectionne ton véhicule électrique
+        cta: Continuer
+      zipcodes:
+        header:
+          title: Dans quels arrondissements tu veux renouveler un ticket ?
+        cta: Continuer
+      rate_option:
+        header:
+          title: Quel tarif souhaitez vous ?
+        clickable: 
+          free: "Gratuit : "
+        cta: Continuer

@@ -1,0 +1,9 @@
+<%= turbo_frame_tag 'loading', class: 'grow stack' do %>
+  <main class="grow container stack stack--no-gap center">
+      <section class='stack'>
+        <%= render 'components/loader', color: 'primary', size: 'large'%>
+        <h4 class='text__align--center'><%= @title %></h4>
+        <p class='text__align--center'><%= @text %></p>
+      </section>
+  </main>
+<% end %>

@@ -1,0 +1,18 @@
+fr:
+  views:
+    onboardings:
+      welcome:
+        header:
+          title: Comment ça marche ?
+        main:
+          steps:
+            first:
+              title: Connecte ton compte de ticket de stationnement
+              text: Ça nous permet de prendre des tickets de stationnement pour toi
+            second:
+              title: Renseigne les arrondissements où tu te gares habituellement
+              text: On renouvellera automatiquement tous les jours un nouveau ticket pour chacun de ces arrondissements
+            third:
+              title: C’est tout, fini les amendes inutiles
+              text: Tu peux nous oublier, on s’occupe du reste et tu ne recevras plus jamais d’amendes
+        cta: C'est parti

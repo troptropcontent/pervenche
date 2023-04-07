@@ -10,14 +10,14 @@ RSpec.describe 'AutomatedTickets::Setups', type: :request do
     automated_ticket = FactoryBot.build(
       :automated_ticket,
       user_id: user.id,
-      service: service,
-      rate_option_client_internal_id: rate_option_client_internal_id,
-      license_plate: license_plate,
-      zipcode: zipcode,
-      weekdays: weekdays,
-      accepted_time_units: accepted_time_units,
-      payment_method_client_internal_id: payment_method_client_internal_id,
-      status: status
+      service:,
+      rate_option_client_internal_id:,
+      license_plate:,
+      zipcode:,
+      weekdays:,
+      accepted_time_units:,
+      payment_method_client_internal_id:,
+      status:
     )
     automated_ticket.save(validate: false)
     automated_ticket
@@ -124,14 +124,14 @@ RSpec.describe 'AutomatedTickets::Setups', type: :request do
           automated_ticket = FactoryBot.build(
             :automated_ticket,
             user_id: user.id,
-            service: service,
-            rate_option_client_internal_id: rate_option_client_internal_id,
-            license_plate: license_plate,
-            zipcode: zipcode,
-            weekdays: weekdays,
-            accepted_time_units: accepted_time_units,
-            payment_method_client_internal_id: payment_method_client_internal_id,
-            status: status
+            service:,
+            rate_option_client_internal_id:,
+            license_plate:,
+            zipcode:,
+            weekdays:,
+            accepted_time_units:,
+            payment_method_client_internal_id:,
+            status:
           )
           automated_ticket.save(validate: false)
           automated_ticket
@@ -307,7 +307,7 @@ RSpec.describe 'AutomatedTickets::Setups', type: :request do
               }
             end
             it 'returns the wizard in synchron mode with errors on the model' do
-              put path, params: params
+              put(path, params:)
               expect(response).to have_http_status(422)
               expect(response).to render_template('automated_tickets/setups/wizard')
               expect(assigns(:load_content_later)).to eq false
@@ -332,7 +332,7 @@ RSpec.describe 'AutomatedTickets::Setups', type: :request do
             allow(AutomatedTicket).to receive(:find).and_return(automated_ticket)
             allow(automated_ticket).to receive(:service).and_return(service_double)
 
-            put path, params: params
+            put(path, params:)
             expect(response).to have_http_status(422)
             expect(response).to render_template('automated_tickets/setups/wizard')
             expect(assigns(:load_content_later)).to eq false
@@ -357,7 +357,7 @@ RSpec.describe 'AutomatedTickets::Setups', type: :request do
             allow(AutomatedTicket).to receive(:find).and_return(automated_ticket)
             allow(automated_ticket).to receive(:service).and_return(service_double)
 
-            put path, params: params
+            put(path, params:)
             expect(response).to have_http_status(422)
             expect(response).to render_template('automated_tickets/setups/wizard')
             expect(assigns(:load_content_later)).to eq false
@@ -383,7 +383,7 @@ RSpec.describe 'AutomatedTickets::Setups', type: :request do
             allow(AutomatedTicket).to receive(:find).and_return(automated_ticket)
             allow(automated_ticket).to receive(:service).and_return(service_double)
 
-            put path, params: params
+            put(path, params:)
             expect(response).to have_http_status(422)
             expect(response).to render_template('automated_tickets/setups/wizard')
             expect(assigns(:load_content_later)).to eq false
@@ -411,7 +411,7 @@ RSpec.describe 'AutomatedTickets::Setups', type: :request do
               }
             end
             it 'updates the record and redirects to the next step' do
-              put path, params: params
+              put(path, params:)
               expect(response).to have_http_status(302)
               expect(response).to redirect_to("/automated_tickets/#{automated_ticket.id}/setups/license_plate_and_zipcode")
               expect(automated_ticket.reload.service_id).to eq(a_service.id)
@@ -431,7 +431,7 @@ RSpec.describe 'AutomatedTickets::Setups', type: :request do
               }
             end
             it 'updates the record and redirects to the next step' do
-              put path, params: params
+              put(path, params:)
               expect(response).to have_http_status(302)
               expect(response).to redirect_to("/automated_tickets/#{automated_ticket.id}/setups/rate_option")
               expect(automated_ticket.reload.zipcode).to eq('TESTZIPCODE')
@@ -452,7 +452,7 @@ RSpec.describe 'AutomatedTickets::Setups', type: :request do
               }
             end
             it 'updates the record and redirects to the next step' do
-              put path, params: params
+              put(path, params:)
               expect(response).to have_http_status(302)
               expect(response).to redirect_to("/automated_tickets/#{automated_ticket.id}/setups/duration_and_payment_method")
               expect(automated_ticket.reload.rate_option_client_internal_id).to eq('TESTLCLIENTRATEOPTIONID')
@@ -473,7 +473,7 @@ RSpec.describe 'AutomatedTickets::Setups', type: :request do
               }
             end
             it 'updates the record and redirects to the root as it was the last step' do
-              put path, params: params
+              put(path, params:)
               expect(response).to have_http_status(302)
               expect(response).to redirect_to(root_path)
               expect(automated_ticket.reload.payment_method_client_internal_id).to eq('TESTCLIENTPAYMENTMETHODID')

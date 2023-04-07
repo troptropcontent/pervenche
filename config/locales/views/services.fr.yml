@@ -1,0 +1,30 @@
+fr:
+  views:
+    services:
+      new:
+        flash:
+          success: "Compte connecté  👍"
+        header:
+          title: "Connecte ton compte de ticket de stationnement"
+          subtitle: "On en a besoin pour prendre des tickets automatiquement à ta place et les renouveller"
+        form:
+          kind:
+            label: App de stationnement utilisée
+            disabled_subtitle: Bientôt dispo
+          name:
+            placeholder: "Your service name"
+          phone_number:
+            label: Numéro de téléphone
+            placeholder: "Your service username"
+          username_type: 
+            label: Mon identifiant est un
+            types:
+              phone: Téléphone
+              email: Email
+          email:
+            label: Addresse email
+            placeholder: "Votre addresse email"
+          password:
+            label: Mot de passe
+            placeholder: "Your service password"
+        cta: Continuer

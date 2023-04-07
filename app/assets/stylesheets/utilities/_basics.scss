@@ -3,6 +3,12 @@
     text-align: center  !important;;
   }
 
+  &__size {
+    &--s{
+      font-size:  var(--font-size-s) !important;;
+    }
+  }
+
   &__color{
     &--light{
       color: var(--color-light)  !important;;
@@ -15,6 +21,22 @@
     }
     &--danger{
       color: var(--color-danger)  !important;;
+    }
+    &--muted{
+      color: var(--color-text-muted)  !important;;
+    }
+  }
+}
+
+.margin {
+  &__bottom {
+    &--l {
+      margin-block-end: var(--space-l) !important;
+    }
+  }
+  &__top {
+    &--xl {
+      margin-block-start: var(--space-xl) !important;
     }
   }
 }

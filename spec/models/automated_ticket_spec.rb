@@ -1,96 +1,180 @@
 require 'rails_helper'
-
+require 'support/shared_context/a_user_with_a_service_with_an_automated_ticket'
 RSpec.describe AutomatedTicket, type: :model do
-  subject { 
-    FactoryBot.create(:automated_ticket, user:, service:, weekdays: weekdays) 
-  }
-  let(:weekdays){[1]}
+  subject { FactoryBot.build(:automated_ticket, :set_up, user:, service:, zipcodes:) }
+  let(:zipcodes) { %w[75018 75017 75016] }
+  let(:user) { FactoryBot.create(:user) }
   let(:service) do
-    service = FactoryBot.build(:service, user:)
+    service = FactoryBot.build(:service, user_id: user.id)
     service.save(validate: false)
     service
   end
-  let(:user){FactoryBot.create(:user)}
 
-  describe 'validations' do
-    context 'uniqueness' do
-      let(:user) do
-        user = FactoryBot.build(:user)
-        user.save(validate: false)
-        user
+  describe '.class_methods' do
+    describe 'missing_running_tickets_in_database' do
+      let(:automated_ticket) do
+        FactoryBot.create(:automated_ticket, :set_up, user:, service:, zipcodes:, status:, active:)
       end
-      let(:service) do
-        service = FactoryBot.build(:service, user_id: user.id)
-        service.save(validate: false)
-        service
+      let(:status) { :ready }
+      let(:active) { :true }
+      let!(:running_ticket_in_database_75017) do
+        FactoryBot.create(:ticket,
+                          ends_on: Date.current.tomorrow,
+                          automated_ticket_id: automated_ticket.id,
+                          zipcode: '75017')
       end
-      let!(:automated_ticket) do
-        FactoryBot.build(
-          :automated_ticket,
-          user_id: user.id,
-          service: service
-        )
+      let!(:old_ticket_in_database_75018) do
+        FactoryBot.create(:ticket,
+                          ends_on: Date.current.yesterday,
+                          automated_ticket_id: automated_ticket.id,
+                          zipcode: '75016')
       end
-      context 'license_plate' do
-        it { should validate_uniqueness_of(:license_plate).scoped_to(%i[user_id service_id]) }
+      it 'return the missing zipcodes' do
+        expect(described_class.missing_running_tickets_in_database).to contain_exactly([automated_ticket.id, '75016'],
+                                                                                       [automated_ticket.id, '75018'])
       end
-    end
-    context 'presence' do
-      it 'We should have here all specs related to the conditionnal validation that we have on the model'
+
+      context 'when there no missing tickets' do
+        let!(:running_ticket_in_database_75018) do
+          FactoryBot.create(:ticket,
+                            ends_on: Date.current.tomorrow,
+                            automated_ticket_id: automated_ticket.id,
+                            zipcode: '75018')
+        end
+        let!(:running_ticket_in_database_75016) do
+          FactoryBot.create(:ticket,
+                            ends_on: Date.current.tomorrow,
+                            automated_ticket_id: automated_ticket.id,
+                            zipcode: '75016')
+        end
+        it 'returns an empty array' do
+          expect(described_class.missing_running_tickets_in_database).to eq([])
+        end
+      end
+      context 'when there is automated tickets that are not ready' do
+        let(:status) { :started }
+        it 'returns an empty array' do
+          expect(described_class.missing_running_tickets_in_database).to eq([])
+        end
+      end
+      context 'when there is automated tickets that are not active' do
+        let(:active) { :false }
+        it 'returns an empty array' do
+          expect(described_class.missing_running_tickets_in_database).to eq([])
+        end
+      end
     end
   end
-  describe "#instance_methods" do
-    context "#find_or_create_running_ticket_if_it_exists" do
-      before do
-        allow(subject).to receive(:running_ticket_in_client).and_return(running_ticket_in_client)
-      end
-      let(:running_ticket_in_client){nil}
-      context "when a running ticket exists in the database" do
-        let!(:running_ticket_in_database) {FactoryBot.create(:ticket, automated_ticket: subject, ends_on: 2.minutes.from_now)}
-        it "returns the running ticket" do
-          expect(subject.find_or_create_running_ticket_if_it_exists).to eq(running_ticket_in_database)
-        end
-      end
-      context "when a running ticket does not exist in the database" do
-        
-        context "when a ticket exist in the client" do
-          let(:running_ticket_in_client){{
-            starts_on: "2023-01-25 13:35:58".to_datetime.in_time_zone,
-            ends_on: "2023-01-25 13:35:58".to_datetime.in_time_zone,
-            license_plate: "MyLicensePlate",
-            cost: 1,
-            client_internal_id: "FakeClientInternalId",
-            client: 'pay_by_phone',
-          }}
-          it "creates a new ticket in the database and returns it" do
-            ticket_count = Ticket.count
-            result = subject.find_or_create_running_ticket_if_it_exists
-            expect(**result.attributes).to include(**running_ticket_in_client.except(:client, :cost).stringify_keys)
-            expect(result.cost_cents).to eq(100)
-            expect( Ticket.count).to eq(ticket_count + 1)
+
+  describe 'validations' do
+    context 'presence' do
+      it { should validate_presence_of(:service_id) }
+      it { should validate_presence_of(:localisation) }
+      it { should validate_presence_of(:license_plate) }
+      it { should validate_presence_of(:rate_option_client_internal_id) }
+    end
+
+    context 'length' do
+      describe 'zipcodes' do
+        context 'empty array' do
+          let(:zipcodes) { [] }
+          it do
+            expect(subject).to be_invalid
+            expect(subject.errors.full_messages).to include('Zipcodes doit contenir au moins un élément')
           end
         end
-        context "when a ticket does not exist in the client" do
-          it "return null" do
-            expect(subject.find_or_create_running_ticket_if_it_exists).to eq(nil)
+        context 'non empty array' do
+          it do
+            expect(subject).to be_valid
+          end
+        end
+      end
+      describe 'weekdays' do
+        context 'free ticket' do
+          before do
+            subject.weekdays = []
+            subject.free = true
+          end
+          it 'does not require weekdays if the ticket is free' do
+            expect(subject).to be_invalid
+          end
+        end
+        context 'not free ticket' do
+          context 'empty array' do
+            before do
+              subject.weekdays = []
+            end
+            it 'require at list one weekdays if the ticket is not free' do
+              expect(subject).to be_invalid
+              expect(subject.errors.full_messages).to include('Weekdays doit contenir au moins un élément')
+            end
+          end
+        end
+      end
+      describe 'payment_method_client_internal_ids' do
+        context 'free ticket' do
+          before do
+            subject.payment_method_client_internal_ids = []
+            subject.free = true
+          end
+          it 'does not require weekdays if the ticket is free' do
+            expect(subject).to be_valid
+          end
+        end
+        context 'not free ticket' do
+          context 'empty array' do
+            before do
+              subject.payment_method_client_internal_ids = []
+            end
+            it 'require at list one weekdays if the ticket is not free' do
+              expect(subject).to be_invalid
+              expect(subject.errors.full_messages).to include('Payment method client internal ids doit contenir au moins un élément')
+            end
           end
         end
       end
     end
-    context "#should_renew_today?" do
-      let(:weekdays){[Date.today.wday]}
+
+    context 'ticket_already_registered' do
+      context 'when a ticket already exists with the similar characteristics' do
+        let!(:an_already_existing_automated_ticket) do
+          FactoryBot.create(:automated_ticket, :set_up, user:, service:, zipcodes: already_covered_zipcodes)
+        end
+        let!(:already_covered_zipcodes) { ['75018'] }
+        it 'is not valid' do
+          expect(subject).to be_invalid
+          expect(subject.errors.messages.values.flatten).to include("Un ticket est déja parametré pour ce tarif, cette plaque d'immatriclation et ce code postal")
+        end
+
+        context 'when a similar ticket exists for several zipcodes' do
+          let!(:already_covered_zipcodes) { %w[75018 75017] }
+          it 'is not valid' do
+            expect(subject).to be_invalid
+            expect(subject.errors.messages.values.flatten).to include("Des tickets sont déja paramétrés pour ce tarif, cette plaque d'immatriculation pour ces code postaux 75018, 75017")
+          end
+        end
+      end
+    end
+  end
+
+  describe '#instance_methods' do
+    context '#should_renew_today?' do
       context "when today's weekday is included in automated_ticket.weekdays" do
-        it "should return true" do
+        before do
+          subject.weekdays = [Date.today.wday]
+        end
+        it 'should return true' do
           expect(subject.should_renew_today?).to eq(true)
         end
       end
       context "when today's weekday is not included in automated_ticket.weekdays" do
-        let(:weekdays){[Date.today.tomorrow.wday]}
-        it "should return true" do
+        before do
+          subject.weekdays = [Date.today.tomorrow.wday]
+        end
+        it 'should return true' do
           expect(subject.should_renew_today?).to eq(false)
         end
       end
     end
   end
-  
 end

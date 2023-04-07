@@ -1,0 +1,8 @@
+.divider {
+    height: 1px;
+    background-color: var(--color-dark);
+
+    &--muted{
+        background-color: var(--color-muted);  
+    }
+}

@@ -1,0 +1,7 @@
+.infocard {
+    padding: var(--space-m);
+    border-radius: var(--border-radius);
+    &--muted {
+      background-color: var(--color-muted);
+    }
+  }

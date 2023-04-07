@@ -88,6 +88,12 @@ group :development do
 
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
+
+  # erb-lint
+  gem 'erb_lint', require: false
+  gem 'rubocop', require: false
+  gem 'rubocop-rails', require: false
+  gem 'rubocop-rspec', require: false
 end
 
 group :test do
@@ -105,4 +111,4 @@ gem 'omniauth-rails_csrf_protection'
 
 gem 'sidekiq', '~> 7.0'
 
-gem "service_actor-rails", "~> 1.0"
+gem 'service_actor-rails', '~> 1.0'

@@ -1,6 +1,9 @@
 .loader {
     &--ring{
-        display: inline-block;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
         position: relative;
         width: 80px;
         height: 80px;
@@ -11,11 +14,9 @@
             position: absolute;
             width: 64px;
             height: 64px;
-            margin: 8px;
-            border: 8px solid var(--color-primary);
+            border: 8px solid;
             border-radius: 50%;
             animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-            border-color: var(--color-primary) transparent transparent transparent;
 
             &:nth-child(1) {
                 animation-delay: -0.45s;
@@ -36,6 +37,65 @@
                 transform: rotate(360deg);
               }
             }
+
+            &--small {
+              width: var(--space-l);
+              height: var(--space-l);
+              div {
+                width: var(--space-m);
+                height: var(--space-m);
+                border: var(--space-xxxxs) solid;
+                border-radius: 50%;
+                animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+    
+                &:nth-child(1) {
+                    animation-delay: -0.45s;
+                  }
+                  &:nth-child(2) {
+                    animation-delay: -0.3s;
+                  }
+                  &:nth-child(3) {
+                    animation-delay: -0.15s;
+                  }
+                  
+                }
+            }
+
+            &--large {
+              width: var(--space-xxl);
+              height: var(--space-xxl);
+              div {
+                width: var(--space-xl);
+                height: var(--space-xl);
+                border: var(--space-xxs) solid ;
+                border-radius: 50%;
+                animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+    
+                &:nth-child(1) {
+                    animation-delay: -0.45s;
+                  }
+                  &:nth-child(2) {
+                    animation-delay: -0.3s;
+                  }
+                  &:nth-child(3) {
+                    animation-delay: -0.15s;
+                  }
+                  
+                }
+            }
+
+            &--white {
+              div {
+                border-color: var(--color-white) transparent transparent transparent;
+              }
+            }
+
+            &--primary {
+              div {
+                border-color: var(--color-primary) transparent transparent transparent;
+              }
+            }
+    
 
     }
 }

@@ -1,0 +1,16 @@
+
+AllCops:
+  NewCops: enable
+  Exclude:
+    - db/schema.rb
+  TargetRubyVersion: 3.2.1
+  SuggestExtensions: false
+
+Style/ClassAndModuleChildren:
+  Enabled: false
+Style/Documentation:
+  Enabled: false
+Metrics/BlockLength:
+  Exclude:
+    - '**/*_spec.rb'
+    - 'spec/factories/**/*.rb'

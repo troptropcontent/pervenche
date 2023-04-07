@@ -1,0 +1,16 @@
+fr:
+  views:
+    automated_tickets:
+      index:
+        cta: 'Ajouter un ticket automatique'
+  partials:
+    automated_ticket:
+      covered: Couvert
+      not_covered: Non couvert
+      modify_zipcodes: Modifier les arrondissements
+      ticket_count: 
+        zero: 'Aucun ticket renouvellé automatiquement'
+        one: '1 ticket renouvellé automatiquement'
+        other: '%{count} tickets renouvellés automatiquement'
+        
+

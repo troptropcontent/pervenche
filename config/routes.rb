@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
 
@@ -7,12 +9,17 @@ Rails.application.routes.draw do
   root 'automated_tickets#index'
   resources :services, only: %i[index new create]
   resources :robots, only: %i[index new create update]
+
   resources :automated_tickets, only: %i[new index show destroy update] do
-    resources :setups, only: %i[show update], controller: 'automated_tickets/setups' do
-      member do
-        get 'content', to: 'automated_tickets/setups#content'
-      end
+    resources :setup, only: %i[show update edit], controller: 'automated_tickets/setup', param: :step_name
+  end
+
+  resource :onboarding, only: :show do
+    get 'welcome', to: 'onboardings#welcome'
+  end
+  resources :shared_views, only: [] do
+    collection do
+      get 'loading'
     end
   end
-  resource :onboarding, only: :show
 end

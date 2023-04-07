@@ -9,4 +9,14 @@
             display: block;
         }
     }
+
+    &--l{
+        gap: var(--space-l);   
+    }
+    &--xs{
+        gap: var(--space-xs);  
+    }
+    &--no-gap{
+        gap: 0;  
+    }
 }

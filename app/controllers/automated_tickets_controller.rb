@@ -1,10 +1,14 @@
+# frozen_string_literal: true
+
 class AutomatedTicketsController < ApplicationController
   load_and_authorize_resource
+
+  # GET /automated_tickets/new
   def new
-    automated_ticket = current_user.automated_tickets.new
-    automated_ticket.service = current_user.services.first if current_user.services.count == 1
-    automated_ticket.save(validate: false)
-    redirect_to automated_ticket_setup_path(automated_ticket.id, AutomatedTicket.setup_steps.keys.first)
+    automated_ticket = new_automated_ticket
+    next_step = next_step_for(automated_ticket)
+    path = path_for(automated_ticket, next_step)
+    redirect_to path
   end
 
   # GET   /automated_tickets/:id
@@ -23,7 +27,9 @@ class AutomatedTicketsController < ApplicationController
   end
 
   # GET   /automated_tickets
-  def index; end
+  def index
+    @automated_tickets = @automated_tickets.includes(:running_tickets_in_database)
+  end
 
   def update
     if @automated_ticket.update(automated_ticket_params)
@@ -37,5 +43,21 @@ class AutomatedTicketsController < ApplicationController
 
   def automated_ticket_params
     params.require(:automated_ticket).permit(:active)
+  end
+
+  def new_automated_ticket
+    automated_ticket = current_user.automated_tickets.new
+    automated_ticket.save(validate: false)
+    AutomatedTicket::Setup::CompleteAlreadyCompletableSteps.call(
+      automated_ticket:
+    ).automated_ticket
+  end
+
+  def next_step_for(automated_ticket)
+    AutomatedTicket::Setup::FindNextStep.call(automated_ticket:).next_step
+  end
+
+  def path_for(automated_ticket, step)
+    AutomatedTicket::Setup::FindPath.call(automated_ticket:, step:).path
   end
 end

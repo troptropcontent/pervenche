@@ -1,0 +1,21 @@
+<%= simple_form_for automated_ticket, 
+                    url: automated_ticket_setup_path(automated_ticket.id, step),
+                    html: {
+                      class: "form form--column grow",
+                      data: { trbo: false,
+                              controller: "form clickable-svg", 
+                              action: "form#showLoadingWindow form#addAssociatedHiddenInputsToData" ,
+                              'form-loading-url-param': loading_shared_views_path(params: {title: t("views.setup.loading.title"), text: t("views.setup.loading.subtitle")})
+                        }
+                    } do |f| %>
+    <section class="content grow stack">
+      <%= yield(f) %>
+    </section>
+    <section class="footer stack margin__bottom--l">
+        <div class="visually-hidden" data-form-target='hiddenInputsGroup'>
+        </div>
+        <%= button_tag(type: 'submit', class: "btn btn--primary") do %>
+          <p><%= t("views.setup.#{step}.cta") %></p>
+        <% end %>
+    </section>
+    <% end %>  

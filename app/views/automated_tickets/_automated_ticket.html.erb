@@ -1,22 +1,49 @@
-<div class='automated_ticket'>
-    <div class="automated_ticket__header">
-        <%= image_tag([automated_ticket.service.kind, 'png'].join('.'), alt: automated_ticket.service.kind , class: "automated_ticket__image") %>
-        <%= render 'components/switcher', resource: automated_ticket, resource_boolean: 'active' %>
-    </div>
-    <%= link_to automated_ticket_path(automated_ticket) do %>
-        <div class='stack'>
-            <div class='cluster'>
-                <h3><%= t('views.automated_tickets.automated_ticket.vehicle') %></h3>
+<span class='stack'>   
+  <%= render 'components/infocard', color: 'muted' do %>
+    <div class="stack stack--no-gap">
+        <span class="cluster">
+            <% if automated_ticket.vehicle_description %>
+                <b><%= automated_ticket.vehicle_description %></b>
                 <p><%= automated_ticket.license_plate %></p>
-            </div>
-            <div class='cluster'>
-                <h3><%= t('views.automated_tickets.automated_ticket.zipcode') %></h3>
-                <p><%= automated_ticket.zipcode %></p>
-            </div>
-            <div class='cluster'>
-                <h3><%= t("views.automated_tickets.automated_ticket.coverage.title") %></h3>
-                <p class="<%= class_names('text__color--danger': automated_ticket.coverage == 'not_covered', 'text__color--success': automated_ticket.coverage != 'not_covered') %>"><%= t("views.automated_tickets.automated_ticket.coverage.#{automated_ticket.coverage}") %></p>
-            </div>    
-        </div>
-    <% end %>
-</div>
+                <% else %>
+                <b><%= automated_ticket.license_plate %></b>
+            <% end %>
+        </span>
+        <p class="text__color--primary">
+            <%= t 'partials.automated_ticket.ticket_count', count: automated_ticket.zipcodes.length %>
+        </p>
+    </div>
+  <% end %>
+  <% automated_ticket.zipcodes.each do |zipcode| %>
+     <div class="cluster cluster__justify-content--between">
+            <span class='cluster'>
+                    <div class="center">
+                        <%= inline_svg 'ticket.svg'%>
+                    </div>
+                    <p><%= zipcode %></p>
+            </span>
+              <% if automated_ticket.running_tickets_in_database.find{|t| t.zipcode == zipcode} %>
+              <% end %>
+              
+              <% if !!automated_ticket.running_tickets_in_database.find{|t| t.zipcode == zipcode} %>
+                  <span class="cluster text__color--success" >
+                    <%= t 'partials.automated_ticket.covered' %>
+                    <%= inline_svg 'shield.svg' %>
+                  </span>
+                <% else %>
+                  <span class="cluster text__color--danger" >
+                    <%= t 'partials.automated_ticket.not_covered' %>
+                    <%= inline_svg 'cross.svg' %>
+                  </span>
+              <% end %>
+              
+     </div>
+     <div class="divider divider--muted"></div>
+  <% end %>
+  <%= link_to edit_automated_ticket_setup_path(automated_ticket_id: automated_ticket.id, step_name: :zipcodes, params: {localisation: automated_ticket.localisation}) do %>
+    <div class="cluster">
+        <div class="center"><%= inline_svg 'round_plus.svg'%></div>
+        <p><%= t 'partials.automated_ticket.modify_zipcodes' %></p>
+    </div>
+  <% end %>
+</span>

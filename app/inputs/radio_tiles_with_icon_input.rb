@@ -23,7 +23,7 @@ class RadioTilesWithIconInput < SimpleForm::Inputs::Base
   def real_tile(title, value)
     template.content_tag(:label, class: 'form__input__tiles__tile_with_icon', id: value) do
       [
-        @builder.input_field(attribute_name, type: 'radio', class: 'visually-hidden', value: value),
+        @builder.input_field(attribute_name, type: 'radio', class: 'visually-hidden', value:),
         template.content_tag(:span) do
           [
             template.image_tag(value + '.png'),

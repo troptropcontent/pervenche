@@ -1,0 +1,10 @@
+fr:
+  application: 
+    name: Pervenche
+    slug: Fini les amendes inutiles
+  views:
+    application:
+      done: "Terminé"
+      to_do: "À faire"
+      continue: "Continuer"
+      or: "ou"
