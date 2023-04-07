@@ -9,8 +9,6 @@ class Ability
     can %i[new], AutomatedTicket
     can %i[setup], AutomatedTicket, { user:, status: %i[started setup] }
     can %i[read update destroy], AutomatedTicket, { user:, status: :ready }
-    can %i[index create update], Robot, { service: { user: } }
-    can %i[new], Robot
     can %i[new create], Service, { user: }
   end
 end
