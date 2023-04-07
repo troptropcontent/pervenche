@@ -1,7 +1,6 @@
 require 'active_support/core_ext/integer/time'
 
 Rails.application.configure do
-  config.active_record.encryption.support_unencrypted_data = true
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.
