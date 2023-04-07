@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 class AutomatedTicket < ApplicationRecord
-  encrypts :license_plate, deterministic: true
+  # encrypts :license_plate, deterministic: true
+  encrypts :license_plate
   has_many :tickets, dependent: :destroy
   has_many :ticket_requests, dependent: :destroy
   has_many :running_tickets_in_database, -> { running }, class_name: 'Ticket'

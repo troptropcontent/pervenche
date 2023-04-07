@@ -4,7 +4,8 @@
 class Service < ApplicationRecord
   belongs_to :user
   has_many :automated_tickets, dependent: :destroy
-  encrypts :username, :password, deterministic: true
+  # encrypts :username, :password, deterministic: true
+  encrypts :username, :password
   enum :kind, {
     pay_by_phone: 0,
     easy_park: 1,
