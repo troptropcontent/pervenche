@@ -114,6 +114,7 @@ ActiveRecord::Schema[7.0].define(version: 20_230_407_152_358) do
     t.string 'roles', default: ['customer'], null: false, array: true
     t.index ['email'], name: 'index_users_on_email', unique: true
     t.index ['reset_password_token'], name: 'index_users_on_reset_password_token', unique: true
+    t.index ['roles'], name: 'index_users_on_roles', using: :gin
   end
 
   add_foreign_key 'automated_tickets', 'services'
