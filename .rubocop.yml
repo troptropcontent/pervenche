@@ -1,8 +1,9 @@
 
+require:
+  - rubocop-rails
+
 AllCops:
   NewCops: enable
-  Exclude:
-    - db/schema.rb
   TargetRubyVersion: 3.2.1
   SuggestExtensions: false
 
