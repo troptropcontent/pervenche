@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
@@ -73,6 +75,18 @@ RSpec.describe User, type: :model do
           it 'remove the role' do
             expect(user.remove_role('customer')).to eq(nil)
             expect(user.roles).to eq(%w[admin])
+          end
+        end
+      end
+      context '#has_role' do
+        context 'when the user has role' do
+          it 'returns true' do
+            expect(user.has_role?('customer')).to eq(true)
+          end
+        end
+        context 'when the user has not the role' do
+          it 'returns false' do
+            expect(user.has_role?('admin')).to eq(false)
           end
         end
       end

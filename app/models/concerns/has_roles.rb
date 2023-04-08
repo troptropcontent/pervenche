@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'active_support/concern'
 
 module HasRoles
@@ -23,6 +25,10 @@ module HasRoles
 
       roles.delete(role)
       save!
+    end
+
+    def has_role?(role)
+      roles.include?(role)
     end
 
     private
