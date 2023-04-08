@@ -1,10 +1,12 @@
 # frozen_string_literal: true
 
 module AutomatedTickets
-  # This controller handles the automated_ticket setup wizard
   class SetupController < ApplicationController
+    skip_load_and_authorize_resource
+
     before_action :load_automated_ticket
     before_action :load_step!
+    before_action :authorize_action!
 
     def show
       @with_navbar = false
@@ -51,6 +53,10 @@ module AutomatedTickets
       else
         not_found
       end
+    end
+
+    def authorize_action!
+      authorize! :setup, @automated_ticket
     end
 
     def step_already_completed?
