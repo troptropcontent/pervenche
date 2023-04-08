@@ -1,7 +1,15 @@
 # frozen_string_literal: true
 
 class AutomatedTicketsController < ApplicationController
-  load_and_authorize_resource
+  # GET   /automated_tickets
+  def index
+    @automated_tickets = @automated_tickets.includes(:running_tickets_in_database)
+  end
+
+  # GET   /automated_tickets/:id
+  def show
+    @last_tickets = @automated_ticket.tickets.order(starts_on: :desc).limit(10)
+  end
 
   # GET /automated_tickets/new
   def new
@@ -11,9 +19,12 @@ class AutomatedTicketsController < ApplicationController
     redirect_to path
   end
 
-  # GET   /automated_tickets/:id
-  def show
-    @last_tickets = @automated_ticket.tickets.order(starts_on: :desc).limit(10)
+  def update
+    if @automated_ticket.update(automated_ticket_params)
+      head :no_content
+    else
+      head :unprocessable_entity
+    end
   end
 
   # DELETE /automated_tickets/:id
@@ -23,19 +34,6 @@ class AutomatedTicketsController < ApplicationController
     else
       @last_tickets = @automated_ticket.tickets.order(starts_on: :desc).limit(10)
       render :show
-    end
-  end
-
-  # GET   /automated_tickets
-  def index
-    @automated_tickets = @automated_tickets.includes(:running_tickets_in_database)
-  end
-
-  def update
-    if @automated_ticket.update(automated_ticket_params)
-      head :no_content
-    else
-      head :unprocessable_entity
     end
   end
 

@@ -2,8 +2,8 @@
 
 class ApplicationController < ActionController::Base
   before_action :authenticate_user!
+  load_and_authorize_resource unless: :devise_controller?
   before_action :require_operationnal, if: :operationnal_required?
-  before_action :require_navbar
 
   rescue_from ActiveRecord::RecordNotFound do |_exception|
     not_found
@@ -29,9 +29,5 @@ class ApplicationController < ActionController::Base
 
   def operationnal_required?
     operationnal_controller? && !current_user.operationnal?
-  end
-
-  def require_navbar
-    @with_navbar = true
   end
 end

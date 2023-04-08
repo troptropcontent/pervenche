@@ -9,6 +9,11 @@ fr:
           attributes:
             username: 
               taken: "Ce compte est déja enregistré sur la plateforme"
+        user:
+          attributes:
+            roles:
+              duplicate_value: "Plusieurs role identiques on été detectés"
+              handled_roles_only: "Le role %{unhandled_role} n'est pas pris en compte"
         automated_ticket: 
           attributes:
             zipcodes: 
