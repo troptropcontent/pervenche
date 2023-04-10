@@ -20,4 +20,8 @@ Rails.application.routes.draw do
       get 'loading'
     end
   end
+
+  resource 'admin', only: [], controller: 'admin' do
+    get 'dashboard'
+  end
 end

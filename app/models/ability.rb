@@ -16,6 +16,8 @@ class Ability
     can %i[new create], Service, { user_id: user.id }
 
     return unless user.has_role?('admin')
+
+    can %i[dashboard], :admin
     # all admin abilities goes here
   end
 end
