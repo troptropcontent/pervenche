@@ -1,0 +1,215 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://auth.paybyphoneapis.com/token
+    body:
+      encoding: US-ASCII
+      string: grant_type=password&username=%2B33607053868&password=Paybyphone.66&client_id=paybyphone_web
+    headers:
+      User-Agent:
+      - Faraday v2.7.4
+      Accept:
+      - application/json, text/plain, */*
+      X-Pbp-Clienttype:
+      - WebApp
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 11 Apr 2023 16:01:56 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '1298'
+      Connection:
+      - keep-alive
+      Server:
+      - nginx/1.20.0
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubdomains; preload
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - ALLOW-FROM https://*.paybyphone.com https://*.cloudfront.net
+      Vary:
+      - Origin
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-cache, no-store
+      X-Request-Start:
+      - '1681228916.830'
+      X-Upstream-Response-Time:
+      - "-"
+      X-Request-Time:
+      - '0.176'
+      X-Time-Iso:
+      - '2023-04-11T16:01:56+00:00'
+    body:
+      encoding: UTF-8
+      string: '{"access_token":"eyJ4NXQiOiJpYVBrNzdUZ3Y1N1dTUFR3OVZrb2RIcXJIYWMiLCJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Ijg5QTNFNEVGQjRFMEJGOUVENjQ4RjRGMEY1NTkyODc0N0FBQjFEQTcifQ.eyJtZW1iZXJpZCI6ImI1NzdlZDM5LTllNmMtNGNlMi1iODNhLWE1Y2UzZTRhMjE1NSIsImFjdGl2ZXVzZXJhY2NvdW50IjoiYjU3N2VkMzktZWE2Zi00ODZjLWE1NTYtOGE4N2Y3YzY3MWE0IiwibmJmIjoxNjgxMjI4OTE2LCJndHkiOiJwYXNzd29yZCIsImp0aSI6ImlJMTFuNFhFVGxnT05YMFhveXdSWSIsInN1YiI6ImI1NzdlZDM5LTllNmMtNGNlMi1iODNhLWE1Y2UzZTRhMjE1NSIsImlhdCI6MTY4MTIyODkxNiwiZXhwIjoxNjgxMjMwMTE2LCJzY29wZSI6InBheWJ5cGhvbmUiLCJpc3MiOiJQYXlCeVBob25lIElkZW50aXR5IEFuZCBBY2Nlc3MiLCJhdWQiOlsicGJwX2FwaV9mcHNwYXltZW50cyIsInBicF9hcGlfcGFya2luZyIsInBicF9hcGlfcGF5bWVudCIsInBicF9hcGlfcHJvZmlsZXNlcnZpY2UiLCJwYnBfaWRhIiwiaHR0cDovL2FwaS5wYXlieXBob25lLmNvbSIsImh0dHA6Ly9hcGkucWEucGF5YnlwaG9uZS5jb20iXSwiYXpwIjoicGF5YnlwaG9uZV93ZWIifQ.BCZL_WUJakK4hFUpJq83ffmxiTH4Yk9UDgQqC9oACA18S0iE_GKcY-V1KggVmKT0LstqhCIgS6G9-rkqgEEcJom7c1QEVTKmrsbb9gbqiCNSwF4wNQBs_HXK3J2L2TochuI-Pt2lAFRh6tWTokqkMnfEwjRtmDkdPr-4ALVBP9agFq97NvI4IIQ1yLd6-NaGkhkTQ-V-g0IggGP1NMkKfuejGzqkRp6-_bQGhH16FA6CC1O0JOjI2c7UBmSOdWbL76O9D6JGdAPQEgjz1qROIUPNbOFAsGFAcv8JftdPSbe1qwTi8rT050V_qdsHfWAjXCZRqJPDQ1q2jivsiDps8A","expires_in":1200,"refresh_token":"P2d3c7piK4jYtRL7oV2S3_cNcZ6Q5gOByRn88Eok5tP","scope":"paybyphone","token_type":"Bearer"}'
+  recorded_at: Tue, 11 Apr 2023 16:01:56 GMT
+- request:
+    method: post
+    uri: https://auth.paybyphoneapis.com/token
+    body:
+      encoding: US-ASCII
+      string: grant_type=password&username=%2B33607053868&password=Paybyphone.66&client_id=paybyphone_web
+    headers:
+      User-Agent:
+      - Faraday v2.7.4
+      Accept:
+      - application/json, text/plain, */*
+      X-Pbp-Clienttype:
+      - WebApp
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 11 Apr 2023 16:01:57 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '1298'
+      Connection:
+      - keep-alive
+      Server:
+      - nginx/1.20.0
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubdomains; preload
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - ALLOW-FROM https://*.paybyphone.com https://*.cloudfront.net
+      Vary:
+      - Origin
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-cache, no-store
+      X-Request-Start:
+      - '1681228917.496'
+      X-Upstream-Response-Time:
+      - "-"
+      X-Request-Time:
+      - '0.256'
+      X-Time-Iso:
+      - '2023-04-11T16:01:57+00:00'
+    body:
+      encoding: UTF-8
+      string: '{"access_token":"eyJ4NXQiOiJpYVBrNzdUZ3Y1N1dTUFR3OVZrb2RIcXJIYWMiLCJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Ijg5QTNFNEVGQjRFMEJGOUVENjQ4RjRGMEY1NTkyODc0N0FBQjFEQTcifQ.eyJtZW1iZXJpZCI6ImI1NzdlZDM5LTllNmMtNGNlMi1iODNhLWE1Y2UzZTRhMjE1NSIsImFjdGl2ZXVzZXJhY2NvdW50IjoiYjU3N2VkMzktZWE2Zi00ODZjLWE1NTYtOGE4N2Y3YzY3MWE0IiwibmJmIjoxNjgxMjI4OTE3LCJndHkiOiJwYXNzd29yZCIsImp0aSI6IkRncXhhcVpLbWIwakRvbkhhVkxIdyIsInN1YiI6ImI1NzdlZDM5LTllNmMtNGNlMi1iODNhLWE1Y2UzZTRhMjE1NSIsImlhdCI6MTY4MTIyODkxNywiZXhwIjoxNjgxMjMwMTE3LCJzY29wZSI6InBheWJ5cGhvbmUiLCJpc3MiOiJQYXlCeVBob25lIElkZW50aXR5IEFuZCBBY2Nlc3MiLCJhdWQiOlsicGJwX2FwaV9mcHNwYXltZW50cyIsInBicF9hcGlfcGFya2luZyIsInBicF9hcGlfcGF5bWVudCIsInBicF9hcGlfcHJvZmlsZXNlcnZpY2UiLCJwYnBfaWRhIiwiaHR0cDovL2FwaS5wYXlieXBob25lLmNvbSIsImh0dHA6Ly9hcGkucWEucGF5YnlwaG9uZS5jb20iXSwiYXpwIjoicGF5YnlwaG9uZV93ZWIifQ.hjvVAkmh2iKRerEJxfFRXG8dvCfc9sF5MK-HcNp8gWSZ4mntim3aS40JY6ByjGch-sbcneLJNm8pj6k50VWx0OSUBxdstyysfPFW_QdYwfAvRYILEteA3qyszooRmTweXAqkjcVy5maps2sjo2pFuUh4vJq_gRYJfII8ZIpNqProN-_oKBx4C2v5qQY54tglMot1ZP-t7D-QF66UOyA_Ci8x2pMpBNRuQAph_91tUhOhVqbJTCovTu7RXPjVXBA_-N5BW3aLbE2W28q0Z9PFjr9bjAfLpENPD92jQWjoL85wzWBImjutJc9s2d0SxZTc08cngMlm5DP6AQHpclbf7w","expires_in":1200,"refresh_token":"Gy6P_sZd80SfV3l6JSBj87t8XDktUM0-XshO2lt8Vb5","scope":"paybyphone","token_type":"Bearer"}'
+  recorded_at: Tue, 11 Apr 2023 16:01:57 GMT
+- request:
+    method: get
+    uri: https://consumer.paybyphoneapis.com/parking/accounts
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      Authorization:
+      - Bearer eyJ4NXQiOiJpYVBrNzdUZ3Y1N1dTUFR3OVZrb2RIcXJIYWMiLCJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Ijg5QTNFNEVGQjRFMEJGOUVENjQ4RjRGMEY1NTkyODc0N0FBQjFEQTcifQ.eyJtZW1iZXJpZCI6ImI1NzdlZDM5LTllNmMtNGNlMi1iODNhLWE1Y2UzZTRhMjE1NSIsImFjdGl2ZXVzZXJhY2NvdW50IjoiYjU3N2VkMzktZWE2Zi00ODZjLWE1NTYtOGE4N2Y3YzY3MWE0IiwibmJmIjoxNjgxMjI4OTE3LCJndHkiOiJwYXNzd29yZCIsImp0aSI6IkRncXhhcVpLbWIwakRvbkhhVkxIdyIsInN1YiI6ImI1NzdlZDM5LTllNmMtNGNlMi1iODNhLWE1Y2UzZTRhMjE1NSIsImlhdCI6MTY4MTIyODkxNywiZXhwIjoxNjgxMjMwMTE3LCJzY29wZSI6InBheWJ5cGhvbmUiLCJpc3MiOiJQYXlCeVBob25lIElkZW50aXR5IEFuZCBBY2Nlc3MiLCJhdWQiOlsicGJwX2FwaV9mcHNwYXltZW50cyIsInBicF9hcGlfcGFya2luZyIsInBicF9hcGlfcGF5bWVudCIsInBicF9hcGlfcHJvZmlsZXNlcnZpY2UiLCJwYnBfaWRhIiwiaHR0cDovL2FwaS5wYXlieXBob25lLmNvbSIsImh0dHA6Ly9hcGkucWEucGF5YnlwaG9uZS5jb20iXSwiYXpwIjoicGF5YnlwaG9uZV93ZWIifQ.hjvVAkmh2iKRerEJxfFRXG8dvCfc9sF5MK-HcNp8gWSZ4mntim3aS40JY6ByjGch-sbcneLJNm8pj6k50VWx0OSUBxdstyysfPFW_QdYwfAvRYILEteA3qyszooRmTweXAqkjcVy5maps2sjo2pFuUh4vJq_gRYJfII8ZIpNqProN-_oKBx4C2v5qQY54tglMot1ZP-t7D-QF66UOyA_Ci8x2pMpBNRuQAph_91tUhOhVqbJTCovTu7RXPjVXBA_-N5BW3aLbE2W28q0Z9PFjr9bjAfLpENPD92jQWjoL85wzWBImjutJc9s2d0SxZTc08cngMlm5DP6AQHpclbf7w
+      Referer:
+      - https://m2.paybyphone.fr/
+      User-Agent:
+      - Faraday v2.7.4
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 11 Apr 2023 16:01:57 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '47'
+      Connection:
+      - keep-alive
+      Server:
+      - nginx/1.22.1
+      X-Powered-By:
+      - ASP.NET
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      X-Request-Start:
+      - '1681228917.938'
+      X-Upstream-Response-Time:
+      - "-"
+      X-Request-Time:
+      - '0.046'
+      X-Time-Iso:
+      - '2023-04-11T16:01:57+00:00'
+    body:
+      encoding: UTF-8
+      string: '[{"id":"b577ed39-6f82-4fad-b38e-17fb5792c91a"}]'
+  recorded_at: Tue, 11 Apr 2023 16:01:57 GMT
+- request:
+    method: get
+    uri: https://consumer.paybyphoneapis.com/parking/accounts/b577ed39-6f82-4fad-b38e-17fb5792c91a/sessions?periodType=Current
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      Authorization:
+      - Bearer eyJ4NXQiOiJpYVBrNzdUZ3Y1N1dTUFR3OVZrb2RIcXJIYWMiLCJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Ijg5QTNFNEVGQjRFMEJGOUVENjQ4RjRGMEY1NTkyODc0N0FBQjFEQTcifQ.eyJtZW1iZXJpZCI6ImI1NzdlZDM5LTllNmMtNGNlMi1iODNhLWE1Y2UzZTRhMjE1NSIsImFjdGl2ZXVzZXJhY2NvdW50IjoiYjU3N2VkMzktZWE2Zi00ODZjLWE1NTYtOGE4N2Y3YzY3MWE0IiwibmJmIjoxNjgxMjI4OTE3LCJndHkiOiJwYXNzd29yZCIsImp0aSI6IkRncXhhcVpLbWIwakRvbkhhVkxIdyIsInN1YiI6ImI1NzdlZDM5LTllNmMtNGNlMi1iODNhLWE1Y2UzZTRhMjE1NSIsImlhdCI6MTY4MTIyODkxNywiZXhwIjoxNjgxMjMwMTE3LCJzY29wZSI6InBheWJ5cGhvbmUiLCJpc3MiOiJQYXlCeVBob25lIElkZW50aXR5IEFuZCBBY2Nlc3MiLCJhdWQiOlsicGJwX2FwaV9mcHNwYXltZW50cyIsInBicF9hcGlfcGFya2luZyIsInBicF9hcGlfcGF5bWVudCIsInBicF9hcGlfcHJvZmlsZXNlcnZpY2UiLCJwYnBfaWRhIiwiaHR0cDovL2FwaS5wYXlieXBob25lLmNvbSIsImh0dHA6Ly9hcGkucWEucGF5YnlwaG9uZS5jb20iXSwiYXpwIjoicGF5YnlwaG9uZV93ZWIifQ.hjvVAkmh2iKRerEJxfFRXG8dvCfc9sF5MK-HcNp8gWSZ4mntim3aS40JY6ByjGch-sbcneLJNm8pj6k50VWx0OSUBxdstyysfPFW_QdYwfAvRYILEteA3qyszooRmTweXAqkjcVy5maps2sjo2pFuUh4vJq_gRYJfII8ZIpNqProN-_oKBx4C2v5qQY54tglMot1ZP-t7D-QF66UOyA_Ci8x2pMpBNRuQAph_91tUhOhVqbJTCovTu7RXPjVXBA_-N5BW3aLbE2W28q0Z9PFjr9bjAfLpENPD92jQWjoL85wzWBImjutJc9s2d0SxZTc08cngMlm5DP6AQHpclbf7w
+      Referer:
+      - https://m2.paybyphone.fr/
+      User-Agent:
+      - Faraday v2.7.4
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 400
+      message: OK
+    headers:
+      Date:
+      - Tue, 11 Apr 2023 16:01:58 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '10576'
+      Connection:
+      - keep-alive
+      Server:
+      - nginx/1.22.1
+      X-Powered-By:
+      - ASP.NET
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      X-Request-Start:
+      - '1681228918.591'
+      X-Upstream-Response-Time:
+      - "-"
+      X-Request-Time:
+      - '0.251'
+      X-Time-Iso:
+      - '2023-04-11T16:01:58+00:00'
+    body:
+      encoding: UTF-8
+      string: '[{"parkingSessionId":"0b740a3a-e234-4a68-9f80-444221de4e83","locationId":"75018","startTime":"2023-04-08T17:16:13Z","stall":null,"expireTime":"2023-04-11T17:16:00Z","vehicle":{"id":55757296,"licensePlate":"CL191JL","type":"car","countryCode":"FR","jurisdiction":""},"rateOption":{"rateOptionId":"75101","type":"RES"},"isStoppable":true,"fpsApplies":false,"totalCost":null,"isExtendable":true,"isRenewable":false,"renewableAfter":null,"segments":[{"parkingStart":"2023-04-08T17:16:13Z","parkingEnd":"2023-04-11T17:16:00Z","cost":1.50,"fees":0.0,"chargeableTimeUnitsParked":660,"chargeableTimeUnitType":1,"freeTimeUnitsApplied":0,"freeTimeUnitType":1}],"maxStayState":"MaxStayWithinThreshold"},{"parkingSessionId":"36740a3a-2e76-4464-aa1b-79ce6ae5f1be","locationId":"75001","startTime":"2023-04-08T18:03:23Z","stall":null,"expireTime":"2023-04-11T18:00:00Z","vehicle":{"id":94411639,"licensePlate":"GF929AP","type":"electricMotorcycle","countryCode":"FR","jurisdiction":""},"rateOption":{"rateOptionId":"1244259777","type":"VP-2RM"},"isStoppable":true,"fpsApplies":false,"totalCost":null,"isExtendable":false,"isRenewable":false,"renewableAfter":null,"segments":[{"parkingStart":"2023-04-08T18:03:23Z","parkingEnd":"2023-04-11T18:00:00Z","cost":0.0,"fees":0.0,"chargeableTimeUnitsParked":660,"chargeableTimeUnitType":1,"freeTimeUnitsApplied":0,"freeTimeUnitType":1}],"maxStayState":"MaxStayReached"},{"parkingSessionId":"35740a3a-7b5e-45e0-aa15-ab0b600e6e11","locationId":"75002","startTime":"2023-04-08T18:02:16Z","stall":null,"expireTime":"2023-04-11T18:00:00Z","vehicle":{"id":94411639,"licensePlate":"GF929AP","type":"electricMotorcycle","countryCode":"FR","jurisdiction":""},"rateOption":{"rateOptionId":"1244259777","type":"VP-2RM"},"isStoppable":true,"fpsApplies":false,"totalCost":null,"isExtendable":false,"isRenewable":false,"renewableAfter":null,"segments":[{"parkingStart":"2023-04-08T18:02:16Z","parkingEnd":"2023-04-11T18:00:00Z","cost":0.0,"fees":0.0,"chargeableTimeUnitsParked":660,"chargeableTimeUnitType":1,"freeTimeUnitsApplied":0,"freeTimeUnitType":1}],"maxStayState":"MaxStayReached"},{"parkingSessionId":"36740a3a-95d2-42be-9567-d11aa3821a1d","locationId":"75003","startTime":"2023-04-08T18:03:52Z","stall":null,"expireTime":"2023-04-11T18:00:00Z","vehicle":{"id":94411639,"licensePlate":"GF929AP","type":"electricMotorcycle","countryCode":"FR","jurisdiction":""},"rateOption":{"rateOptionId":"1244259777","type":"VP-2RM"},"isStoppable":true,"fpsApplies":false,"totalCost":null,"isExtendable":false,"isRenewable":false,"renewableAfter":null,"segments":[{"parkingStart":"2023-04-08T18:03:52Z","parkingEnd":"2023-04-11T18:00:00Z","cost":0.0,"fees":0.0,"chargeableTimeUnitsParked":660,"chargeableTimeUnitType":1,"freeTimeUnitsApplied":0,"freeTimeUnitType":1}],"maxStayState":"MaxStayReached"},{"parkingSessionId":"35740a3a-c27d-42ac-a92c-179fb1e6f292","locationId":"75004","startTime":"2023-04-08T18:02:24Z","stall":null,"expireTime":"2023-04-11T18:00:00Z","vehicle":{"id":94411639,"licensePlate":"GF929AP","type":"electricMotorcycle","countryCode":"FR","jurisdiction":""},"rateOption":{"rateOptionId":"1244259777","type":"VP-2RM"},"isStoppable":true,"fpsApplies":false,"totalCost":null,"isExtendable":false,"isRenewable":false,"renewableAfter":null,"segments":[{"parkingStart":"2023-04-08T18:02:24Z","parkingEnd":"2023-04-11T18:00:00Z","cost":0.0,"fees":0.0,"chargeableTimeUnitsParked":660,"chargeableTimeUnitType":1,"freeTimeUnitsApplied":0,"freeTimeUnitType":1}],"maxStayState":"MaxStayReached"},{"parkingSessionId":"35740a3a-b081-4340-88b8-63ba37762678","locationId":"75004","startTime":"2023-04-08T18:02:25Z","stall":null,"expireTime":"2023-04-11T18:00:00Z","vehicle":{"id":94411639,"licensePlate":"GF929AP","type":"electricMotorcycle","countryCode":"FR","jurisdiction":""},"rateOption":{"rateOptionId":"1244259777","type":"VP-2RM"},"isStoppable":true,"fpsApplies":false,"totalCost":null,"isExtendable":false,"isRenewable":false,"renewableAfter":null,"segments":[{"parkingStart":"2023-04-08T18:02:25Z","parkingEnd":"2023-04-11T18:00:00Z","cost":0.0,"fees":0.0,"chargeableTimeUnitsParked":660,"chargeableTimeUnitType":1,"freeTimeUnitsApplied":0,"freeTimeUnitType":1}],"maxStayState":"MaxStayReached"},{"parkingSessionId":"35740a3a-d990-4fc6-8c5a-6f565508bab4","locationId":"75005","startTime":"2023-04-08T18:02:29Z","stall":null,"expireTime":"2023-04-11T18:00:00Z","vehicle":{"id":94411639,"licensePlate":"GF929AP","type":"electricMotorcycle","countryCode":"FR","jurisdiction":""},"rateOption":{"rateOptionId":"1244259777","type":"VP-2RM"},"isStoppable":true,"fpsApplies":false,"totalCost":null,"isExtendable":false,"isRenewable":false,"renewableAfter":null,"segments":[{"parkingStart":"2023-04-08T18:02:29Z","parkingEnd":"2023-04-11T18:00:00Z","cost":0.0,"fees":0.0,"chargeableTimeUnitsParked":660,"chargeableTimeUnitType":1,"freeTimeUnitsApplied":0,"freeTimeUnitType":1}],"maxStayState":"MaxStayReached"},{"parkingSessionId":"35740a3a-76a5-40df-a33d-d96dd7b44631","locationId":"75008","startTime":"2023-04-08T18:02:35Z","stall":null,"expireTime":"2023-04-11T18:00:00Z","vehicle":{"id":94411639,"licensePlate":"GF929AP","type":"electricMotorcycle","countryCode":"FR","jurisdiction":""},"rateOption":{"rateOptionId":"1244259777","type":"VP-2RM"},"isStoppable":true,"fpsApplies":false,"totalCost":null,"isExtendable":false,"isRenewable":false,"renewableAfter":null,"segments":[{"parkingStart":"2023-04-08T18:02:35Z","parkingEnd":"2023-04-11T18:00:00Z","cost":0.0,"fees":0.0,"chargeableTimeUnitsParked":660,"chargeableTimeUnitType":1,"freeTimeUnitsApplied":0,"freeTimeUnitType":1}],"maxStayState":"MaxStayReached"},{"parkingSessionId":"35740a3a-37ba-40bd-8a0c-520f5a8c2c96","locationId":"75011","startTime":"2023-04-08T18:02:40Z","stall":null,"expireTime":"2023-04-11T18:00:00Z","vehicle":{"id":94411639,"licensePlate":"GF929AP","type":"electricMotorcycle","countryCode":"FR","jurisdiction":""},"rateOption":{"rateOptionId":"1244259777","type":"VP-2RM"},"isStoppable":true,"fpsApplies":false,"totalCost":null,"isExtendable":false,"isRenewable":false,"renewableAfter":null,"segments":[{"parkingStart":"2023-04-08T18:02:40Z","parkingEnd":"2023-04-11T18:00:00Z","cost":0.0,"fees":0.0,"chargeableTimeUnitsParked":660,"chargeableTimeUnitType":1,"freeTimeUnitsApplied":0,"freeTimeUnitType":1}],"maxStayState":"MaxStayReached"},{"parkingSessionId":"35740a3a-5acf-403e-8d8f-ee06d29ccbbb","locationId":"75015","startTime":"2023-04-08T18:02:45Z","stall":null,"expireTime":"2023-04-11T18:00:00Z","vehicle":{"id":94411639,"licensePlate":"GF929AP","type":"electricMotorcycle","countryCode":"FR","jurisdiction":""},"rateOption":{"rateOptionId":"1244259777","type":"VP-2RM"},"isStoppable":true,"fpsApplies":false,"totalCost":null,"isExtendable":false,"isRenewable":false,"renewableAfter":null,"segments":[{"parkingStart":"2023-04-08T18:02:45Z","parkingEnd":"2023-04-11T18:00:00Z","cost":0.0,"fees":0.0,"chargeableTimeUnitsParked":660,"chargeableTimeUnitType":1,"freeTimeUnitsApplied":0,"freeTimeUnitType":1}],"maxStayState":"MaxStayReached"},{"parkingSessionId":"35740a3a-b1e3-4277-8362-bc88bdf7d03d","locationId":"75016","startTime":"2023-04-08T18:02:51Z","stall":null,"expireTime":"2023-04-11T18:00:00Z","vehicle":{"id":94411639,"licensePlate":"GF929AP","type":"electricMotorcycle","countryCode":"FR","jurisdiction":""},"rateOption":{"rateOptionId":"1244259777","type":"VP-2RM"},"isStoppable":true,"fpsApplies":false,"totalCost":null,"isExtendable":false,"isRenewable":false,"renewableAfter":null,"segments":[{"parkingStart":"2023-04-08T18:02:51Z","parkingEnd":"2023-04-11T18:00:00Z","cost":0.0,"fees":0.0,"chargeableTimeUnitsParked":660,"chargeableTimeUnitType":1,"freeTimeUnitsApplied":0,"freeTimeUnitType":1}],"maxStayState":"MaxStayReached"},{"parkingSessionId":"35740a3a-47f9-447f-acce-7412d7ae0ce1","locationId":"75017","startTime":"2023-04-08T18:02:56Z","stall":null,"expireTime":"2023-04-11T18:00:00Z","vehicle":{"id":94411639,"licensePlate":"GF929AP","type":"electricMotorcycle","countryCode":"FR","jurisdiction":""},"rateOption":{"rateOptionId":"1244259777","type":"VP-2RM"},"isStoppable":true,"fpsApplies":false,"totalCost":null,"isExtendable":false,"isRenewable":false,"renewableAfter":null,"segments":[{"parkingStart":"2023-04-08T18:02:56Z","parkingEnd":"2023-04-11T18:00:00Z","cost":0.0,"fees":0.0,"chargeableTimeUnitsParked":660,"chargeableTimeUnitType":1,"freeTimeUnitsApplied":0,"freeTimeUnitType":1}],"maxStayState":"MaxStayReached"},{"parkingSessionId":"36740a3a-4e10-49bb-a742-91509ed3d656","locationId":"75018","startTime":"2023-04-08T18:03:02Z","stall":null,"expireTime":"2023-04-11T18:00:00Z","vehicle":{"id":94411639,"licensePlate":"GF929AP","type":"electricMotorcycle","countryCode":"FR","jurisdiction":""},"rateOption":{"rateOptionId":"1244259777","type":"VP-2RM"},"isStoppable":true,"fpsApplies":false,"totalCost":null,"isExtendable":false,"isRenewable":false,"renewableAfter":null,"segments":[{"parkingStart":"2023-04-08T18:03:02Z","parkingEnd":"2023-04-11T18:00:00Z","cost":0.0,"fees":0.0,"chargeableTimeUnitsParked":660,"chargeableTimeUnitType":1,"freeTimeUnitsApplied":0,"freeTimeUnitType":1}],"maxStayState":"MaxStayReached"},{"parkingSessionId":"36740a3a-9f25-45e9-a22f-aec3ea4a8f10","locationId":"75019","startTime":"2023-04-08T18:03:08Z","stall":null,"expireTime":"2023-04-11T18:00:00Z","vehicle":{"id":94411639,"licensePlate":"GF929AP","type":"electricMotorcycle","countryCode":"FR","jurisdiction":""},"rateOption":{"rateOptionId":"1244259777","type":"VP-2RM"},"isStoppable":true,"fpsApplies":false,"totalCost":null,"isExtendable":false,"isRenewable":false,"renewableAfter":null,"segments":[{"parkingStart":"2023-04-08T18:03:08Z","parkingEnd":"2023-04-11T18:00:00Z","cost":0.0,"fees":0.0,"chargeableTimeUnitsParked":660,"chargeableTimeUnitType":1,"freeTimeUnitsApplied":0,"freeTimeUnitType":1}],"maxStayState":"MaxStayReached"},{"parkingSessionId":"36740a3a-0248-4777-894a-abc16462cb13","locationId":"75020","startTime":"2023-04-08T18:03:16Z","stall":null,"expireTime":"2023-04-11T18:00:00Z","vehicle":{"id":94411639,"licensePlate":"GF929AP","type":"electricMotorcycle","countryCode":"FR","jurisdiction":""},"rateOption":{"rateOptionId":"1244259777","type":"VP-2RM"},"isStoppable":true,"fpsApplies":false,"totalCost":null,"isExtendable":false,"isRenewable":false,"renewableAfter":null,"segments":[{"parkingStart":"2023-04-08T18:03:16Z","parkingEnd":"2023-04-11T18:00:00Z","cost":0.0,"fees":0.0,"chargeableTimeUnitsParked":660,"chargeableTimeUnitType":1,"freeTimeUnitsApplied":0,"freeTimeUnitType":1}],"maxStayState":"MaxStayReached"}]'
+  recorded_at: Tue, 11 Apr 2023 16:01:58 GMT
+recorded_with: VCR 6.1.0

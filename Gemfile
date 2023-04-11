@@ -103,6 +103,8 @@ group :test do
   gem 'selenium-webdriver'
   gem 'shoulda-matchers', '~> 5.0'
   gem 'webdrivers'
+  gem "vcr"
+  gem "webmock"
 end
 gem 'cancancan'
 gem 'devise'
