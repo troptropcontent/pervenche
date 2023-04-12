@@ -1,27 +1,23 @@
-<main class='container'>
+<main class='grow container stack stack--no-gap'>
     <section class="header">
-        <span class="stack">
-        <h1><%= t('views.onboardings.show.header.title') %></h1>
-        <p><%= t('views.onboardings.show.header.subtitle') %></p>
-        </span>
+        <h1><%= t('views.onboardings.welcome.header.title') %></h1> 
     </section>
-    <section class='stack'>
-        <%= render 'components/step', 
-            title: t('views.onboardings.show.steps.service.title'), 
-            text: t('views.onboardings.show.steps.service.text'),
-            cta:  t('views.onboardings.show.steps.service.cta'),
-            cta_path:  new_service_path,
-            done: @service_set_up 
-        %>
-        <%= render 'components/step', 
-            title: t('views.onboardings.show.steps.automated_ticket.title'), 
-            text: t('views.onboardings.show.steps.automated_ticket.text'),
-            cta:  t('views.onboardings.show.steps.automated_ticket.cta'),
-            cta_path:  new_automated_ticket_path,
-            done: @automated_ticket_set_up
-         %>
-    </section>
-    <section>
-        
-    </section>
+    <div class="grow stack">
+        <section class='grow stack stack--l'>
+        <% [[1, 'first'], [2, 'second'], [3, 'third']].each do |step| %> 
+        <div class='cluster cluster--no-wrap'>
+            <span class="number_tag number_tag--light">
+                <p><%= step[0] %></p>
+            </span>
+            <span>
+                <h4><%= t("views.onboardings.welcome.main.steps.#{step[1]}.title") %></h4>
+                <p><%= t("views.onboardings.welcome.main.steps.#{step[1]}.text") %></p>
+            </span>
+        </div>
+        <% end %>
+        </section>
+        <section class="footer stack margin__bottom--l">
+            <%= link_to t('views.onboardings.welcome.cta'), new_service_path(params: {navigation: {redirect_to: onboarding_path}}), class: "btn btn--primary center" %>
+         </section>
+    </div>
 </main>

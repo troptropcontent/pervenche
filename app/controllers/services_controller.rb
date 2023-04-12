@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class ServicesController < ApplicationController
-  def index; end
-
   def new
     @with_navbar = false
     @redirect_to = navigation_params&.dig(:redirect_to)

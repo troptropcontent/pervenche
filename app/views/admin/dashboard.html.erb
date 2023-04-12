@@ -1,0 +1,12 @@
+<main class='grow container stack'>
+    <%= render 'components/header' %>
+    <section>
+        <div class="center box box--primary">
+          <h1>Utilisateurs</h1>
+          <h1><%= @users_onboarded_count %></h1> 
+        </div>
+    </section>
+    <%= turbo_frame_tag "client_diagnostic_pay_by_phone", src: admin_client_path(client_kind: 'pay_by_phone') do %>
+      <%= render 'admin/diagnostics/client/client', state: 'Loading', kind: 'pay_by_phone' %>
+    <% end %>
+</main>

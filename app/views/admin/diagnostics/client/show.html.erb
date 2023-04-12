@@ -1,0 +1,20 @@
+<main class="grow container stack">
+    <%= render 'components/header' %>
+    <section>
+      <%= turbo_frame_tag "client_diagnostic_pay_by_phone" do %>
+        <%= render 'admin/diagnostics/client/client', state: @state, kind: @kind%>
+      <% end %>
+    </section>
+    <section>
+      <ul>
+        <% @checkup.each do |(check, result)| %>
+          <li>
+            <span class="cluster"><p> <%= t("admin.diagnostics.client.views.show.checks.#{check}") %></p> : <p class="<%= class_names('text', result == 'Ok' ? 'text__color--success' : 'text__color--danger') %>" ><%= t("admin.diagnostics.client.views.show.checks.#{result == 'Ok' ? 'ok' : 'fail'}") %></p></span>
+          </li>
+        <% end %>
+      </ul>
+    </section>
+</main>
+
+
+

@@ -1,0 +1,1007 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://auth.paybyphoneapis.com/token
+    body:
+      encoding: US-ASCII
+      string: grant_type=password&username=a_fake_username&password=a_fake_password&client_id=paybyphone_web
+    headers:
+      User-Agent:
+      - Faraday v2.7.4
+      Accept:
+      - application/json, text/plain, */*
+      X-Pbp-Clienttype:
+      - WebApp
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 12 Apr 2023 21:07:51 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '1298'
+      Connection:
+      - keep-alive
+      Server:
+      - nginx/1.20.0
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubdomains; preload
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - ALLOW-FROM https://*.paybyphone.com https://*.cloudfront.net
+      Vary:
+      - Origin
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-cache, no-store
+      X-Request-Start:
+      - '1681333671.041'
+      X-Upstream-Response-Time:
+      - "-"
+      X-Request-Time:
+      - '0.157'
+      X-Time-Iso:
+      - '2023-04-12T21:07:51+00:00'
+    body:
+      encoding: UTF-8
+      string: '{"access_token":"a_token","expires_in":1200,"refresh_token":"sPO84e1F0JdPYYZf6LEGa8Rabv-D4oVyFUgFPjh5L4U","scope":"paybyphone","token_type":"Bearer"}'
+  recorded_at: Wed, 12 Apr 2023 21:07:51 GMT
+- request:
+    method: post
+    uri: https://auth.paybyphoneapis.com/token
+    body:
+      encoding: US-ASCII
+      string: grant_type=password&username=a_fake_username&password=a_fake_password&client_id=paybyphone_web
+    headers:
+      User-Agent:
+      - Faraday v2.7.4
+      Accept:
+      - application/json, text/plain, */*
+      X-Pbp-Clienttype:
+      - WebApp
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 12 Apr 2023 21:07:51 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '1298'
+      Connection:
+      - keep-alive
+      Server:
+      - nginx/1.20.0
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubdomains; preload
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - ALLOW-FROM https://*.paybyphone.com https://*.cloudfront.net
+      Vary:
+      - Origin
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-cache, no-store
+      X-Request-Start:
+      - '1681333671.657'
+      X-Upstream-Response-Time:
+      - "-"
+      X-Request-Time:
+      - '0.158'
+      X-Time-Iso:
+      - '2023-04-12T21:07:51+00:00'
+    body:
+      encoding: UTF-8
+      string: '{"access_token":"a_token","expires_in":1200,"refresh_token":"c82CMw35Z21RWe-aatukqTp1XeUnew-MJ0RzO-im0LE","scope":"paybyphone","token_type":"Bearer"}'
+  recorded_at: Wed, 12 Apr 2023 21:07:51 GMT
+- request:
+    method: get
+    uri: https://consumer.paybyphoneapis.com/identity/profileservice/v1/members/vehicles/paybyphone
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      Authorization:
+      - Bearer a_token
+      Referer:
+      - https://m2.paybyphone.fr/
+      User-Agent:
+      - Faraday v2.7.4
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 12 Apr 2023 21:07:52 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Server:
+      - nginx/1.22.1
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      X-Request-Start:
+      - '1681333672.162'
+      X-Upstream-Response-Time:
+      - "-"
+      X-Request-Time:
+      - '0.035'
+      X-Time-Iso:
+      - '2023-04-12T21:07:52+00:00'
+    body:
+      encoding: UTF-8
+      string: '[{"vehicleId":"dCqmcYtMBVHXeKKSPL6TZ3aGq3NoLCAgovAP-fJaAl2RBOeCgO62Q_M5Urz4Oakb1wmZ22TyN9MBtqzDUHBcyg","legacyVehicleId":55757296,"licensePlate":"a_license_plate","country":"FR","type":"Car"},{"vehicleId":"v_cO-eR4UHbRCdX3MaO-aIrfFHQdaVLIMapxxLuFSe45RLZoAU9z1XdaiGTortXSqZH2k_9Rej97qB8Cdah2sQ","legacyVehicleId":94411639,"licensePlate":"a_other_other_license_plate","country":"FR","jurisdiction":"","type":"ElectricMotorcycle","profile":{"photo":"","description":"scoot
+        de Tho"}},{"vehicleId":"RArpPrn2JNLaZv7DKXg-IE1lmBuL09N5dzHKE1X28CcQNxVl9ixcU1_YaUVxro6A1eDuC7UtwYu39surE-coPg","legacyVehicleId":36022663,"licensePlate":"a_other_license_plate","country":"FR","type":"Car"},{"vehicleId":"UO1TTdQjA51k-gKgWZGZ6dWu66w_DeI1Ib5KkA1jahzyi6vpTAFXYBig1mjsgobirbsQiKYkGv_nb6LTWVls5A","legacyVehicleId":89703481,"licensePlate":"a_other_other_other_license_plate","country":"FR","jurisdiction":"","type":"Car","profile":{"photo":"","description":"van
+        Cheyerre"}}]'
+  recorded_at: Wed, 12 Apr 2023 21:07:52 GMT
+- request:
+    method: post
+    uri: https://auth.paybyphoneapis.com/token
+    body:
+      encoding: US-ASCII
+      string: grant_type=password&username=a_fake_username&password=a_fake_password&client_id=paybyphone_web
+    headers:
+      User-Agent:
+      - Faraday v2.7.4
+      Accept:
+      - application/json, text/plain, */*
+      X-Pbp-Clienttype:
+      - WebApp
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 12 Apr 2023 21:07:52 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '1298'
+      Connection:
+      - keep-alive
+      Server:
+      - nginx/1.20.0
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubdomains; preload
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - ALLOW-FROM https://*.paybyphone.com https://*.cloudfront.net
+      Vary:
+      - Origin
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-cache, no-store
+      X-Request-Start:
+      - '1681333672.722'
+      X-Upstream-Response-Time:
+      - "-"
+      X-Request-Time:
+      - '0.157'
+      X-Time-Iso:
+      - '2023-04-12T21:07:52+00:00'
+    body:
+      encoding: UTF-8
+      string: '{"access_token":"a_token","expires_in":1200,"refresh_token":"pMpqRTj5-Pcfc2Ibsgin3OJwAkfv-OPwlsU0z_of--I","scope":"paybyphone","token_type":"Bearer"}'
+  recorded_at: Wed, 12 Apr 2023 21:07:52 GMT
+- request:
+    method: post
+    uri: https://auth.paybyphoneapis.com/token
+    body:
+      encoding: US-ASCII
+      string: grant_type=password&username=a_fake_username&password=a_fake_password&client_id=paybyphone_web
+    headers:
+      User-Agent:
+      - Faraday v2.7.4
+      Accept:
+      - application/json, text/plain, */*
+      X-Pbp-Clienttype:
+      - WebApp
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 12 Apr 2023 21:07:53 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '1298'
+      Connection:
+      - keep-alive
+      Server:
+      - nginx/1.20.0
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubdomains; preload
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - ALLOW-FROM https://*.paybyphone.com https://*.cloudfront.net
+      Vary:
+      - Origin
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-cache, no-store
+      X-Request-Start:
+      - '1681333673.400'
+      X-Upstream-Response-Time:
+      - "-"
+      X-Request-Time:
+      - '0.159'
+      X-Time-Iso:
+      - '2023-04-12T21:07:53+00:00'
+    body:
+      encoding: UTF-8
+      string: '{"access_token":"a_token","expires_in":1200,"refresh_token":"fHH9I98UEO5r-ChmPJ-V7qa9Vb5_xOWfFBRv20GZFq4","scope":"paybyphone","token_type":"Bearer"}'
+  recorded_at: Wed, 12 Apr 2023 21:07:53 GMT
+- request:
+    method: get
+    uri: https://consumer.paybyphoneapis.com/parking/accounts
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      Authorization:
+      - Bearer a_token
+      Referer:
+      - https://m2.paybyphone.fr/
+      User-Agent:
+      - Faraday v2.7.4
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 12 Apr 2023 21:07:53 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '47'
+      Connection:
+      - keep-alive
+      Server:
+      - nginx/1.22.1
+      X-Powered-By:
+      - ASP.NET
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      X-Request-Start:
+      - '1681333673.881'
+      X-Upstream-Response-Time:
+      - "-"
+      X-Request-Time:
+      - '0.022'
+      X-Time-Iso:
+      - '2023-04-12T21:07:53+00:00'
+    body:
+      encoding: UTF-8
+      string: '[{"id":"b577ed39-6f82-4fad-b38e-17fb5792c91a"}]'
+  recorded_at: Wed, 12 Apr 2023 21:07:53 GMT
+- request:
+    method: get
+    uri: https://consumer.paybyphoneapis.com/parking/locations/75018/rateOptions?licensePlate=CL12345KK&parkingAccountId=b577ed39-6f82-4fad-b38e-17fb5792c91a
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      Authorization:
+      - Bearer a_token
+      Referer:
+      - https://m2.paybyphone.fr/
+      User-Agent:
+      - Faraday v2.7.4
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 400
+      message: Bad Request
+    headers:
+      Date:
+      - Wed, 12 Apr 2023 21:07:54 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '41'
+      Connection:
+      - keep-alive
+      Server:
+      - nginx/1.22.1
+      X-Powered-By:
+      - ASP.NET
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      X-Request-Start:
+      - '1681333674.519'
+      X-Upstream-Response-Time:
+      - "-"
+      X-Request-Time:
+      - '0.240'
+      Access-Control-Allow-Origin:
+      - https://m2.qa.paybyphone.com
+      Access-Control-Allow-Headers:
+      - Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type,
+        Access-Control-Request-Method, Access-Control-Request-Headers, Authorization,
+        ContentType, x-pbp-clienttype, x-pbp-version, x-pbp-enableratelimitthreshold,
+        X-Pbp-BypassRateLimit, x-pbp-verificationtoken,x-datadog-trace-id, x-datadog-parent-id,
+        x-datadog-origin, x-datadog-sampling-priority, x-datadog-sampled, X-Pbp-DistributionChannel,
+        x-pbp-skip-verification, X-Pbp-ApiKey
+      Access-Control-Expose-Headers:
+      - "*"
+      Access-Control-Max-Age:
+      - '120'
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Methods:
+      - GET,PUT,POST,DELETE,OPTIONS,PATCH
+    body:
+      encoding: UTF-8
+      string: '{"issues":[{"reason":"VehicleNotFound"}]}'
+  recorded_at: Wed, 12 Apr 2023 21:07:54 GMT
+- request:
+    method: post
+    uri: https://auth.paybyphoneapis.com/token
+    body:
+      encoding: US-ASCII
+      string: grant_type=password&username=a_fake_username&password=a_fake_password&client_id=paybyphone_web
+    headers:
+      User-Agent:
+      - Faraday v2.7.4
+      Accept:
+      - application/json, text/plain, */*
+      X-Pbp-Clienttype:
+      - WebApp
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 12 Apr 2023 21:07:55 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '1298'
+      Connection:
+      - keep-alive
+      Server:
+      - nginx/1.20.0
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubdomains; preload
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - ALLOW-FROM https://*.paybyphone.com https://*.cloudfront.net
+      Vary:
+      - Origin
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-cache, no-store
+      X-Request-Start:
+      - '1681333675.145'
+      X-Upstream-Response-Time:
+      - "-"
+      X-Request-Time:
+      - '0.159'
+      X-Time-Iso:
+      - '2023-04-12T21:07:55+00:00'
+    body:
+      encoding: UTF-8
+      string: '{"access_token":"a_token","expires_in":1200,"refresh_token":"fskiMl12Rd9RZkkljal2iksh9Hj8ZGMqpggssxiqRSW","scope":"paybyphone","token_type":"Bearer"}'
+  recorded_at: Wed, 12 Apr 2023 21:07:55 GMT
+- request:
+    method: post
+    uri: https://auth.paybyphoneapis.com/token
+    body:
+      encoding: US-ASCII
+      string: grant_type=password&username=a_fake_username&password=a_fake_password&client_id=paybyphone_web
+    headers:
+      User-Agent:
+      - Faraday v2.7.4
+      Accept:
+      - application/json, text/plain, */*
+      X-Pbp-Clienttype:
+      - WebApp
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 12 Apr 2023 21:07:55 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '1298'
+      Connection:
+      - keep-alive
+      Server:
+      - nginx/1.20.0
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubdomains; preload
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - ALLOW-FROM https://*.paybyphone.com https://*.cloudfront.net
+      Vary:
+      - Origin
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-cache, no-store
+      X-Request-Start:
+      - '1681333675.753'
+      X-Upstream-Response-Time:
+      - "-"
+      X-Request-Time:
+      - '0.157'
+      X-Time-Iso:
+      - '2023-04-12T21:07:55+00:00'
+    body:
+      encoding: UTF-8
+      string: '{"access_token":"a_token","expires_in":1200,"refresh_token":"te-SY20ur0tLZfynkI1LypL9xm5s8NaL3VX4cLyLnh-","scope":"paybyphone","token_type":"Bearer"}'
+  recorded_at: Wed, 12 Apr 2023 21:07:55 GMT
+- request:
+    method: get
+    uri: https://payments.paybyphoneapis.com/v1/accounts
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json, text/plain, */*
+      Accept-Language:
+      - fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7
+      Authorization:
+      - Bearer a_token
+      Content-Type:
+      - application/json
+      Sec-Fetch-Dest:
+      - empty
+      Sec-Fetch-Mode:
+      - cors
+      Sec-Fetch-Site:
+      - cross-site
+      X-Api-Key:
+      - zZ4ePLvoBBD1YwBGCo6P5DiPLDjSss3j
+      X-Pbp-Clienttype:
+      - WebApp
+      Referer:
+      - https://m2.paybyphone.fr/
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      User-Agent:
+      - Faraday v2.7.4
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 12 Apr 2023 21:07:56 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Server:
+      - nginx/1.22.1
+      X-Response-Time:
+      - '9'
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      X-Request-Start:
+      - '1681333676.252'
+      X-Upstream-Response-Time:
+      - "-"
+      X-Request-Time:
+      - '0.029'
+      X-Time-Iso:
+      - '2023-04-12T21:07:56+00:00'
+    body:
+      encoding: UTF-8
+      string: '{"paymentCards":[{"coBrandCardTypes":["CarteBancaire","MasterCard"],"cardType":"MasterCard","accountType":"PaymentCard","maskedCardNumber":"------------2021","expiryMonth":"09","expiryYear":"2025","issueNumber":"","startMonth":"","startYear":"","paymentAccountId":"2c19093a-a257-4011-a0a6-df9d1b62542f","billingAddress":{},"paymentScope":"Private","consent":{"consentType":"OnGoing","consentGivenDate":"2023-01-31T08:44:13.090699+00:00"},"createdOn":"2023-01-31T08:45:20.735035+00:00","creationStatus":{"paymentAccountId":"2c19093a-a257-4011-a0a6-df9d1b62542f","cardValidations":[{"gateway":"Ogone","paymentAccountId":"2c19093a-a257-4011-a0a6-df9d1b62542f","countryCode":"FR","distributionChannel":"pbp-android"}],"status":"Created","failureReason":0}},{"coBrandCardTypes":["Visa"],"cardType":"Visa","accountType":"PaymentCard","maskedCardNumber":"------------2358","expiryMonth":"11","expiryYear":"2027","issueNumber":"","startMonth":"","startYear":"","paymentAccountId":"6bb6073a-d81e-46ad-9a33-54337c1ddf82","billingAddress":{},"paymentScope":"Private","consent":{"consentType":"OnGoing","consentGivenDate":"2022-11-23T11:27:35.640304+00:00"},"createdOn":"2022-11-23T11:29:10.745028+00:00","creationStatus":{"paymentAccountId":"6bb6073a-d81e-46ad-9a33-54337c1ddf82","cardValidations":[{"gateway":"Ogone","paymentAccountId":"6bb6073a-d81e-46ad-9a33-54337c1ddf82","countryCode":"FR"}],"status":"Created","failureReason":0}},{"coBrandCardTypes":["Visa"],"cardType":"Visa","accountType":"PaymentCard","maskedCardNumber":"------------4436","expiryMonth":"09","expiryYear":"2025","issueNumber":"","startMonth":"","startYear":"","paymentAccountId":"fb20073a-e4d5-40da-b6d2-d3e21651a4c4","billingAddress":{},"paymentScope":"Private","consent":{"consentType":"OnGoing","consentGivenDate":"2022-10-25T11:02:37.284899+00:00"},"createdOn":"2022-10-25T11:03:14.07801+00:00","creationStatus":{"paymentAccountId":"fb20073a-e4d5-40da-b6d2-d3e21651a4c4","cardValidations":[{"gateway":"Ogone","paymentAccountId":"fb20073a-e4d5-40da-b6d2-d3e21651a4c4","countryCode":"FR"}],"status":"Created","failureReason":0}},{"coBrandCardTypes":["Unknown"],"cardType":"MasterCard","accountType":"PaymentCard","maskedCardNumber":"------------9321","expiryMonth":"09","expiryYear":"2027","issueNumber":"","paymentAccountId":"4f67063a-c6f7-4f01-916b-84659dd13bdc","billingAddress":{"zipCode":""},"paymentScope":"Private","consent":{"consentType":"OnGoing","consentGivenDate":"2022-09-19T09:45:08+00:00"},"createdOn":"2022-10-24T19:29:37.664249+00:00","creationStatus":{"paymentAccountId":"4f67063a-c6f7-4f01-916b-84659dd13bdc","cardValidations":[{"gateway":"Migrated","paymentAccountId":"4f67063a-c6f7-4f01-916b-84659dd13bdc","countryCode":"FR"}],"status":"Created","failureReason":0}},{"coBrandCardTypes":["Unknown"],"cardType":"MasterCard","accountType":"PaymentCard","maskedCardNumber":"------------6750","expiryMonth":"03","expiryYear":"2025","issueNumber":"","paymentAccountId":"dfdc053a-5592-4d2e-9dc3-3b83d0567714","billingAddress":{"zipCode":""},"paymentScope":"Private","consent":{"consentType":"OnGoing","consentGivenDate":"2022-08-23T12:34:46+00:00"},"createdOn":"2022-09-03T01:52:57.2673+00:00","creationStatus":{"paymentAccountId":"dfdc053a-5592-4d2e-9dc3-3b83d0567714","cardValidations":[{"gateway":"Migrated","paymentAccountId":"dfdc053a-5592-4d2e-9dc3-3b83d0567714","countryCode":"FR"}],"status":"Created","failureReason":0}},{"coBrandCardTypes":["Unknown"],"cardType":"Visa","accountType":"PaymentCard","maskedCardNumber":"------------6156","expiryMonth":"07","expiryYear":"2025","issueNumber":"","paymentAccountId":"d5a8053a-81df-4ee2-a4d1-9654e1084eb1","billingAddress":{"zipCode":""},"paymentScope":"Private","consent":{"consentType":"OnGoing","consentGivenDate":"2022-08-13T10:03:56+00:00"},"createdOn":"2022-09-02T21:43:34.366969+00:00","creationStatus":{"paymentAccountId":"d5a8053a-81df-4ee2-a4d1-9654e1084eb1","cardValidations":[{"gateway":"Migrated","paymentAccountId":"d5a8053a-81df-4ee2-a4d1-9654e1084eb1","countryCode":"FR"}],"status":"Created","failureReason":0}}],"mno":[]}'
+  recorded_at: Wed, 12 Apr 2023 21:07:56 GMT
+- request:
+    method: post
+    uri: https://auth.paybyphoneapis.com/token
+    body:
+      encoding: US-ASCII
+      string: grant_type=password&username=a_fake_username&password=a_fake_password&client_id=paybyphone_web
+    headers:
+      User-Agent:
+      - Faraday v2.7.4
+      Accept:
+      - application/json, text/plain, */*
+      X-Pbp-Clienttype:
+      - WebApp
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 12 Apr 2023 21:07:56 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '1298'
+      Connection:
+      - keep-alive
+      Server:
+      - nginx/1.20.0
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubdomains; preload
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - ALLOW-FROM https://*.paybyphone.com https://*.cloudfront.net
+      Vary:
+      - Origin
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-cache, no-store
+      X-Request-Start:
+      - '1681333676.815'
+      X-Upstream-Response-Time:
+      - "-"
+      X-Request-Time:
+      - '0.158'
+      X-Time-Iso:
+      - '2023-04-12T21:07:56+00:00'
+    body:
+      encoding: UTF-8
+      string: '{"access_token":"a_token","expires_in":1200,"refresh_token":"Yj_nowmk2EZLsZdxKjqBORAiK_1P4gCBuSChZKPRoib","scope":"paybyphone","token_type":"Bearer"}'
+  recorded_at: Wed, 12 Apr 2023 21:07:56 GMT
+- request:
+    method: post
+    uri: https://auth.paybyphoneapis.com/token
+    body:
+      encoding: US-ASCII
+      string: grant_type=password&username=a_fake_username&password=a_fake_password&client_id=paybyphone_web
+    headers:
+      User-Agent:
+      - Faraday v2.7.4
+      Accept:
+      - application/json, text/plain, */*
+      X-Pbp-Clienttype:
+      - WebApp
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 12 Apr 2023 21:07:57 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '1298'
+      Connection:
+      - keep-alive
+      Server:
+      - nginx/1.20.0
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubdomains; preload
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - ALLOW-FROM https://*.paybyphone.com https://*.cloudfront.net
+      Vary:
+      - Origin
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-cache, no-store
+      X-Request-Start:
+      - '1681333677.482'
+      X-Upstream-Response-Time:
+      - "-"
+      X-Request-Time:
+      - '0.166'
+      X-Time-Iso:
+      - '2023-04-12T21:07:57+00:00'
+    body:
+      encoding: UTF-8
+      string: '{"access_token":"a_token","expires_in":1200,"refresh_token":"w8Uw1BhCHFJz5ENuH_YUP0EHmGRCLYYb3vOJRlSsKca","scope":"paybyphone","token_type":"Bearer"}'
+  recorded_at: Wed, 12 Apr 2023 21:07:57 GMT
+- request:
+    method: get
+    uri: https://consumer.paybyphoneapis.com/parking/accounts
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      Authorization:
+      - Bearer a_token
+      Referer:
+      - https://m2.paybyphone.fr/
+      User-Agent:
+      - Faraday v2.7.4
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 12 Apr 2023 21:07:57 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '47'
+      Connection:
+      - keep-alive
+      Server:
+      - nginx/1.22.1
+      X-Powered-By:
+      - ASP.NET
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      X-Request-Start:
+      - '1681333677.981'
+      X-Upstream-Response-Time:
+      - "-"
+      X-Request-Time:
+      - '0.024'
+      X-Time-Iso:
+      - '2023-04-12T21:07:57+00:00'
+    body:
+      encoding: UTF-8
+      string: '[{"id":"b577ed39-6f82-4fad-b38e-17fb5792c91a"}]'
+  recorded_at: Wed, 12 Apr 2023 21:07:58 GMT
+- request:
+    method: get
+    uri: https://consumer.paybyphoneapis.com/parking/accounts/b577ed39-6f82-4fad-b38e-17fb5792c91a/sessions?periodType=Current
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      Authorization:
+      - Bearer a_token
+      Referer:
+      - https://m2.paybyphone.fr/
+      User-Agent:
+      - Faraday v2.7.4
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 12 Apr 2023 21:07:58 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '9870'
+      Connection:
+      - keep-alive
+      Server:
+      - nginx/1.22.1
+      X-Powered-By:
+      - ASP.NET
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      X-Request-Start:
+      - '1681333678.922'
+      X-Upstream-Response-Time:
+      - "-"
+      X-Request-Time:
+      - '0.540'
+      X-Time-Iso:
+      - '2023-04-12T21:07:58+00:00'
+    body:
+      encoding: UTF-8
+      string: '[{"parkingSessionId":"4f890a3a-b7b1-4cf5-8b31-67c7b9fe0970","locationId":"75001","startTime":"2023-04-12T20:23:03Z","stall":null,"expireTime":"2023-04-13T18:00:00Z","vehicle":{"id":94411639,"licensePlate":"GF929AP","type":"electricMotorcycle","countryCode":"FR","jurisdiction":""},"rateOption":{"rateOptionId":"1244259777","type":"VP-2RM"},"isStoppable":true,"fpsApplies":false,"totalCost":null,"isExtendable":false,"isRenewable":false,"renewableAfter":null,"segments":[{"parkingStart":"2023-04-12T20:23:03Z","parkingEnd":"2023-04-13T18:00:00Z","cost":0.0,"fees":0.0,"chargeableTimeUnitsParked":660,"chargeableTimeUnitType":1,"freeTimeUnitsApplied":0,"freeTimeUnitType":1}],"maxStayState":"MaxStayReached"},{"parkingSessionId":"4e890a3a-7cfa-4b31-85dd-7be1e026cf13","locationId":"75002","startTime":"2023-04-12T20:22:16Z","stall":null,"expireTime":"2023-04-13T18:00:00Z","vehicle":{"id":94411639,"licensePlate":"GF929AP","type":"electricMotorcycle","countryCode":"FR","jurisdiction":""},"rateOption":{"rateOptionId":"1244259777","type":"VP-2RM"},"isStoppable":true,"fpsApplies":false,"totalCost":null,"isExtendable":false,"isRenewable":false,"renewableAfter":null,"segments":[{"parkingStart":"2023-04-12T20:22:16Z","parkingEnd":"2023-04-13T18:00:00Z","cost":0.0,"fees":0.0,"chargeableTimeUnitsParked":660,"chargeableTimeUnitType":1,"freeTimeUnitsApplied":0,"freeTimeUnitType":1}],"maxStayState":"MaxStayReached"},{"parkingSessionId":"4f890a3a-b206-47e6-866f-022eb2c84529","locationId":"75003","startTime":"2023-04-12T20:22:19Z","stall":null,"expireTime":"2023-04-13T18:00:00Z","vehicle":{"id":94411639,"licensePlate":"GF929AP","type":"electricMotorcycle","countryCode":"FR","jurisdiction":""},"rateOption":{"rateOptionId":"1244259777","type":"VP-2RM"},"isStoppable":true,"fpsApplies":false,"totalCost":null,"isExtendable":false,"isRenewable":false,"renewableAfter":null,"segments":[{"parkingStart":"2023-04-12T20:22:19Z","parkingEnd":"2023-04-13T18:00:00Z","cost":0.0,"fees":0.0,"chargeableTimeUnitsParked":660,"chargeableTimeUnitType":1,"freeTimeUnitsApplied":0,"freeTimeUnitType":1}],"maxStayState":"MaxStayReached"},{"parkingSessionId":"4f890a3a-8c0f-481c-9b81-235625937afc","locationId":"75004","startTime":"2023-04-12T20:22:22Z","stall":null,"expireTime":"2023-04-13T18:00:00Z","vehicle":{"id":94411639,"licensePlate":"GF929AP","type":"electricMotorcycle","countryCode":"FR","jurisdiction":""},"rateOption":{"rateOptionId":"1244259777","type":"VP-2RM"},"isStoppable":true,"fpsApplies":false,"totalCost":null,"isExtendable":false,"isRenewable":false,"renewableAfter":null,"segments":[{"parkingStart":"2023-04-12T20:22:22Z","parkingEnd":"2023-04-13T18:00:00Z","cost":0.0,"fees":0.0,"chargeableTimeUnitsParked":660,"chargeableTimeUnitType":1,"freeTimeUnitsApplied":0,"freeTimeUnitType":1}],"maxStayState":"MaxStayReached"},{"parkingSessionId":"4f890a3a-6824-467b-b559-dd45a242e1e5","locationId":"75005","startTime":"2023-04-12T20:22:27Z","stall":null,"expireTime":"2023-04-13T18:00:00Z","vehicle":{"id":94411639,"licensePlate":"GF929AP","type":"electricMotorcycle","countryCode":"FR","jurisdiction":""},"rateOption":{"rateOptionId":"1244259777","type":"VP-2RM"},"isStoppable":true,"fpsApplies":false,"totalCost":null,"isExtendable":false,"isRenewable":false,"renewableAfter":null,"segments":[{"parkingStart":"2023-04-12T20:22:27Z","parkingEnd":"2023-04-13T18:00:00Z","cost":0.0,"fees":0.0,"chargeableTimeUnitsParked":660,"chargeableTimeUnitType":1,"freeTimeUnitsApplied":0,"freeTimeUnitType":1}],"maxStayState":"MaxStayReached"},{"parkingSessionId":"4f890a3a-fb38-4b76-86a2-8166bf7d2036","locationId":"75008","startTime":"2023-04-12T20:22:32Z","stall":null,"expireTime":"2023-04-13T18:00:00Z","vehicle":{"id":94411639,"licensePlate":"GF929AP","type":"electricMotorcycle","countryCode":"FR","jurisdiction":""},"rateOption":{"rateOptionId":"1244259777","type":"VP-2RM"},"isStoppable":true,"fpsApplies":false,"totalCost":null,"isExtendable":false,"isRenewable":false,"renewableAfter":null,"segments":[{"parkingStart":"2023-04-12T20:22:32Z","parkingEnd":"2023-04-13T18:00:00Z","cost":0.0,"fees":0.0,"chargeableTimeUnitsParked":660,"chargeableTimeUnitType":1,"freeTimeUnitsApplied":0,"freeTimeUnitType":1}],"maxStayState":"MaxStayReached"},{"parkingSessionId":"4e890a3a-0fe8-42e5-8c47-2611e67e5ec0","locationId":"75011","startTime":"2023-04-12T20:22:11Z","stall":null,"expireTime":"2023-04-13T18:00:00Z","vehicle":{"id":94411639,"licensePlate":"GF929AP","type":"electricMotorcycle","countryCode":"FR","jurisdiction":""},"rateOption":{"rateOptionId":"1244259777","type":"VP-2RM"},"isStoppable":true,"fpsApplies":false,"totalCost":null,"isExtendable":false,"isRenewable":false,"renewableAfter":null,"segments":[{"parkingStart":"2023-04-12T20:22:11Z","parkingEnd":"2023-04-13T18:00:00Z","cost":0.0,"fees":0.0,"chargeableTimeUnitsParked":660,"chargeableTimeUnitType":1,"freeTimeUnitsApplied":0,"freeTimeUnitType":1}],"maxStayState":"MaxStayReached"},{"parkingSessionId":"4f890a3a-5e58-4c03-95f3-83192d457856","locationId":"75015","startTime":"2023-04-12T20:22:40Z","stall":null,"expireTime":"2023-04-13T18:00:00Z","vehicle":{"id":94411639,"licensePlate":"GF929AP","type":"electricMotorcycle","countryCode":"FR","jurisdiction":""},"rateOption":{"rateOptionId":"1244259777","type":"VP-2RM"},"isStoppable":true,"fpsApplies":false,"totalCost":null,"isExtendable":false,"isRenewable":false,"renewableAfter":null,"segments":[{"parkingStart":"2023-04-12T20:22:40Z","parkingEnd":"2023-04-13T18:00:00Z","cost":0.0,"fees":0.0,"chargeableTimeUnitsParked":660,"chargeableTimeUnitType":1,"freeTimeUnitsApplied":0,"freeTimeUnitType":1}],"maxStayState":"MaxStayReached"},{"parkingSessionId":"4f890a3a-c76b-426b-966a-7afa758ad876","locationId":"75016","startTime":"2023-04-12T20:22:45Z","stall":null,"expireTime":"2023-04-13T18:00:00Z","vehicle":{"id":94411639,"licensePlate":"GF929AP","type":"electricMotorcycle","countryCode":"FR","jurisdiction":""},"rateOption":{"rateOptionId":"1244259777","type":"VP-2RM"},"isStoppable":true,"fpsApplies":false,"totalCost":null,"isExtendable":false,"isRenewable":false,"renewableAfter":null,"segments":[{"parkingStart":"2023-04-12T20:22:45Z","parkingEnd":"2023-04-13T18:00:00Z","cost":0.0,"fees":0.0,"chargeableTimeUnitsParked":660,"chargeableTimeUnitType":1,"freeTimeUnitsApplied":0,"freeTimeUnitType":1}],"maxStayState":"MaxStayReached"},{"parkingSessionId":"4f890a3a-db7f-4370-8eea-416aa82cfc76","locationId":"75017","startTime":"2023-04-12T20:22:50Z","stall":null,"expireTime":"2023-04-13T18:00:00Z","vehicle":{"id":94411639,"licensePlate":"GF929AP","type":"electricMotorcycle","countryCode":"FR","jurisdiction":""},"rateOption":{"rateOptionId":"1244259777","type":"VP-2RM"},"isStoppable":true,"fpsApplies":false,"totalCost":null,"isExtendable":false,"isRenewable":false,"renewableAfter":null,"segments":[{"parkingStart":"2023-04-12T20:22:50Z","parkingEnd":"2023-04-13T18:00:00Z","cost":0.0,"fees":0.0,"chargeableTimeUnitsParked":660,"chargeableTimeUnitType":1,"freeTimeUnitsApplied":0,"freeTimeUnitType":1}],"maxStayState":"MaxStayReached"},{"parkingSessionId":"4d890a3a-551a-429f-be17-6478433b2384","locationId":"75018","startTime":"2023-04-12T20:20:12Z","stall":null,"expireTime":"2023-04-13T18:00:00Z","vehicle":{"id":55757296,"licensePlate":"a_license_plate","type":"car","countryCode":"FR","jurisdiction":""},"rateOption":{"rateOptionId":"75101","type":"RES"},"isStoppable":true,"fpsApplies":false,"totalCost":null,"isExtendable":true,"isRenewable":false,"renewableAfter":null,"segments":[{"parkingStart":"2023-04-12T20:20:12Z","parkingEnd":"2023-04-13T18:00:00Z","cost":1.50,"fees":0.0,"chargeableTimeUnitsParked":660,"chargeableTimeUnitType":1,"freeTimeUnitsApplied":0,"freeTimeUnitType":1}],"maxStayState":"MaxStayWithinThreshold"},{"parkingSessionId":"d2880a3a-ddbc-4eb2-9d2b-226c20612d94","locationId":"75018","startTime":"2023-04-12T18:06:34Z","stall":null,"expireTime":"2023-04-13T18:00:00Z","vehicle":{"id":94411639,"licensePlate":"GF929AP","type":"electricMotorcycle","countryCode":"FR","jurisdiction":""},"rateOption":{"rateOptionId":"1244259777","type":"VP-2RM"},"isStoppable":true,"fpsApplies":false,"totalCost":null,"isExtendable":false,"isRenewable":false,"renewableAfter":null,"segments":[{"parkingStart":"2023-04-12T18:06:34Z","parkingEnd":"2023-04-13T18:00:00Z","cost":0.0,"fees":0.0,"chargeableTimeUnitsParked":660,"chargeableTimeUnitType":1,"freeTimeUnitsApplied":0,"freeTimeUnitType":1}],"maxStayState":"MaxStayReached"},{"parkingSessionId":"4f890a3a-b850-4c2c-bfb2-9c504e1690d5","locationId":"75019","startTime":"2023-04-12T20:22:38Z","stall":null,"expireTime":"2023-04-13T18:00:00Z","vehicle":{"id":94411639,"licensePlate":"GF929AP","type":"electricMotorcycle","countryCode":"FR","jurisdiction":""},"rateOption":{"rateOptionId":"1244259777","type":"VP-2RM"},"isStoppable":true,"fpsApplies":false,"totalCost":null,"isExtendable":false,"isRenewable":false,"renewableAfter":null,"segments":[{"parkingStart":"2023-04-12T20:22:38Z","parkingEnd":"2023-04-13T18:00:00Z","cost":0.0,"fees":0.0,"chargeableTimeUnitsParked":660,"chargeableTimeUnitType":1,"freeTimeUnitsApplied":0,"freeTimeUnitType":1}],"maxStayState":"MaxStayReached"},{"parkingSessionId":"4f890a3a-bf9c-4699-81e5-58a75c2f2c51","locationId":"75020","startTime":"2023-04-12T20:22:58Z","stall":null,"expireTime":"2023-04-13T18:00:00Z","vehicle":{"id":94411639,"licensePlate":"GF929AP","type":"electricMotorcycle","countryCode":"FR","jurisdiction":""},"rateOption":{"rateOptionId":"1244259777","type":"VP-2RM"},"isStoppable":true,"fpsApplies":false,"totalCost":null,"isExtendable":false,"isRenewable":false,"renewableAfter":null,"segments":[{"parkingStart":"2023-04-12T20:22:58Z","parkingEnd":"2023-04-13T18:00:00Z","cost":0.0,"fees":0.0,"chargeableTimeUnitsParked":660,"chargeableTimeUnitType":1,"freeTimeUnitsApplied":0,"freeTimeUnitType":1}],"maxStayState":"MaxStayReached"}]'
+  recorded_at: Wed, 12 Apr 2023 21:07:58 GMT
+- request:
+    method: post
+    uri: https://auth.paybyphoneapis.com/token
+    body:
+      encoding: US-ASCII
+      string: grant_type=password&username=a_fake_username&password=a_fake_password&client_id=paybyphone_web
+    headers:
+      User-Agent:
+      - Faraday v2.7.4
+      Accept:
+      - application/json, text/plain, */*
+      X-Pbp-Clienttype:
+      - WebApp
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 12 Apr 2023 21:07:59 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '1298'
+      Connection:
+      - keep-alive
+      Server:
+      - nginx/1.20.0
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubdomains; preload
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - ALLOW-FROM https://*.paybyphone.com https://*.cloudfront.net
+      Vary:
+      - Origin
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-cache, no-store
+      X-Request-Start:
+      - '1681333679.486'
+      X-Upstream-Response-Time:
+      - "-"
+      X-Request-Time:
+      - '0.158'
+      X-Time-Iso:
+      - '2023-04-12T21:07:59+00:00'
+    body:
+      encoding: UTF-8
+      string: '{"access_token":"a_token","expires_in":1200,"refresh_token":"gE-X2RYr8TtXk1Wktwr3XjcN7VPmNnG2kDnou4TDddv","scope":"paybyphone","token_type":"Bearer"}'
+  recorded_at: Wed, 12 Apr 2023 21:07:59 GMT
+- request:
+    method: post
+    uri: https://auth.paybyphoneapis.com/token
+    body:
+      encoding: US-ASCII
+      string: grant_type=password&username=a_fake_username&password=a_fake_password&client_id=paybyphone_web
+    headers:
+      User-Agent:
+      - Faraday v2.7.4
+      Accept:
+      - application/json, text/plain, */*
+      X-Pbp-Clienttype:
+      - WebApp
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 12 Apr 2023 21:08:00 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '1298'
+      Connection:
+      - keep-alive
+      Server:
+      - nginx/1.20.0
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubdomains; preload
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - ALLOW-FROM https://*.paybyphone.com https://*.cloudfront.net
+      Vary:
+      - Origin
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-cache, no-store
+      X-Request-Start:
+      - '1681333680.060'
+      X-Upstream-Response-Time:
+      - "-"
+      X-Request-Time:
+      - '0.175'
+      X-Time-Iso:
+      - '2023-04-12T21:08:00+00:00'
+    body:
+      encoding: UTF-8
+      string: '{"access_token":"a_token","expires_in":1200,"refresh_token":"CKTSgs-X-bNOlWcoML6a0bBV-BNm6NyTVsWhE8no5bW","scope":"paybyphone","token_type":"Bearer"}'
+  recorded_at: Wed, 12 Apr 2023 21:08:00 GMT
+- request:
+    method: get
+    uri: https://consumer.paybyphoneapis.com/parking/accounts
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      Authorization:
+      - Bearer a_token
+      Referer:
+      - https://m2.paybyphone.fr/
+      User-Agent:
+      - Faraday v2.7.4
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 12 Apr 2023 21:08:00 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '47'
+      Connection:
+      - keep-alive
+      Server:
+      - nginx/1.22.1
+      X-Powered-By:
+      - ASP.NET
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      X-Request-Start:
+      - '1681333680.484'
+      X-Upstream-Response-Time:
+      - "-"
+      X-Request-Time:
+      - '0.025'
+      X-Time-Iso:
+      - '2023-04-12T21:08:00+00:00'
+    body:
+      encoding: UTF-8
+      string: '[{"id":"b577ed39-6f82-4fad-b38e-17fb5792c91a"}]'
+  recorded_at: Wed, 12 Apr 2023 21:08:00 GMT
+- request:
+    method: get
+    uri: https://consumer.paybyphoneapis.com/parking/accounts/b577ed39-6f82-4fad-b38e-17fb5792c91a/quote?durationQuantity=1&durationTimeUnit=Days&isParkUntil=false&licensePlate=CL12345KK&locationId=75018&parkingAccountId=b577ed39-6f82-4fad-b38e-17fb5792c91a&rateOptionId=bhkjhlkjhkljhlkjhlkjhkjhkzeizeoiruzeo
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      Authorization:
+      - Bearer a_token
+      Referer:
+      - https://m2.paybyphone.fr/
+      User-Agent:
+      - Faraday v2.7.4
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 400
+      message: Bad Request
+    headers:
+      Date:
+      - Wed, 12 Apr 2023 21:08:00 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '51'
+      Connection:
+      - keep-alive
+      Server:
+      - nginx/1.22.1
+      X-Powered-By:
+      - ASP.NET
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      X-Request-Start:
+      - '1681333680.914'
+      X-Upstream-Response-Time:
+      - "-"
+      X-Request-Time:
+      - '0.027'
+      Access-Control-Allow-Origin:
+      - https://m2.qa.paybyphone.com
+      Access-Control-Allow-Headers:
+      - Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type,
+        Access-Control-Request-Method, Access-Control-Request-Headers, Authorization,
+        ContentType, x-pbp-clienttype, x-pbp-version, x-pbp-enableratelimitthreshold,
+        X-Pbp-BypassRateLimit, x-pbp-verificationtoken,x-datadog-trace-id, x-datadog-parent-id,
+        x-datadog-origin, x-datadog-sampling-priority, x-datadog-sampled, X-Pbp-DistributionChannel,
+        x-pbp-skip-verification, X-Pbp-ApiKey
+      Access-Control-Expose-Headers:
+      - "*"
+      Access-Control-Max-Age:
+      - '120'
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Methods:
+      - GET,PUT,POST,DELETE,OPTIONS,PATCH
+    body:
+      encoding: UTF-8
+      string: '{"issues":[{"reason":"RateOptionIdInvalidFormat"}]}'
+  recorded_at: Wed, 12 Apr 2023 21:08:00 GMT
+recorded_with: VCR 6.1.0
