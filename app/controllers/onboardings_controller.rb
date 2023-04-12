@@ -7,7 +7,6 @@ class OnboardingsController < ApplicationController
       redirect_to new_automated_ticket_path
     else
       @with_navbar = false
-      render 'welcome'
     end
   end
 end
