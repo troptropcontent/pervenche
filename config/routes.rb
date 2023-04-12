@@ -21,7 +21,13 @@ Rails.application.routes.draw do
     end
   end
 
-  resource 'admin', only: [], controller: 'admin' do
+  resource :admin, only: [], controller: 'admin' do
     get 'dashboard'
+    resources :diagnostics, only: [] do
+      collection do
+        resources :client, only: :show, param: :client_kind, constraints: { client_kind: /pay_by_phone/ },
+                           controller: 'admin/diagnostics/client'
+      end
+    end
   end
 end

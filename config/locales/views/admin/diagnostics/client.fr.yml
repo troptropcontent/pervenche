@@ -1,0 +1,19 @@
+en:
+    admin:
+      diagnostics:
+        client: 
+          views: 
+            show:
+              checks:
+                ok: OK
+                fail: ERREUR
+                vehicles : Vehicules
+                rate_options : Tarifs
+                payment_methods : Moyens de paiments
+                running_ticket : Tickets en cours
+                quote : Devis
+          partials:
+            client:
+              pay_by_phone: PayByPhone
+
+
