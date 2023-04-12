@@ -4,7 +4,7 @@ namespace :automated_ticket do
     tickets_to_renew = AutomatedTicket.missing_running_tickets_in_database
     return if tickets_to_renew.empty?
 
-    if Rails.env.production?
+    if ENV['PERVENCHE_RENEW_TICKET']
       tickets_to_renew.each do |(automated_ticket_id, zipcode)|
         AutomatedTicket::Renewer.call(automated_ticket_id:, zipcode:)
       end
