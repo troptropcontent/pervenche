@@ -5,7 +5,7 @@ http_interactions:
     uri: https://auth.paybyphoneapis.com/token
     body:
       encoding: US-ASCII
-      string: grant_type=password&username=%2B33607053868&password=Paybyphone.66&client_id=paybyphone_web
+      string: grant_type=password&username=a_fake_username&password=a_fake_password&client_id=paybyphone_web
     headers:
       User-Agent:
       - Faraday v2.7.4
@@ -61,7 +61,7 @@ http_interactions:
     uri: https://auth.paybyphoneapis.com/token
     body:
       encoding: US-ASCII
-      string: grant_type=password&username=%2B33607053868&password=Paybyphone.66&client_id=paybyphone_web
+      string: grant_type=password&username=a_fake_username&password=a_fake_password&client_id=paybyphone_web
     headers:
       User-Agent:
       - Faraday v2.7.4

@@ -5,7 +5,7 @@ http_interactions:
     uri: https://auth.paybyphoneapis.com/token
     body:
       encoding: US-ASCII
-      string: grant_type=password&username=%2B33607053868&password=Paybyphone.66&client_id=paybyphone_web
+      string: grant_type=password&username=a_fake_username&password=a_fake_password&client_id=paybyphone_web
     headers:
       User-Agent:
       - Faraday v2.7.4
@@ -61,7 +61,7 @@ http_interactions:
     uri: https://auth.paybyphoneapis.com/token
     body:
       encoding: US-ASCII
-      string: grant_type=password&username=%2B33607053868&password=Paybyphone.66&client_id=paybyphone_web
+      string: grant_type=password&username=a_fake_username&password=a_fake_password&client_id=paybyphone_web
     headers:
       User-Agent:
       - Faraday v2.7.4
@@ -160,11 +160,11 @@ http_interactions:
       - '2023-04-11T15:58:32+00:00'
     body:
       encoding: UTF-8
-      string: '[{"id":"b577ed39-6f82-4fad-b38e-17fb5792c91a"}]'
+      string: '[{"id":"account_id"}]'
   recorded_at: Tue, 11 Apr 2023 15:58:32 GMT
 - request:
     method: get
-    uri: https://consumer.paybyphoneapis.com/parking/locations/75019/rateOptions?licensePlate=CL191JL&parkingAccountId=b577ed39-6f82-4fad-b38e-17fb5792c91a
+    uri: https://consumer.paybyphoneapis.com/parking/locations/75018/rateOptions?licensePlate=CL123UU&parkingAccountId=account_id
     body:
       encoding: US-ASCII
       string: ''
@@ -210,14 +210,14 @@ http_interactions:
       - '2023-04-11T15:58:33+00:00'
     body:
       encoding: UTF-8
-      string: '[{"name":"Voiture - Visiteur - 75012-75020","type":"CUSTOM","rateOptionId":"1085252721","effectiveMaxStayDuration":{"quantity":19,"timeUnit":"Hours"},"maxStayStatus":"ParkingAllowed","policyType":"EmissionsBasedPolicy","maxStayEndTime":"2023-04-12T10:58:32+00:00","acceptedTimeUnits":["Minutes","Hours"],"restrictionPeriods":[{"startTime":"2023-04-11T09:00:00+02:00","endTime":"2023-04-11T20:00:00+02:00","maxStay":{"quantity":360,"timeUnit":"Minutes"}},{"startTime":"2023-04-12T09:00:00+02:00","endTime":"2023-04-12T20:00:00+02:00","maxStay":{"quantity":360,"timeUnit":"Minutes"}}],"availableTimeUnitsWithRestrictions":{"minutes":{"duration":{"quantity":19,"timeUnit":"Hours"},"endTime":"2023-04-12T12:58:32+02:00"},"hours":{"duration":{"quantity":19,"timeUnit":"Hours"},"endTime":"2023-04-12T12:58:32+02:00"}},"timeSteps":null,"isDefault":true,"isPreferred":false,"licensePlate":"CL191JL","areas":null,"fps":null,"availablePromotions":[],"renewalParking":{"isAllowed":false,"window":null},"eligibilityEndDate":null}]'
+      string: '[{"name":"Voiture - Visiteur - 75012-75020","type":"CUSTOM","rateOptionId":"1085252721","effectiveMaxStayDuration":{"quantity":19,"timeUnit":"Hours"},"maxStayStatus":"ParkingAllowed","policyType":"EmissionsBasedPolicy","maxStayEndTime":"2023-04-12T10:58:32+00:00","acceptedTimeUnits":["Minutes","Hours"],"restrictionPeriods":[{"startTime":"2023-04-11T09:00:00+02:00","endTime":"2023-04-11T20:00:00+02:00","maxStay":{"quantity":360,"timeUnit":"Minutes"}},{"startTime":"2023-04-12T09:00:00+02:00","endTime":"2023-04-12T20:00:00+02:00","maxStay":{"quantity":360,"timeUnit":"Minutes"}}],"availableTimeUnitsWithRestrictions":{"minutes":{"duration":{"quantity":19,"timeUnit":"Hours"},"endTime":"2023-04-12T12:58:32+02:00"},"hours":{"duration":{"quantity":19,"timeUnit":"Hours"},"endTime":"2023-04-12T12:58:32+02:00"}},"timeSteps":null,"isDefault":true,"isPreferred":false,"licensePlate":"CL123UU","areas":null,"fps":null,"availablePromotions":[],"renewalParking":{"isAllowed":false,"window":null},"eligibilityEndDate":null}]'
   recorded_at: Tue, 11 Apr 2023 15:58:33 GMT
 - request:
     method: post
     uri: https://auth.paybyphoneapis.com/token
     body:
       encoding: US-ASCII
-      string: grant_type=password&username=%2B33607053868&password=Paybyphone.66&client_id=paybyphone_web
+      string: grant_type=password&username=a_fake_username&password=a_fake_password&client_id=paybyphone_web
     headers:
       User-Agent:
       - Faraday v2.7.4
@@ -273,7 +273,7 @@ http_interactions:
     uri: https://auth.paybyphoneapis.com/token
     body:
       encoding: US-ASCII
-      string: grant_type=password&username=%2B33607053868&password=Paybyphone.66&client_id=paybyphone_web
+      string: grant_type=password&username=a_fake_username&password=a_fake_password&client_id=paybyphone_web
     headers:
       User-Agent:
       - Faraday v2.7.4
@@ -372,11 +372,11 @@ http_interactions:
       - '2023-04-11T15:58:35+00:00'
     body:
       encoding: UTF-8
-      string: '[{"id":"b577ed39-6f82-4fad-b38e-17fb5792c91a"}]'
+      string: '[{"id":"account_id"}]'
   recorded_at: Tue, 11 Apr 2023 15:58:35 GMT
 - request:
     method: get
-    uri: https://consumer.paybyphoneapis.com/parking/accounts/b577ed39-6f82-4fad-b38e-17fb5792c91a/quote?durationQuantity=1&durationTimeUnit=Hours&isParkUntil=false&licensePlate=CL191JL&locationId=75019&parkingAccountId=b577ed39-6f82-4fad-b38e-17fb5792c91a&rateOptionId=1085252721
+    uri: https://consumer.paybyphoneapis.com/parking/accounts/account_id/quote?durationQuantity=1&durationTimeUnit=Hours&isParkUntil=false&licensePlate=CL123UU&locationId=75018&parkingAccountId=account_id&rateOptionId=1085252721
     body:
       encoding: US-ASCII
       string: ''
@@ -422,6 +422,6 @@ http_interactions:
       - '2023-04-11T15:58:36+00:00'
     body:
       encoding: UTF-8
-      string: '{"locationId":"75019","stall":null,"quoteDate":"2023-04-11T15:58:35Z","totalCost":{"amount":4.0,"currency":"EUR"},"parkingAccountId":"b577ed39-6f82-4fad-b38e-17fb5792c91a","parkingStartTime":"2023-04-11T15:58:35Z","parkingExpiryTime":"2023-04-11T16:58:35Z","parkingDurationAdjustment":"NotAdjusted","licensePlate":"CL191JL","quoteItems":[{"quoteItemType":"Parking","name":"Parking","costAmount":{"amount":4.0,"currency":"EUR"}}],"quoteId":"7e56d834-df2f-4d02-b0b6-e5b5e9d5fd26","paymentMode":"Paid","promotionApplied":null}'
+      string: '{"locationId":"75018","stall":null,"quoteDate":"2023-04-11T15:58:35Z","totalCost":{"amount":4.0,"currency":"EUR"},"parkingAccountId":"account_id","parkingStartTime":"2023-04-11T15:58:35Z","parkingExpiryTime":"2023-04-11T16:58:35Z","parkingDurationAdjustment":"NotAdjusted","licensePlate":"CL123UU","quoteItems":[{"quoteItemType":"Parking","name":"Parking","costAmount":{"amount":4.0,"currency":"EUR"}}],"quoteId":"7e56d834-df2f-4d02-b0b6-e5b5e9d5fd26","paymentMode":"Paid","promotionApplied":null}'
   recorded_at: Tue, 11 Apr 2023 15:58:36 GMT
 recorded_with: VCR 6.1.0

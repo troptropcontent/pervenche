@@ -27,7 +27,7 @@ RSpec.describe AutomatedTicket::Setup::LoadData, type: :actor do
           { vehicles: [
             ParkingTicket::Clients::Models::Vehicle.new(
               client_internal_id: 'a_fake_client_id',
-              license_plate: 'a_fake_license_plate',
+              license_plate: 'CL123UU',
               vehicle_description: 'a_fake_name',
               vehicle_type: 'electric_motorcycle'
             )

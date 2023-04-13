@@ -11,13 +11,14 @@ module Admin::Diagnostics
       service
     end
     let!(:user) { FactoryBot.create(:user) }
-    let(:username) { '+33607053868' }
-    let(:password) { 'Paybyphone.66' }
+    let(:username) { 'a_fake_username' }
+    let(:password) { 'a_fake_password' }
     let(:kind) { 'pay_by_phone' }
     let!(:automated_ticket) do
-      FactoryBot.create(:automated_ticket, :set_up, service:, user:, license_plate: 'CL191JL', zipcodes: ['75019'],
+      FactoryBot.create(:automated_ticket, :set_up, service:, user:, license_plate: 'CL123UU', zipcodes: [zipcode],
                                                     rate_option_client_internal_id: '1085252721', accepted_time_units: ['days'])
     end
+    let(:zipcode) { '75018' }
     describe '.class_methods' do
       context 'pay_by_phone' do
         describe 'vehicles' do
@@ -85,6 +86,7 @@ module Admin::Diagnostics
           end
         end
         describe 'quote' do
+          let(:zipcode) { '75019' }
           context 'when no error is raised' do
             it 'returns Ok' do
               VCR.use_cassette('pay_by_phone_quote') do
@@ -169,6 +171,7 @@ module Admin::Diagnostics
           end
         end
         describe 'quote' do
+          let(:zipcode) { '75019' }
           context 'when no error is raised' do
             it 'returns Ok' do
               VCR.use_cassette('pay_by_phone_quote') do

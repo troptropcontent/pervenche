@@ -23,7 +23,7 @@ RSpec.describe AutomatedTicket::Setup::CompleteAlreadyCompletableSteps, type: :a
       it 'automatically set the license_plate, vehicle_type and vehicle_description' do
         subject
         reloaded_automated_ticket = automated_ticket.reload
-        expect(reloaded_automated_ticket.license_plate).to eq('a_fake_license_plate')
+        expect(reloaded_automated_ticket.license_plate).to eq('CL123UU')
         expect(reloaded_automated_ticket.vehicle_type).to eq('electric_motorcycle')
         expect(reloaded_automated_ticket.vehicle_description).to eq('a_fake_name')
       end

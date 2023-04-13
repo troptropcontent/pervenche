@@ -5,7 +5,7 @@ http_interactions:
     uri: https://auth.paybyphoneapis.com/token
     body:
       encoding: US-ASCII
-      string: grant_type=password&username=%2B33607053868&password=Paybyphone.66&client_id=paybyphone_web
+      string: grant_type=password&username=a_fake_username&password=a_fake_password&client_id=paybyphone_web
     headers:
       User-Agent:
       - Faraday v2.7.4
@@ -54,14 +54,14 @@ http_interactions:
       - '2023-04-11T15:41:41+00:00'
     body:
       encoding: UTF-8
-      string: '{"access_token":"eyJ4NXQiOiJpYVBrNzdUZ3Y1N1dTUFR3OVZrb2RIcXJIYWMiLCJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Ijg5QTNFNEVGQjRFMEJGOUVENjQ4RjRGMEY1NTkyODc0N0FBQjFEQTcifQ.eyJtZW1iZXJpZCI6ImI1NzdlZDM5LTllNmMtNGNlMi1iODNhLWE1Y2UzZTRhMjE1NSIsImFjdGl2ZXVzZXJhY2NvdW50IjoiYjU3N2VkMzktZWE2Zi00ODZjLWE1NTYtOGE4N2Y3YzY3MWE0IiwibmJmIjoxNjgxMjI3NzAxLCJndHkiOiJwYXNzd29yZCIsImp0aSI6Ikk3UUM3amF6bXhTeENpa1lzUFRUUCIsInN1YiI6ImI1NzdlZDM5LTllNmMtNGNlMi1iODNhLWE1Y2UzZTRhMjE1NSIsImlhdCI6MTY4MTIyNzcwMSwiZXhwIjoxNjgxMjI4OTAxLCJzY29wZSI6InBheWJ5cGhvbmUiLCJpc3MiOiJQYXlCeVBob25lIElkZW50aXR5IEFuZCBBY2Nlc3MiLCJhdWQiOlsicGJwX2FwaV9mcHNwYXltZW50cyIsInBicF9hcGlfcGFya2luZyIsInBicF9hcGlfcGF5bWVudCIsInBicF9hcGlfcHJvZmlsZXNlcnZpY2UiLCJwYnBfaWRhIiwiaHR0cDovL2FwaS5wYXlieXBob25lLmNvbSIsImh0dHA6Ly9hcGkucWEucGF5YnlwaG9uZS5jb20iXSwiYXpwIjoicGF5YnlwaG9uZV93ZWIifQ.sLzGhCUaqnKuxr9gLVNDKSld5MtWkqosCgKBAp6PKvWtew5zthWz0jCMnEruMSu-ITPqd4k4KksvNOnpwMVvdFnJ8sGISgwXYsXUS6zlArl8cvt8EsjCR70lxnMAszTt0gqn-v5gbNklavuIY7_6ItSWBaapsCh0zfBw4YS5qOQ0KTuzstvTHIIR-DXZXPG3Ep7U1ILF8i3Zk2V3BPhjxFL-4eFAgSLD6CdJED0J61IN25_PyoKjFeOAMESNsfrasSB9PtpOurIbneizJ2n0qAXNhPN-iLnxIsHmbGemwq8_KbvwTt-0BQksCm3-ZceVz_e6QNXp1HRY5U-WLU3TtQ","expires_in":1200,"refresh_token":"lgxFWgIwtKt4MHzQVeBI80EtixYXcwkA3cyVYUABV0w","scope":"paybyphone","token_type":"Bearer"}'
+      string: '{"access_token":"a_token","expires_in":1200,"refresh_token":"lgxFWgIwtKt4MHzQVeBI80EtixYXcwkA3cyVYUABV0w","scope":"paybyphone","token_type":"Bearer"}'
   recorded_at: Tue, 11 Apr 2023 15:41:41 GMT
 - request:
     method: post
     uri: https://auth.paybyphoneapis.com/token
     body:
       encoding: US-ASCII
-      string: grant_type=password&username=%2B33607053868&password=Paybyphone.66&client_id=paybyphone_web
+      string: grant_type=password&username=a_fake_username&password=a_fake_password&client_id=paybyphone_web
     headers:
       User-Agent:
       - Faraday v2.7.4
@@ -110,7 +110,7 @@ http_interactions:
       - '2023-04-11T15:41:42+00:00'
     body:
       encoding: UTF-8
-      string: '{"access_token":"eyJ4NXQiOiJpYVBrNzdUZ3Y1N1dTUFR3OVZrb2RIcXJIYWMiLCJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Ijg5QTNFNEVGQjRFMEJGOUVENjQ4RjRGMEY1NTkyODc0N0FBQjFEQTcifQ.eyJtZW1iZXJpZCI6ImI1NzdlZDM5LTllNmMtNGNlMi1iODNhLWE1Y2UzZTRhMjE1NSIsImFjdGl2ZXVzZXJhY2NvdW50IjoiYjU3N2VkMzktZWE2Zi00ODZjLWE1NTYtOGE4N2Y3YzY3MWE0IiwibmJmIjoxNjgxMjI3NzAyLCJndHkiOiJwYXNzd29yZCIsImp0aSI6InphX2ZLbzlUZ2hqTG1zT3g4S3RkQyIsInN1YiI6ImI1NzdlZDM5LTllNmMtNGNlMi1iODNhLWE1Y2UzZTRhMjE1NSIsImlhdCI6MTY4MTIyNzcwMiwiZXhwIjoxNjgxMjI4OTAyLCJzY29wZSI6InBheWJ5cGhvbmUiLCJpc3MiOiJQYXlCeVBob25lIElkZW50aXR5IEFuZCBBY2Nlc3MiLCJhdWQiOlsicGJwX2FwaV9mcHNwYXltZW50cyIsInBicF9hcGlfcGFya2luZyIsInBicF9hcGlfcGF5bWVudCIsInBicF9hcGlfcHJvZmlsZXNlcnZpY2UiLCJwYnBfaWRhIiwiaHR0cDovL2FwaS5wYXlieXBob25lLmNvbSIsImh0dHA6Ly9hcGkucWEucGF5YnlwaG9uZS5jb20iXSwiYXpwIjoicGF5YnlwaG9uZV93ZWIifQ.MeweI2GPuADWqEcFTvSEedB7_S6ngvEyTEoGB67Odm6sBOcNo51DG3f12jhkUVAQTD8USJus8cjjp4TVmsynTTrKbh0wNdyevkJsv55MYOsT0MqDfVdpubvJsUfunmH1idrq_8l_pYgcFLCjTXlS9uzymyu3S2kfmQD3J7Qv9kcU-5r6bWiFIqKPnMWVgYRK7LteWKLLvXqPWMQ0WuNfANhinYt6RfWk2WUFJOBCAq1IvwyyMrs7LSq2nq8Mk1JR1Yx-zB3288X-kySBwUUrn6KOpmUdB8p3kGGeJC_WMBU4Oqku5NtAygDIUlFegUPG9TKuNoAvFGFFxMWM2HZ2Bw","expires_in":1200,"refresh_token":"l90icbXrYkB0liqX5Binf0wL8YE4gBoeNYSlDtSQbWR","scope":"paybyphone","token_type":"Bearer"}'
+      string: '{"access_token":"a_token","expires_in":1200,"refresh_token":"l90icbXrYkB0liqX5Binf0wL8YE4gBoeNYSlDtSQbWR","scope":"paybyphone","token_type":"Bearer"}'
   recorded_at: Tue, 11 Apr 2023 15:41:42 GMT
 - request:
     method: get
@@ -122,7 +122,7 @@ http_interactions:
       Content-Type:
       - application/json
       Authorization:
-      - Bearer eyJ4NXQiOiJpYVBrNzdUZ3Y1N1dTUFR3OVZrb2RIcXJIYWMiLCJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Ijg5QTNFNEVGQjRFMEJGOUVENjQ4RjRGMEY1NTkyODc0N0FBQjFEQTcifQ.eyJtZW1iZXJpZCI6ImI1NzdlZDM5LTllNmMtNGNlMi1iODNhLWE1Y2UzZTRhMjE1NSIsImFjdGl2ZXVzZXJhY2NvdW50IjoiYjU3N2VkMzktZWE2Zi00ODZjLWE1NTYtOGE4N2Y3YzY3MWE0IiwibmJmIjoxNjgxMjI3NzAyLCJndHkiOiJwYXNzd29yZCIsImp0aSI6InphX2ZLbzlUZ2hqTG1zT3g4S3RkQyIsInN1YiI6ImI1NzdlZDM5LTllNmMtNGNlMi1iODNhLWE1Y2UzZTRhMjE1NSIsImlhdCI6MTY4MTIyNzcwMiwiZXhwIjoxNjgxMjI4OTAyLCJzY29wZSI6InBheWJ5cGhvbmUiLCJpc3MiOiJQYXlCeVBob25lIElkZW50aXR5IEFuZCBBY2Nlc3MiLCJhdWQiOlsicGJwX2FwaV9mcHNwYXltZW50cyIsInBicF9hcGlfcGFya2luZyIsInBicF9hcGlfcGF5bWVudCIsInBicF9hcGlfcHJvZmlsZXNlcnZpY2UiLCJwYnBfaWRhIiwiaHR0cDovL2FwaS5wYXlieXBob25lLmNvbSIsImh0dHA6Ly9hcGkucWEucGF5YnlwaG9uZS5jb20iXSwiYXpwIjoicGF5YnlwaG9uZV93ZWIifQ.MeweI2GPuADWqEcFTvSEedB7_S6ngvEyTEoGB67Odm6sBOcNo51DG3f12jhkUVAQTD8USJus8cjjp4TVmsynTTrKbh0wNdyevkJsv55MYOsT0MqDfVdpubvJsUfunmH1idrq_8l_pYgcFLCjTXlS9uzymyu3S2kfmQD3J7Qv9kcU-5r6bWiFIqKPnMWVgYRK7LteWKLLvXqPWMQ0WuNfANhinYt6RfWk2WUFJOBCAq1IvwyyMrs7LSq2nq8Mk1JR1Yx-zB3288X-kySBwUUrn6KOpmUdB8p3kGGeJC_WMBU4Oqku5NtAygDIUlFegUPG9TKuNoAvFGFFxMWM2HZ2Bw
+      - Bearer a_token
       Referer:
       - https://m2.paybyphone.fr/
       User-Agent:
@@ -158,8 +158,8 @@ http_interactions:
       - '2023-04-11T15:41:42+00:00'
     body:
       encoding: UTF-8
-      string: '[{"vehicleId":"dCqmcYtMBVHXeKKSPL6TZ3aGq3NoLCAgovAP-fJaAl2RBOeCgO62Q_M5Urz4Oakb1wmZ22TyN9MBtqzDUHBcyg","legacyVehicleId":55757296,"licensePlate":"CL191JL","country":"FR","type":"Car"},{"vehicleId":"v_cO-eR4UHbRCdX3MaO-aIrfFHQdaVLIMapxxLuFSe45RLZoAU9z1XdaiGTortXSqZH2k_9Rej97qB8Cdah2sQ","legacyVehicleId":94411639,"licensePlate":"GF929AP","country":"FR","jurisdiction":"","type":"ElectricMotorcycle","profile":{"photo":"","description":"scoot
-        de Tho"}},{"vehicleId":"RArpPrn2JNLaZv7DKXg-IE1lmBuL09N5dzHKE1X28CcQNxVl9ixcU1_YaUVxro6A1eDuC7UtwYu39surE-coPg","legacyVehicleId":36022663,"licensePlate":"ED491TH","country":"FR","type":"Car"},{"vehicleId":"UO1TTdQjA51k-gKgWZGZ6dWu66w_DeI1Ib5KkA1jahzyi6vpTAFXYBig1mjsgobirbsQiKYkGv_nb6LTWVls5A","legacyVehicleId":89703481,"licensePlate":"FM411ZK","country":"FR","jurisdiction":"","type":"Car","profile":{"photo":"","description":"van
+      string: '[{"vehicleId":"dCqmcYtMBVHXeKKSPL6TZ3aGq3NoLCAgovAP-fJaAl2RBOeCgO62Q_M5Urz4Oakb1wmZ22TyN9MBtqzDUHBcyg","legacyVehicleId":55757296,"licensePlate":"CL123UU","country":"FR","type":"Car"},{"vehicleId":"v_cO-eR4UHbRCdX3MaO-aIrfFHQdaVLIMapxxLuFSe45RLZoAU9z1XdaiGTortXSqZH2k_9Rej97qB8Cdah2sQ","legacyVehicleId":94411639,"licensePlate":"GF123XX","country":"FR","jurisdiction":"","type":"ElectricMotorcycle","profile":{"photo":"","description":"scoot
+        de Tho"}},{"vehicleId":"RArpPrn2JNLaZv7DKXg-IE1lmBuL09N5dzHKE1X28CcQNxVl9ixcU1_YaUVxro6A1eDuC7UtwYu39surE-coPg","legacyVehicleId":36022663,"licensePlate":"ED123YY","country":"FR","type":"Car"},{"vehicleId":"UO1TTdQjA51k-gKgWZGZ6dWu66w_DeI1Ib5KkA1jahzyi6vpTAFXYBig1mjsgobirbsQiKYkGv_nb6LTWVls5A","legacyVehicleId":89703481,"licensePlate":"FM123OO","country":"FR","jurisdiction":"","type":"Car","profile":{"photo":"","description":"van
         Cheyerre"}}]'
   recorded_at: Tue, 11 Apr 2023 15:41:42 GMT
 recorded_with: VCR 6.1.0
