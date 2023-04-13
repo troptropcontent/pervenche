@@ -5,7 +5,7 @@ http_interactions:
     uri: https://auth.paybyphoneapis.com/token
     body:
       encoding: US-ASCII
-      string: grant_type=password&username=%2B33607053868&password=Paybyphone.66&client_id=paybyphone_web
+      string: grant_type=password&username=a_fake_username&password=a_fake_password&client_id=paybyphone_web
     headers:
       User-Agent:
       - Faraday v2.7.4
@@ -54,14 +54,14 @@ http_interactions:
       - '2023-04-11T16:00:40+00:00'
     body:
       encoding: UTF-8
-      string: '{"access_token":"eyJ4NXQiOiJpYVBrNzdUZ3Y1N1dTUFR3OVZrb2RIcXJIYWMiLCJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Ijg5QTNFNEVGQjRFMEJGOUVENjQ4RjRGMEY1NTkyODc0N0FBQjFEQTcifQ.eyJtZW1iZXJpZCI6ImI1NzdlZDM5LTllNmMtNGNlMi1iODNhLWE1Y2UzZTRhMjE1NSIsImFjdGl2ZXVzZXJhY2NvdW50IjoiYjU3N2VkMzktZWE2Zi00ODZjLWE1NTYtOGE4N2Y3YzY3MWE0IiwibmJmIjoxNjgxMjI4ODQwLCJndHkiOiJwYXNzd29yZCIsImp0aSI6InJNclZKQVFGNFVHMHVISjM0Q04yMiIsInN1YiI6ImI1NzdlZDM5LTllNmMtNGNlMi1iODNhLWE1Y2UzZTRhMjE1NSIsImlhdCI6MTY4MTIyODg0MCwiZXhwIjoxNjgxMjMwMDQwLCJzY29wZSI6InBheWJ5cGhvbmUiLCJpc3MiOiJQYXlCeVBob25lIElkZW50aXR5IEFuZCBBY2Nlc3MiLCJhdWQiOlsicGJwX2FwaV9mcHNwYXltZW50cyIsInBicF9hcGlfcGFya2luZyIsInBicF9hcGlfcGF5bWVudCIsInBicF9hcGlfcHJvZmlsZXNlcnZpY2UiLCJwYnBfaWRhIiwiaHR0cDovL2FwaS5wYXlieXBob25lLmNvbSIsImh0dHA6Ly9hcGkucWEucGF5YnlwaG9uZS5jb20iXSwiYXpwIjoicGF5YnlwaG9uZV93ZWIifQ.OFD09FZZrl3Yfob1itEez7eKZMhNAkTi3WrZKD6KS4fcG091-dChnwimd70JlNRwfCeoRQ4D0pPbu_-xTURy-64HngnvS77_XblM_WIo7sKYm9V24iboRxQecMM7WgOEsrNaro63-pyKxas1h6h8fxymYhldymNbuQEYrPNTZiXylms6nSw2VKpkdDBQRdNp6IPvPoYepjMRTJkE-y6dGiJzbh8KZsR_twEVLUa5ZA2wbZGRLeth8qfL29IiMzH3UVo9ZDpxiYo6E9zoKP6TLZMU7M_Y4Scqdf7lUCdQ_akk45QZoxNx3xl-b0QHEp6PV5aygQ-4yHZIG5wzoCoDDA","expires_in":1200,"refresh_token":"fVSm90W_93EBERBsvrZYsD81ueTwCxDDC4dpb8yIKZA","scope":"paybyphone","token_type":"Bearer"}'
+      string: '{"access_token":"a_token","expires_in":1200,"refresh_token":"fVSm90W_93EBERBsvrZYsD81ueTwCxDDC4dpb8yIKZA","scope":"paybyphone","token_type":"Bearer"}'
   recorded_at: Tue, 11 Apr 2023 16:00:40 GMT
 - request:
     method: post
     uri: https://auth.paybyphoneapis.com/token
     body:
       encoding: US-ASCII
-      string: grant_type=password&username=%2B33607053868&password=Paybyphone.66&client_id=paybyphone_web
+      string: grant_type=password&username=a_fake_username&password=a_fake_password&client_id=paybyphone_web
     headers:
       User-Agent:
       - Faraday v2.7.4
@@ -110,7 +110,7 @@ http_interactions:
       - '2023-04-11T16:00:40+00:00'
     body:
       encoding: UTF-8
-      string: '{"access_token":"eyJ4NXQiOiJpYVBrNzdUZ3Y1N1dTUFR3OVZrb2RIcXJIYWMiLCJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Ijg5QTNFNEVGQjRFMEJGOUVENjQ4RjRGMEY1NTkyODc0N0FBQjFEQTcifQ.eyJtZW1iZXJpZCI6ImI1NzdlZDM5LTllNmMtNGNlMi1iODNhLWE1Y2UzZTRhMjE1NSIsImFjdGl2ZXVzZXJhY2NvdW50IjoiYjU3N2VkMzktZWE2Zi00ODZjLWE1NTYtOGE4N2Y3YzY3MWE0IiwibmJmIjoxNjgxMjI4ODQwLCJndHkiOiJwYXNzd29yZCIsImp0aSI6IktaOV9hVDdMaWhzRkk2SWhQd0dfdSIsInN1YiI6ImI1NzdlZDM5LTllNmMtNGNlMi1iODNhLWE1Y2UzZTRhMjE1NSIsImlhdCI6MTY4MTIyODg0MCwiZXhwIjoxNjgxMjMwMDQwLCJzY29wZSI6InBheWJ5cGhvbmUiLCJpc3MiOiJQYXlCeVBob25lIElkZW50aXR5IEFuZCBBY2Nlc3MiLCJhdWQiOlsicGJwX2FwaV9mcHNwYXltZW50cyIsInBicF9hcGlfcGFya2luZyIsInBicF9hcGlfcGF5bWVudCIsInBicF9hcGlfcHJvZmlsZXNlcnZpY2UiLCJwYnBfaWRhIiwiaHR0cDovL2FwaS5wYXlieXBob25lLmNvbSIsImh0dHA6Ly9hcGkucWEucGF5YnlwaG9uZS5jb20iXSwiYXpwIjoicGF5YnlwaG9uZV93ZWIifQ.U-djXGRm5AMao6-6uUVrHfXnHLGpu70lx34ljcWPdhzM2YEGUpRK3c9ymmN4pR7dauwb67A8m7FEpWjOHiGo12DVf7vIYRgl7CGhwWpbSk3fPtmSu9xUQ6_-puZat0Cln0FYuageJnJ4E7UPSV7V8Dai3RiLEk2M_1mqqeXsCszsDKlRv1UgrGluLrQWl4QxsQzOiraKTCz-HEsmhvlgRfTeIXUR6zmK2zQ4xFV2oSs1EDijdgHwjNjYYQjVaoVs3hS8XKken04vwgMAqCWJY5m0_CMXUT3Crq3ZST8B8SKWHTYn5QBCzSrb3_xbm-saVeLGQOgJFDJfl78skJtGBA","expires_in":1200,"refresh_token":"bibjpirLXYuK2kmuO6-uPwgpiVfwJ7O6OuB7j_2s7YY","scope":"paybyphone","token_type":"Bearer"}'
+      string: '{"access_token":"a_token","expires_in":1200,"refresh_token":"bibjpirLXYuK2kmuO6-uPwgpiVfwJ7O6OuB7j_2s7YY","scope":"paybyphone","token_type":"Bearer"}'
   recorded_at: Tue, 11 Apr 2023 16:00:40 GMT
 - request:
     method: get
@@ -124,7 +124,7 @@ http_interactions:
       Accept-Language:
       - fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7
       Authorization:
-      - Bearer eyJ4NXQiOiJpYVBrNzdUZ3Y1N1dTUFR3OVZrb2RIcXJIYWMiLCJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Ijg5QTNFNEVGQjRFMEJGOUVENjQ4RjRGMEY1NTkyODc0N0FBQjFEQTcifQ.eyJtZW1iZXJpZCI6ImI1NzdlZDM5LTllNmMtNGNlMi1iODNhLWE1Y2UzZTRhMjE1NSIsImFjdGl2ZXVzZXJhY2NvdW50IjoiYjU3N2VkMzktZWE2Zi00ODZjLWE1NTYtOGE4N2Y3YzY3MWE0IiwibmJmIjoxNjgxMjI4ODQwLCJndHkiOiJwYXNzd29yZCIsImp0aSI6IktaOV9hVDdMaWhzRkk2SWhQd0dfdSIsInN1YiI6ImI1NzdlZDM5LTllNmMtNGNlMi1iODNhLWE1Y2UzZTRhMjE1NSIsImlhdCI6MTY4MTIyODg0MCwiZXhwIjoxNjgxMjMwMDQwLCJzY29wZSI6InBheWJ5cGhvbmUiLCJpc3MiOiJQYXlCeVBob25lIElkZW50aXR5IEFuZCBBY2Nlc3MiLCJhdWQiOlsicGJwX2FwaV9mcHNwYXltZW50cyIsInBicF9hcGlfcGFya2luZyIsInBicF9hcGlfcGF5bWVudCIsInBicF9hcGlfcHJvZmlsZXNlcnZpY2UiLCJwYnBfaWRhIiwiaHR0cDovL2FwaS5wYXlieXBob25lLmNvbSIsImh0dHA6Ly9hcGkucWEucGF5YnlwaG9uZS5jb20iXSwiYXpwIjoicGF5YnlwaG9uZV93ZWIifQ.U-djXGRm5AMao6-6uUVrHfXnHLGpu70lx34ljcWPdhzM2YEGUpRK3c9ymmN4pR7dauwb67A8m7FEpWjOHiGo12DVf7vIYRgl7CGhwWpbSk3fPtmSu9xUQ6_-puZat0Cln0FYuageJnJ4E7UPSV7V8Dai3RiLEk2M_1mqqeXsCszsDKlRv1UgrGluLrQWl4QxsQzOiraKTCz-HEsmhvlgRfTeIXUR6zmK2zQ4xFV2oSs1EDijdgHwjNjYYQjVaoVs3hS8XKken04vwgMAqCWJY5m0_CMXUT3Crq3ZST8B8SKWHTYn5QBCzSrb3_xbm-saVeLGQOgJFDJfl78skJtGBA
+      - Bearer a_token
       Content-Type:
       - application/json
       Sec-Fetch-Dest:
