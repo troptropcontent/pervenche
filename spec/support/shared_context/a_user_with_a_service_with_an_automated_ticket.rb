@@ -45,20 +45,20 @@ RSpec.shared_context 'a user with a service with an automated ticket' do |last_v
   when :vehicle
     let(:automated_ticket_service) { service }
     let(:localisation) { 'paris' }
-    let(:license_plate) { 'a_fake_license_plate' }
+    let(:license_plate) { 'CL123UU' }
     let(:vehicle_type) { 'electric_motorcycle' }
     let(:vehicle_description) { 'a_fake_name' }
   when :zipcodes
     let(:automated_ticket_service) { service }
     let(:localisation) { 'paris' }
-    let(:license_plate) { 'a_fake_license_plate' }
+    let(:license_plate) { 'CL123UU' }
     let(:vehicle_type) { 'electric_motorcycle' }
     let(:vehicle_description) { 'a_fake_name' }
     let(:zipcodes) { %w[75008 75017 75019] }
   when :rate_option
     let(:automated_ticket_service) { service }
     let(:localisation) { 'paris' }
-    let(:license_plate) { 'a_fake_license_plate' }
+    let(:license_plate) { 'CL123UU' }
     let(:vehicle_type) { 'electric_motorcycle' }
     let(:vehicle_description) { 'a_fake_name' }
     let(:zipcodes) { %w[75008 75017 75019] }
@@ -68,7 +68,7 @@ RSpec.shared_context 'a user with a service with an automated ticket' do |last_v
   when :weekdays
     let(:automated_ticket_service) { service }
     let(:localisation) { 'paris' }
-    let(:license_plate) { 'a_fake_license_plate' }
+    let(:license_plate) { 'CL123UU' }
     let(:vehicle_type) { 'electric_motorcycle' }
     let(:vehicle_description) { 'a_fake_name' }
     let(:zipcodes) { %w[75008 75017 75019] }
@@ -79,7 +79,7 @@ RSpec.shared_context 'a user with a service with an automated ticket' do |last_v
   when :payment_methods
     let(:automated_ticket_service) { service }
     let(:localisation) { 'paris' }
-    let(:license_plate) { 'a_fake_license_plate' }
+    let(:license_plate) { 'CL123UU' }
     let(:vehicle_type) { 'electric_motorcycle' }
     let(:vehicle_description) { 'a_fake_name' }
     let(:zipcodes) { %w[75008 75017 75019] }
