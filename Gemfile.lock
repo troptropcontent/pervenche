@@ -68,6 +68,7 @@ GEM
       tzinfo (~> 2.0)
     addressable (2.8.4)
       public_suffix (>= 2.0.2, < 6.0)
+    amazing_print (1.4.0)
     ast (2.4.2)
     bcrypt (3.1.18)
     better_html (2.0.1)
@@ -139,6 +140,9 @@ GEM
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
     json (2.6.3)
+    json_matchers (0.11.1)
+      json_schema
+    json_schema (0.21.0)
     jwt (2.7.0)
     loofah (2.20.0)
       crass (~> 1.0.2)
@@ -203,8 +207,6 @@ GEM
       omniauth (~> 2.0)
     orm_adapter (0.5.0)
     parallel (1.22.1)
-    parking_ticket (1.0.51)
-      faraday (>= 2.7.2)
     parser (3.2.2.0)
       ast (~> 2.4.1)
     pg (1.4.6)
@@ -300,6 +302,8 @@ GEM
     rubocop-rspec (2.19.0)
       rubocop (~> 1.33)
       rubocop-capybara (~> 2.17)
+    rubocop-sorbet (0.7.0)
+      rubocop (>= 0.90.0)
     ruby-progressbar (1.13.0)
     ruby2_keywords (0.0.5)
     rubyzip (2.3.2)
@@ -416,6 +420,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  amazing_print
   bootsnap
   byebug
   cancancan
@@ -423,13 +428,14 @@ DEPENDENCIES
   devise
   erb_lint
   factory_bot_rails
+  faraday (>= 2.7.2)
   importmap-rails
   inline_svg
   jbuilder
+  json_matchers
   money-rails (~> 1.12)
   omniauth-google-oauth2
   omniauth-rails_csrf_protection
-  parking_ticket
   pg (~> 1.1)
   puma (~> 5.0)
   rails (~> 7.0.4, >= 7.0.4.1)
@@ -439,6 +445,7 @@ DEPENDENCIES
   rubocop
   rubocop-rails
   rubocop-rspec
+  rubocop-sorbet
   sassc-rails
   selenium-webdriver
   sentry-rails
@@ -454,6 +461,7 @@ DEPENDENCIES
   tapioca
   turbo-rails
   tzinfo-data
+  unparser
   vcr
   web-console
   webdrivers
