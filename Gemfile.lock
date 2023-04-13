@@ -461,7 +461,6 @@ DEPENDENCIES
   tapioca
   turbo-rails
   tzinfo-data
-  unparser
   vcr
   web-console
   webdrivers
