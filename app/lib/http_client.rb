@@ -1,7 +1,28 @@
-# typed: strict
+# typed: true
 # frozen_string_literal: true
 
 class HttpClient
+  # TO DO ADD TYPE HERE
+  class JsonFormater < Faraday::Logging::Formatter
+    def request(env); end
+
+    def response(env)
+      # Build a custom message using `env`
+      info('Request') do
+        json = JSON.generate({ source: :http_client,
+                               status: env.status,
+                               url: env.url,
+                               method: env.method,
+                               request: { body: env.request_body, headers: env.request_headers },
+                               headers: env.response_headers,
+                               body: env.response_body })
+
+        json.gsub(/(username=|password=)([^&]+)/, '\1[REMOVED]')
+      end
+    end
+
+    def exception(_exc); end
+  end
   extend T::Sig
   sig do
     params(url: String,
@@ -44,9 +65,7 @@ class HttpClient
       conn.response :json
       conn.request(:authorization, 'Bearer', token) if token
       conn.response :raise_error
-      conn.response :logger, nil, { headers: false, bodies: true } do |logger|
-        logger.filter(/(username=|password=)([^&]+)/, '\1[REMOVED]')
-      end
+      conn.response :logger, Rails.logger, { formatter: JsonFormater }
     end
   end
 end
