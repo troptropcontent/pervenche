@@ -31,6 +31,10 @@ gem 'stimulus-rails'
 gem 'sentry-rails'
 gem 'sentry-ruby'
 
+#Logging
+gem 'lograge'
+gem 'lograge-sql'
+
 # Use Tailwind CSS [https://github.com/rails/tailwindcss-rails]
 # gem 'tailwindcss-rails'
 
