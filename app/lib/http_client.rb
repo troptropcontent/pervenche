@@ -45,7 +45,7 @@ class HttpClient
       conn.request(:authorization, 'Bearer', token) if token
       conn.response :raise_error
       conn.response :logger, nil, { headers: false, bodies: true } do |logger|
-        logger.filter(/(username=|password=@)([^&]+)/, '\1[REMOVED]')
+        logger.filter(/(username=|password=)([^&]+)/, '\1[REMOVED]')
       end
     end
   end

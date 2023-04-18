@@ -3,8 +3,10 @@
     padding: var(--space-l) var(--space-l);
     background-origin: border-box; // Invisible borders with linear gradients
     background-color: transparent;
-    border: var(--border-dark);
-    box-shadow: var(--shadow-retro);
+    border: solid 2px transparent;
+    border-radius: var(--border-radius);
+    // border: var(--border-dark);
+    // box-shadow: var(--shadow-retro);
     font-weight: bold;
     text-decoration: none;
     cursor: pointer;
