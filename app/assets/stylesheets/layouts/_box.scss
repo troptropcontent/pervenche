@@ -1,8 +1,10 @@
 .box {
     padding: var(--space-s);
-    border: var(--border-dark);
     background-color: var(--color-white);
-    box-shadow: var(--shadow-retro);
+    border: var(--border);
+    border-radius: var(--border-radius);
+    // border: var(--border-dark);
+    // box-shadow: var(--shadow-retro);
     
     &--primary {
         background-color: var(--color-primary);
