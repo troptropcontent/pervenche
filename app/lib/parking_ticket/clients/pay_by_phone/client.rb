@@ -8,49 +8,106 @@ module ParkingTicket
         extend T::Sig
         class << self
           extend T::Sig
-          sig { params(username: String, password: String).returns(Faraday::Response) }
+          sig do
+            params(username: String,
+                   password: String)
+              .returns(T::Hash[
+              String,
+              T.any(
+                String,
+                T::Array[T.untyped],
+                T::Hash[T.untyped, T.untyped]
+              )])
+          end
           def auth(username, password)
-            conn = Faraday.new('https://auth.paybyphoneapis.com') do |f|
-              f.response :json
-            end
-
-            conn.post(
-              '/token',
-              URI.encode_www_form({
-                                    grant_type: 'password',
-                                    username:,
-                                    password:,
-                                    client_id: 'paybyphone_web'
-                                  }),
-              {
+            HttpClient.post(
+              url: 'https://auth.paybyphoneapis.com/token',
+              body: URI.encode_www_form({
+                                          grant_type: 'password',
+                                          username:,
+                                          password:,
+                                          client_id: 'paybyphone_web'
+                                        }),
+              headers: {
                 'Accept' => 'application/json, text/plain, */*',
                 'X-Pbp-ClientType' => 'WebApp'
               }
-            )
-          end
-
-          sig { params(token: String, account_id: String, zipcode: String, license_plate: String).returns(Array) }
-          def rate_options(token, account_id, zipcode, license_plate)
-            connection(token).get("/parking/locations/#{zipcode}/rateOptions",
-                                  {
-                                    parkingAccountId: account_id,
-                                    licensePlate: license_plate
-                                  }).body
-          end
-
-          sig { params(token: String).returns(T::Array[T::Hash[String, T.untyped]]) }
-          def vehicles(token)
-            connection(token).get('/identity/profileservice/v1/members/vehicles/paybyphone').body
+            ).body
           end
 
           sig { params(token: String).returns(String) }
           def account_id(token)
-            connection(token).get('/parking/accounts').body.dig(0, 'id')
+            HttpClient.get(
+              url: 'https://consumer.paybyphoneapis.com/parking/accounts',
+              headers: {
+                accept: 'application/json, text/plain, */*',
+                'accept-language': 'fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7',
+                'content-type': 'application/json',
+                'sec-fetch-dest': 'empty',
+                'sec-fetch-mode': 'cors',
+                'sec-fetch-site': 'cross-site',
+                'x-pbp-clienttype': 'WebApp',
+                'x-pbp-version': '2'
+              },
+              token:
+            ).body.dig(0, 'id')
+          end
+
+          sig { params(token: String, account_id: String, zipcode: String, license_plate: String).returns(Array) }
+          def rate_options(token, account_id, zipcode, license_plate)
+            HttpClient.get(
+              url: "https://consumer.paybyphoneapis.com/parking/locations/#{zipcode}/rateOptions",
+              headers: {
+                accept: 'application/json, text/plain, */*',
+                'accept-language': 'fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7',
+                'content-type': 'application/json',
+                'sec-fetch-dest': 'empty',
+                'sec-fetch-mode': 'cors',
+                'sec-fetch-site': 'cross-site',
+                'x-pbp-clienttype': 'WebApp',
+                'x-pbp-version': '2'
+              },
+              params: {
+                parkingAccountId: account_id,
+                licensePlate: license_plate
+              },
+              token:
+            ).body
+          end
+
+          sig { params(token: String).returns(T::Array[T::Hash[String, T.untyped]]) }
+          def vehicles(token)
+            HttpClient.get(
+              url: 'https://consumer.paybyphoneapis.com/identity/profileservice/v1/members/vehicles/paybyphone',
+              headers: {
+                accept: 'application/json, text/plain, */*',
+                'accept-language': 'fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7',
+                'content-type': 'application/json',
+                'sec-fetch-dest': 'empty',
+                'sec-fetch-mode': 'cors',
+                'sec-fetch-site': 'cross-site',
+                'x-pbp-clienttype': 'WebApp'
+              },
+              token:
+            ).body
           end
 
           sig { params(token: String, account_id: String).returns(T::Array[T::Hash[String, T.untyped]]) }
           def running_tickets(token, account_id)
-            connection(token).get("/parking/accounts/#{account_id}/sessions?periodType=Current").body
+            HttpClient.get(
+              url: "https://consumer.paybyphoneapis.com/parking/accounts/#{account_id}/sessions?periodType=Current",
+              headers: {
+                accept: 'application/json, text/plain, */*',
+                'accept-language': 'fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7',
+                'content-type': 'application/json',
+                'sec-fetch-dest': 'empty',
+                'sec-fetch-mode': 'cors',
+                'sec-fetch-site': 'cross-site',
+                'x-pbp-clienttype': 'WebApp',
+                'x-pbp-version': '2'
+              },
+              token:
+            ).body
           end
 
           sig do
@@ -65,9 +122,19 @@ module ParkingTicket
             ).returns(T::Hash[String, T.untyped])
           end
           def quote(token, account_id, rate_option_id, zipcode, license_plate, quantity, time_unit)
-            connection(token).get(
-              "/parking/accounts/#{account_id}/quote",
-              {
+            HttpClient.get(
+              url: "https://consumer.paybyphoneapis.com/parking/accounts/#{account_id}/quote",
+              headers: {
+                accept: 'application/json, text/plain, */*',
+                'accept-language': 'fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7',
+                'content-type': 'application/json',
+                'sec-fetch-dest': 'empty',
+                'sec-fetch-mode': 'cors',
+                'sec-fetch-site': 'cross-site',
+                'x-pbp-clienttype': 'WebApp',
+                'x-pbp-version': '2'
+              },
+              params: {
                 locationId: zipcode,
                 licensePlate: license_plate,
                 rateOptionId: rate_option_id,
@@ -75,7 +142,28 @@ module ParkingTicket
                 durationQuantity: quantity,
                 isParkUntil: false,
                 parkingAccountId: account_id
-              }
+              },
+              token:
+            ).body
+          end
+
+          sig { params(token: String).returns(T::Hash[String, T::Array[T::Hash[String, T.untyped]]]) }
+          def payment_methods(token)
+            HttpClient.get(
+              url: 'https://payments.paybyphoneapis.com/v1/accounts',
+              headers: {
+                accept: 'application/json, text/plain, */*',
+                'accept-language': 'fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7',
+                'content-type': 'application/json',
+                'sec-fetch-dest': 'empty',
+                'sec-fetch-mode': 'cors',
+                'sec-fetch-site': 'cross-site',
+                'x-api-key': 'zZ4ePLvoBBD1YwBGCo6P5DiPLDjSss3j',
+                'x-pbp-clienttype': 'WebApp',
+                Referer: 'https://m2.paybyphone.fr/',
+                'Referrer-Policy': 'strict-origin-when-cross-origin'
+              },
+              token:
             ).body
           end
 
@@ -130,35 +218,22 @@ module ParkingTicket
 
             final_data = payment_method_id ? base_data.merge(payment_data) : base_data
 
-            connection(token).post(
-              "/parking/accounts/#{account_id}/sessions/",
-              JSON.generate(final_data)
-            ).body
-          end
-
-          sig { params(token: String).returns(T::Hash[String, T::Array[T::Hash[String, T.untyped]]]) }
-          def payment_methods(token)
-            connection = Faraday.new(
-              url: 'https://payments.paybyphoneapis.com',
+            HttpClient.post(
+              url: "https://consumer.paybyphoneapis.com/parking/accounts/#{account_id}/sessions/",
               headers: {
                 accept: 'application/json, text/plain, */*',
                 'accept-language': 'fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7',
-                authorization: "Bearer #{token}",
                 'content-type': 'application/json',
                 'sec-fetch-dest': 'empty',
                 'sec-fetch-mode': 'cors',
                 'sec-fetch-site': 'cross-site',
-                'x-api-key': 'zZ4ePLvoBBD1YwBGCo6P5DiPLDjSss3j',
                 'x-pbp-clienttype': 'WebApp',
-                Referer: 'https://m2.paybyphone.fr/',
-                'Referrer-Policy': 'strict-origin-when-cross-origin'
-              }
-            ) do |f|
-              f.response :json
-              f.response :raise_error
-            end
-
-            connection.get('/v1/accounts').body
+                'x-pbp-distributionchannel': 'pbp-webapp',
+                'x-pbp-version': '2'
+              },
+              body: JSON.generate(final_data),
+              token:
+            ).body
           end
 
           private
@@ -242,7 +317,7 @@ module ParkingTicket
 
         sig { returns(String) }
         def token
-          @token ||= self.class.auth(@username, @password).body['access_token']
+          @token ||= self.class.auth(@username, @password).fetch('access_token')
         end
 
         sig { returns(String) }
