@@ -13,6 +13,14 @@ module ParkingTicket
         let(:zipcode) { '75018' }
         let(:license_plate) { 'CL123UU' }
         describe '#instance_methods' do
+          context '#valid_credentials?' do
+            it 'check that credentials are valids' do
+              VCR.use_cassette('auth') do
+                expect(subject.valid_credentials?).to eq(true)
+              end
+            end
+          end
+
           context '#vehicles' do
             it 'returns the vehicles' do
               VCR.use_cassette('pay_by_phone_vehicles') do
