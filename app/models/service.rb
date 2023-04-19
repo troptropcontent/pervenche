@@ -13,23 +13,22 @@ class Service < ApplicationRecord
   }
 
   validates :username, uniqueness: { scope: :kind }
-  validates_presence_of :kind, :username, :password
+  validates :kind, :username, :password, presence: true
   validate :valid_credentials
 
+  delegate :payment_methods, to: :client
+
+  delegate :running_ticket, to: :client
+
+  delegate :quote, to: :client
+
   def vehicles
-    Rails.cache.fetch("#{cache_key_with_version}/#{kind}/#{username}/vehicles", expires_in: 1.minutes) do
-      # for now we only permit the electric_motorcycle, we will later permit all kind of vehicles
-      client.vehicles.filter { |vehicle| vehicle.vehicle_type == 'electric_motorcycle' }
-    end
+    client.vehicles.filter { |vehicle| vehicle.vehicle_type == 'electric_motorcycle' }
   end
 
-  # rubocop:disable Metrics/MethodLength
   def rate_options(zipcodes, license_plate)
     rate_options = zipcodes.map do |zipcode|
-      Rails.cache.fetch("#{cache_key_with_version}/#{kind}/#{zipcode}/#{license_plate}/rate_options",
-                        expires_in: 1.minutes) do
-        client.rate_options(zipcode, license_plate)
-      end
+      client.rate_options(zipcode, license_plate)
     end
     rate_options_unique = rate_options.flatten.uniq(&:serialize)
     shared_rate_option_between_zipcodes = rate_options_unique.filter do |rate_option|
@@ -38,20 +37,6 @@ class Service < ApplicationRecord
 
     shared_rate_option_between_zipcodes.map! do |rate_option|
       rate_option_with_free_property(rate_option, zipcodes, license_plate)
-    end
-  end
-  # rubocop:enable Metrics/MethodLength
-
-  def payment_methods
-    Rails.cache.fetch("#{cache_key_with_version}/#{kind}/#{username}/payment_methods", expires_in: 1.minutes) do
-      client.payment_methods
-    end
-  end
-
-  def running_ticket(license_plate, zipcode)
-    Rails.cache.fetch("#{cache_key_with_version}/#{kind}/#{username}/#{license_plate}/#{zipcode}/running_ticket",
-                      expires_in: 1.minutes) do
-      client.running_ticket(license_plate, zipcode)
     end
   end
 
@@ -69,14 +54,6 @@ class Service < ApplicationRecord
   end
 
   # rubocop:enable Metrics/ParameterLists
-  def quote(rate_option_id, zipcode, license_plate, quantity, time_unit)
-    # rubocop:disable Layout/LineLength
-    Rails.cache.fetch("#{cache_key_with_version}/#{kind}/#{username}/#{license_plate}/#{rate_option_id}/#{quantity}/#{time_unit}/quote",
-                      # rubocop:enable Layout/LineLength
-                      expires_in: 1.minutes) do
-      client.quote(rate_option_id, zipcode, license_plate, quantity, time_unit)
-    end
-  end
 
   private
 
