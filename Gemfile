@@ -34,6 +34,8 @@ gem 'sentry-ruby'
 #Logging
 gem 'lograge'
 gem 'lograge-sql'
+gem 'newrelic_rpm'
+
 
 # Use Tailwind CSS [https://github.com/rails/tailwindcss-rails]
 # gem 'tailwindcss-rails'
