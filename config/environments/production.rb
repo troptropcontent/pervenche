@@ -1,4 +1,5 @@
 require 'active_support/core_ext/integer/time'
+require_relative '../../app/logging/log_formatter'
 
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
@@ -48,12 +49,8 @@ Rails.application.configure do
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   # config.force_ssl = true
 
-  # Include generic and useful information about system operation, but avoid logging too much
-  # information to avoid inadvertent exposure of personally identifiable information (PII).
-  config.log_level = :debug
-
-  # Prepend all log lines with the following tags.
-  config.log_tags = [:request_id]
+  # # Prepend all log lines with the following tags.
+  # config.log_tags = [:request_id]
 
   # Use a different cache store in production.
   # config.cache_store = :mem_cache_store
@@ -75,17 +72,26 @@ Rails.application.configure do
   # Don't log any deprecations.
   config.active_support.report_deprecations = false
 
-  # Use default logging formatter so that PID and timestamp are not suppressed.
-  config.log_formatter = Logger::Formatter.new
-
-  # Use a different logger for distributed setups.
-  # require "syslog/logger"
-  # config.logger = ActiveSupport::TaggedLogging.new(Syslog::Logger.new "app-name")
-
+  # custom logging
+  config.log_level = :info
+  config.log_formatter = Logging::LogFormatter.new
   if ENV['RAILS_LOG_TO_STDOUT'].present?
     logger           = ActiveSupport::Logger.new(STDOUT)
     logger.formatter = config.log_formatter
     config.logger    = ActiveSupport::TaggedLogging.new(logger)
+  end
+  # Lograge config
+  config.lograge.enabled = true
+  config.lograge.formatter = Lograge::Formatters::Json.new
+  config.colorize_logging = false
+
+  config.lograge.custom_options = lambda do |event|
+    { params: event.payload[:params] }
+  end
+  config.lograge.custom_payload do |controller|
+    {
+      request_id: controller.request.request_id
+    }
   end
 
   # Do not dump schema after migrations.
