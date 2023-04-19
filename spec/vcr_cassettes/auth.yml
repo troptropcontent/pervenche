@@ -1,0 +1,59 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://auth.paybyphoneapis.com/token
+    body:
+      encoding: US-ASCII
+      string: grant_type=password&username=a_fake_username&password=a_fake_password&client_id=paybyphone_web
+    headers:
+      Accept:
+      - application/json, text/plain, */*
+      X-Pbp-Clienttype:
+      - WebApp
+      User-Agent:
+      - Faraday v2.7.4
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 19 Apr 2023 20:38:18 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '1298'
+      Connection:
+      - keep-alive
+      Server:
+      - nginx/1.20.0
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubdomains; preload
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - ALLOW-FROM https://*.paybyphone.com https://*.cloudfront.net
+      Vary:
+      - Origin
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-cache, no-store
+      X-Request-Start:
+      - '1681936698.201'
+      X-Upstream-Response-Time:
+      - "-"
+      X-Request-Time:
+      - '0.155'
+      X-Time-Iso:
+      - '2023-04-19T20:38:18+00:00'
+    body:
+      encoding: UTF-8
+      string: '{"access_token":"eyJ4NXQiOiJpYVBrNzdUZ3Y1N1dTUFR3OVZrb2RIcXJIYWMiLCJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Ijg5QTNFNEVGQjRFMEJGOUVENjQ4RjRGMEY1NTkyODc0N0FBQjFEQTcifQ.eyJtZW1iZXJpZCI6ImI1NzdlZDM5LTllNmMtNGNlMi1iODNhLWE1Y2UzZTRhMjE1NSIsImFjdGl2ZXVzZXJhY2NvdW50IjoiYjU3N2VkMzktZWE2Zi00ODZjLWE1NTYtOGE4N2Y3YzY3MWE0IiwibmJmIjoxNjgxOTM2Njk4LCJndHkiOiJwYXNzd29yZCIsImp0aSI6IlFDOU5IZ1VOYjBMcmp6NGVpVE5OeSIsInN1YiI6ImI1NzdlZDM5LTllNmMtNGNlMi1iODNhLWE1Y2UzZTRhMjE1NSIsImlhdCI6MTY4MTkzNjY5OCwiZXhwIjoxNjgxOTM3ODk4LCJzY29wZSI6InBheWJ5cGhvbmUiLCJpc3MiOiJQYXlCeVBob25lIElkZW50aXR5IEFuZCBBY2Nlc3MiLCJhdWQiOlsicGJwX2FwaV9mcHNwYXltZW50cyIsInBicF9hcGlfcGFya2luZyIsInBicF9hcGlfcGF5bWVudCIsInBicF9hcGlfcHJvZmlsZXNlcnZpY2UiLCJwYnBfaWRhIiwiaHR0cDovL2FwaS5wYXlieXBob25lLmNvbSIsImh0dHA6Ly9hcGkucWEucGF5YnlwaG9uZS5jb20iXSwiYXpwIjoicGF5YnlwaG9uZV93ZWIifQ.t84_wHJQ50hAy4bxWuozCMpkVrWBTIagjAIYNnJNyi_ebreKUEYnvLbMzlrorTzqKHmQCfuQC33bfW0YdHYU9qXDKwP-LhC9THXOAB42s9IJah2jVamnD98r44n6YA_k_hYc5GDpW6w5RtIO_RECNp9j2DGgj_ehSQtSuedQEYHpP4_1aVLIxOxPunDeWpMhwo3jDGQiVIS0b2NzTA4s7f-EKYQWZ61OOqKVhgVw_Tu1mhvTnb7qhvHXj2_CWPvMNGA7k2oweOlQlWevTYWUJL9ZfBMV2e1mJQG1cRxXktTQmGagXNOgQFb8cENl9MFSjvnbDm4Fmep1WegKdx4aUg","expires_in":1200,"refresh_token":"xvhiskNRF-aDJTqWbBNPMRaywUuKicv7HfjXQQFu0jK","scope":"paybyphone","token_type":"Bearer"}'
+  recorded_at: Wed, 19 Apr 2023 20:38:18 GMT
+recorded_with: VCR 6.1.0
