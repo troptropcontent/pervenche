@@ -6,7 +6,8 @@ module Encryptable
 
   sig { params(value: T.untyped, deterministic: T.nilable(T::Boolean)).returns(String) }
   def hash_secret(value, deterministic: true)
-    salt = deterministic ? Rails.application.credentials.active_record_encryption.secondary_deterministic_key : BCrypt::Engine.generate_salt
+    secondary_deterministic_key = Rails.application.credentials.active_record_encryption.secondary_deterministic_key
+    salt = deterministic ? secondary_deterministic_key : BCrypt::Engine.generate_salt
     BCrypt::Engine.hash_secret(value, salt)
   end
 end
