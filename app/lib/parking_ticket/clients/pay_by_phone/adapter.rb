@@ -16,7 +16,7 @@ module ParkingTicket
 
           sig { params(username: String, password: String).returns(T::Boolean) }
           def valid_credentials?(username, password)
-            !!client_class.auth(username, password)
+            !!client_class.new(username, password).valid_credentials?
           end
         end
 

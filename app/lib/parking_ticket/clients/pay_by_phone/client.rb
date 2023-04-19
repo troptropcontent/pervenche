@@ -6,6 +6,7 @@ module ParkingTicket
     module PayByPhone
       class Client
         extend T::Sig
+        include Cachable
         class << self
           extend T::Sig
           sig do
@@ -259,24 +260,37 @@ module ParkingTicket
           @password = password
         end
 
+        sig { returns(T::Boolean) }
+        def valid_credentials?
+          !!token
+        end
+
         sig { returns(T::Array[T::Hash[String, T.untyped]]) }
         def vehicles
-          self.class.vehicles(token)
+          cached(cache_key: build_cache_key('vehicles'), expires_in: 1200) do
+            self.class.vehicles(token)
+          end
         end
 
         sig { params(zipcode: String, license_plate: String).returns(T::Array[T::Hash[String, T.untyped]]) }
         def rate_options(zipcode, license_plate)
-          self.class.rate_options(token, account_id, zipcode, license_plate)
+          cached(cache_key: build_cache_key('rate_options', zipcode, license_plate), expires_in: 1200) do
+            self.class.rate_options(token, account_id, zipcode, license_plate)
+          end
         end
 
         sig { returns(T::Array[T::Hash[String, T.untyped]]) }
         def running_tickets
-          self.class.running_tickets(token, account_id)
+          cached(cache_key: build_cache_key('running_tickets'), expires_in: 1200) do
+            self.class.running_tickets(token, account_id)
+          end
         end
 
         sig { returns(T::Hash[String, T::Array[T::Hash[String, T.untyped]]]) }
         def payment_methods
-          self.class.payment_methods(token)
+          cached(cache_key: build_cache_key('payment_methods'), expires_in: 1200) do
+            self.class.payment_methods(token)
+          end
         end
 
         sig do
@@ -284,7 +298,10 @@ module ParkingTicket
                  time_unit: String).returns(T::Hash[String, T.untyped])
         end
         def quote(rate_option_id, zipcode, license_plate, quantity, time_unit)
-          self.class.quote(token, account_id, rate_option_id, zipcode, license_plate, quantity, time_unit)
+          cached(cache_key: build_cache_key('quote', rate_option_id, zipcode, license_plate, quantity, time_unit),
+                 expires_in: 1200) do
+            self.class.quote(token, account_id, rate_option_id, zipcode, license_plate, quantity, time_unit)
+          end
         end
 
         sig do
@@ -317,12 +334,22 @@ module ParkingTicket
 
         sig { returns(String) }
         def token
-          @token ||= self.class.auth(@username, @password).fetch('access_token')
+          @token ||= cached(cache_key: build_cache_key('auth'), expires_in: 1200) do
+            self.class.auth(@username, @password).fetch('access_token')
+          end
         end
 
         sig { returns(String) }
         def account_id
-          @account_id ||= self.class.account_id(token)
+          @account_id ||= cached(cache_key: build_cache_key('account_id'),
+                                 expires_in: 1200) do
+            self.class.account_id(token)
+          end
+        end
+
+        sig { params(method_name: String, method_args: T.untyped).returns(String) }
+        def build_cache_key(method_name, *method_args)
+          ['client/pay_by_phone', @username, @password, method_name, *method_args].join('/')
         end
       end
     end
