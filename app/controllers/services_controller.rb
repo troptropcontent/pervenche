@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class ServicesController < ApplicationController
-  load_and_authorize_resource
   def new
     @with_navbar = false
     @redirect_to = navigation_params&.dig(:redirect_to)
@@ -16,8 +15,6 @@ class ServicesController < ApplicationController
       render 'new', status: :unprocessable_entity
     end
   end
-
-  def index; end
 
   private
 

@@ -1,9 +1,43 @@
 .box {
     padding: var(--space-s);
-    border: var(--border);
     background-color: var(--color-white);
+    border: var(--border);
     border-radius: var(--border-radius);
-}
-
-  
+    // border: var(--border-dark);
+    // box-shadow: var(--shadow-retro);
     
+    &--primary {
+        background-color: var(--color-primary);
+        > * {
+            color: var(--color-white)
+        }
+    }
+
+    &--success {
+        background-color: var(--color-success);
+        > * {
+            color: var(--color-white)
+        }
+        > * > * {
+            color: var(--color-white)
+        }
+    }
+    &--danger {
+        background-color: var(--color-danger);
+        > * {
+            color: var(--color-white)
+        }
+        > * > * {
+            color: var(--color-white)
+        }
+    }
+    &--tertiary {
+        background-color: var(--color-tertiary);
+        > * {
+            color: var(--color-white)
+        }
+        > * > * {
+            color: var(--color-white)
+        }
+    }
+}

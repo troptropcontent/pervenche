@@ -7,10 +7,8 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root 'automated_tickets#index'
-  resources :services, only: %i[index new create]
-  resources :robots, only: %i[index new create update]
-
-  resources :automated_tickets, only: %i[new index show destroy update] do
+  resources :services, only: %i[new create]
+  resources :automated_tickets, only: %i[new index destroy update] do
     resources :setup, only: %i[show update edit], controller: 'automated_tickets/setup', param: :step_name
   end
 
@@ -20,6 +18,16 @@ Rails.application.routes.draw do
   resources :shared_views, only: [] do
     collection do
       get 'loading'
+    end
+  end
+
+  resource :admin, only: [], controller: 'admin' do
+    get 'dashboard'
+    resources :diagnostics, only: [] do
+      collection do
+        resources :client, only: :show, param: :client_kind, constraints: { client_kind: /pay_by_phone/ },
+                           controller: 'admin/diagnostics/client'
+      end
     end
   end
 end

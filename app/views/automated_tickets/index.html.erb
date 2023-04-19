@@ -1,12 +1,5 @@
 <main class="grow container stack">
-    <section class="header center">
-        <span class='cluster'>
-            <div class="center">
-                <%= inline_svg 'ticket.svg'%>
-            </div>
-            <h2><%= t 'application.name' %></h2>
-        </span>
-    </section>
+    <%= render 'components/header' %>
     <section class="stack grow">
        <%= render @automated_tickets %>
     </section>

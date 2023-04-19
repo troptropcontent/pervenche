@@ -1,0 +1,10 @@
+{
+    "id": "https://consumer.paybyphoneapis.com/parking/accounts/account_id/quote",
+    "$schema": "https://json-schema.org/draft-06/schema#",
+    "type": "object",
+    "required": ["quoteId", "parkingStartTime"],
+    "properties": {
+    "quoteId": {"type": "string"},
+    "parkingStartTime": {"type": "string"}
+    }
+}

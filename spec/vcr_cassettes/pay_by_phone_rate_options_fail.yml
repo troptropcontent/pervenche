@@ -1,0 +1,427 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://auth.paybyphoneapis.com/token
+    body:
+      encoding: US-ASCII
+      string: grant_type=password&username=a_fake_username&password=a_fake_password&client_id=paybyphone_web
+    headers:
+      User-Agent:
+      - Faraday v2.7.4
+      Accept:
+      - application/json, text/plain, */*
+      X-Pbp-Clienttype:
+      - WebApp
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 11 Apr 2023 15:58:31 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '1298'
+      Connection:
+      - keep-alive
+      Server:
+      - nginx/1.20.0
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubdomains; preload
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - ALLOW-FROM https://*.paybyphone.com https://*.cloudfront.net
+      Vary:
+      - Origin
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-cache, no-store
+      X-Request-Start:
+      - '1681228711.463'
+      X-Upstream-Response-Time:
+      - "-"
+      X-Request-Time:
+      - '0.265'
+      X-Time-Iso:
+      - '2023-04-11T15:58:31+00:00'
+    body:
+      encoding: UTF-8
+      string: '{"access_token":"eyJ4NXQiOiJpYVBrNzdUZ3Y1N1dTUFR3OVZrb2RIcXJIYWMiLCJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Ijg5QTNFNEVGQjRFMEJGOUVENjQ4RjRGMEY1NTkyODc0N0FBQjFEQTcifQ.eyJtZW1iZXJpZCI6ImI1NzdlZDM5LTllNmMtNGNlMi1iODNhLWE1Y2UzZTRhMjE1NSIsImFjdGl2ZXVzZXJhY2NvdW50IjoiYjU3N2VkMzktZWE2Zi00ODZjLWE1NTYtOGE4N2Y3YzY3MWE0IiwibmJmIjoxNjgxMjI4NzExLCJndHkiOiJwYXNzd29yZCIsImp0aSI6InItQkFkLUpwU3RrSFl2dnNUel91NiIsInN1YiI6ImI1NzdlZDM5LTllNmMtNGNlMi1iODNhLWE1Y2UzZTRhMjE1NSIsImlhdCI6MTY4MTIyODcxMSwiZXhwIjoxNjgxMjI5OTExLCJzY29wZSI6InBheWJ5cGhvbmUiLCJpc3MiOiJQYXlCeVBob25lIElkZW50aXR5IEFuZCBBY2Nlc3MiLCJhdWQiOlsicGJwX2FwaV9mcHNwYXltZW50cyIsInBicF9hcGlfcGFya2luZyIsInBicF9hcGlfcGF5bWVudCIsInBicF9hcGlfcHJvZmlsZXNlcnZpY2UiLCJwYnBfaWRhIiwiaHR0cDovL2FwaS5wYXlieXBob25lLmNvbSIsImh0dHA6Ly9hcGkucWEucGF5YnlwaG9uZS5jb20iXSwiYXpwIjoicGF5YnlwaG9uZV93ZWIifQ.lfwIldnpoIrPuldhnnZzAxG-AZUTnS-SQU4CMAlwSJe20eRNUUvX2gXDThb0L5e3YcmN4NLOOITkparpAnVFL83c-ZqShQUhd1q-zcW7kEeLoha0iPdS1vGcAAuZVXSAR4dC1uXSZdrUKE9eWTtuauztx65i0hvTYjMBjF8Mn5W1H3OB349KbrIV4VxPGFs7ZTgqnrsH8_IxpjGhTIpKBe_PO7DFLnOyqJ0XuNxfSj9tNgRUHXp96hDYegus3w5VSQ8BcD1bsGFkSS8mzlvXaCsnK2F6QuVvL84vKmiw1yurZ-0Oy4nZURI3Pb1G2_qdjLVs_W_L16udnO-V8UpaCw","expires_in":1200,"refresh_token":"AhGXMBTTaQjl_Fd3QTJTnixv4meg5DL1ocLS0rP2AAx","scope":"paybyphone","token_type":"Bearer"}'
+  recorded_at: Tue, 11 Apr 2023 15:58:31 GMT
+- request:
+    method: post
+    uri: https://auth.paybyphoneapis.com/token
+    body:
+      encoding: US-ASCII
+      string: grant_type=password&username=a_fake_username&password=a_fake_password&client_id=paybyphone_web
+    headers:
+      User-Agent:
+      - Faraday v2.7.4
+      Accept:
+      - application/json, text/plain, */*
+      X-Pbp-Clienttype:
+      - WebApp
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 11 Apr 2023 15:58:32 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '1298'
+      Connection:
+      - keep-alive
+      Server:
+      - nginx/1.20.0
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubdomains; preload
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - ALLOW-FROM https://*.paybyphone.com https://*.cloudfront.net
+      Vary:
+      - Origin
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-cache, no-store
+      X-Request-Start:
+      - '1681228712.142'
+      X-Upstream-Response-Time:
+      - "-"
+      X-Request-Time:
+      - '0.257'
+      X-Time-Iso:
+      - '2023-04-11T15:58:32+00:00'
+    body:
+      encoding: UTF-8
+      string: '{"access_token":"eyJ4NXQiOiJpYVBrNzdUZ3Y1N1dTUFR3OVZrb2RIcXJIYWMiLCJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Ijg5QTNFNEVGQjRFMEJGOUVENjQ4RjRGMEY1NTkyODc0N0FBQjFEQTcifQ.eyJtZW1iZXJpZCI6ImI1NzdlZDM5LTllNmMtNGNlMi1iODNhLWE1Y2UzZTRhMjE1NSIsImFjdGl2ZXVzZXJhY2NvdW50IjoiYjU3N2VkMzktZWE2Zi00ODZjLWE1NTYtOGE4N2Y3YzY3MWE0IiwibmJmIjoxNjgxMjI4NzEyLCJndHkiOiJwYXNzd29yZCIsImp0aSI6IjhwT0RKU043cWV4TnZjekFfaG9wbiIsInN1YiI6ImI1NzdlZDM5LTllNmMtNGNlMi1iODNhLWE1Y2UzZTRhMjE1NSIsImlhdCI6MTY4MTIyODcxMiwiZXhwIjoxNjgxMjI5OTEyLCJzY29wZSI6InBheWJ5cGhvbmUiLCJpc3MiOiJQYXlCeVBob25lIElkZW50aXR5IEFuZCBBY2Nlc3MiLCJhdWQiOlsicGJwX2FwaV9mcHNwYXltZW50cyIsInBicF9hcGlfcGFya2luZyIsInBicF9hcGlfcGF5bWVudCIsInBicF9hcGlfcHJvZmlsZXNlcnZpY2UiLCJwYnBfaWRhIiwiaHR0cDovL2FwaS5wYXlieXBob25lLmNvbSIsImh0dHA6Ly9hcGkucWEucGF5YnlwaG9uZS5jb20iXSwiYXpwIjoicGF5YnlwaG9uZV93ZWIifQ.G1LYzDXcEFeGyd1uCSjIMDD6wg0Zqgjq2axsSv1RD3CU6hW4rQYC4_wQ3mp-sSuGK3kj1QMqjqq6BgQ1-LBCWil_XNqOFoYlMuT0yxJS1UoCH9EE1_zigoXSZySmr7Y-VPwGNaJuFwl70gosTyD7DUvH8p04QAtmhvMzQJOyw95zJAHeH_JT5W-Kfa-9VY7_7Cw6gaqAD8e56EkzwRr_gIguIjCs0FMUbrj5-rdWqVMBhs-ofaWKfQIz8fyKm_0DkstTkRuCM0CAUxcHF11W34ID3CWvzejh8UGh2Amyq_6bioT2pPIelOn7tz5-cz8VAENdgVM4yzEa78iIUNyrbA","expires_in":1200,"refresh_token":"Uk7DmU-oh3aeVbCwzy9blxYtpKC5jlLwSLjArTJOBT1","scope":"paybyphone","token_type":"Bearer"}'
+  recorded_at: Tue, 11 Apr 2023 15:58:32 GMT
+- request:
+    method: get
+    uri: https://consumer.paybyphoneapis.com/parking/accounts
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      Authorization:
+      - Bearer eyJ4NXQiOiJpYVBrNzdUZ3Y1N1dTUFR3OVZrb2RIcXJIYWMiLCJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Ijg5QTNFNEVGQjRFMEJGOUVENjQ4RjRGMEY1NTkyODc0N0FBQjFEQTcifQ.eyJtZW1iZXJpZCI6ImI1NzdlZDM5LTllNmMtNGNlMi1iODNhLWE1Y2UzZTRhMjE1NSIsImFjdGl2ZXVzZXJhY2NvdW50IjoiYjU3N2VkMzktZWE2Zi00ODZjLWE1NTYtOGE4N2Y3YzY3MWE0IiwibmJmIjoxNjgxMjI4NzEyLCJndHkiOiJwYXNzd29yZCIsImp0aSI6IjhwT0RKU043cWV4TnZjekFfaG9wbiIsInN1YiI6ImI1NzdlZDM5LTllNmMtNGNlMi1iODNhLWE1Y2UzZTRhMjE1NSIsImlhdCI6MTY4MTIyODcxMiwiZXhwIjoxNjgxMjI5OTEyLCJzY29wZSI6InBheWJ5cGhvbmUiLCJpc3MiOiJQYXlCeVBob25lIElkZW50aXR5IEFuZCBBY2Nlc3MiLCJhdWQiOlsicGJwX2FwaV9mcHNwYXltZW50cyIsInBicF9hcGlfcGFya2luZyIsInBicF9hcGlfcGF5bWVudCIsInBicF9hcGlfcHJvZmlsZXNlcnZpY2UiLCJwYnBfaWRhIiwiaHR0cDovL2FwaS5wYXlieXBob25lLmNvbSIsImh0dHA6Ly9hcGkucWEucGF5YnlwaG9uZS5jb20iXSwiYXpwIjoicGF5YnlwaG9uZV93ZWIifQ.G1LYzDXcEFeGyd1uCSjIMDD6wg0Zqgjq2axsSv1RD3CU6hW4rQYC4_wQ3mp-sSuGK3kj1QMqjqq6BgQ1-LBCWil_XNqOFoYlMuT0yxJS1UoCH9EE1_zigoXSZySmr7Y-VPwGNaJuFwl70gosTyD7DUvH8p04QAtmhvMzQJOyw95zJAHeH_JT5W-Kfa-9VY7_7Cw6gaqAD8e56EkzwRr_gIguIjCs0FMUbrj5-rdWqVMBhs-ofaWKfQIz8fyKm_0DkstTkRuCM0CAUxcHF11W34ID3CWvzejh8UGh2Amyq_6bioT2pPIelOn7tz5-cz8VAENdgVM4yzEa78iIUNyrbA
+      Referer:
+      - https://m2.paybyphone.fr/
+      User-Agent:
+      - Faraday v2.7.4
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 11 Apr 2023 15:58:32 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '47'
+      Connection:
+      - keep-alive
+      Server:
+      - nginx/1.22.1
+      X-Powered-By:
+      - ASP.NET
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      X-Request-Start:
+      - '1681228712.565'
+      X-Upstream-Response-Time:
+      - "-"
+      X-Request-Time:
+      - '0.030'
+      X-Time-Iso:
+      - '2023-04-11T15:58:32+00:00'
+    body:
+      encoding: UTF-8
+      string: '[{"id":"account_id"}]'
+  recorded_at: Tue, 11 Apr 2023 15:58:32 GMT
+- request:
+    method: get
+    uri: https://consumer.paybyphoneapis.com/parking/locations/75018/rateOptions?licensePlate=CL123UU&parkingAccountId=account_id
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      Authorization:
+      - Bearer eyJ4NXQiOiJpYVBrNzdUZ3Y1N1dTUFR3OVZrb2RIcXJIYWMiLCJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Ijg5QTNFNEVGQjRFMEJGOUVENjQ4RjRGMEY1NTkyODc0N0FBQjFEQTcifQ.eyJtZW1iZXJpZCI6ImI1NzdlZDM5LTllNmMtNGNlMi1iODNhLWE1Y2UzZTRhMjE1NSIsImFjdGl2ZXVzZXJhY2NvdW50IjoiYjU3N2VkMzktZWE2Zi00ODZjLWE1NTYtOGE4N2Y3YzY3MWE0IiwibmJmIjoxNjgxMjI4NzEyLCJndHkiOiJwYXNzd29yZCIsImp0aSI6IjhwT0RKU043cWV4TnZjekFfaG9wbiIsInN1YiI6ImI1NzdlZDM5LTllNmMtNGNlMi1iODNhLWE1Y2UzZTRhMjE1NSIsImlhdCI6MTY4MTIyODcxMiwiZXhwIjoxNjgxMjI5OTEyLCJzY29wZSI6InBheWJ5cGhvbmUiLCJpc3MiOiJQYXlCeVBob25lIElkZW50aXR5IEFuZCBBY2Nlc3MiLCJhdWQiOlsicGJwX2FwaV9mcHNwYXltZW50cyIsInBicF9hcGlfcGFya2luZyIsInBicF9hcGlfcGF5bWVudCIsInBicF9hcGlfcHJvZmlsZXNlcnZpY2UiLCJwYnBfaWRhIiwiaHR0cDovL2FwaS5wYXlieXBob25lLmNvbSIsImh0dHA6Ly9hcGkucWEucGF5YnlwaG9uZS5jb20iXSwiYXpwIjoicGF5YnlwaG9uZV93ZWIifQ.G1LYzDXcEFeGyd1uCSjIMDD6wg0Zqgjq2axsSv1RD3CU6hW4rQYC4_wQ3mp-sSuGK3kj1QMqjqq6BgQ1-LBCWil_XNqOFoYlMuT0yxJS1UoCH9EE1_zigoXSZySmr7Y-VPwGNaJuFwl70gosTyD7DUvH8p04QAtmhvMzQJOyw95zJAHeH_JT5W-Kfa-9VY7_7Cw6gaqAD8e56EkzwRr_gIguIjCs0FMUbrj5-rdWqVMBhs-ofaWKfQIz8fyKm_0DkstTkRuCM0CAUxcHF11W34ID3CWvzejh8UGh2Amyq_6bioT2pPIelOn7tz5-cz8VAENdgVM4yzEa78iIUNyrbA
+      Referer:
+      - https://m2.paybyphone.fr/
+      User-Agent:
+      - Faraday v2.7.4
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 401
+      message: OK
+    headers:
+      Date:
+      - Tue, 11 Apr 2023 15:58:33 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '1018'
+      Connection:
+      - keep-alive
+      Server:
+      - nginx/1.22.1
+      X-Powered-By:
+      - ASP.NET
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      X-Request-Start:
+      - '1681228713.275'
+      X-Upstream-Response-Time:
+      - "-"
+      X-Request-Time:
+      - '0.331'
+      X-Time-Iso:
+      - '2023-04-11T15:58:33+00:00'
+    body:
+      encoding: UTF-8
+      string: '[{"name":"Voiture - Visiteur - 75012-75020","type":"CUSTOM","rateOptionId":"1085252721","effectiveMaxStayDuration":{"quantity":19,"timeUnit":"Hours"},"maxStayStatus":"ParkingAllowed","policyType":"EmissionsBasedPolicy","maxStayEndTime":"2023-04-12T10:58:32+00:00","acceptedTimeUnits":["Minutes","Hours"],"restrictionPeriods":[{"startTime":"2023-04-11T09:00:00+02:00","endTime":"2023-04-11T20:00:00+02:00","maxStay":{"quantity":360,"timeUnit":"Minutes"}},{"startTime":"2023-04-12T09:00:00+02:00","endTime":"2023-04-12T20:00:00+02:00","maxStay":{"quantity":360,"timeUnit":"Minutes"}}],"availableTimeUnitsWithRestrictions":{"minutes":{"duration":{"quantity":19,"timeUnit":"Hours"},"endTime":"2023-04-12T12:58:32+02:00"},"hours":{"duration":{"quantity":19,"timeUnit":"Hours"},"endTime":"2023-04-12T12:58:32+02:00"}},"timeSteps":null,"isDefault":true,"isPreferred":false,"licensePlate":"CL123UU","areas":null,"fps":null,"availablePromotions":[],"renewalParking":{"isAllowed":false,"window":null},"eligibilityEndDate":null}]'
+  recorded_at: Tue, 11 Apr 2023 15:58:33 GMT
+- request:
+    method: post
+    uri: https://auth.paybyphoneapis.com/token
+    body:
+      encoding: US-ASCII
+      string: grant_type=password&username=a_fake_username&password=a_fake_password&client_id=paybyphone_web
+    headers:
+      User-Agent:
+      - Faraday v2.7.4
+      Accept:
+      - application/json, text/plain, */*
+      X-Pbp-Clienttype:
+      - WebApp
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 11 Apr 2023 15:58:33 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '1298'
+      Connection:
+      - keep-alive
+      Server:
+      - nginx/1.20.0
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubdomains; preload
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - ALLOW-FROM https://*.paybyphone.com https://*.cloudfront.net
+      Vary:
+      - Origin
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-cache, no-store
+      X-Request-Start:
+      - '1681228713.889'
+      X-Upstream-Response-Time:
+      - "-"
+      X-Request-Time:
+      - '0.159'
+      X-Time-Iso:
+      - '2023-04-11T15:58:33+00:00'
+    body:
+      encoding: UTF-8
+      string: '{"access_token":"eyJ4NXQiOiJpYVBrNzdUZ3Y1N1dTUFR3OVZrb2RIcXJIYWMiLCJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Ijg5QTNFNEVGQjRFMEJGOUVENjQ4RjRGMEY1NTkyODc0N0FBQjFEQTcifQ.eyJtZW1iZXJpZCI6ImI1NzdlZDM5LTllNmMtNGNlMi1iODNhLWE1Y2UzZTRhMjE1NSIsImFjdGl2ZXVzZXJhY2NvdW50IjoiYjU3N2VkMzktZWE2Zi00ODZjLWE1NTYtOGE4N2Y3YzY3MWE0IiwibmJmIjoxNjgxMjI4NzEzLCJndHkiOiJwYXNzd29yZCIsImp0aSI6InFTMDIyOVBKbTNBb3o1TGVGaFRWWSIsInN1YiI6ImI1NzdlZDM5LTllNmMtNGNlMi1iODNhLWE1Y2UzZTRhMjE1NSIsImlhdCI6MTY4MTIyODcxMywiZXhwIjoxNjgxMjI5OTEzLCJzY29wZSI6InBheWJ5cGhvbmUiLCJpc3MiOiJQYXlCeVBob25lIElkZW50aXR5IEFuZCBBY2Nlc3MiLCJhdWQiOlsicGJwX2FwaV9mcHNwYXltZW50cyIsInBicF9hcGlfcGFya2luZyIsInBicF9hcGlfcGF5bWVudCIsInBicF9hcGlfcHJvZmlsZXNlcnZpY2UiLCJwYnBfaWRhIiwiaHR0cDovL2FwaS5wYXlieXBob25lLmNvbSIsImh0dHA6Ly9hcGkucWEucGF5YnlwaG9uZS5jb20iXSwiYXpwIjoicGF5YnlwaG9uZV93ZWIifQ.LzDqJVeZtAg_i_Y1s6Fk7yh2fxqeTe4IU0MDYc49oxJ7kVl3eWfwbH8PHdTUhggy9fS767DnVFYE0OD3lpC9prXyZpYnZXjYMAR4tEKyonG0vJ1B4P8w-xHncN-KHijZrLJHMPUiBWnd4DooLYcSjFUIFWAuil8fNy9k3gTuUh2Wlr-sJWqmsUQMC3ymMPlJ_IFcxGROgwUaa5vFhJR6mtDN9mADAkRgKpzavyaKKXyntbCnD0OtbrcDg6bop6H0AUai9sLo0tPGYbrFQXkmmd4tNyyZ-_TYQCrlqNALU9aTH-J5whjc-jeBKDi8xSbawXnvJ0vdxR8SfOfieSvPhg","expires_in":1200,"refresh_token":"-Z_9u3qA025HYGfPZN2UvNoBLlI6x_EzqKGrgXC4jJb","scope":"paybyphone","token_type":"Bearer"}'
+  recorded_at: Tue, 11 Apr 2023 15:58:33 GMT
+- request:
+    method: post
+    uri: https://auth.paybyphoneapis.com/token
+    body:
+      encoding: US-ASCII
+      string: grant_type=password&username=a_fake_username&password=a_fake_password&client_id=paybyphone_web
+    headers:
+      User-Agent:
+      - Faraday v2.7.4
+      Accept:
+      - application/json, text/plain, */*
+      X-Pbp-Clienttype:
+      - WebApp
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 11 Apr 2023 15:58:34 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '1298'
+      Connection:
+      - keep-alive
+      Server:
+      - nginx/1.20.0
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubdomains; preload
+      X-Content-Type-Options:
+      - nosniff
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - ALLOW-FROM https://*.paybyphone.com https://*.cloudfront.net
+      Vary:
+      - Origin
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-cache, no-store
+      X-Request-Start:
+      - '1681228714.803'
+      X-Upstream-Response-Time:
+      - "-"
+      X-Request-Time:
+      - '0.537'
+      X-Time-Iso:
+      - '2023-04-11T15:58:34+00:00'
+    body:
+      encoding: UTF-8
+      string: '{"access_token":"eyJ4NXQiOiJpYVBrNzdUZ3Y1N1dTUFR3OVZrb2RIcXJIYWMiLCJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Ijg5QTNFNEVGQjRFMEJGOUVENjQ4RjRGMEY1NTkyODc0N0FBQjFEQTcifQ.eyJtZW1iZXJpZCI6ImI1NzdlZDM5LTllNmMtNGNlMi1iODNhLWE1Y2UzZTRhMjE1NSIsImFjdGl2ZXVzZXJhY2NvdW50IjoiYjU3N2VkMzktZWE2Zi00ODZjLWE1NTYtOGE4N2Y3YzY3MWE0IiwibmJmIjoxNjgxMjI4NzE0LCJndHkiOiJwYXNzd29yZCIsImp0aSI6Ik9SdUJYa0h2TUNBNTBfNDh4ak5ISCIsInN1YiI6ImI1NzdlZDM5LTllNmMtNGNlMi1iODNhLWE1Y2UzZTRhMjE1NSIsImlhdCI6MTY4MTIyODcxNCwiZXhwIjoxNjgxMjI5OTE0LCJzY29wZSI6InBheWJ5cGhvbmUiLCJpc3MiOiJQYXlCeVBob25lIElkZW50aXR5IEFuZCBBY2Nlc3MiLCJhdWQiOlsicGJwX2FwaV9mcHNwYXltZW50cyIsInBicF9hcGlfcGFya2luZyIsInBicF9hcGlfcGF5bWVudCIsInBicF9hcGlfcHJvZmlsZXNlcnZpY2UiLCJwYnBfaWRhIiwiaHR0cDovL2FwaS5wYXlieXBob25lLmNvbSIsImh0dHA6Ly9hcGkucWEucGF5YnlwaG9uZS5jb20iXSwiYXpwIjoicGF5YnlwaG9uZV93ZWIifQ.E90oiKxCMoOaCyJpD_qKYRszL_FajXa8-otdC_Q7Kp59cjBtIzykZz2ZsS097sINGQX7hn7by8ZMZ7meIiwR8DKUQuaYeobLVkqYjRlgZ1rQTTNg5v5lwEzmuBf0RE_YI2fz_p792TZ7J2wEA0PcUpDOQzsUM6zSg1LFrN2pz1wByv3Ytr7vwRacXd0gMllyR9QJ_3a0dwLZ-TG3eiLelC6HpYRq7bIAjOA4teSBZsE20lAuQAleEsnu-PIfcAASDcXk9dPM4qz84votaqk3wdRzYpqSd2tIo8ESHWOb3w4Am-RndcMfV0VQwbO0DDaDAuItXx0Hd-VslNQwJ1VKVw","expires_in":1200,"refresh_token":"myqPlIx1qD584p8JTHqVskKk73zSCOq94kpkW_TEZpH","scope":"paybyphone","token_type":"Bearer"}'
+  recorded_at: Tue, 11 Apr 2023 15:58:34 GMT
+- request:
+    method: get
+    uri: https://consumer.paybyphoneapis.com/parking/accounts
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      Authorization:
+      - Bearer eyJ4NXQiOiJpYVBrNzdUZ3Y1N1dTUFR3OVZrb2RIcXJIYWMiLCJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Ijg5QTNFNEVGQjRFMEJGOUVENjQ4RjRGMEY1NTkyODc0N0FBQjFEQTcifQ.eyJtZW1iZXJpZCI6ImI1NzdlZDM5LTllNmMtNGNlMi1iODNhLWE1Y2UzZTRhMjE1NSIsImFjdGl2ZXVzZXJhY2NvdW50IjoiYjU3N2VkMzktZWE2Zi00ODZjLWE1NTYtOGE4N2Y3YzY3MWE0IiwibmJmIjoxNjgxMjI4NzE0LCJndHkiOiJwYXNzd29yZCIsImp0aSI6Ik9SdUJYa0h2TUNBNTBfNDh4ak5ISCIsInN1YiI6ImI1NzdlZDM5LTllNmMtNGNlMi1iODNhLWE1Y2UzZTRhMjE1NSIsImlhdCI6MTY4MTIyODcxNCwiZXhwIjoxNjgxMjI5OTE0LCJzY29wZSI6InBheWJ5cGhvbmUiLCJpc3MiOiJQYXlCeVBob25lIElkZW50aXR5IEFuZCBBY2Nlc3MiLCJhdWQiOlsicGJwX2FwaV9mcHNwYXltZW50cyIsInBicF9hcGlfcGFya2luZyIsInBicF9hcGlfcGF5bWVudCIsInBicF9hcGlfcHJvZmlsZXNlcnZpY2UiLCJwYnBfaWRhIiwiaHR0cDovL2FwaS5wYXlieXBob25lLmNvbSIsImh0dHA6Ly9hcGkucWEucGF5YnlwaG9uZS5jb20iXSwiYXpwIjoicGF5YnlwaG9uZV93ZWIifQ.E90oiKxCMoOaCyJpD_qKYRszL_FajXa8-otdC_Q7Kp59cjBtIzykZz2ZsS097sINGQX7hn7by8ZMZ7meIiwR8DKUQuaYeobLVkqYjRlgZ1rQTTNg5v5lwEzmuBf0RE_YI2fz_p792TZ7J2wEA0PcUpDOQzsUM6zSg1LFrN2pz1wByv3Ytr7vwRacXd0gMllyR9QJ_3a0dwLZ-TG3eiLelC6HpYRq7bIAjOA4teSBZsE20lAuQAleEsnu-PIfcAASDcXk9dPM4qz84votaqk3wdRzYpqSd2tIo8ESHWOb3w4Am-RndcMfV0VQwbO0DDaDAuItXx0Hd-VslNQwJ1VKVw
+      Referer:
+      - https://m2.paybyphone.fr/
+      User-Agent:
+      - Faraday v2.7.4
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 11 Apr 2023 15:58:35 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '47'
+      Connection:
+      - keep-alive
+      Server:
+      - nginx/1.22.1
+      X-Powered-By:
+      - ASP.NET
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      X-Request-Start:
+      - '1681228715.328'
+      X-Upstream-Response-Time:
+      - "-"
+      X-Request-Time:
+      - '0.027'
+      X-Time-Iso:
+      - '2023-04-11T15:58:35+00:00'
+    body:
+      encoding: UTF-8
+      string: '[{"id":"account_id"}]'
+  recorded_at: Tue, 11 Apr 2023 15:58:35 GMT
+- request:
+    method: get
+    uri: https://consumer.paybyphoneapis.com/parking/accounts/account_id/quote?durationQuantity=1&durationTimeUnit=Hours&isParkUntil=false&licensePlate=CL123UU&locationId=75018&parkingAccountId=account_id&rateOptionId=1085252721
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      Authorization:
+      - Bearer eyJ4NXQiOiJpYVBrNzdUZ3Y1N1dTUFR3OVZrb2RIcXJIYWMiLCJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Ijg5QTNFNEVGQjRFMEJGOUVENjQ4RjRGMEY1NTkyODc0N0FBQjFEQTcifQ.eyJtZW1iZXJpZCI6ImI1NzdlZDM5LTllNmMtNGNlMi1iODNhLWE1Y2UzZTRhMjE1NSIsImFjdGl2ZXVzZXJhY2NvdW50IjoiYjU3N2VkMzktZWE2Zi00ODZjLWE1NTYtOGE4N2Y3YzY3MWE0IiwibmJmIjoxNjgxMjI4NzE0LCJndHkiOiJwYXNzd29yZCIsImp0aSI6Ik9SdUJYa0h2TUNBNTBfNDh4ak5ISCIsInN1YiI6ImI1NzdlZDM5LTllNmMtNGNlMi1iODNhLWE1Y2UzZTRhMjE1NSIsImlhdCI6MTY4MTIyODcxNCwiZXhwIjoxNjgxMjI5OTE0LCJzY29wZSI6InBheWJ5cGhvbmUiLCJpc3MiOiJQYXlCeVBob25lIElkZW50aXR5IEFuZCBBY2Nlc3MiLCJhdWQiOlsicGJwX2FwaV9mcHNwYXltZW50cyIsInBicF9hcGlfcGFya2luZyIsInBicF9hcGlfcGF5bWVudCIsInBicF9hcGlfcHJvZmlsZXNlcnZpY2UiLCJwYnBfaWRhIiwiaHR0cDovL2FwaS5wYXlieXBob25lLmNvbSIsImh0dHA6Ly9hcGkucWEucGF5YnlwaG9uZS5jb20iXSwiYXpwIjoicGF5YnlwaG9uZV93ZWIifQ.E90oiKxCMoOaCyJpD_qKYRszL_FajXa8-otdC_Q7Kp59cjBtIzykZz2ZsS097sINGQX7hn7by8ZMZ7meIiwR8DKUQuaYeobLVkqYjRlgZ1rQTTNg5v5lwEzmuBf0RE_YI2fz_p792TZ7J2wEA0PcUpDOQzsUM6zSg1LFrN2pz1wByv3Ytr7vwRacXd0gMllyR9QJ_3a0dwLZ-TG3eiLelC6HpYRq7bIAjOA4teSBZsE20lAuQAleEsnu-PIfcAASDcXk9dPM4qz84votaqk3wdRzYpqSd2tIo8ESHWOb3w4Am-RndcMfV0VQwbO0DDaDAuItXx0Hd-VslNQwJ1VKVw
+      Referer:
+      - https://m2.paybyphone.fr/
+      User-Agent:
+      - Faraday v2.7.4
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 11 Apr 2023 15:58:36 GMT
+      Content-Type:
+      - application/json; charset=utf-8
+      Content-Length:
+      - '523'
+      Connection:
+      - keep-alive
+      Server:
+      - nginx/1.22.1
+      X-Powered-By:
+      - ASP.NET
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      X-Request-Start:
+      - '1681228716.232'
+      X-Upstream-Response-Time:
+      - "-"
+      X-Request-Time:
+      - '0.526'
+      X-Time-Iso:
+      - '2023-04-11T15:58:36+00:00'
+    body:
+      encoding: UTF-8
+      string: '{"locationId":"75018","stall":null,"quoteDate":"2023-04-11T15:58:35Z","totalCost":{"amount":4.0,"currency":"EUR"},"parkingAccountId":"account_id","parkingStartTime":"2023-04-11T15:58:35Z","parkingExpiryTime":"2023-04-11T16:58:35Z","parkingDurationAdjustment":"NotAdjusted","licensePlate":"CL123UU","quoteItems":[{"quoteItemType":"Parking","name":"Parking","costAmount":{"amount":4.0,"currency":"EUR"}}],"quoteId":"7e56d834-df2f-4d02-b0b6-e5b5e9d5fd26","paymentMode":"Paid","promotionApplied":null}'
+  recorded_at: Tue, 11 Apr 2023 15:58:36 GMT
+recorded_with: VCR 6.1.0
