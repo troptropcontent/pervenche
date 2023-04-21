@@ -17,6 +17,13 @@ module Notifiers
         )
       end
 
+      sig { params(channel: Symbol, content: String).void }
+      def send_message_later(channel, content)
+        return unless ENV.fetch('PERVENCHE_DISCORD_NOTIFICATION', nil)
+
+        Notifications::Discord::SendMessageJob.perform_async(channel.to_s, content)
+      end
+
       private
 
       sig { params(content: String).returns(String) }
