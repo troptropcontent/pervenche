@@ -19,7 +19,7 @@ module Notifiers
           let(:webhook_url) { 'a_webhook_url' }
           it 'calls the http_client with the correct URL and content' do
             allow(Rails.application.credentials.notifiers.discord.webhooks_url).to receive(:fetch).with(:errors).and_return(webhook_url)
-            expect(HttpClient).to receive(:post).with(url: webhook_url, body: { content: expected_content })
+            expect(Http::Client).to receive(:post).with(url: webhook_url, body: { content: expected_content })
             described_class.send_message(:errors, 'test')
           end
         end

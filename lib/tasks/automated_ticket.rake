@@ -6,7 +6,7 @@ namespace :automated_ticket do
 
     if ENV['PERVENCHE_RENEW_TICKET']
       tickets_to_renew.each do |(automated_ticket_id, zipcode)|
-        AutomatedTicket::Renewer.call(automated_ticket_id:, zipcode:)
+        AutomatedTickets::RenewerJob.perform_async(automated_ticket_id, zipcode)
       end
     end
   end

@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'sidekiq/web'
 Rails.application.routes.draw do
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
 
@@ -29,5 +30,9 @@ Rails.application.routes.draw do
                            controller: 'admin/diagnostics/client'
       end
     end
+  end
+
+  authenticate :user, ->(user) { user.has_role?('admin') } do
+    mount Sidekiq::Web => '/sidekiq'
   end
 end

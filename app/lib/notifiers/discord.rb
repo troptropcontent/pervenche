@@ -11,10 +11,17 @@ module Notifiers
         return unless ENV.fetch('PERVENCHE_DISCORD_NOTIFICATION', nil)
 
         url = Rails.application.credentials.notifiers.discord.webhooks_url.fetch(channel)
-        HttpClient.post(
+        Http::Client.post(
           url:,
           body: { content: content_with_env_prefix(content) }
         )
+      end
+
+      sig { params(channel: Symbol, content: String).void }
+      def send_message_later(channel, content)
+        return unless ENV.fetch('PERVENCHE_DISCORD_NOTIFICATION', nil)
+
+        Notifications::Discord::SendMessageJob.perform_async(channel.to_s, content)
       end
 
       private
