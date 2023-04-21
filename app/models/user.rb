@@ -2,6 +2,7 @@
 
 class User < ApplicationRecord
   include HasRoles
+  after_create :send_notification
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -21,5 +22,11 @@ class User < ApplicationRecord
 
   def operationnal?
     services.joins(:automated_tickets).where(automated_tickets: { status: :ready }).present?
+  end
+
+  private
+
+  def send_notification
+    ActiveSupport::Notifications.instrument 'users.created', attributes
   end
 end
