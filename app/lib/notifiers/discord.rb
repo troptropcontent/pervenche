@@ -11,7 +11,7 @@ module Notifiers
         return unless ENV.fetch('PERVENCHE_DISCORD_NOTIFICATION', nil)
 
         url = Rails.application.credentials.notifiers.discord.webhooks_url.fetch(channel)
-        HttpClient.post(
+        Http::Client.post(
           url:,
           body: { content: content_with_env_prefix(content) }
         )
