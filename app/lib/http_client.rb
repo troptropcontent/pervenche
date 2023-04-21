@@ -46,21 +46,23 @@ class HttpClient
   end
   def self.post(url:, body: nil, headers: nil, token: nil)
     connection(url:, headers:, token:).post do |request|
-      request.body = body if body
+      request.body =  URI.encode_www_form(body) if body.is_a? Hash
+      request.body =  body if body.is_a? String
     end
   end
 
   sig do
     params(url: String,
            headers: T.nilable(T::Hash[T.untyped, T.untyped]),
-           token: T.nilable(String))
+           token: T.nilable(String),
+           use_proxy: T.nilable(T::Boolean))
       .returns(Faraday::Connection)
   end
-  def self.connection(url:, headers:, token: nil)
+  def self.connection(url:, headers:, token: nil, use_proxy: false)
     Faraday.new(
       url:,
       headers:,
-      proxy: ENV.fetch('PERVENCHE_HTTP_PROXY', nil)
+      proxy: (ENV.fetch('PERVENCHE_HTTP_PROXY') if use_proxy)
     ) do |conn|
       conn.response :json
       conn.request(:authorization, 'Bearer', token) if token
