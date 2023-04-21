@@ -21,7 +21,7 @@ module ParkingTicket
               )])
           end
           def auth(username, password)
-            HttpClient.post(
+            Http::Client.post(
               url: 'https://auth.paybyphoneapis.com/token',
               body: URI.encode_www_form({
                                           grant_type: 'password',
@@ -33,13 +33,14 @@ module ParkingTicket
                 'Accept' => 'application/json, text/plain, */*',
                 'X-Pbp-ClientType' => 'WebApp'
               },
-              use_proxy: true
+              use_proxy: true,
+              raise_error: false
             ).body
           end
 
           sig { params(token: String).returns(String) }
           def account_id(token)
-            HttpClient.get(
+            Http::Client.get(
               url: 'https://consumer.paybyphoneapis.com/parking/accounts',
               headers: {
                 accept: 'application/json, text/plain, */*',
@@ -58,7 +59,7 @@ module ParkingTicket
 
           sig { params(token: String, account_id: String, zipcode: String, license_plate: String).returns(Array) }
           def rate_options(token, account_id, zipcode, license_plate)
-            HttpClient.get(
+            Http::Client.get(
               url: "https://consumer.paybyphoneapis.com/parking/locations/#{zipcode}/rateOptions",
               headers: {
                 accept: 'application/json, text/plain, */*',
@@ -81,7 +82,7 @@ module ParkingTicket
 
           sig { params(token: String).returns(T::Array[T::Hash[String, T.untyped]]) }
           def vehicles(token)
-            HttpClient.get(
+            Http::Client.get(
               url: 'https://consumer.paybyphoneapis.com/identity/profileservice/v1/members/vehicles/paybyphone',
               headers: {
                 accept: 'application/json, text/plain, */*',
@@ -99,7 +100,7 @@ module ParkingTicket
 
           sig { params(token: String, account_id: String).returns(T::Array[T::Hash[String, T.untyped]]) }
           def running_tickets(token, account_id)
-            HttpClient.get(
+            Http::Client.get(
               url: "https://consumer.paybyphoneapis.com/parking/accounts/#{account_id}/sessions?periodType=Current",
               headers: {
                 accept: 'application/json, text/plain, */*',
@@ -128,7 +129,7 @@ module ParkingTicket
             ).returns(T::Hash[String, T.untyped])
           end
           def quote(token, account_id, rate_option_id, zipcode, license_plate, quantity, time_unit)
-            HttpClient.get(
+            Http::Client.get(
               url: "https://consumer.paybyphoneapis.com/parking/accounts/#{account_id}/quote",
               headers: {
                 accept: 'application/json, text/plain, */*',
@@ -156,7 +157,7 @@ module ParkingTicket
 
           sig { params(token: String).returns(T::Hash[String, T::Array[T::Hash[String, T.untyped]]]) }
           def payment_methods(token)
-            HttpClient.get(
+            Http::Client.get(
               url: 'https://payments.paybyphoneapis.com/v1/accounts',
               headers: {
                 accept: 'application/json, text/plain, */*',
@@ -226,7 +227,7 @@ module ParkingTicket
 
             final_data = payment_method_id ? base_data.merge(payment_data) : base_data
 
-            HttpClient.post(
+            Http::Client.post(
               url: "https://consumer.paybyphoneapis.com/parking/accounts/#{account_id}/sessions/",
               headers: {
                 accept: 'application/json, text/plain, */*',
@@ -270,7 +271,7 @@ module ParkingTicket
 
         sig { returns(T::Boolean) }
         def valid_credentials?
-          !!token
+          token.length > 0
         end
 
         sig { returns(T::Array[T::Hash[String, T.untyped]]) }
@@ -343,7 +344,7 @@ module ParkingTicket
         sig { returns(String) }
         def token
           @token ||= cached(cache_key: build_cache_key('auth'), expires_in: 1200) do
-            self.class.auth(@username, @password).fetch('access_token')
+            self.class.auth(@username, @password).fetch('access_token', '')
           end
         end
 

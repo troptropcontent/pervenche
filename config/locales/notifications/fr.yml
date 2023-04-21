@@ -3,3 +3,5 @@ fr:
   notifications: 
     discord:
       new_user:  "Un nouvel utilisateur s'est inscrit sur la plateforme  🔥\nemail: %{email}"
+      faraday:
+        errors: "🚨 Une requete a échoué 🚨\nmethod: %{method}\nurl: %{url}\nstatus: %{status}\nbody: %{body}"
