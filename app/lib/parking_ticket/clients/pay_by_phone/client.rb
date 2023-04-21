@@ -32,7 +32,8 @@ module ParkingTicket
               headers: {
                 'Accept' => 'application/json, text/plain, */*',
                 'X-Pbp-ClientType' => 'WebApp'
-              }
+              },
+              use_proxy: true
             ).body
           end
 
@@ -50,7 +51,8 @@ module ParkingTicket
                 'x-pbp-clienttype': 'WebApp',
                 'x-pbp-version': '2'
               },
-              token:
+              token:,
+              use_proxy: true
             ).body.dig(0, 'id')
           end
 
@@ -72,7 +74,8 @@ module ParkingTicket
                 parkingAccountId: account_id,
                 licensePlate: license_plate
               },
-              token:
+              token:,
+              use_proxy: true
             ).body
           end
 
@@ -89,7 +92,8 @@ module ParkingTicket
                 'sec-fetch-site': 'cross-site',
                 'x-pbp-clienttype': 'WebApp'
               },
-              token:
+              token:,
+              use_proxy: true
             ).body
           end
 
@@ -107,7 +111,8 @@ module ParkingTicket
                 'x-pbp-clienttype': 'WebApp',
                 'x-pbp-version': '2'
               },
-              token:
+              token:,
+              use_proxy: true
             ).body
           end
 
@@ -144,7 +149,8 @@ module ParkingTicket
                 isParkUntil: false,
                 parkingAccountId: account_id
               },
-              token:
+              token:,
+              use_proxy: true
             ).body
           end
 
@@ -164,7 +170,8 @@ module ParkingTicket
                 Referer: 'https://m2.paybyphone.fr/',
                 'Referrer-Policy': 'strict-origin-when-cross-origin'
               },
-              token:
+              token:,
+              use_proxy: true
             ).body
           end
 
@@ -233,7 +240,8 @@ module ParkingTicket
                 'x-pbp-version': '2'
               },
               body: JSON.generate(final_data),
-              token:
+              token:,
+              use_proxy: true
             ).body
           end
 
