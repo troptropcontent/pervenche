@@ -12,6 +12,13 @@ RSpec.describe AutomatedTicket, type: :model do
 
   describe '.class_methods' do
     describe 'missing_running_tickets_in_database' do
+      let(:expected) do
+        described_class.missing_running_tickets_in_database.pluck(
+          'automated_tickets.id',
+          'unnested_automated_tickets.zipcode',
+          'last_ticket_request_dates.last_requested_date'
+        )
+      end
       let(:automated_ticket) do
         FactoryBot.create(:automated_ticket, :set_up, user:, service:, zipcodes:, status:, active:)
       end
@@ -30,8 +37,31 @@ RSpec.describe AutomatedTicket, type: :model do
                           zipcode: '75016')
       end
       it 'return the missing zipcodes' do
-        expect(described_class.missing_running_tickets_in_database).to contain_exactly([automated_ticket.id, '75016'],
-                                                                                       [automated_ticket.id, '75018'])
+        expect(expected).to contain_exactly([automated_ticket.id, '75016', nil],
+                                            [automated_ticket.id, '75018',
+                                             nil])
+      end
+
+      context 'when the automated_ticket have already been requested' do
+        let!(:two_minutes_ago) do
+          Date.current - 2.minutes
+        end
+        let!(:first_ticket_request_for_75016) do
+          FactoryBot.create(:ticket_request, zipcode: '75016', automated_ticket_id: automated_ticket.id,
+                                             requested_on: two_minutes_ago)
+        end
+        let!(:one_minute_ago) do
+          Date.current - 1.minute
+        end
+        let!(:second_ticket_request_for_75016) do
+          FactoryBot.create(:ticket_request, zipcode: '75016', automated_ticket_id: automated_ticket.id,
+                                             requested_on: one_minute_ago)
+        end
+        it 'return the missing zipcodes' do
+          expect(expected).to contain_exactly([automated_ticket.id, '75016', second_ticket_request_for_75016.requested_on],
+                                              [automated_ticket.id, '75018',
+                                               nil])
+        end
       end
 
       context 'when there no missing tickets' do
@@ -48,19 +78,19 @@ RSpec.describe AutomatedTicket, type: :model do
                             zipcode: '75016')
         end
         it 'returns an empty array' do
-          expect(described_class.missing_running_tickets_in_database).to eq([])
+          expect(expected).to eq([])
         end
       end
       context 'when there is automated tickets that are not ready' do
         let(:status) { :started }
         it 'returns an empty array' do
-          expect(described_class.missing_running_tickets_in_database).to eq([])
+          expect(expected).to eq([])
         end
       end
       context 'when there is automated tickets that are not active' do
         let(:active) { :false }
         it 'returns an empty array' do
-          expect(described_class.missing_running_tickets_in_database).to eq([])
+          expect(expected).to eq([])
         end
       end
     end

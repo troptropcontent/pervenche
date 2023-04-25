@@ -64,10 +64,19 @@ class AutomatedTicket < ApplicationRecord
       ON unnested_automated_tickets.id = automated_tickets.id
       LEFT OUTER JOIN (SELECT id, automated_ticket_id, zipcode FROM tickets where tickets.ends_on >= NOW()) as running_tickets
       ON automated_tickets.id = running_tickets.automated_ticket_id AND unnested_automated_tickets.zipcode = running_tickets.zipcode
+      LEFT OUTER JOIN (
+        SELECT
+         automated_ticket_id,
+         zipcode,
+         MAX(requested_on) as last_requested_date
+        FROM ticket_requests
+        GROUP BY ticket_requests.automated_ticket_id, ticket_requests.zipcode
+      ) as last_ticket_request_dates
+      ON automated_tickets.id = last_ticket_request_dates.automated_ticket_id AND last_ticket_request_dates.zipcode = unnested_automated_tickets.zipcode
     }
-    joins(join_sql)
-      .where(active: true, status: :ready, running_tickets: { id: nil })
-      .pluck('automated_tickets.id', 'unnested_automated_tickets.zipcode')
+
+    AutomatedTicket.joins(join_sql)
+                   .where(active: true, status: :ready, running_tickets: { id: nil })
   end
 
   def self.setup_steps
