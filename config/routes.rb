@@ -22,6 +22,10 @@ Rails.application.routes.draw do
     end
   end
 
+  namespace :billing do
+    resources :subscription, only: :new
+  end
+
   resource :admin, only: [], controller: 'admin' do
     get 'dashboard'
     resources :diagnostics, only: [] do
