@@ -73,6 +73,9 @@ gem 'sassc-rails'
 # Money
 gem 'money-rails', '~>1.12'
 
+#Chargebee
+gem 'chargebee', '~>2'
+
 # Htt requests
 gem 'faraday', '>= 2.7.2'
 
