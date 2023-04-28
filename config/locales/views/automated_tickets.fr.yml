@@ -2,7 +2,9 @@ fr:
   views:
     automated_tickets:
       index:
-        cta: 'Ajouter un ticket automatique'
+        cta: 'Ajouter un ticket'
+        modal: 
+          text_html: Si vous avez la moindre question, vous pouvez envoyer un email à <a href="mailto:tom@pervenche.eu">tom@pervenche.eu</a>. 
   partials:
     automated_ticket:
       covered: Couvert
