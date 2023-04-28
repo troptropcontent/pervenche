@@ -11,7 +11,7 @@ fr:
               text: Ça nous permet de prendre des tickets de stationnement pour toi
             second:
               title: Renseigne le ou les arrondissements où tu te gares habituellement
-              text: On renouvellera automatiquement tous les jours un nouveau ticket pour chacun de ces arrondissements
+              text: Si tu as une voiture, choisis l'arrondissement dans lequel tu es résident. Si tu as un scooter, choisis autant d'arrondissements que tu veux. On renouvellera automatiquement tous les jours un nouveau ticket pour la ou les zones sélectionnées.
             third:
               title: C’est tout, fini les amendes inutiles
               text: Tu peux nous oublier, on s’occupe du reste et tu ne recevras plus jamais d’amendes

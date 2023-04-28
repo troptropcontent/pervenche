@@ -17,7 +17,9 @@ fr:
         cta: Continuer
       zipcodes:
         header:
-          title: Dans quels arrondissements tu veux renouveler un ticket ?
+          title: 
+            electric_motorcycle: Dans quels arrondissements veux-tu renouveler un ticket ?
+            combustion_car: Dans quel arronsissement es-tu résident ?
         cta: Continuer
       rate_option:
         header:

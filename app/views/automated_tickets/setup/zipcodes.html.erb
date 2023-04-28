@@ -2,7 +2,8 @@
 
 <main class="grow container stack stack--no-gap">
     <section class="header">
-      <h2><%= t('views.setup.zipcodes.header.title') %></h2>
+
+      <h2><%= t("views.setup.zipcodes.header.title.#{@automated_ticket.vehicle_type}") %></h2>
     </section>
     <%= render 'automated_tickets/setup/shared/form', automated_ticket: @automated_ticket, step: @step do |f| %>
       <% if @localisation == 'paris' %>
