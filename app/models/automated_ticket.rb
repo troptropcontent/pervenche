@@ -16,7 +16,8 @@ class AutomatedTicket < ApplicationRecord
     zipcodes: %i[zipcodes],
     rate_option: %i[rate_option_client_internal_id accepted_time_units free],
     weekdays: %i[weekdays],
-    payment_methods: %i[payment_method_client_internal_ids]
+    payment_methods: %i[payment_method_client_internal_ids],
+    subscription: [:charge_bee_subscription_id]
   }.freeze
 
   enum status: {
@@ -52,6 +53,12 @@ class AutomatedTicket < ApplicationRecord
   with_options if: -> { required_for_step?(:payment_methods) } do
     validates :payment_method_client_internal_ids,
               length: { minimum: 1, message: I18n.t('errors.messages.empty_array') }, unless: :free
+  end
+
+  with_options if: -> { required_for_step?(:subscription) } do
+    validates :charge_bee_subscription_id, presence: true, unless: lambda {
+                                                                     !!!ENV.fetch('PERVENCHE_CHARGEBEE_ENABLED', false)
+                                                                   }
   end
 
   validate :similar_ticket_already_registered
@@ -124,6 +131,11 @@ class AutomatedTicket < ApplicationRecord
 
   def running_ticket_in_database_for(zipcode:)
     tickets.running.find_by(zipcode:)
+  end
+
+  def payment_method_client_internal_ids=(value)
+    value = [value] if value.is_a?(String)
+    super
   end
 
   private
