@@ -73,7 +73,7 @@ Rails.application.configure do
   config.active_support.report_deprecations = false
 
   # custom logging
-  config.log_level = :debug
+  config.log_level = :info
   config.log_formatter = LogFormatter.new
   if ENV['RAILS_LOG_TO_STDOUT'].present?
     logger           = ActiveSupport::Logger.new(STDOUT)
