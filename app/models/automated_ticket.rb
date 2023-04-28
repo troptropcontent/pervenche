@@ -54,6 +54,10 @@ class AutomatedTicket < ApplicationRecord
               length: { minimum: 1, message: I18n.t('errors.messages.empty_array') }, unless: :free
   end
 
+  with_options if: -> { required_for_step?(:subscription) } do
+    validates :charge_bee_subscription_id, presence: true
+  end
+
   validate :similar_ticket_already_registered
 
   attr_accessor :setup_step

@@ -1,4 +1,7 @@
 fr:
+  support:
+    array:
+      last_word_connector: ' et '
   application: 
     name: Pervenche
     slug: Fini les amendes inutiles
@@ -8,3 +11,4 @@ fr:
       to_do: "À faire"
       continue: "Continuer"
       or: "ou"
+      and: "et"
