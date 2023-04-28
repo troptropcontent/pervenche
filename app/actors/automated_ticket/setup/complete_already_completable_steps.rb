@@ -106,8 +106,6 @@ class AutomatedTicket::Setup::CompleteAlreadyCompletableSteps < Actor
   end
 
   def weekdays_completable?
-    return false unless automated_ticket.free
-
     automated_ticket.assign_attributes(
       {
         weekdays: [0, 1, 2, 3, 4, 5, 6]

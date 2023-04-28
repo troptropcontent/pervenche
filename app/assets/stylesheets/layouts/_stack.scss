@@ -19,4 +19,10 @@
     &--no-gap{
         gap: 0;  
     }
+
+    &--justify-content{
+        &--end{
+            justify-content: end;
+        }
+    }
 }

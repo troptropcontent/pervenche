@@ -14,8 +14,14 @@
     <section class="footer stack margin__bottom--l">
         <div class="visually-hidden" data-form-target='hiddenInputsGroup'>
         </div>
-        <%= button_tag(type: 'submit', class: "btn btn--primary") do %>
-          <p><%= t("views.setup.#{step}.cta") %></p>
+        <% if local_assigns[:disabled] %>
+          <div class="btn btn--light center">
+            <p><%= t("views.setup.#{step}.cta") %></p>
+          </div>
+          <% else %>
+          <%= button_tag(type: 'submit', class: "btn btn--primary") do %>
+            <p><%= t("views.setup.#{step}.cta") %></p>
+          <% end %>
         <% end %>
     </section>
     <% end %>  

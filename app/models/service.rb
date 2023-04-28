@@ -2,6 +2,7 @@
 
 # The Service represent the parking application account
 class Service < ApplicationRecord
+  SUPPORTED_RATE_OPTION_TYPES = %w[RES VP-2RM].freeze
   belongs_to :user
   has_many :automated_tickets, dependent: :destroy
   # encrypts :username, :password, deterministic: true
@@ -22,13 +23,13 @@ class Service < ApplicationRecord
 
   delegate :quote, to: :client
 
-  def vehicles
-    client.vehicles.filter { |vehicle| vehicle.vehicle_type == 'electric_motorcycle' }
-  end
+  delegate :vehicles, to: :client
 
   def rate_options(zipcodes, license_plate)
     rate_options = zipcodes.map do |zipcode|
-      client.rate_options(zipcode, license_plate)
+      client.rate_options(zipcode, license_plate).filter do |rate_option|
+        SUPPORTED_RATE_OPTION_TYPES.include?(rate_option.type)
+      end
     end
     rate_options_unique = rate_options.flatten.uniq(&:serialize)
     shared_rate_option_between_zipcodes = rate_options_unique.filter do |rate_option|

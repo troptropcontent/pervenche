@@ -31,6 +31,10 @@ FactoryBot.define do
       payment_method_client_internal_ids { ['rytrtt88ppezoezpeop'] }
     end
 
+    trait :with_charge_bee_subscription_id do
+      charge_bee_subscription_id { ['hgjhkghjghgghgkhgk'] }
+    end
+
     trait :set_up do
       with_localisation
       with_vehicle
@@ -38,6 +42,7 @@ FactoryBot.define do
       with_rate_option
       with_weekdays
       with_payment_methods
+      with_charge_bee_subscription_id
       status { :ready }
     end
   end

@@ -8,6 +8,12 @@
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+    <script src="https://js.chargebee.com/v2/chargebee.js"></script>
+    <meta name="chargebee-site" content="<%= Rails.application.credentials.dig(
+                      :chargebee,
+                      ENV['PERVENCHE_CHARGEBEE_PRODUCTION_SITE'] ? :production : :sandbox,
+                      :site
+                    )%>">
   </head>
 
   <body>

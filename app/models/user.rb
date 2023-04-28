@@ -2,6 +2,7 @@
 
 class User < ApplicationRecord
   include HasRoles
+  before_create :set_chargebee_customer_id
   after_create :send_notification
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -28,5 +29,12 @@ class User < ApplicationRecord
 
   def send_notification
     ActiveSupport::Notifications.instrument 'users.created', attributes
+  end
+
+  def set_chargebee_customer_id
+    return unless ENV['PERVENCHE_CHARGEBEE_ENABLED'] && email
+
+    new_chargebee_customer = ChargeBee::Customer.create({ email: }).customer
+    self.chargebee_customer_id = new_chargebee_customer.id
   end
 end

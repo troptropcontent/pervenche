@@ -25,3 +25,21 @@ fr:
         clickable: 
           free: "Gratuit : "
         cta: Continuer
+      payment_methods:
+        header:
+            title: Quel moyen de paiement souhaitez vous que PayByPhone utilise ?
+        visa: Visa ending by %{anonymised_card_number}
+        master_card: MasterCard ending by %{anonymised_card_number}
+        cta: Continuer
+      subscription:
+        cta: Terminer
+        header:
+          title: Abonne toi au service
+        subscribe_cta: Renseigner un moyen de paiement
+        subscribed: Abonnement bien pris en compte.
+        text_subscribed_html: 
+          one: Et voilà, c'est fini, d'ici quelques instants tu pourras oublier de renouveler le ticket de ton véhicule (<b>%{license_plate}</b>) dans la zone <b>%{zipcodes}</b>.<br><br>Aprés avoir cliqué sur <b>Terminer</b>, le ticket apparaitra comme non couvert mais c'est normal, il faut attendre quelques instants pour que le robot se mette en place.
+          other: Et voilà, c'est fini, d'ici quelques instants tu pourras oublier de renouveler les ticket de ton véhicule (<b>%{license_plate}</b>) dans les zones <b>%{zipcodes}</b>.<br><br>Aprés avoir cliqué sur <b>Terminer</b>, les tickets apparaitrons comme non couverts mais c'est normal, il faut attendre quelques instants pour que le robot se mette en place.
+        text_html: 
+          one: Pour finaliser le renouvellement automatique de ton ticket de stationnement pour ton véhicule (<b>%{license_plate}</b>) dans la zone <b>%{zipcodes}</b>, il ne te reste plus qu'à t'abonner au service.<br><br>Cela ne te prendra que quelques secondes et c'est la dernière étape.
+          other: Pour finaliser le renouvellement automatique de tes tickets de stationnement pour ton véhicule (<b>%{license_plate}</b>) dans les zones <b>%{zipcodes}</b>, il ne te reste plus qu'à t'abonner au service.<br><br>Cela ne te prendra que quelques secondes et c'est la dernière étape.
