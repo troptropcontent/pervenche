@@ -16,7 +16,8 @@ class AutomatedTicket < ApplicationRecord
     zipcodes: %i[zipcodes],
     rate_option: %i[rate_option_client_internal_id accepted_time_units free],
     weekdays: %i[weekdays],
-    payment_methods: %i[payment_method_client_internal_ids]
+    payment_methods: %i[payment_method_client_internal_ids],
+    subscription: [:charge_bee_subscription_id]
   }.freeze
 
   enum status: {
@@ -61,6 +62,7 @@ class AutomatedTicket < ApplicationRecord
   validate :similar_ticket_already_registered
 
   attr_accessor :setup_step
+  attr_accessor :chargebee_redirect_hostname
 
   def self.missing_running_tickets_in_database
     join_sql = %{
@@ -128,6 +130,11 @@ class AutomatedTicket < ApplicationRecord
 
   def running_ticket_in_database_for(zipcode:)
     tickets.running.find_by(zipcode:)
+  end
+
+  def payment_method_client_internal_ids=(value)
+    value = [value] if value.is_a?(String)
+    super
   end
 
   private
