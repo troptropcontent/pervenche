@@ -5,6 +5,7 @@ module AutomatedTicket::Setup
     include Rails.application.routes.url_helpers
     HOSTS = {
       development: 'localhost:3000',
+      test: 'localhost:3000',
       staging: 'app.staging.pervenche.eu',
       production: 'app.pervenche.eu'
     }.freeze
@@ -79,7 +80,7 @@ module AutomatedTicket::Setup
                                                                            ),
                                                                            type: 'checkout_new'
 
-                                                                         }).hosted_page
+                                                                         }).hosted_page.to_json
 
         }
       end

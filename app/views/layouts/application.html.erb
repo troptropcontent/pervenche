@@ -11,7 +11,7 @@
     <script src="https://js.chargebee.com/v2/chargebee.js"></script>
     <meta name="chargebee-site" content="<%= Rails.application.credentials.dig(
                       :chargebee,
-                      ENV['PERVENCHE_CHARGEBEE_ENABLED'] ? :production : :sandbox,
+                      ENV['PERVENCHE_CHARGEBEE_PRODUCTION_SITE'] ? :production : :sandbox,
                       :site
                     )%>">
   </head>

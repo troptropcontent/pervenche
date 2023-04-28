@@ -1,0 +1,127 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://pervenche-test.chargebee.com/api/v2/hosted_pages/checkout_new_for_items
+    body:
+      encoding: UTF-8
+      string: subscription_items%5Bitem_price_id%5D%5B0%5D=combustion_car_eur_monthly&customer%5Bid%5D=BTcd3pTchKzWzG2u&customer%5Bcf_environment%5D=test&redirect_url=http%3A%2F%2Flocalhost%3A3000%2Fautomated_tickets%2F111%2Fsetup%2Fsubscription&type=checkout_new
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - Chargebee-Ruby-Client v2.24.0
+      Lang-Version:
+      - 3.2.1
+      Os-Version:
+      - arm64-darwin20
+      Content-Length:
+      - '249'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Host:
+      - pervenche-test.chargebee.com
+      Authorization:
+      - Basic dGVzdF8yM0g1TWhpZUhpMTFtRXBjc1N6MVNnVlVoY2pSb3paSDo=
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 28 Apr 2023 08:27:33 GMT
+      Content-Type:
+      - application/json;charset=utf-8
+      Content-Length:
+      - '393'
+      Connection:
+      - keep-alive
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Cache-Control:
+      - no-store, no-cache, must-revalidate
+      Pragma:
+      - no-cache
+      Server:
+      - ChargeBee
+    body:
+      encoding: UTF-8
+      string: |-
+        {"hosted_page": {
+            "id": "oXZvOrUdHBk7WGakcd5upSFwPivz1BcdtV",
+            "type": "checkout_new",
+            "url": "https://pervenche-test.chargebee.com/pages/v3/oXZvOrUdHBk7WGakcd5upSFwPivz1BcdtV/",
+            "state": "created",
+            "embed": false,
+            "created_at": 1682670453,
+            "expires_at": 1682681253,
+            "object": "hosted_page",
+            "updated_at": 1682670453,
+            "resource_version": 1682670453426
+        }}
+  recorded_at: Fri, 28 Apr 2023 08:27:33 GMT
+- request:
+    method: post
+    uri: https://pervenche-test.chargebee.com/api/v2/hosted_pages/checkout_new_for_items
+    body:
+      encoding: UTF-8
+      string: subscription_items%5Bitem_price_id%5D%5B0%5D=combustion_car_eur_monthly&customer%5Bid%5D=BTcd3pTchKzWzG2u&customer%5Bcf_environment%5D=test&redirect_url=http%3A%2F%2Flocalhost%3A3000%2Fautomated_tickets%2F111%2Fsetup%2Fsubscription&type=checkout_new
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - Chargebee-Ruby-Client v2.24.0
+      Lang-Version:
+      - 3.2.1
+      Os-Version:
+      - arm64-darwin20
+      Content-Length:
+      - '249'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Host:
+      - pervenche-test.chargebee.com
+      Authorization:
+      - Basic dGVzdF8yM0g1TWhpZUhpMTFtRXBjc1N6MVNnVlVoY2pSb3paSDo=
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 28 Apr 2023 08:27:33 GMT
+      Content-Type:
+      - application/json;charset=utf-8
+      Content-Length:
+      - '391'
+      Connection:
+      - keep-alive
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Cache-Control:
+      - no-store, no-cache, must-revalidate
+      Pragma:
+      - no-cache
+      Server:
+      - ChargeBee
+    body:
+      encoding: UTF-8
+      string: |-
+        {"hosted_page": {
+            "id": "6RuUlukZgMOruMMgxCdakVsetMTj0cdBT",
+            "type": "checkout_new",
+            "url": "https://pervenche-test.chargebee.com/pages/v3/6RuUlukZgMOruMMgxCdakVsetMTj0cdBT/",
+            "state": "created",
+            "embed": false,
+            "created_at": 1682670453,
+            "expires_at": 1682681253,
+            "object": "hosted_page",
+            "updated_at": 1682670453,
+            "resource_version": 1682670453908
+        }}
+  recorded_at: Fri, 28 Apr 2023 08:27:33 GMT
+recorded_with: VCR 6.1.0

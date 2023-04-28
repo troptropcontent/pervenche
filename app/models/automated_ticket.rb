@@ -56,13 +56,14 @@ class AutomatedTicket < ApplicationRecord
   end
 
   with_options if: -> { required_for_step?(:subscription) } do
-    validates :charge_bee_subscription_id, presence: true
+    validates :charge_bee_subscription_id, presence: true, unless: lambda {
+                                                                     !!!ENV.fetch('PERVENCHE_CHARGEBEE_ENABLED', false)
+                                                                   }
   end
 
   validate :similar_ticket_already_registered
 
   attr_accessor :setup_step
-  attr_accessor :chargebee_redirect_hostname
 
   def self.missing_running_tickets_in_database
     join_sql = %{
