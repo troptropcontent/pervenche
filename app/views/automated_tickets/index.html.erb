@@ -3,10 +3,13 @@
     <section class="stack grow">
        <%= render @automated_tickets %>
     </section>
-    <section class="footer stack margin__bottom--l">
+    <section class="footer cluster margin__bottom--l">
+        <%= render 'components/modal', btn_content: inline_svg('help-circle.svg', class: 'text__color--muted') do %>
+          <p><%= t('views.automated_tickets.index.modal.text_html') %></p>
+        <% end %>
         <%= link_to t('views.automated_tickets.index.cta'),
                 new_automated_ticket_path,
-                class: "btn btn--primary center",
+                class: "btn btn--primary center grow",
                 data: { turbo: false } 
         %>
     </section>
