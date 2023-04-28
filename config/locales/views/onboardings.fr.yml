@@ -10,7 +10,7 @@ fr:
               title: Connecte ton compte de ticket de stationnement
               text: Ça nous permet de prendre des tickets de stationnement pour toi
             second:
-              title: Renseigne les arrondissements où tu te gares habituellement
+              title: Renseigne le ou les arrondissements où tu te gares habituellement
               text: On renouvellera automatiquement tous les jours un nouveau ticket pour chacun de ces arrondissements
             third:
               title: C’est tout, fini les amendes inutiles
