@@ -67,6 +67,11 @@
         <h4><%= t('views.services.new.form.password.label') %></h4>
         <%= f.input :password, as: :password %>
     </div>
+    <% if service.errors.present? %>
+      <p class="text__color--danger">
+        <%= t('views.services.new.form.errors.text') %>
+      </p>
+    <% end %>
     <% if local_assigns[:redirect_to] %>
         <%= hidden_field_tag 'navigation[redirect_to]', redirect_to %>
     <% end %>
@@ -83,3 +88,4 @@
         </div>
     </section>
 <% end %>  
+

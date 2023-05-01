@@ -1,0 +1,11 @@
+fr:
+  models:
+    service:
+      attributes:
+        kind:
+          enum:
+            pay_by_phone: "PayByPhone"
+            easy_park: "Easy Park"
+      validations:
+        username: "Le nom d'utilisateur ne semble pas correct"
+        password: "Le mot de passe ne semble pas correct"
