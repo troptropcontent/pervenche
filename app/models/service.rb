@@ -61,7 +61,8 @@ class Service < ApplicationRecord
   def valid_credentials
     return if (kind && username && password) && ParkingTicket::Base.valid_credentials?(kind, username, password)
 
-    errors.add(:credentials, I18n.t('models.service.validations.credentials'))
+    errors.add(:username, I18n.t('models.service.validations.username'))
+    errors.add(:password, I18n.t('models.service.validations.password'))
   end
 
   def client

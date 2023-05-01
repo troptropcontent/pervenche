@@ -27,4 +27,6 @@ fr:
           password:
             label: Mot de passe
             placeholder: "Your service password"
+          errors:
+            text: "* Le nom d'utilisateur et le mot de passe ne semblent pas corrects"
         cta: Continuer
