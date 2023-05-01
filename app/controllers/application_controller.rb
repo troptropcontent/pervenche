@@ -23,11 +23,17 @@ class ApplicationController < ActionController::Base
   private
 
   def operationnal_controller?
-    !devise_controller? && %w[onboardings shared_views
-                              setups setup].exclude?(controller_name) && %w[new create update].exclude?(action_name)
+    !devise_controller? &&
+      !webhooks_controller? &&
+      %w[onboardings shared_views setups setup].exclude?(controller_name) &&
+      %w[new create update].exclude?(action_name)
   end
 
   def operationnal_required?
     operationnal_controller? && !current_user.operationnal?
+  end
+
+  def webhooks_controller?
+    [Webhooks::ChargeBeeController].include? self.class
   end
 end

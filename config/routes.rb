@@ -32,6 +32,12 @@ Rails.application.routes.draw do
     end
   end
 
+  namespace :webhooks do
+    namespace :charge_bee do
+      post '/:token', action: 'handle'
+    end
+  end
+
   authenticate :user, ->(user) { user.has_role?('admin') } do
     mount Sidekiq::Web => '/sidekiq'
   end
