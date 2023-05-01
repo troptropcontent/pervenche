@@ -66,6 +66,9 @@ module AutomatedTicket::Setup
         self.data = {
           plan_id:,
           hosted_page_data: ChargeBee::HostedPage.checkout_new_for_items({
+                                                                           subscription: {
+                                                                             cf_automated_ticket_id: automated_ticket.id
+                                                                           },
                                                                            subscription_items: [{
                                                                              item_price_id: "#{plan_id}_eur_monthly"
                                                                            }],
