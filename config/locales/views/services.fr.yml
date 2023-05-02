@@ -28,5 +28,7 @@ fr:
             label: Mot de passe
             placeholder: "Your service password"
           errors:
-            text: "* Le nom d'utilisateur et le mot de passe ne semblent pas corrects"
+            text_html: "* Les identifiants utilisés ne semblent pas corrects, n'hésitez pas à m'envoyer un mail à <a href='mailto:tom@pervenche.eu'>tom@pervenche.eu</a> si le problème persiste."
+          hint:
+            text_html: "* vous devez utiliser les identifiants que vous utilisez pour vous connecter <a href='https://m2.paybyphone.fr/login'>ici</a>"
         cta: Continuer
