@@ -1,6 +1,6 @@
 <%= simple_form_for service, html: {
       class: "form form--column grow",
-                              data: { turbo: false, controller: "form tabs" , action: "form#toggleSubmitButtonLoading form#removeEmptyValue"}
+                              data: { turbo: false, controller: "form tabs phone-input" , action: "form#toggleSubmitButtonLoading form#removeEmptyValue"}
                             } do |f| %>
     <section class="content grow stack stack--l">
     <div class="form_group stack stack--xs">
@@ -13,68 +13,28 @@
         ], 
         wrapper: false %>
     </div>
-     <div class="stack">
-        <div class="stack stack--xs">
-            <h4><%= t('views.services.new.form.username_type.label') %></h4>
-            <div class="tabs tabs--separated">
-                <%= render 'components/clickable', 
-                    input_name: 'tab', 
-                    input_value: 'phone', 
-                    input_text: t('views.services.new.form.username_type.types.phone'), 
-                    checked: true,
-                    input_html: {
-                        data: {
-                            action: "tabs#showContent form#disableInputs form#enableInputs",
-                            'tabs-id-param': "phone",
-                            'form-disable-ids-param': ['service_username_email'],
-                            'form-enable-ids-param': ['service_username_phone']
-                        }
-                    } %>
-                <%= render 'components/clickable', 
-                    input_name: 'tab', 
-                    input_value: 'email', 
-                    input_text: t('views.services.new.form.username_type.types.email'), 
-                    input_html: {
-                        data: {
-                            action: "tabs#showContent form#disableInputs form#enableInputs",
-                            'tabs-id-param': "email",
-                            'form-disable-ids-param': ['service_username_phone'],
-                            'form-enable-ids-param': ['service_username_email']
-                        }
-                    } %>
-            </div>
-        </div>
-        <div id="tabs_phone" class="form_group stack stack--xs" data-controller="phone-input" data-tabs-target="content">
-            <h4><%= t('views.services.new.form.phone_number.label') %></h4>
-            <%= f.input :username,
-                as: :tel, 
-                wrapper_html: {class: 'form__group--column'}, 
-                input_html: {id: 'service_username_phone', data: {"phone-input-target"=>"input"}} %>
-        </div>
-
-        <div id="tabs_email" class="form_group stack stack--xs visually-hidden"  data-tabs-target="content">
-            <h4><%= t('views.services.new.form.email.label') %></h4>
-            <%= f.input :username,
-                as: :email,
-                placeholder: t('views.services.new.form.email.placeholder'),
-                wrapper_html: {class: 'form__group--column'},
-                input_html: {id: 'service_username_email', data: {"phone-input-target"=>"input"}, disabled: true} 
-             %>
-        </div>
-     </div>
-    
+    <div class="form_group stack stack--xs" >
+        <h4><%= t('views.services.new.form.phone_number.label') %></h4>
+                <%= f.input :username,
+                    as: :tel, 
+                    wrapper_html: {class: 'form__group--column'}, 
+                    input_html: {id: 'service_username_phone', data: {"phone-input-target"=>"input"}} %>
+    </div>
     <div class="form_group stack stack--xs" >
         <h4><%= t('views.services.new.form.password.label') %></h4>
         <%= f.input :password, as: :password %>
     </div>
     <% if service.errors.present? %>
       <p class="text__color--danger">
-        <%= t('views.services.new.form.errors.text') %>
+        <%= t('views.services.new.form.errors.text_html') %>
       </p>
     <% end %>
     <% if local_assigns[:redirect_to] %>
         <%= hidden_field_tag 'navigation[redirect_to]', redirect_to %>
     <% end %>
+    <p>
+        <%= t('views.services.new.form.hint.text_html') %>
+    </p>
     </section>
     <section class="footer cluster margin__bottom--l">
     <%= link_to redirect_to, class: 'btn btn--white center' do %>
