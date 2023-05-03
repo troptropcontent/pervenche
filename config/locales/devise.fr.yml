@@ -22,5 +22,31 @@ fr:
         password: 
           label: Mot de passe
           placeholder: Votre mot de passe
+    passwords:
+      new:
+        title: Mot de passe oublié ?
+        link_to: Mot de passe oublié ?
+        inputs:
+          email:
+            label: Mon email
+            placeholder: Mon email
+        submit: Réinitialiser mon mot de passe
+      edit:
+        title: Réinitialisation du mot de passe
+        inputs:
+          password:
+            label: Nouveau mot de passe
+          password_confirmation:
+            label: Confirmation du nouveau mot de passe
+        submit: Réinitialiser mon mot de passe
+      no_token: "Vous ne pouvez pas accéder à cette page"
+      send_instructions: "Demande de nouveau mot de passe bien reçue, vous allez recevoir un email dans quelques minutes."
+      send_paranoid_instructions: "Si votre email existe bien dans notre base de donnée, vous recevrez un email dans quelques minutes"
+      updated: "Votre mot de passe a bien été mis à jour, vous etes à présent connecté."
+      updated_not_active: "Votre mot de passe a bien été mis à jour."
+  errors:
+    messages:
+      not_found: "non trouvé"
+
           
 

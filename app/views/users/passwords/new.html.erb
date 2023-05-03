@@ -1,0 +1,28 @@
+<div class="container stack">
+    <%= render 'devise/shared/branded_header' %>
+    <section class="stack stack--l">
+      <h2 class='text__align--center'><%= t('devise.passwords.new.title') %></h2>
+      <%= simple_form_for resource, 
+                          as: resource_name, 
+                          url: password_path(resource_name),
+                          method: :post,
+                          html: {
+                            class: "form form--column stack stack--l",
+                            data: { turbo: false }
+                          } do |f| %>
+
+        <% if resource.errors.any? %>
+          <div class="error-message">
+            <%= resource.errors.full_messages.to_sentence.capitalize %>
+          </div>
+        <% end %>
+
+        <div class="form_group stack stack--s">
+            <p ><%= t('devise.passwords.new.inputs.email.label') %></p >
+            <%= f.input :email, placeholder: '', input_html: { autofocus: true } %>
+        </div>
+        <%= f.submit  t('devise.passwords.new.submit') , class: "btn btn--primary" %>
+      <% end %>
+    </section>
+</div>
+  
