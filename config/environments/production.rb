@@ -78,7 +78,7 @@ Rails.application.configure do
     open_timeout: 5,
     read_timeout: 5
   }
-  config.action_mailer.default_url_options = { host: 'pervenche.eu' }
+  config.action_mailer.default_url_options = { host: 'app.pervenche.eu' }
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
