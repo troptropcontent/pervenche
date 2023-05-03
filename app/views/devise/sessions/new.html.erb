@@ -25,6 +25,9 @@
        <div class="form_group stack stack--s">
             <p ><%= t('devise.sessions.inputs.password.label') %></p >
              <%= f.input :password, placeholder: t('devise.sessions.inputs.password.placeholder') %>
+            <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
+              <%= link_to t('devise.passwords.new.link_to'), new_password_path(resource_name) %><br />
+            <% end %>
         </div>
         <%= f.submit  t('devise.sessions.title') , class: "btn btn--primary" %>
       <% end %>
