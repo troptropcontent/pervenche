@@ -6,5 +6,10 @@ class AutomatedTicket::Renewer < Actor
   play FindPaymentMethod,
        FindTimeUnitAndQuantity,
        RequestNewTicket,
-       if: ->(actor) { actor.running_ticket.nil? && actor.automated_ticket.should_renew_today? }
+       if: lambda { |actor|
+             actor.running_ticket.nil? &&
+               actor.automated_ticket.should_renew_today? &&
+               (actor.last_request_on.nil? || actor.last_request_on <= 5.minutes.ago)
+           }
+  # TO_DO make last_request_on 0 if null this way we can simply do actor.last_request_on <= 5.minutes.ago
 end

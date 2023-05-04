@@ -3,7 +3,8 @@
 require 'rails_helper'
 
 RSpec.describe AutomatedTicket::Renewer, type: :actor do
-  subject { described_class.call(automated_ticket_id: automated_ticket.id, zipcode: '75016') }
+  subject { described_class.call(automated_ticket_id: automated_ticket.id, zipcode: '75016', last_request_on:) }
+  let(:last_request_on) { nil }
   let(:automated_ticket) do
     FactoryBot.create(:automated_ticket, :set_up, user:, service:, zipcodes:, weekdays:, free:, accepted_time_units:)
   end
@@ -30,7 +31,7 @@ RSpec.describe AutomatedTicket::Renewer, type: :actor do
     end
     context 'when a running ticket is found in the database' do
       let!(:running_ticket_in_database) do
-        FactoryBot.create(:ticket, automated_ticket:, zipcode: '75016', ends_on: Time.current + 2.hours)
+        FactoryBot.create(:ticket, automated_ticket:, zipcode: '75016', ends_on: 2.hours.from_now)
       end
       it_behaves_like 'it does not request a new ticket'
     end
@@ -44,8 +45,8 @@ RSpec.describe AutomatedTicket::Renewer, type: :actor do
           let(:running_ticket_in_client) do
             ParkingTicket::Clients::Models::Ticket.new(
               client_internal_id: '34ae093a-37f4-4326-bdbf-7965c82b378a',
-              starts_on: (Time.now - 1.days).to_datetime,
-              ends_on: (Time.now + 1.days).to_datetime,
+              starts_on: (Time.now - 1.day).to_datetime,
+              ends_on: (Time.now + 1.day).to_datetime,
               license_plate: 'a fake license plate',
               cost: 1.0,
               client: 'PayByPhone'
@@ -99,6 +100,11 @@ RSpec.describe AutomatedTicket::Renewer, type: :actor do
               let(:accepted_time_units) { ['something_else'] }
               let(:expected_time_unit) { 'hours' }
               it_behaves_like 'it requests a new ticket'
+            end
+
+            context 'when the ticket have been requested less than 5 minutes ago' do
+              let(:last_request_on) { 4.minutes.ago }
+              it_behaves_like 'it does not request a new ticket'
             end
           end
         end
