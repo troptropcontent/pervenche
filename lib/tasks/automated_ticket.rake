@@ -8,8 +8,8 @@ namespace :automated_ticket do
     return if tickets_to_renew.empty?
 
     if ENV['PERVENCHE_RENEW_TICKET']
-      tickets_to_renew.each do |(automated_ticket_id, zipcode, last_request_date)|
-        AutomatedTickets::RenewerJob.perform_async(automated_ticket_id, zipcode, last_request_date)
+      tickets_to_renew.each do |(automated_ticket_id, zipcode, last_request_on)|
+        AutomatedTickets::RenewerJob.perform_async(automated_ticket_id, zipcode, last_request_on)
       end
     end
   end
