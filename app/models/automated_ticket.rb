@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class AutomatedTicket < ApplicationRecord
-  # encrypts :license_plate, deterministic: true
   encrypts :license_plate, deterministic: true
   has_many :tickets, dependent: :destroy
   has_many :ticket_requests, dependent: :destroy
@@ -77,7 +76,7 @@ class AutomatedTicket < ApplicationRecord
         SELECT
          automated_ticket_id,
          zipcode,
-         MAX(requested_on) as last_requested_date
+         MAX(requested_on) as last_requested_on
         FROM ticket_requests
         GROUP BY ticket_requests.automated_ticket_id, ticket_requests.zipcode
       ) as last_ticket_request_dates
