@@ -28,7 +28,7 @@ fr:
             label: Mot de passe
             placeholder: "Your service password"
           errors:
-            text_html: "* Les identifiants utilisés ne semblent pas corrects, n'hésitez pas à m'envoyer un mail à <a href='mailto:tom@pervenche.eu'>tom@pervenche.eu</a> si le problème persiste."
+            text_html: "* Les identifiants utilisés ne semblent pas corrects, n'hésitez pas à m'envoyer un mail à <a href='mailto:contact@pervenche.eu'>contact@pervenche.eu</a> si le problème persiste."
           hint:
-            text_html: "* vous devez utiliser les identifiants que vous utilisez pour vous connecter <a href='https://m2.paybyphone.fr/login'>ici</a>"
+            text_html: "* vous devez utiliser les identifiants que vous utilisez pour vous connecter <a href='https://www.paybyphone.com/receipts'>ici</a>"
         cta: Continuer
