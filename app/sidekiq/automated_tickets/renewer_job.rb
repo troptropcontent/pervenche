@@ -9,8 +9,9 @@ class AutomatedTickets::RenewerJob
     params(automated_ticket_id: Integer, zipcode: String, last_request_on_string: T.nilable(String)).returns(T.untyped)
   end
   def perform(automated_ticket_id, zipcode, last_request_on_string)
+    last_request_on = DateTime.parse(last_request_on_string) if last_request_on_string
     AutomatedTicket::Renewer.call(automated_ticket_id:,
                                   zipcode:,
-                                  last_request_on: DateTime.parse(last_request_on_string))
+                                  last_request_on:)
   end
 end
