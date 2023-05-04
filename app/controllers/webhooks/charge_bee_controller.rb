@@ -3,6 +3,7 @@ class Webhooks::ChargeBeeController < ApplicationController
   skip_load_and_authorize_resource
   before_action :authenticate_token
 
+  # POST /webhooks/charge_bee/:token
   def handle
     content = params[:content]
     webhook_type = params[:event_type]

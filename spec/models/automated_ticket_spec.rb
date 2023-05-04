@@ -16,7 +16,7 @@ RSpec.describe AutomatedTicket, type: :model do
         described_class.missing_running_tickets_in_database.pluck(
           'automated_tickets.id',
           'unnested_automated_tickets.zipcode',
-          'last_ticket_request_dates.last_requested_date'
+          'last_ticket_request_dates.last_requested_on'
         )
       end
       let(:automated_ticket) do
