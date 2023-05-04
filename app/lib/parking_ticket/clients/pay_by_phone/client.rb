@@ -290,9 +290,7 @@ module ParkingTicket
 
         sig { returns(T::Array[T::Hash[String, T.untyped]]) }
         def running_tickets
-          cached(cache_key: build_cache_key('running_tickets'), expires_in: 1200) do
-            self.class.running_tickets(token, account_id)
-          end
+          self.class.running_tickets(token, account_id)
         end
 
         sig { returns(T::Hash[String, T::Array[T::Hash[String, T.untyped]]]) }
