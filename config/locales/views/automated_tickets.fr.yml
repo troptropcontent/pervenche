@@ -4,7 +4,7 @@ fr:
       index:
         cta: 'Ajouter un ticket'
         modal: 
-          text_html: Si vous avez la moindre question, vous pouvez envoyer un email à <a href="mailto:tom@pervenche.eu">tom@pervenche.eu</a>. 
+          text_html: Si vous avez la moindre question, vous pouvez envoyer un email à <a href="mailto:contact@pervenche.eu">contact@pervenche.eu</a>. 
   partials:
     automated_ticket:
       covered: Couvert
