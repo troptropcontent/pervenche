@@ -4,7 +4,7 @@ FactoryBot.define do
   factory :automated_ticket do
     user
     service
-
+    active { true }
     trait :with_localisation do
       localisation { 'paris' }
     end
