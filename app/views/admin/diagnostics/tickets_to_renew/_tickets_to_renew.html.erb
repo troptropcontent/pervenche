@@ -1,0 +1,10 @@
+<section class="<%= class_names('center', 'box', ('box--success' if state == 'Ok'),  ('box--danger' if state == 'Fail'), ('box--tertiary' if state == 'Loading')) %>" >
+    <div class='stack' >
+      <% if state == 'Loading' %>
+          <%= render 'components/loader', color: 'white', size: 'large'%>
+        <% else %>
+        <h1><%= checkup[:total_number_of_taken_ticket] %> / <%= checkup[:total] %></h1>
+      <% end %>
+    </div>
+</section>
+

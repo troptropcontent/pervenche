@@ -1,0 +1,11 @@
+<main class="grow container stack">
+    <%= render 'components/header' %>
+    <section>
+      <%= turbo_frame_tag "tickets_to_renew_diagnostic" do %>
+        <%= render 'admin/diagnostics/tickets_to_renew/tickets_to_renew', state: @state, checkup: @checkup %>
+      <% end %>
+    </section>
+</main>
+
+
+

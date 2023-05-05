@@ -9,4 +9,7 @@
     <%= turbo_frame_tag "client_diagnostic_pay_by_phone", src: admin_client_path(client_kind: 'pay_by_phone') do %>
       <%= render 'admin/diagnostics/client/client', state: 'Loading', kind: 'pay_by_phone' %>
     <% end %>
+    <%= turbo_frame_tag "tickets_to_renew_diagnostic", src: admin_tickets_to_renew_path do %>
+      <%= render 'admin/diagnostics/tickets_to_renew/tickets_to_renew', state: 'Loading' %>
+    <% end %>
 </main>

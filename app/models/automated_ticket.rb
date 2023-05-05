@@ -67,6 +67,11 @@ class AutomatedTicket < ApplicationRecord
   attr_accessor :setup_step
 
   def self.missing_running_tickets_in_database
+    AutomatedTicket.unnested_with_running_tickets
+                   .where(active: true, status: :ready, running_tickets: { id: nil })
+  end
+
+  def self.unnested_with_running_tickets
     join_sql = %{
       JOIN (select id, UNNEST(zipcodes) as zipcode from automated_tickets) as unnested_automated_tickets
       ON unnested_automated_tickets.id = automated_tickets.id
@@ -84,7 +89,6 @@ class AutomatedTicket < ApplicationRecord
     }
 
     AutomatedTicket.joins(join_sql)
-                   .where(active: true, status: :ready, running_tickets: { id: nil })
   end
 
   def self.setup_steps

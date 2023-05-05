@@ -26,6 +26,7 @@ Rails.application.routes.draw do
       collection do
         resources :client, only: :show, param: :client_kind, constraints: { client_kind: /pay_by_phone/ },
                            controller: 'admin/diagnostics/client'
+        resource :tickets_to_renew, only: :show, controller: 'admin/diagnostics/tickets_to_renew'
       end
     end
   end

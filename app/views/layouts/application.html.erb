@@ -9,6 +9,9 @@
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
     <script src="https://js.chargebee.com/v2/chargebee.js"></script>
+    <% if ENV['PERVENCHE_CRISP_ENABLED'] %>
+      <script type="text/javascript">window.$crisp=[];window.CRISP_WEBSITE_ID="d90a4aab-2689-484b-b7ac-249ee53f1cb5";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();</script>
+    <% end %>
     <meta name="chargebee-site" content="<%= Rails.application.credentials.dig(
                       :chargebee,
                       ENV['PERVENCHE_CHARGEBEE_PRODUCTION_SITE'] ? :production : :sandbox,
