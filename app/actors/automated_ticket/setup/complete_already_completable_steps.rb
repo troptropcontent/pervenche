@@ -36,6 +36,7 @@ class AutomatedTicket::Setup::CompleteAlreadyCompletableSteps < Actor
     return rate_option_completable? if step == :rate_option
     return weekdays_completable? if step == :weekdays
     return payment_methods_completable? if step == :payment_methods
+    return subscription_step_completable? if step == :subscription
 
     false
   end
@@ -127,5 +128,24 @@ class AutomatedTicket::Setup::CompleteAlreadyCompletableSteps < Actor
     )
 
     automated_ticket.valid?
+  end
+
+  def subscription_step_completable?
+    return false if ENV['PERVENCHE_CHARGEBEE_ASK_CARD_AT_THE_END_OF_THE_FLOW']
+
+    plan_id = automated_ticket.free ? 'electric_scooter' : 'combustion_car'
+    result = ChargeBee::Subscription.create_with_items(automated_ticket.user.chargebee_customer_id, {
+                                                         subscription: {
+                                                           cf_automated_ticket_id: automated_ticket.id
+                                                         },
+                                                         subscription_items: [{
+                                                           item_price_id: "#{plan_id}_eur_monthly"
+                                                         }]
+                                                       })
+    automated_ticket.assign_attributes(
+      {
+        charge_bee_subscription_id: result.subscription.id
+      }
+    )
   end
 end

@@ -58,8 +58,6 @@ class AutomatedTicket < ApplicationRecord
     validates :charge_bee_subscription_id, presence: true, unless: lambda {
                                                                      !!!ENV.fetch('PERVENCHE_CHARGEBEE_ENABLED', false)
                                                                    }
-    validates :charge_bee_subscription_id,
-              uniqueness: true
   end
 
   validate :similar_ticket_already_registered
