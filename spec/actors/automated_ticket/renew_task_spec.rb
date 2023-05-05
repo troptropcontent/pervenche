@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
-require 'sidekiq/testing'
 require 'support/shared_context/with_environment_variable'
 
 RSpec.describe AutomatedTicket::RenewTask, type: :actor do

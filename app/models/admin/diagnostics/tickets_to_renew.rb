@@ -2,12 +2,6 @@
 
 module Admin::Diagnostics
   class TicketsToRenew
-    class << self
-      def all
-        AutomatedTicket.unnested_with_running_tickets.where(active: true, status: :ready)
-      end
-    end
-
     def checkup
       {
         total_number_of_taken_ticket:,
@@ -19,7 +13,7 @@ module Admin::Diagnostics
     private
 
     def tickets_to_be_taken
-      @tickets_to_be_taken ||= self.class.all
+      @tickets_to_be_taken ||= AutomatedTicket.unnested_with_running_tickets.where(active: true, status: :ready)
     end
 
     def total_number_of_taken_ticket
