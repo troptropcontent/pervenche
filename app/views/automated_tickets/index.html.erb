@@ -4,8 +4,10 @@
        <%= render @automated_tickets %>
     </section>
     <section class="footer cluster margin__bottom--l">
-        <%= render 'components/modal', btn_content: inline_svg('help-circle.svg', class: 'text__color--muted') do %>
-          <p><%= t('views.automated_tickets.index.modal.text_html') %></p>
+        <% unless ENV['PERVENCHE_CRISP_ENABLED'] %>
+          <%= render 'components/modal', btn_content: inline_svg('help-circle.svg', class: 'text__color--muted') do %>
+            <p><%= t('views.automated_tickets.index.modal.text_html') %></p>
+          <% end %>
         <% end %>
         <%= link_to t('views.automated_tickets.index.cta'),
                 new_automated_ticket_path,
