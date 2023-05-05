@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Admin::Diagnostics::Clients', type: :request do
+RSpec.describe 'Admin::Diagnostics::ClientController', type: :request do
   let!(:user) { FactoryBot.create(:user, roles:) }
   let!(:automated_ticket) do
     FactoryBot.create(:automated_ticket, :set_up, user:, service:, zipcodes:, weekdays:, free:, accepted_time_units:)

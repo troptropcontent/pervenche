@@ -14,12 +14,12 @@ class Ability
     can %i[setup], AutomatedTicket, { user:, status: %i[started setup] }
     can %i[index destroy], AutomatedTicket, { user_id: user.id, status: :ready }
     can %i[new create], Service, { user_id: user.id }
-    
+
     return unless user.has_role?('admin')
-    
+
     # all admin abilities goes here
     can %i[dashboard], :admin
     can %i[show], Admin::Diagnostics::Client
-
+    can %i[show], Admin::Diagnostics::TicketsToRenew
   end
 end
