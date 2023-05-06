@@ -14,6 +14,8 @@ class Service < ApplicationRecord
   }
 
   validates :username, uniqueness: { scope: :kind }
+  validates :username, phone: true
+
   validates :kind, :username, :password, presence: true
   validate :valid_credentials
 
