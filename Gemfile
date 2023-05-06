@@ -27,6 +27,9 @@ gem 'turbo-rails'
 # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
 gem 'stimulus-rails'
 
+#validates phone
+gem 'phonelib'
+
 # Sentry to catch all errrors
 gem 'sentry-rails'
 gem 'sentry-ruby'
