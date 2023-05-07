@@ -10,8 +10,8 @@ class AutomatedTicket < ApplicationRecord
 
   SETUP_STEPS = {
     service: [:service_id],
-    localisation: [:localisation],
     vehicle: %i[license_plate vehicle_description vehicle_type],
+    localisation: [:localisation],
     zipcodes: %i[zipcodes],
     rate_option: %i[rate_option_client_internal_id accepted_time_units free],
     weekdays: %i[weekdays],
