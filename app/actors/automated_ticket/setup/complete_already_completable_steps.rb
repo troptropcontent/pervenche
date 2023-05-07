@@ -135,9 +135,7 @@ class AutomatedTicket::Setup::CompleteAlreadyCompletableSteps < Actor
 
     plan_id = automated_ticket.free ? 'electric_scooter' : 'combustion_car'
     result = ChargeBee::Subscription.create_with_items(automated_ticket.user.chargebee_customer_id, {
-                                                         subscription: {
-                                                           cf_automated_ticket_id: automated_ticket.id
-                                                         },
+                                                         cf_automated_ticket_id: automated_ticket.id,
                                                          subscription_items: [{
                                                            item_price_id: "#{plan_id}_eur_monthly"
                                                          }]
