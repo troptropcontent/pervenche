@@ -1,0 +1,34 @@
+
+
+<main class="grow container stack stack--no-gap">
+    <section class="header">
+
+      <h2><%= t("views.setup.localisation.header.title") %></h2>
+    </section>
+    <%= render 'automated_tickets/setup/shared/form', automated_ticket: @automated_ticket, step: @step do |f| %>
+      <div class="form_group stack stack--xs">
+        <%= f.input :localisation, wrapper_html: {class: 'stack'} do %>
+          <%= f.label "localisation_paris", class: 'form__input__type__picker__type' do %>
+              <%= f.radio_button "localisation", 
+                                 'paris', 
+                                 class: 'visually-hidden', 
+                                 checked: true %>
+                                
+              <span class= 'clickable'>
+                <h4>Oui</h4>
+              </span>
+          <% end %>
+        <% end %>
+        <%= f.input :localisation, wrapper_html: {class: 'stack'} do %>
+          <%= f.label "localisation_other", class: 'form__input__type__picker__type' do %>
+              <%= f.radio_button "localisation", 
+                                 'other', 
+                                 class: 'visually-hidden' %>
+                                
+              <span class= 'clickable'>
+                <h4>Non</h4>
+              </span>
+          <% end %>
+        <% end %>
+    <% end %>
+</main>

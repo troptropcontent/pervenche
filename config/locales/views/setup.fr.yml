@@ -13,13 +13,17 @@ fr:
         cta: Continuer
       vehicle:
         header:
-          title: Sélectionne ton véhicule électrique ou résident
+          title: Sélectionne ton véhicule
         cta: Continuer
       zipcodes:
         header:
           title: 
+            neutral: Dans quelle zone veux-tu renouveler automatiquement ton ticket ? 
             electric_motorcycle: Dans quels arrondissements veux-tu renouveler un ticket ?
             combustion_car: Dans quel arronsissement es-tu résident ?
+        inputs:
+          zipcodes: 
+            placeholder: Code de la zone souhaitée
         cta: Continuer
       rate_option:
         header:

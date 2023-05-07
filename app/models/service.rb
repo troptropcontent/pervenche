@@ -2,7 +2,7 @@
 
 # The Service represent the parking application account
 class Service < ApplicationRecord
-  SUPPORTED_RATE_OPTION_TYPES = %w[RES VP-2RM].freeze
+  SUPPORTED_RATE_OPTION_TYPES = %w[RES VP-2RM CMI].freeze
   belongs_to :user
   has_many :automated_tickets, dependent: :destroy
   # encrypts :username, :password, deterministic: true
@@ -14,6 +14,8 @@ class Service < ApplicationRecord
   }
 
   validates :username, uniqueness: { scope: :kind }
+  validates :username, phone: true
+
   validates :kind, :username, :password, presence: true
   validate :valid_credentials
 

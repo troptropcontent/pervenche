@@ -1,0 +1,9 @@
+ <div class="form_group stack stack--xs" >
+        
+                <%= form.input :zipcodes,
+                    as: :string, 
+                    required: true,
+                    placeholder: t("views.setup.zipcodes.inputs.zipcodes.placeholder"),
+                    input_html: {name: 'automated_ticket[zipcodes][]'},
+                    wrapper_html: {class: 'form__group--column'} %>
+    </div>
