@@ -31,7 +31,7 @@ class AutomatedTicket::Setup::CompleteAlreadyCompletableSteps < Actor
 
   def completable_step?(step)
     return service_step_completable? if step == :service
-    return localisation_step_completable? if step == :localisation
+    # return localisation_step_completable? if step == :localisation
     return vehicle_step_completable? if step == :vehicle
     return rate_option_completable? if step == :rate_option
     return weekdays_completable? if step == :weekdays
