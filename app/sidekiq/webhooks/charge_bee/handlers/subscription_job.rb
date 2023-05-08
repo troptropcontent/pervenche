@@ -21,7 +21,8 @@ class Webhooks::ChargeBee::Handlers::SubscriptionJob
       type: content.dig('subscription', 'subscription_items', 0, 'item_price_id'),
       amount: (content.dig('subscription', 'subscription_items', 0, 'amount') / 100),
       trial_ends: DateTime.strptime(content.dig('subscription', 'trial_end').to_s, '%s'),
-      automated_ticket_id: content.dig('subscription', 'cf_automated_ticket_id')
+      automated_ticket_id: content.dig('subscription', 'cf_automated_ticket_id'),
+      user_email: automated_ticket.user.email
     }
   end
 end

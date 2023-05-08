@@ -6,4 +6,4 @@ fr:
       faraday:
         errors: "🚨 Une requete a échoué 🚨\nmethod: %{method}\nurl: %{url}\nstatus: %{status}\nbody: %{body}"
       charge_bee:
-        subscription_created: "💶 Une souscription a été créée 💶\ntype: %{type}\nmontant: %{amount} €\nfin de la période d'essai: %{trial_ends}\nautomated_ticket_id: %{automated_ticket_id}"
+        subscription_created: "💶 Une souscription a été créée 💶\ntype: %{type}\nmontant: %{amount} €\nfin de la période d'essai: %{trial_ends}\nautomated_ticket_id: %{automated_ticket_id}\nuser_email: %{user_email}"

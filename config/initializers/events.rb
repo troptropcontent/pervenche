@@ -26,6 +26,7 @@ ActiveSupport::Notifications.subscribe 'charge_bee.subscription_created' do |_na
            type: payload.fetch(:type),
            amount: payload.fetch(:amount),
            trial_ends: I18n.l(payload.fetch(:trial_ends)),
-           automated_ticket_id: payload.fetch(:automated_ticket_id))
+           automated_ticket_id: payload.fetch(:automated_ticket_id),
+           user_email: payload.fetch(:user_email))
   )
 end
