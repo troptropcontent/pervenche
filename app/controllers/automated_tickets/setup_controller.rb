@@ -56,7 +56,7 @@ module AutomatedTickets
     end
 
     def authorize_action!
-      authorize! :setup, @automated_ticket
+      authorize! action_name.to_sym, @automated_ticket
     end
 
     def step_already_completed?
