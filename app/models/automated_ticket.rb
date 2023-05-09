@@ -97,11 +97,6 @@ class AutomatedTicket < ApplicationRecord
     service.running_ticket(license_plate, zipcode)
   end
 
-  def free?
-    time_unit = accepted_time_units.include?('days') ? 'days' : 'hours'
-    service.quote(rate_option_client_internal_id, zipcodes[0], license_plate, 1, time_unit)[:cost].zero?
-  end
-
   def coverage
     return 'covered' if running_ticket
     return 'day_not_covered' unless should_renew_today?
