@@ -39,6 +39,7 @@ class AutomatedTicket < ApplicationRecord
 
   with_options if: -> { required_for_step?(:zipcodes) } do
     validates :zipcodes, length: { minimum: 1, message: I18n.t('errors.messages.empty_array') }
+    validates :zipcodes, length: { is: 1 }, unless: :allow_multiple_zipcodes?
   end
 
   with_options if: -> { required_for_step?(:rate_option) } do
@@ -134,6 +135,10 @@ class AutomatedTicket < ApplicationRecord
   def payment_method_client_internal_ids=(value)
     value = [value] if value.is_a?(String)
     super
+  end
+
+  def allow_multiple_zipcodes?
+    vehicle_type == 'electric_motorcycle'
   end
 
   private
