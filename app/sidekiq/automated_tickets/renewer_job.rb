@@ -6,10 +6,10 @@ class AutomatedTickets::RenewerJob
   include Sidekiq::Job
 
   sig do
-    params(automated_ticket_id: Integer, zipcode: String, last_request_on_string: T.nilable(String)).returns(T.untyped)
+    params(automated_ticket_id: Integer, zipcode: String).void
   end
-  def perform(automated_ticket_id, zipcode, last_request_on_string)
-    last_request_on = DateTime.parse(last_request_on_string) if last_request_on_string
+  def perform(automated_ticket_id, zipcode)
+    last_request_on = TicketRequest.where(automated_ticket_id:).maximum(:requested_on) || DateTime.new
     AutomatedTicket::Renewer.call(automated_ticket_id:,
                                   zipcode:,
                                   last_request_on:)

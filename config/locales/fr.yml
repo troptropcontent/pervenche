@@ -17,6 +17,8 @@ fr:
         automated_ticket: 
           attributes:
             zipcodes: 
+              wrong_length:
+                one: ne peut contenir qu'une seule zone pour ce type de vehicule
               similar_ticket_already_registered: 
                 one: "Un ticket est déja parametré pour ce tarif, cette plaque d'immatriclation et ce code postal"
                 other: "Des tickets sont déja paramétrés pour ce tarif, cette plaque d'immatriculation pour ces code postaux %{zipcodes}"

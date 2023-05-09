@@ -9,9 +9,8 @@ class AutomatedTicket::RenewTask < Actor
 
     return unless tickets_to_renew.length.positive? && ENV['PERVENCHE_RENEW_TICKET']
 
-    tickets_to_renew.each do |(automated_ticket_id, zipcode, last_request_on)|
-      last_request_on_string = last_request_on ? last_request_on.to_s : DateTime.new.to_s
-      AutomatedTickets::RenewerJob.perform_async(automated_ticket_id, zipcode, last_request_on_string)
+    tickets_to_renew.each do |(automated_ticket_id, zipcode)|
+      AutomatedTickets::RenewerJob.perform_async(automated_ticket_id, zipcode)
     end
   end
 end

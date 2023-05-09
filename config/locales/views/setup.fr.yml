@@ -6,7 +6,7 @@ fr:
         subtitle: Ça peut prendre 1 à 2 min, plus il y a de tickets plus c’est long.
       localisation:
         header:
-          title: Votre vehicle est-il à Paris ?
+          title: Votre vehicule est-il à Paris ?
         links:
             yes: "Oui, il est à Paris"
             no: "Non, il est autre part en France"

@@ -1,9 +1,10 @@
 require 'rails_helper'
 require 'support/shared_context/a_user_with_a_service_with_an_automated_ticket'
 RSpec.describe AutomatedTicket, type: :model do
-  subject { FactoryBot.build(:automated_ticket, :set_up, user:, service:, zipcodes:) }
+  subject { FactoryBot.build(:automated_ticket, :set_up, user:, service:, zipcodes:, vehicle_type:) }
   let(:zipcodes) { %w[75018 75017 75016] }
   let(:user) { FactoryBot.create(:user) }
+  let(:vehicle_type) { :combustion_car }
   let(:service) do
     service = FactoryBot.build(:service, user_id: user.id)
     service.save(validate: false)
@@ -114,8 +115,38 @@ RSpec.describe AutomatedTicket, type: :model do
           end
         end
         context 'non empty array' do
+          let(:vehicle_type) { :electric_motorcycle }
           it do
             expect(subject).to be_valid
+          end
+        end
+        context 'when multiple zipcodes are not allowed' do
+          it 'Returns an invalid record' do
+            subject.valid?
+            expect(subject.errors[:zipcodes]).to include("ne peut contenir qu'une seule zone pour ce type de vehicule")
+          end
+        end
+        context 'when multiple zipcodes are allowed' do
+          let(:vehicle_type) { :electric_motorcycle }
+          it 'Returns an invalid record' do
+            subject.valid?
+            expect(subject.errors[:zipcodes]).not_to include("ne peut contenir qu'une seule zone pour ce type de vehicule")
+          end
+        end
+
+        context 'format' do
+          let(:vehicle_type) { :electric_motorcycle }
+          let(:zipcodes) { %w[75018 a 75016] }
+          it 'Returns an invalid record' do
+            subject.valid?
+            expect(subject.errors[:zipcodes]).to include("n'est pas valide")
+          end
+          context 'when all the zipcodes are valid' do
+            let(:zipcodes) { %w[75018 75017 75016] }
+            it 'Returns an invalid record' do
+              subject.valid?
+              expect(subject.errors[:zipcodes]).not_to include("n'est pas valide")
+            end
           end
         end
       end
@@ -142,6 +173,7 @@ RSpec.describe AutomatedTicket, type: :model do
         end
       end
       describe 'payment_method_client_internal_ids' do
+        let(:vehicle_type) { :electric_motorcycle }
         context 'free ticket' do
           before do
             subject.payment_method_client_internal_ids = []
@@ -191,7 +223,7 @@ RSpec.describe AutomatedTicket, type: :model do
     context '#should_renew_today?' do
       context "when today's weekday is included in automated_ticket.weekdays" do
         before do
-          subject.weekdays = [Date.today.wday]
+          subject.weekdays = [Time.zone.today.wday]
         end
         it 'should return true' do
           expect(subject.should_renew_today?).to eq(true)
@@ -199,7 +231,7 @@ RSpec.describe AutomatedTicket, type: :model do
       end
       context "when today's weekday is not included in automated_ticket.weekdays" do
         before do
-          subject.weekdays = [Date.today.tomorrow.wday]
+          subject.weekdays = [Time.zone.today.tomorrow.wday]
         end
         it 'should return true' do
           expect(subject.should_renew_today?).to eq(false)
