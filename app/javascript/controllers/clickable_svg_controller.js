@@ -4,20 +4,31 @@ import { Controller } from "@hotwired/stimulus"
 export default class extends Controller {
   static targets = [ "clickable", 'image' ]
   connect() {
+    this.multiselect = this.element.dataset.clickableSvgMultiselectParam === 'true'
   }
 
   toggleCheckedAttribute(event) {
+
     const clickables = this.clickableTargets
+    const alreadyCheckedGroups = clickables.filter(group => group.attributes.checked)
     const group = clickables.find(group => group.id === event.params.groupId )
     const image = this.imageTarget
-    const is_checked = !!group.attributes.checked
-    if (is_checked) {
-      image.insertBefore(group, image.children[0])
-      group.removeAttribute('checked')
-    } else {
+
+    const checkClickable = (group) => {
       image.insertBefore(group, null)
       group.setAttribute('checked', '')
     }
+    const unCheckClickable = (group) => {
+      image.insertBefore(group, image.children[0])
+      group.removeAttribute('checked')
+    }
 
+    const is_checked = !!group.attributes.checked
+    if (is_checked) {
+      unCheckClickable(group)
+    } else {
+      checkClickable(group)
+      !this.multiselect && alreadyCheckedGroups.map(group => unCheckClickable(group))
+    }
   }
 }
