@@ -1,8 +1,6 @@
-<section class="header center">
-    <span class='cluster'>
-        <div class="center">
-            <%= inline_svg 'ticket.svg'%>
-        </div>
-        <h2><%= t 'application.name' %></h2>
-    </span>
+<section class="header">
+        <%= render 'components/modal', btn_content: inline_svg('menu.svg'), btn_class: 'center', btn_id: 'menu_modal_btn', full_screen: true do %>
+            <p><%= t('views.automated_tickets.index.modal.text_html') %></p>
+        <% end %>
+        <h2 class='grow center' ><%= t 'application.name' %></h2>
 </section>

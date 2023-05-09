@@ -64,12 +64,18 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
-  config.include Devise::Test::IntegrationHelpers, type: :request
+  config.include Devise::Test::IntegrationHelpers, type: %i[request system]
+  config.include Warden::Test::Helpers
 
   # sidekiq
   config.before(:each) do
     Sidekiq::Worker.clear_all
   end
+
+  # # System test
+  # config.before(:each, type: :system) do
+  #   driven_by :selenium_chrome_headless
+  # end
 end
 
 Shoulda::Matchers.configure do |config|

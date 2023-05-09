@@ -1,8 +1,8 @@
 
-<%= link_to '#', class: 'btn btn--white center', data: {'action': 'click->modal#open'} do %>
+<%= link_to '#', id: local_assigns[:btn_id], class: local_assigns[:btn_class], data: {'action': 'click->modal#open'} do %>
     <%= btn_content %>
 <% end %>
-<div id="modal" class="modal" data-modal-target="modal" >
+<div id="modal" class="<%= class_names('modal', local_assigns[:full_screen] && 'modal--full-screen' )%>" data-modal-target="modal">
   <div class="modal-content stack stack--no-gap">
     <div class="cluster cluster__justify-content--end">
       <span class="close" data-modal-target="closeModalBtn" data-action='click->modal#close'><%= inline_svg 'cross.svg' %></span>
