@@ -39,19 +39,18 @@ RSpec.describe 'Services', type: :request do
               end
             end
           end
-          describe '200' do
+          describe '302' do
             before do
               sign_in FactoryBot.create(:user)
             end
             context 'when the username is not valid' do
-              it 'returns a 200: Success and creates a service' do
+              it 'returns a 302: Redirect to the onboarding' do
                 allow(ParkingTicket::Base).to receive(:valid_credentials?).and_return(true)
                 expect do
                   post('/services',
                        params: { service: { username: '+33612345678', password: 'password', kind: 'pay_by_phone' } })
                 end.to change(Service, :count).by(1)
-                # update specs to return a 200 here (should be something to do with operationnal)
-                expect(response).to have_http_status(:success)
+                expect(response).to redirect_to('/')
               end
             end
           end
