@@ -22,9 +22,9 @@ RSpec.describe AutomatedTicket::RenewTask, type: :actor do
         include_examples 'with an environment variable', 'PERVENCHE_RENEW_TICKET', 'true'
         let(:expected_job_arguments) do
           [
-            [automated_ticket.id, '75018', '-4712-01-01T00:00:00+00:00'],
-            [automated_ticket.id, '75017', two_minutes_ago.to_s],
-            [automated_ticket.id, '75016', '-4712-01-01T00:00:00+00:00']
+            [automated_ticket.id, '75018'],
+            [automated_ticket.id, '75017'],
+            [automated_ticket.id, '75016']
           ]
         end
         let!(:two_minutes_ago) do

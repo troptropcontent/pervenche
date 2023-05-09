@@ -39,6 +39,8 @@ class AutomatedTicket < ApplicationRecord
 
   with_options if: -> { required_for_step?(:zipcodes) } do
     validates :zipcodes, length: { minimum: 1, message: I18n.t('errors.messages.empty_array') }
+    validates :zipcodes, length: { is: 1 }, unless: :allow_multiple_zipcodes?
+    validates :zipcodes, array: { format: { with: /[0-9]+/ } }
   end
 
   with_options if: -> { required_for_step?(:rate_option) } do
@@ -97,11 +99,6 @@ class AutomatedTicket < ApplicationRecord
     service.running_ticket(license_plate, zipcode)
   end
 
-  def free?
-    time_unit = accepted_time_units.include?('days') ? 'days' : 'hours'
-    service.quote(rate_option_client_internal_id, zipcodes[0], license_plate, 1, time_unit)[:cost].zero?
-  end
-
   def coverage
     return 'covered' if running_ticket
     return 'day_not_covered' unless should_renew_today?
@@ -139,6 +136,10 @@ class AutomatedTicket < ApplicationRecord
   def payment_method_client_internal_ids=(value)
     value = [value] if value.is_a?(String)
     super
+  end
+
+  def allow_multiple_zipcodes?
+    vehicle_type == 'electric_motorcycle'
   end
 
   private

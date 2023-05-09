@@ -2,26 +2,27 @@
                     url: automated_ticket_setup_path(automated_ticket.id, step),
                     html: {
                       class: "form form--column grow",
-                      data: { trbo: false,
+                      data: { 
                               controller: "form clickable-svg", 
                               action: "form#showLoadingWindow form#addAssociatedHiddenInputsToData" ,
-                              'form-loading-url-param': loading_shared_views_path(params: {title: t("views.setup.loading.title"), text: t("views.setup.loading.subtitle")})
+                              'form-loading-url-param': loading_shared_views_path(params: {title: t("views.setup.loading.title"), text: t("views.setup.loading.subtitle")}),
+                              'clickable-svg-multiselect-param': local_assigns[:clickable_svg_multiselect] || false
                         }
                     } do |f| %>
-    <section class="content grow stack">
-      <%= yield(f) %>
-    </section>
-    <section class="footer stack margin__bottom--l">
-        <div class="visually-hidden" data-form-target='hiddenInputsGroup'>
+  <section class="content grow stack">
+    <%= yield(f) %>
+  </section>
+  <section class="footer stack margin__bottom--l">
+      <div class="visually-hidden" data-form-target='hiddenInputsGroup'>
+      </div>
+      <% if local_assigns[:disabled] %>
+        <div class="btn btn--light center">
+          <p><%= t("views.setup.#{step}.cta") %></p>
         </div>
-        <% if local_assigns[:disabled] %>
-          <div class="btn btn--light center">
-            <p><%= t("views.setup.#{step}.cta") %></p>
-          </div>
-          <% else %>
-          <%= button_tag(type: 'submit', class: "btn btn--primary") do %>
-            <p><%= t("views.setup.#{step}.cta") %></p>
-          <% end %>
+        <% else %>
+        <%= button_tag(type: 'submit', class: "btn btn--primary") do %>
+          <p><%= t("views.setup.#{step}.cta") %></p>
         <% end %>
-    </section>
-    <% end %>  
+      <% end %>
+  </section>
+<% end %>  
