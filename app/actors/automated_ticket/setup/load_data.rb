@@ -53,7 +53,7 @@ module AutomatedTicket::Setup
 
     def load_data_required_for_zipcodes_step
       self.data = {
-        localisation: params.permit(:localisation)[:localisation]
+        localisation: automated_ticket.localisation || params.permit(:localisation)[:localisation]
       }
     end
 

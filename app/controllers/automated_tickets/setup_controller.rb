@@ -37,6 +37,7 @@ module AutomatedTickets
         redirect_to path
       else
         load_instance_variables_for(step: @step)
+        flash[:alert] = @automated_ticket.errors.full_messages
         render @step, status: :unprocessable_entity
       end
     end

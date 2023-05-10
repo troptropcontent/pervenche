@@ -22,6 +22,10 @@ fr:
               similar_ticket_already_registered: 
                 one: "Un ticket est déja parametré pour ce tarif, cette plaque d'immatriclation et ce code postal"
                 other: "Des tickets sont déja paramétrés pour ce tarif, cette plaque d'immatriculation pour ces code postaux %{zipcodes}"
+              invalid: "%{value} n'est pas un code zone valide"
+              not_possible: 
+                one: "un ticket automatique n'est pas possible dans ce code zone"
+                other: "un ticket automatique n'est pas possible dans ces codes zones"
       messages:
         record_invalid: "La validation a échoué : %{errors}"
         restrict_dependent_destroy:
@@ -44,6 +48,8 @@ fr:
           pay_by_phone: PayByPhone
           easy_park: EasyPark
           flow_bird: FlowBird
+      automated_ticket:
+        zipcodes: "Codes zones"
   date:
     abbr_day_names:
       - dim

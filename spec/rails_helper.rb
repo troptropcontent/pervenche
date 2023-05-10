@@ -34,6 +34,18 @@ rescue ActiveRecord::PendingMigrationError => e
   abort e.to_s.strip
 end
 RSpec.configure do |config|
+  # will allow things like that
+  # before do |example|
+  #   puts 'before hook' unless example.metadata[:skip]
+  # end
+
+  # it 'will use before hook' do
+  # end
+
+  # it 'will not use before hook', :skip do
+  # end
+  # config.treat_symbols_as_metadata_keys_with_true_values = true
+
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{Rails.root}/spec/fixtures"
 
@@ -82,4 +94,5 @@ end
 VCR.configure do |config|
   config.cassette_library_dir = 'spec/vcr_cassettes'
   config.hook_into :webmock
+  config.configure_rspec_metadata!
 end

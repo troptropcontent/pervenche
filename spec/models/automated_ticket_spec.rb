@@ -2,9 +2,9 @@ require 'rails_helper'
 require 'support/shared_context/a_user_with_a_service_with_an_automated_ticket'
 RSpec.describe AutomatedTicket, type: :model do
   subject { FactoryBot.build(:automated_ticket, :set_up, user:, service:, zipcodes:, vehicle_type:) }
+  let(:vehicle_type) { :electric_motorcycle }
   let(:zipcodes) { %w[75018 75017 75016] }
   let(:user) { FactoryBot.create(:user) }
-  let(:vehicle_type) { :combustion_car }
   let(:service) do
     service = FactoryBot.build(:service, user_id: user.id)
     service.save(validate: false)
@@ -111,23 +111,22 @@ RSpec.describe AutomatedTicket, type: :model do
           let(:zipcodes) { [] }
           it do
             expect(subject).to be_invalid
-            expect(subject.errors.full_messages).to include('Zipcodes doit contenir au moins un élément')
+            expect(subject.errors.full_messages).to include('Codes zones doit contenir au moins un élément')
           end
         end
         context 'non empty array' do
-          let(:vehicle_type) { :electric_motorcycle }
           it do
             expect(subject).to be_valid
           end
         end
         context 'when multiple zipcodes are not allowed' do
+          let(:vehicle_type) { :combustion_car }
           it 'Returns an invalid record' do
             subject.valid?
             expect(subject.errors[:zipcodes]).to include("ne peut contenir qu'une seule zone pour ce type de vehicule")
           end
         end
         context 'when multiple zipcodes are allowed' do
-          let(:vehicle_type) { :electric_motorcycle }
           it 'Returns an invalid record' do
             subject.valid?
             expect(subject.errors[:zipcodes]).not_to include("ne peut contenir qu'une seule zone pour ce type de vehicule")
@@ -135,17 +134,16 @@ RSpec.describe AutomatedTicket, type: :model do
         end
 
         context 'format' do
-          let(:vehicle_type) { :electric_motorcycle }
-          let(:zipcodes) { %w[75018 a 75016] }
+          let(:zipcodes) { %w[75018 a u7] }
           it 'Returns an invalid record' do
             subject.valid?
-            expect(subject.errors[:zipcodes]).to include("n'est pas valide")
+            expect(subject.errors[:zipcodes]).to eq(["a n'est pas un code zone valide",
+                                                     "u7 n'est pas un code zone valide"])
           end
           context 'when all the zipcodes are valid' do
             let(:zipcodes) { %w[75018 75017 75016] }
             it 'Returns an invalid record' do
               subject.valid?
-              expect(subject.errors[:zipcodes]).not_to include("n'est pas valide")
             end
           end
         end
@@ -173,7 +171,6 @@ RSpec.describe AutomatedTicket, type: :model do
         end
       end
       describe 'payment_method_client_internal_ids' do
-        let(:vehicle_type) { :electric_motorcycle }
         context 'free ticket' do
           before do
             subject.payment_method_client_internal_ids = []
