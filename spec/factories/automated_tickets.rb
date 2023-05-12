@@ -5,6 +5,11 @@ FactoryBot.define do
     user
     service
     active { true }
+
+    trait :with_kind do
+      kind { 'electric_motorcycle' }
+    end
+
     trait :with_localisation do
       localisation { 'paris' }
     end
@@ -36,6 +41,7 @@ FactoryBot.define do
     end
 
     trait :set_up do
+      with_kind
       with_localisation
       with_vehicle
       with_zipcodes
