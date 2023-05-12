@@ -34,7 +34,7 @@ ActiveRecord::Schema[7.0].define(version: 20_230_512_091_242) do
     t.boolean 'free', default: false
     t.string 'stripe_subscription_id'
     t.string 'charge_bee_subscription_id'
-    t.integer 'kind', default: 0, null: false
+    t.integer 'kind'
     t.index ['service_id'], name: 'index_automated_tickets_on_service_id'
     t.index ['user_id'], name: 'index_automated_tickets_on_user_id'
   end

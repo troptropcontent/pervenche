@@ -10,6 +10,7 @@ class AutomatedTicket < ApplicationRecord
 
   SETUP_STEPS = {
     service: [:service_id],
+    kind: [:kind],
     vehicle: %i[license_plate vehicle_description vehicle_type],
     localisation: [:localisation],
     zipcodes: %i[zipcodes],
@@ -24,6 +25,17 @@ class AutomatedTicket < ApplicationRecord
     setup: 1,
     ready: 2
   }
+
+  enum kind: {
+    residential: 0,
+    electric_motorcycle: 1,
+    mobility_inclusion_card: 2,
+    custom: 3
+  }
+
+  with_options if: -> { required_for_step?(:kind) } do
+    validates :kind, presence: true
+  end
 
   with_options if: -> { required_for_step?(:service) } do
     validates :service_id, presence: true
