@@ -32,6 +32,7 @@ ActiveRecord::Schema[7.0].define(version: 20_230_427_043_845) do
     t.string 'vehicle_description'
     t.string 'localisation'
     t.boolean 'free', default: false
+    t.string 'stripe_subscription_id'
     t.string 'charge_bee_subscription_id'
     t.index ['service_id'], name: 'index_automated_tickets_on_service_id'
     t.index ['user_id'], name: 'index_automated_tickets_on_user_id'
