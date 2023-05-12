@@ -52,6 +52,13 @@ fr:
           flow_bird: FlowBird
       automated_ticket:
         zipcodes: "Codes zones"
+        kind: Type
+        kinds:
+          unassigned: Non renseigné
+          residential: Stationnement Résidentiel
+          electric_motorcycle: Scooter Electrique
+          mobility_inclusion_card: CMI
+          custom: Autre
   date:
     abbr_day_names:
       - dim
