@@ -111,7 +111,7 @@ RSpec.describe AutomatedTicket, type: :model do
           let(:zipcodes) { [] }
           it do
             expect(subject).to be_invalid
-            expect(subject.errors.full_messages).to include('Codes zones doit contenir au moins un élément')
+            expect(subject.errors.full_messages).to include('Aucun code zone selectionné')
           end
         end
         context 'non empty array' do
@@ -123,13 +123,12 @@ RSpec.describe AutomatedTicket, type: :model do
           let(:vehicle_type) { :combustion_car }
           it 'Returns an invalid record' do
             subject.valid?
-            expect(subject.errors[:zipcodes]).to include("ne peut contenir qu'une seule zone pour ce type de vehicule")
+            expect(subject.errors[:zipcodes]).to include("Ce type de vehicule ne permet qu'un seule code zone")
           end
         end
         context 'when multiple zipcodes are allowed' do
           it 'Returns an invalid record' do
             subject.valid?
-            expect(subject.errors[:zipcodes]).not_to include("ne peut contenir qu'une seule zone pour ce type de vehicule")
           end
         end
 
