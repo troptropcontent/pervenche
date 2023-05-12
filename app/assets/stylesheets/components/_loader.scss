@@ -95,6 +95,12 @@
                 border-color: var(--color-primary) transparent transparent transparent;
               }
             }
+
+            &--muted {
+              div {
+                border-color: var(--color-muted-dark) transparent transparent transparent;
+              }
+            }
     
 
     }
