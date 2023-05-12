@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ZipcodesValidator < ActiveModel::EachValidator
   def validate_each(record, attribute, values)
     Array(values).each do |value|
@@ -7,7 +9,7 @@ class ZipcodesValidator < ActiveModel::EachValidator
       message = I18n.t('activerecord.errors.models.automated_ticket.attributes.zipcodes.invalid', value:)
       record.errors.add attribute, message
     end
-    
+
     return if ENV['CI']
 
     rate_options = record.service.rate_options(values, record.license_plate)
