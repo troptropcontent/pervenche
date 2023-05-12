@@ -4,7 +4,7 @@
                       class: "form form--column grow",
                       data: { 
                               controller: "form clickable-svg", 
-                              action: "form#showLoadingWindow form#addAssociatedHiddenInputsToData" ,
+                              action: "form#toggleSubmitButtonLoading form#addAssociatedHiddenInputsToData" ,
                               'form-loading-url-param': loading_shared_views_path(params: {title: t("views.setup.loading.title"), text: t("views.setup.loading.subtitle")}),
                               'clickable-svg-multiselect-param': local_assigns[:clickable_svg_multiselect] || false
                         }
@@ -20,9 +20,12 @@
           <p><%= t("views.setup.#{step}.cta") %></p>
         </div>
         <% else %>
-        <%= button_tag(type: 'submit', class: "btn btn--primary") do %>
+        <%= button_tag(type: 'submit', class: "btn btn--primary", data: {'form-target': 'inputButton'}) do %>
           <p><%= t("views.setup.#{step}.cta") %></p>
         <% end %>
+        <div class="btn btn--light grow visually-hidden" data-form-target='loader'>
+            <%= render 'components/loader' %>
+        </div>
       <% end %>
   </section>
 <% end %>  

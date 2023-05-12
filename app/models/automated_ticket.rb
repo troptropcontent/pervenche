@@ -38,9 +38,11 @@ class AutomatedTicket < ApplicationRecord
   end
 
   with_options if: -> { required_for_step?(:zipcodes) } do
-    validates :zipcodes, length: { minimum: 1, message: I18n.t('errors.messages.empty_array') }
+    validates :zipcodes,
+              length: { minimum: 1,
+                        message: I18n.t('activerecord.errors.models.automated_ticket.attributes.zipcodes.empty_array') }
     validates :zipcodes, length: { is: 1 }, unless: :allow_multiple_zipcodes?
-    validates :zipcodes, array: { format: { with: /[0-9]+/ } }
+    validates :zipcodes, zipcodes: true
   end
 
   with_options if: -> { required_for_step?(:rate_option) } do

@@ -16,6 +16,7 @@ module Pervenche
     config.i18n.default_locale = :fr
 
     config.i18n.fallbacks = [:en]
+    config.active_model.i18n_customize_full_message = true
 
     # Configuration for the application, engines, and railties goes here.
     #

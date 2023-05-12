@@ -1,7 +1,15 @@
 <% flash.each do |type, msg| %>
     <div class="<%= class_names('flash',  "flash--#{type}", 'disapear') %>">
         <div class="flash__content center">
-            <%= msg %>
+            <% if msg.is_a?(Array) %>
+                <ul>
+                    <% msg.each do |message| %>
+                      <li><%= message %></li>
+                    <% end %>
+                </ul>
+                <% else %>
+                <%= msg %>
+            <% end %>
         </div>
     </div>
 <% end %>

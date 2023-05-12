@@ -34,9 +34,11 @@ module AutomatedTickets
         @automated_ticket = automated_ticket_with_all_completable_steps_completed
         @automated_ticket.update!(status: :ready, active: true) unless next_step
         path = next_step ? path_for(next_step) : root_path
+        flash[:notice] = t("views.setup.flash.#{next_step ? 'information_saved' : 'finished'}")
         redirect_to path
       else
         load_instance_variables_for(step: @step)
+        flash[:alert] = @automated_ticket.errors.full_messages
         render @step, status: :unprocessable_entity
       end
     end
