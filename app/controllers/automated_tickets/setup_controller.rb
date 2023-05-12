@@ -82,6 +82,11 @@ module AutomatedTickets
       ).permited_params
     end
 
+    def sanitized_and_permited_automated_ticket_params_for(step:)
+      permited_params = permited_automated_ticket_params_for(step:)
+      SanitizedParams.call(permited_params:).sanitized_params
+    end
+
     def path_for(step)
       AutomatedTicket::Setup::FindPath.call(automated_ticket: @automated_ticket, step:).path
     end
@@ -100,7 +105,7 @@ module AutomatedTickets
       AutomatedTicket::Setup::UpdateAutomatedTicket.call(
         automated_ticket: @automated_ticket,
         step: @step.to_sym,
-        params: permited_automated_ticket_params_for(step: @step)
+        params: sanitized_and_permited_automated_ticket_params_for(step: @step)
       ).automated_ticket
     end
   end
