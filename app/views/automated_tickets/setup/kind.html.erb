@@ -1,0 +1,20 @@
+
+
+<main class="grow container stack stack--no-gap">
+    <section class="header">
+
+      <h2><%= t("views.setup.kind.header.title") %></h2>
+    </section>
+    <%= render 'automated_tickets/setup/shared/form', automated_ticket: @automated_ticket, step: @step do |f| %>
+      <div class="form_group stack stack--xs">
+        <% AutomatedTicket.kinds.each do |(kind, value)| %>   
+          <% next if kind == "unassigned" %>       
+          <%= render 'automated_tickets/setup/shared/type_picker_input', 
+            form: f,
+            attribute_name: 'kind',
+            value: kind,
+            content: AutomatedTicket.human_enum_name(:kinds, kind.to_sym)
+          %>
+        <% end %>
+    <% end %>
+</main>
