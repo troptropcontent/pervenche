@@ -21,8 +21,8 @@ class AutomatedTicket::Setup::CompleteAlreadyCompletableSteps < Actor
   end
 
   def find_uncompleted_and_completable_step
-    next_step = AutomatedTicket.setup_steps.keys.find do |step|
-      automated_ticket.setup_step = step
+    next_step = AutomatedTicket.setup_steps.keys.find do |step_name|
+      automated_ticket.setup_step = step_name
       automated_ticket.invalid?
     end
 
