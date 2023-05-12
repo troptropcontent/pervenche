@@ -3,6 +3,13 @@
 # The Service represent the parking application account
 class Service < ApplicationRecord
   SUPPORTED_RATE_OPTION_TYPES = %w[RES VP-2RM CMI].freeze
+  TICKET_KINDS_ALLOWED_VEHICLE_TYPES = {
+    residential: ['combustion_car'],
+    electric_motorcycle: ['electric_motorcycle'],
+    mobility_inclusion_card: %w[combustion_car combustion_motorcycle electric_motorcycle],
+    custom: AutomatedTicket.kinds.keys
+  }.freeze
+
   belongs_to :user
   has_many :automated_tickets, dependent: :destroy
   # encrypts :username, :password, deterministic: true
@@ -26,6 +33,13 @@ class Service < ApplicationRecord
   delegate :quote, to: :client
 
   delegate :vehicles, to: :client
+
+  def vehicles_allowed_for(automated_ticket_kind)
+    allowed_vehycle_types = TICKET_KINDS_ALLOWED_VEHICLE_TYPES[automated_ticket_kind.to_sym]
+    vehicles.filter do |vehicle|
+      allowed_vehycle_types.include?(vehicle.vehicle_type)
+    end
+  end
 
   def rate_options(zipcodes, license_plate)
     rate_options = zipcodes.map do |zipcode|
