@@ -17,15 +17,17 @@ fr:
         automated_ticket: 
           attributes:
             zipcodes: 
+              format: "%{message}"
               wrong_length:
-                one: ne peut contenir qu'une seule zone pour ce type de vehicule
+                one: Ce type de vehicule ne permet qu'un seule code zone
               similar_ticket_already_registered: 
                 one: "Un ticket est déja parametré pour ce tarif, cette plaque d'immatriclation et ce code postal"
                 other: "Des tickets sont déja paramétrés pour ce tarif, cette plaque d'immatriculation pour ces code postaux %{zipcodes}"
               invalid: "%{value} n'est pas un code zone valide"
               not_possible: 
-                one: "un ticket automatique n'est pas possible dans ce code zone"
-                other: "un ticket automatique n'est pas possible dans ces codes zones"
+                one: "Un ticket automatique n'est pas possible dans ce code zone"
+                other: "Un ticket automatique n'est pas possible dans ces codes zones"
+              empty_array: Aucun code zone selectionné
       messages:
         record_invalid: "La validation a échoué : %{errors}"
         restrict_dependent_destroy:
@@ -152,6 +154,14 @@ fr:
       month: Mois
       year: Année
   errors:
+    controller:
+      forbidden:
+        message: Vous n'êtes pas autorisé à effectuer cette action
+      internal_server_error:
+        message: Une erreur inattendue est survenue, notre équipe a été notifiée
+      parameter_missing:
+        specific_message: "Le paramètre %{param} est manquant"
+        general_message: "Un paramètre est manquant"
     format: "%{attribute} %{message}"
     messages:
       accepted: doit être accepté(e)
