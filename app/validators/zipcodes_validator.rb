@@ -7,8 +7,8 @@ class ZipcodesValidator < ActiveModel::EachValidator
       message = I18n.t('activerecord.errors.models.automated_ticket.attributes.zipcodes.invalid', value:)
       record.errors.add attribute, message
     end
-    # validates that the zipcodes returns at least one rate_option, only in production
-    return unless ENV['PERVENCHE_VALIDATES_ZIPCODES']
+    
+    return if ENV['CI']
 
     rate_options = record.service.rate_options(values, record.license_plate)
     message = I18n.t('activerecord.errors.models.automated_ticket.attributes.zipcodes.not_possible',
