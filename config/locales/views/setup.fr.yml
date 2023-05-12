@@ -1,6 +1,9 @@
 fr:
   views:
     setup:
+      flash:
+        information_saved: Informations bien prises en compte
+        finished: Paramétrage fini, ticket automatique correctement configuré
       loading:
         title: Création des tickets en cours
         subtitle: Ça peut prendre 1 à 2 min, plus il y a de tickets plus c’est long.
