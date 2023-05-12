@@ -10,6 +10,10 @@
     margin: var(--space-l);
     border-radius: var(--border-radius);
     padding: var(--space-xs);
+
+    ul {
+      list-style-type: none;
+    }
   }
 
   &--alert{
