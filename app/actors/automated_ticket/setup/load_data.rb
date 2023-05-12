@@ -34,7 +34,7 @@ module AutomatedTicket::Setup
 
     def load_data_required_for_vehicle_step
       self.data = {
-        vehicles: automated_ticket.service.vehicles
+        vehicles: automated_ticket.service.vehicles_allowed_for(automated_ticket.kind)
       }
     end
 
