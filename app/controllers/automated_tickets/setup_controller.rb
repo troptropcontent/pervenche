@@ -88,7 +88,7 @@ module AutomatedTickets
     end
 
     def path_for(step)
-      AutomatedTicket::Setup::FindPath.call(automated_ticket: @automated_ticket, step:).path
+      AutomatedTicket::Setup::FindPath.call(automated_ticket: @automated_ticket, step:, previous_step_param: @step).path
     end
 
     def load_instance_variables_for(step:)
