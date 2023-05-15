@@ -62,9 +62,7 @@ module AutomatedTickets
     end
 
     def step_already_completed?
-      @automated_ticket.valid?.tap do
-        @automated_ticket.errors.clear
-      end
+      AutomatedTicket::Setup::StepCompleted.call(automated_ticket: @automated_ticket, step: @step).step_completed
     end
 
     def data_for(step:)
