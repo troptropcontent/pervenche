@@ -1,5 +1,9 @@
 <% flash.each do |type, msg| %>
-    <div class="<%= class_names('flash',  "flash--#{type}", 'disapear') %>">
+    <div 
+        class="<%= class_names('flash',  "flash--#{type}", 'disapear') %>"
+        data-controller="removals"
+        data-action="animationend->removals#remove"
+    >
         <div class="flash__content center">
             <% if msg.is_a?(Array) %>
                 <ul>
@@ -13,3 +17,4 @@
         </div>
     </div>
 <% end %>
+
