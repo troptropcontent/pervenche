@@ -4,6 +4,7 @@ class AutomatedTicket::Setup::FindPath < Actor
   include Rails.application.routes.url_helpers
   input :automated_ticket
   input :step
+  input :previous_step_param, default: nil
   output :path
   def call
     params = base_params(step:).merge(query_params_for(step:))
@@ -19,10 +20,6 @@ class AutomatedTicket::Setup::FindPath < Actor
   end
 
   def base_params(step:)
-    { automated_ticket_id: automated_ticket.id, step_name: step }
-  end
-
-  def setup_params
-    params.permit(:localisation)
+    { automated_ticket_id: automated_ticket.id, step_name: step, previous_step: previous_step_param }
   end
 end

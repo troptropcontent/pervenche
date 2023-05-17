@@ -7,6 +7,10 @@ fr:
       loading:
         title: Création des tickets en cours
         subtitle: Ça peut prendre 1 à 2 min, plus il y a de tickets plus c’est long.
+      kind:
+        header:
+          title: Type de ticket
+        cta: Continuer
       localisation:
         header:
           title: Votre vehicule est-il à Paris ?

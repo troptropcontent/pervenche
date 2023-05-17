@@ -1,0 +1,15 @@
+<% flash.each do |flash_type, message| %>
+  <div
+    class="<%= class_names('flash__message' , "stack" , "flash__message--#{flash_type}") %>"
+    data-controller="removals"
+    data-action="animationend->removals#remove"
+  >
+    <% if message.is_a?(Array) %>
+        <% message.each do |message_element| %>
+          <p><%= message_element %></p>
+        <% end %>
+    <% else %>
+        <p><%= message %></p>
+    <% end %>
+  </div>
+<% end %>

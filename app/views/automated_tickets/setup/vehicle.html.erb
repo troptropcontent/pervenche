@@ -1,10 +1,11 @@
 <main class="grow container stack stack--no-gap">
     <section class="header">
       <h2><%= t('views.setup.vehicle.header.title') %></h2>
+      <%= render 'automated_tickets/setup/shared/previous_step', previous_step_path: @previous_step_path if @previous_step_path %>
     </section>
     <%= render 'automated_tickets/setup/shared/form', automated_ticket: @automated_ticket, step: @step do |f| %>
       <div class="form_group stack stack--xs">
-        <%= f.input :license_plate, wrapper_html: {class: 'stack'} do %>
+        <%= f.input :license_plate, label: false, wrapper_html: {class: 'stack'} do %>
           <% @vehicles.each do |vehicle| %>
             <%= f.label "license_plate_#{vehicle.license_plate.downcase}", class: 'form__input__type__picker__type' do %>
               <%= f.radio_button "license_plate", 
@@ -25,6 +26,9 @@
                 <% end %>
               </span>
             <% end %>
+          <% end %>
+          <%= render 'components/infocard', color: 'muted', class: 'stack__only' do %>
+            <p>Aucun véhicule éligible pour ce type de ticket</p>
           <% end %>
         <% end %>
       </div>

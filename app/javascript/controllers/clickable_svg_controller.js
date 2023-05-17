@@ -10,7 +10,9 @@ export default class extends Controller {
   toggleCheckedAttribute(event) {
 
     const clickables = this.clickableTargets
-    const alreadyCheckedGroups = clickables.filter(group => group.attributes.checked)
+    const alreadyCheckedGroups = clickables.filter(group => group.attributes.getNamedItem('checked') || group.checked)
+    
+    console.log({alreadyCheckedGroups})
     const group = clickables.find(group => group.id === event.params.groupId )
     const image = this.imageTarget
 

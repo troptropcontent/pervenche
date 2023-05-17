@@ -9,6 +9,7 @@ fr:
     automated_ticket:
       covered: Couvert
       not_covered: Non couvert
+      renewing: Renouvellement en cours
       modify_zipcodes: Modifier les arrondissements
       ticket_count: 
         zero: 'Aucun ticket renouvellé automatiquement'

@@ -9,6 +9,7 @@ RSpec.shared_context 'a user with a service with an automated ticket' do |last_v
     automated_ticket = FactoryBot.build(
       :automated_ticket,
       user:,
+      kind:,
       service: automated_ticket_service,
       rate_option_client_internal_id:,
       license_plate:,
@@ -25,6 +26,7 @@ RSpec.shared_context 'a user with a service with an automated ticket' do |last_v
     automated_ticket
   end
   let(:rate_option_client_internal_id) {}
+  let(:kind) {}
   let(:license_plate) {}
   let(:automated_ticket_service) {}
   let(:payment_method_client_internal_ids) {}
@@ -39,17 +41,23 @@ RSpec.shared_context 'a user with a service with an automated ticket' do |last_v
   case last_validated_step
   when :service
     let(:automated_ticket_service) { service }
+  when :kind
+    let(:automated_ticket_service) { service }
+    let(:kind) { 'electric_motorcycle' }
   when :localisation
     let(:automated_ticket_service) { service }
+    let(:kind) { 'electric_motorcycle' }
     let(:localisation) { 'paris' }
   when :vehicle
     let(:automated_ticket_service) { service }
+    let(:kind) { 'electric_motorcycle' }
     let(:localisation) { 'paris' }
     let(:license_plate) { 'CL123UU' }
     let(:vehicle_type) { 'electric_motorcycle' }
     let(:vehicle_description) { 'a_fake_name' }
   when :zipcodes
     let(:automated_ticket_service) { service }
+    let(:kind) { 'electric_motorcycle' }
     let(:localisation) { 'paris' }
     let(:license_plate) { 'CL123UU' }
     let(:vehicle_type) { 'electric_motorcycle' }
@@ -57,6 +65,7 @@ RSpec.shared_context 'a user with a service with an automated ticket' do |last_v
     let(:zipcodes) { %w[75008 75017 75019] }
   when :rate_option
     let(:automated_ticket_service) { service }
+    let(:kind) { 'electric_motorcycle' }
     let(:localisation) { 'paris' }
     let(:license_plate) { 'CL123UU' }
     let(:vehicle_type) { 'electric_motorcycle' }
@@ -67,6 +76,7 @@ RSpec.shared_context 'a user with a service with an automated ticket' do |last_v
     let(:automated_ticket_free) { false }
   when :weekdays
     let(:automated_ticket_service) { service }
+    let(:kind) { 'electric_motorcycle' }
     let(:localisation) { 'paris' }
     let(:license_plate) { 'CL123UU' }
     let(:vehicle_type) { 'electric_motorcycle' }
@@ -78,6 +88,7 @@ RSpec.shared_context 'a user with a service with an automated ticket' do |last_v
     let(:automated_ticket_free) { false }
   when :payment_methods
     let(:automated_ticket_service) { service }
+    let(:kind) { 'electric_motorcycle' }
     let(:localisation) { 'paris' }
     let(:license_plate) { 'CL123UU' }
     let(:vehicle_type) { 'electric_motorcycle' }

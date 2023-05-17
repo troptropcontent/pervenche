@@ -7,13 +7,53 @@ require 'support/shared_context/service_stubs'
 RSpec.describe AutomatedTicket::Setup::LoadData, type: :actor do
   include Rails.application.routes.url_helpers
   subject { described_class.call(automated_ticket:, step:, params:) }
-  include_context 'a user with a service with an automated ticket', :payment_methods
-  include_context 'a stubed service'
   let(:step) { :service }
   let(:params) do
+    {}
   end
   describe '.call' do
+    describe 'base_data' do
+      let(:automated_ticket) do
+        automated_ticket = FactoryBot.create(:automated_ticket, :with_kind, user:, service:, setup_step: :kind)
+      end
+      let(:user) { FactoryBot.create(:user) }
+      let(:service) do
+        service = FactoryBot.build(:service, user_id: user.id)
+        service.save(validate: false)
+        service
+      end
+      describe 'previous_step' do
+        context 'when there is a previous_step param' do
+          context 'wich is valid' do
+            let(:params) do
+              { previous_step: 'vehicle' }
+            end
+            let(:step) { :kind }
+            let(:expected_data) do
+              { previous_step_path: "/automated_tickets/#{automated_ticket.id}/setup/vehicle" }
+            end
+            it 'loads the correct path' do
+              expect(subject.data).to eq(expected_data)
+            end
+          end
+          context 'wich is not valid' do
+            let(:params) do
+              { previous_step: 'localisation' }
+            end
+            let(:step) { :kind }
+            let(:expected_data) do
+              {}
+            end
+            it 'does not load a path' do
+              expect(subject.data).to eq(expected_data)
+            end
+          end
+        end
+      end
+    end
     describe 'step' do
+      include_context 'a user with a service with an automated ticket', :payment_methods
+      include_context 'a stubed service'
       context 'service' do
         let(:expected_data) do
           { services: [[service.name, service.id]] }

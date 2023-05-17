@@ -18,7 +18,7 @@ RSpec.describe AutomatedTicket::Setup::CompleteAlreadyCompletableSteps, type: :a
       end
     end
     describe 'when there is only one vehicle' do
-      include_context 'a user with a service with an automated ticket', :service
+      include_context 'a user with a service with an automated ticket', :localisation
 
       it 'automatically set the license_plate, vehicle_type and vehicle_description' do
         subject

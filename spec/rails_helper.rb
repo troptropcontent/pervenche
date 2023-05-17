@@ -77,8 +77,8 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
+  config.include Devise::Test::IntegrationHelpers, type: :feature
   config.include Devise::Test::IntegrationHelpers, type: :request
-
   # sidekiq
   config.before(:each) do
     Sidekiq::Worker.clear_all
@@ -96,4 +96,5 @@ VCR.configure do |config|
   config.cassette_library_dir = 'spec/vcr_cassettes'
   config.hook_into :webmock
   config.configure_rspec_metadata!
+  config.ignore_localhost = true
 end

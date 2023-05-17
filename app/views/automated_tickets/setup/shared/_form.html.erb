@@ -10,6 +10,11 @@
                         }
                     } do |f| %>
   <section class="content grow stack">
+    <div class="visually-hidden">
+      <% AutomatedTicket.setup_steps[step.to_sym].each do |field| %>
+        <%= empty_inputs_for(f, automated_ticket.class, field) %>                  
+      <% end %>
+    </div>
     <%= yield(f) %>
   </section>
   <section class="footer stack margin__bottom--l">

@@ -1,0 +1,14 @@
+.svg {
+  display: block;
+  
+  &--s {
+    width: var(--image-s);
+    width: var(--image-s);
+  }
+
+  &--m {
+    width: var(--image-m);
+    width: var(--image-m);
+  }
+}
+

@@ -32,8 +32,10 @@ module ParkingTicket
         }.freeze, T::Hash[String, String])
 
         VEHICLE_TYPE_MAPPER = T.let({
+          'ElectricMotorcycle' => 'electric_motorcycle',
           'Car' => 'combustion_car',
-          'ElectricMotorcycle' => 'electric_motorcycle'
+          'HeavyGoodsVehicle' => 'heavy_goods_vehicle',
+          'Motorcycle' => 'electric_motorcycle'
         }.freeze, T::Hash[String, String])
 
         class Error < StandardError; end

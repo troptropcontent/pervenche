@@ -21,8 +21,8 @@ class AutomatedTicket::Setup::CompleteAlreadyCompletableSteps < Actor
   end
 
   def find_uncompleted_and_completable_step
-    next_step = AutomatedTicket.setup_steps.keys.find do |step|
-      automated_ticket.setup_step = step
+    next_step = AutomatedTicket.setup_steps.keys.find do |step_name|
+      automated_ticket.setup_step = step_name
       automated_ticket.invalid?
     end
 
@@ -31,7 +31,7 @@ class AutomatedTicket::Setup::CompleteAlreadyCompletableSteps < Actor
 
   def completable_step?(step)
     return service_step_completable? if step == :service
-    # return localisation_step_completable? if step == :localisation
+    return localisation_step_completable? if step == :localisation
     return vehicle_step_completable? if step == :vehicle
     return rate_option_completable? if step == :rate_option
     return weekdays_completable? if step == :weekdays
@@ -49,6 +49,8 @@ class AutomatedTicket::Setup::CompleteAlreadyCompletableSteps < Actor
   end
 
   def localisation_step_completable?
+    return false if automated_ticket.kind == 'custom'
+
     automated_ticket.assign_attributes(
       {
         localisation: 'paris'
@@ -73,7 +75,7 @@ class AutomatedTicket::Setup::CompleteAlreadyCompletableSteps < Actor
   end
 
   def vehicle_step_completable?
-    vehicles = automated_ticket.service&.vehicles || []
+    vehicles = automated_ticket.service&.vehicles_allowed_for(automated_ticket.kind) || []
     return false if vehicles.count != 1
 
     vehicle = vehicles.first
