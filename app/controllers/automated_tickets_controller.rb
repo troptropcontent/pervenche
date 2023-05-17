@@ -52,7 +52,7 @@ class AutomatedTicketsController < ApplicationController
   end
 
   def next_step_for(automated_ticket)
-    AutomatedTicket::Setup::FindNextStep.call(automated_ticket:).next_step
+    AutomatedTicket::Setup::FindNextCompletableStep.call(automated_ticket:).next_step
   end
 
   def path_for(automated_ticket, step)

@@ -1,7 +1,9 @@
 # frozen_string_literal: true
+# typed: true
 
 module AutomatedTickets
   class SetupController < ApplicationController
+    extend T::Sig
     skip_load_and_authorize_resource
 
     before_action :load_automated_ticket
@@ -11,12 +13,12 @@ module AutomatedTickets
     def show
       @with_navbar = false
       @automated_ticket.setup_step = @step
-      if step_already_completed?
-        path = next_step ? path_for(@step) : root_path
-        redirect_to(path)
-      else
+      if step_completable?
         load_instance_variables_for(step: @step)
         render @step
+      else
+        path = next_step ? path_for(@step) : root_path
+        redirect_to(path)
       end
     end
 
@@ -33,7 +35,7 @@ module AutomatedTickets
       if @automated_ticket.valid?
         @automated_ticket = automated_ticket_with_all_completable_steps_completed
         @automated_ticket.update!(status: :ready, active: true) unless next_step
-        path = next_step ? path_for(next_step) : root_path
+        path = next_step ? path_for(next_step, previous_step: @step) : root_path
         flash[:notice] = t("views.setup.flash.#{next_step ? 'information_saved' : 'finished'}")
         redirect_to path
       else
@@ -70,7 +72,7 @@ module AutomatedTickets
     end
 
     def next_step
-      AutomatedTicket::Setup::FindNextStep.call(automated_ticket: @automated_ticket).next_step
+      AutomatedTicket::Setup::FindNextCompletableStep.call(automated_ticket: @automated_ticket).next_step
     end
 
     def permited_automated_ticket_params_for(step:)
@@ -85,8 +87,14 @@ module AutomatedTickets
       SanitizedParams.call(permited_params:).sanitized_params
     end
 
-    def path_for(step)
-      AutomatedTicket::Setup::FindPath.call(automated_ticket: @automated_ticket, step:, previous_step_param: @step).path
+    def path_for(step, previous_step: nil)
+      AutomatedTicket::Setup::FindPath.call(automated_ticket: @automated_ticket, step:,
+                                            previous_step_param: previous_step).path
+    end
+
+    sig { returns(AutomatedTickets::Setup) }
+    def setup
+      @automated_ticket.setup
     end
 
     def load_instance_variables_for(step:)
@@ -105,6 +113,13 @@ module AutomatedTickets
         step: @step.to_sym,
         params: sanitized_and_permited_automated_ticket_params_for(step: @step)
       ).automated_ticket
+    end
+
+    def step_completable?
+      AutomatedTicket::Setup::StepCompletable.call(
+        automated_ticket: @automated_ticket,
+        step: @step.to_sym
+      ).step_completable
     end
   end
 end

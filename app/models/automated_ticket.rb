@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+# typed: true
 
 class AutomatedTicket < ApplicationRecord
   encrypts :license_plate, deterministic: true
@@ -154,6 +155,10 @@ class AutomatedTicket < ApplicationRecord
 
   def allow_multiple_zipcodes?
     vehicle_type == 'electric_motorcycle'
+  end
+
+  def setup(step = setup_step)
+    AutomatedTickets::Setup.new(self, step) if step
   end
 
   private

@@ -4,7 +4,7 @@ class AutomatedTicket::Setup::FindPath < Actor
   include Rails.application.routes.url_helpers
   input :automated_ticket
   input :step
-  input :previous_step_param, default: -> {}
+  input :previous_step_param, default: nil
   output :path
   def call
     params = base_params(step:).merge(query_params_for(step:))
