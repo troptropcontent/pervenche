@@ -31,7 +31,9 @@
   </head>
 
   <body data-controller='modal'>
-    <%= render 'components/flash' %>
+    <div class="flash">
+      <%= render "layouts/flash" %>
+    </div>
     <%= yield %>  
   </body>
 </html>

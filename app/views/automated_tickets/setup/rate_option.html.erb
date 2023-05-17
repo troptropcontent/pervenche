@@ -1,6 +1,7 @@
 <main class="grow container stack stack--no-gap">
     <section class="header">
       <h2><%= t('views.setup.rate_option.header.title') %></h2>
+      <%= render 'automated_tickets/setup/shared/previous_step', previous_step_path: @previous_step_path if @previous_step_path %>
     </section>
     <%= render 'automated_tickets/setup/shared/form', automated_ticket: @automated_ticket, step: @step do |f| %>
       <div class="form_group stack stack--xs">
