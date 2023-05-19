@@ -12,9 +12,9 @@
         <%= render 'automated_tickets/setup/shared/previous_step', previous_step_path: @previous_step_path if @previous_step_path %>
       </span>
     </section>
-    <%= render 'automated_tickets/setup/shared/form', automated_ticket: @automated_ticket, step: @step, clickable_svg_multiselect: @automated_ticket.allow_multiple_zipcodes? do |f| %>
+    <%= render 'automated_tickets/setup/shared/form', automated_ticket: @automated_ticket, step: @step do |f| %>
       <% if @localisation == 'paris' %>
-        <%= render 'automated_tickets/setup/zipcodes/paris', zipcodes: @automated_ticket.zipcodes || [] %>
+        <%= render 'automated_tickets/setup/zipcodes/paris', zipcodes: @automated_ticket.zipcodes || [], form: f, multiple: @automated_ticket.allow_multiple_zipcodes? %>
       <% end %>
       <% if @localisation == 'other' %>
         <%= render 'automated_tickets/setup/zipcodes/other', form: f %>
