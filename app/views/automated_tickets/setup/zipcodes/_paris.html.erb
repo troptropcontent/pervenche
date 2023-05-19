@@ -1,5 +1,5 @@
 <%= form.input :zipcodes, 
                as: :type_picker, 
                wrapper: false,
-               collection: Zipcodes.paris, 
-               multiple: true %>
+               collection: Zipcodes.paris.map{|zipcode| [zipcode, zipcode]}, 
+               multiple: multiple %>

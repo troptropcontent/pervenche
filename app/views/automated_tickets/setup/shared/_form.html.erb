@@ -9,6 +9,12 @@
                               'clickable-svg-multiselect-param': local_assigns[:clickable_svg_multiselect] || false
                         }
                     } do |f| %>
+  <section class="header">
+    <span class="cluster cluster--no-wrap">
+      <h2><%= header_content %></h2>
+      <%= render 'automated_tickets/setup/shared/previous_step', previous_step_path: @previous_step_path if @previous_step_path %>
+    </span>
+  </section>                    
   <section class="content grow stack">
     <div class="visually-hidden">
       <% AutomatedTicket.setup_steps[step.to_sym].each do |field| %>

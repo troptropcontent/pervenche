@@ -3,20 +3,20 @@
 class TypePickerInput < SimpleForm::Inputs::Base
   def input(_wrapper_options)
     @multiple = options[:multiple]
-    input_name = @multiple ? "[#{attribute_name}][]" : "[#{attribute_name}]"
-    types = options[:collection].map do |value|
-      type(value, input_name)
+    input_name = object.send(attribute_name).is_a?(Array) ? "[#{attribute_name}][]" : "[#{attribute_name}]"
+    types = options[:collection].map do |(content, value)|
+      type(content, value, input_name)
     end
     types.join.html_safe
   end
 
   private
 
-  def type(value, input_name)
+  def type(content, value, input_name)
     label_tag(value) do
       [
         @multiple ? check_box(value, input_name) : radio_button(value, input_name),
-        clickable(value)
+        clickable(content)
       ].join.html_safe
     end
   end
@@ -43,9 +43,9 @@ class TypePickerInput < SimpleForm::Inputs::Base
     ]
   end
 
-  def clickable(value)
+  def clickable(content)
     template.content_tag(:div, class: 'clickable') do
-      template.content_tag(:h4, value, class: 'clickable')
+      template.content_tag(:h4, content, class: 'clickable')
     end
   end
 
