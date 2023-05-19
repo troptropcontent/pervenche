@@ -2,7 +2,8 @@
 
 class TypePickerInput < SimpleForm::Inputs::Base
   def input(_wrapper_options)
-    input_name = options[:multiple] ? "[#{attribute_name}][]" : "[#{attribute_name}]"
+    @multiple = options[:multiple]
+    input_name = @multiple ? "[#{attribute_name}][]" : "[#{attribute_name}]"
     types = options[:collection].map do |value|
       type(value, input_name)
     end
@@ -14,24 +15,32 @@ class TypePickerInput < SimpleForm::Inputs::Base
   def type(value, input_name)
     label_tag(value) do
       [
-        options[:multiple] ? check_box(value, input_name) : radio_button(value, input_name),
+        @multiple ? check_box(value, input_name) : radio_button(value, input_name),
         clickable(value)
       ].join.html_safe
     end
   end
 
   def check_box(value, input_name)
-    template.check_box_tag("#{object_name}#{input_name}", value, false, class: 'visually-hidden',
-                                                                        id: "#{object_name}_#{attribute_name}_#{value}")
+    template.check_box_tag(
+      *input_args(value, input_name)
+    )
   end
 
   def radio_button(value, input_name)
     template.radio_button_tag(
-      "#{object_name}#{input_name}",
-      value, false,
-      class: 'visually-hidden',
-      id: "#{object_name}_#{attribute_name}_#{value}"
+      *input_args(value, input_name)
     )
+  end
+
+  def input_args(value, input_name)
+    [
+      "#{object_name}#{input_name}",
+      value,
+      @multiple ? object.send(attribute_name).include?(value) : object.send(attribute_name) == value,
+      { class: 'visually-hidden',
+        id: "#{object_name}_#{attribute_name}_#{value}" }
+    ]
   end
 
   def clickable(value)
