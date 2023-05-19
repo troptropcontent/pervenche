@@ -7,7 +7,7 @@ class Service < ApplicationRecord
     residential: ['combustion_car'],
     electric_motorcycle: ['electric_motorcycle'],
     mobility_inclusion_card: %w[combustion_car combustion_motorcycle electric_motorcycle],
-    custom: AutomatedTicket.kinds.keys
+    custom: %w[combustion_car combustion_motorcycle electric_motorcycle]
   }.freeze
 
   belongs_to :user
