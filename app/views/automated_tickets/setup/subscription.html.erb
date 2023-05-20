@@ -1,8 +1,5 @@
 <main class="grow container stack stack--no-gap">
-    <section class="header">
-      <h2><%= t('views.setup.subscription.header.title') %></h2>
-    </section>
-    <%= render 'automated_tickets/setup/shared/form', automated_ticket: @automated_ticket, step: @step, disabled: !!!@charge_bee_subscription_id do |f| %>
+    <%= render 'automated_tickets/setup/shared/form', automated_ticket: @automated_ticket, step: @step, header_content: t('views.setup.subscription.header.title'), disabled: !!!@charge_bee_subscription_id do |f| %>
        <% if @charge_bee_subscription_id %>
           <span><%= t('views.setup.subscription.text_subscribed_html', count: @automated_ticket.zipcodes.length, license_plate: @automated_ticket.license_plate, zipcodes: @automated_ticket.zipcodes.to_sentence) %></span></span>
           <%= f.input :charge_bee_subscription_id, :as => :hidden, :input_html => { :value => @charge_bee_subscription_id } %>

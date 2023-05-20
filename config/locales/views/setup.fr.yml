@@ -25,9 +25,12 @@ fr:
       zipcodes:
         header:
           title: 
-            neutral: Dans quelle zone veux-tu renouveler automatiquement ton ticket ? 
-            electric_motorcycle: Dans quels arrondissements veux-tu renouveler un ticket ?
-            combustion_car: Dans quel arronsissement es-tu résident ?
+            paris:
+              electric_motorcycle: Dans quels arrondissements veux-tu renouveler un ticket ?
+              combustion_car: Dans quel arronsissement es-tu résident ?
+            other:
+              electric_motorcycle: Dans quelle zone veux-tu renouveler automatiquement ton ticket ? 
+              combustion_car: Dans quelle zone veux-tu renouveler automatiquement ton ticket ? 
         inputs:
           zipcodes: 
             placeholder: Code de la zone souhaitée
