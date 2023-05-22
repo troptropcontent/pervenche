@@ -12,13 +12,14 @@ class ServicesController < ApplicationController
       flash[:notice] = t('views.services.new.flash.success')
       redirect_to root_path
     else
+      flash[:alert] = @service.errors.full_messages
       render 'new', status: :unprocessable_entity
     end
   end
 
   private
 
-  def service_params
+  def service_params(params)
     params.require(:service).permit(:username, :password, :name, :kind).compact_blank
   end
 
