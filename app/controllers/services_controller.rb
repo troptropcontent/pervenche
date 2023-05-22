@@ -19,7 +19,7 @@ class ServicesController < ApplicationController
 
   private
 
-  def service_params(params)
+  def service_params
     params.require(:service).permit(:username, :password, :name, :kind).compact_blank
   end
 
