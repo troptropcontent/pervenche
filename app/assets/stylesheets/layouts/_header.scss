@@ -4,7 +4,12 @@
     gap: var(--space-s);
     justify-content: space-between;
     margin: var(--space-xl) 0;
-  
+
+    &__menu {
+      position: absolute;
+      left: var(--space-l);
+    }
+
     @include media(tabletAndUp) {
       margin-bottom: var(--space-xl);
     }

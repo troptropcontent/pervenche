@@ -77,6 +77,22 @@ a {
   }
 }
 
+button {
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: color 200ms;
+  background-color: inherit;
+  margin: 0;
+  padding: 0;
+  border-width: 0;
+
+  &:hover,
+  &:focus,
+  &:active {
+    color: var(--color-primary-rotate);
+  }
+}
+
 html {
 	scroll-behavior: smooth;
 }

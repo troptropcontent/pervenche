@@ -1,0 +1,17 @@
+<% @links.each do |(link_key, path, method)| %>
+    <% if method.nil? || method == :get %>
+        <%= link_to path, class: 'text__color--dark' do %>
+          <span class="cluster">
+            <%= inline_svg("#{link_key.to_s}.svg") %>
+            <p><%=  t("views.application.menu.#{link_key.to_s}") %></p>
+          </span>
+        <% end %>
+      <% else %>
+        <%= button_to path, method: method, class: 'text__color--dark'  do %>
+          <span class="cluster">
+            <%= inline_svg("#{link_key.to_s}.svg") %>
+            <p><%=  t("views.application.menu.#{link_key.to_s}") %></p>
+          </span>
+        <% end %>
+    <% end %>
+<% end %>
