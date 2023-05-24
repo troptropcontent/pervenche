@@ -29,6 +29,9 @@ fr:
             placeholder: "Your service password"
           errors:
             text_html: "* Les identifiants utilisés ne semblent pas corrects, n'hésitez pas à m'envoyer un mail à <a href='mailto:contact@pervenche.eu'>contact@pervenche.eu</a> si le problème persiste."
-          hint:
-            text_html: "* vous devez utiliser les identifiants que vous utilisez pour vous connecter <a href='https://www.paybyphone.com/receipts' target='_blank'>ici</a>"
+          modal:
+            link_content: "Problème de connexion ?"
+            title: "Problème de connexion"
+            content_html: "Si vous n’arrivez pas à connecter votre compte PayByPhone à Pervenche, la meilleure solution est de réinitialiser votre mot de passe PayByPhone avec le lien suivant :<br><br> <a href='https://m2.paybyphone.fr/forgot-password' target='_blank'>https://m2.paybyphone.fr/forgot-password</a>.<br><br>Puis revenez sur la page de connexion et réssayez de vous connectez.<br>Si ça ne fonctionne toujours pas, contactez-nous via le widget en bas à droite de votre écran."
         cta: Continuer
+

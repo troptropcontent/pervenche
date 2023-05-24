@@ -1,0 +1,14 @@
+
+<%= link_to '#', class: class_names(@link_class), data: {'action': 'click->modal#open'} do %>
+    <%= @link_content %>
+<% end %>
+<div id="modal" class="modal" data-modal-target="modal" >
+  <div class="<%= class_names('modal__content', 'stack', 'modal__content--full-screen': @content_full_screen) %>">
+    <div class="cluster cluster__justify-content--between">
+      <h2><%= @title %></h2>
+      <span class="modal__close" data-modal-target="closeModalBtn" data-action='click->modal#close'><%= inline_svg 'cross.svg' %></span>
+    </div>
+    <%= content %>
+  </div>
+</div>
+

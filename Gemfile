@@ -34,6 +34,9 @@ gem 'phonelib'
 gem 'sentry-rails'
 gem 'sentry-ruby'
 
+#view component
+gem "view_component"
+
 #Logging
 gem 'lograge'
 gem 'lograge-sql'
