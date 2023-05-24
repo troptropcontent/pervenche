@@ -21,8 +21,8 @@ RSpec.describe AutomatedTicket::Setup::StepCompleted, type: :actor do
       end
     end
     context 'when the step is not completed' do
-      let(:step) { :localisation }
-      it 'returns true' do
+      let(:step) { :zipcodes }
+      it 'returns false' do
         expect(subject).to eq(false)
       end
     end

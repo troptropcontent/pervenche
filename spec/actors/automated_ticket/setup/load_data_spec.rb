@@ -14,7 +14,8 @@ RSpec.describe AutomatedTicket::Setup::LoadData, type: :actor do
   describe '.call' do
     describe 'base_data' do
       let(:automated_ticket) do
-        automated_ticket = FactoryBot.create(:automated_ticket, :with_kind, user:, service:, setup_step: :kind)
+        automated_ticket = FactoryBot.create(:automated_ticket, :with_localisation, user:, service:,
+                                                                                    setup_step: :localisation)
       end
       let(:user) { FactoryBot.create(:user) }
       let(:service) do
@@ -26,11 +27,14 @@ RSpec.describe AutomatedTicket::Setup::LoadData, type: :actor do
         context 'when there is a previous_step param' do
           context 'wich is valid' do
             let(:params) do
-              { previous_step: 'vehicle' }
+              { previous_step: 'localisation' }
             end
             let(:step) { :kind }
             let(:expected_data) do
-              { previous_step_path: "/automated_tickets/#{automated_ticket.id}/setup/vehicle" }
+              {
+                previous_step_path: "/automated_tickets/#{automated_ticket.id}/setup/localisation",
+                kinds: %i[residential electric_motorcycle mobility_inclusion_card]
+              }
             end
             it 'loads the correct path' do
               expect(subject.data).to eq(expected_data)
@@ -38,11 +42,13 @@ RSpec.describe AutomatedTicket::Setup::LoadData, type: :actor do
           end
           context 'wich is not valid' do
             let(:params) do
-              { previous_step: 'localisation' }
+              { previous_step: 'vehicle' }
             end
             let(:step) { :kind }
             let(:expected_data) do
-              {}
+              {
+                kinds: %i[residential electric_motorcycle mobility_inclusion_card]
+              }
             end
             it 'does not load a path' do
               expect(subject.data).to eq(expected_data)

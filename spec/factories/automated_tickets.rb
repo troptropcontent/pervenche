@@ -6,7 +6,12 @@ FactoryBot.define do
     service
     active { true }
 
+    trait :with_localisation do
+      localisation { 'paris' }
+    end
+
     trait :with_kind do
+      with_localisation
       kind { 'electric_motorcycle' }
     end
 
@@ -16,16 +21,8 @@ FactoryBot.define do
       vehicle_type { 'electric_motorcycle' }
     end
 
-    trait :with_localisation do
-      with_kind
-      with_vehicle
-      localisation { 'paris' }
-    end
-
     trait :with_zipcodes do
-      with_kind
       with_vehicle
-      with_localisation
       zipcodes { %w[75018 75019 75020] }
     end
 

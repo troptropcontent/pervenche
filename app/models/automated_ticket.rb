@@ -11,14 +11,19 @@ class AutomatedTicket < ApplicationRecord
 
   SETUP_STEPS = {
     service: [:service_id],
-    kind: [:kind],
-    vehicle: %i[license_plate vehicle_description vehicle_type],
     localisation: [:localisation],
+    kind: %i[kind],
+    vehicle: %i[license_plate vehicle_description vehicle_type],
     zipcodes: %i[zipcodes],
     rate_option: %i[rate_option_client_internal_id accepted_time_units free],
     weekdays: %i[weekdays],
     payment_methods: %i[payment_method_client_internal_ids],
     subscription: [:charge_bee_subscription_id]
+  }.freeze
+
+  KINDS_ALLOWED_FOR_LOCALISATION = {
+    paris: %i[residential electric_motorcycle mobility_inclusion_card],
+    other: [:custom]
   }.freeze
 
   enum status: {
@@ -73,7 +78,7 @@ class AutomatedTicket < ApplicationRecord
 
   with_options if: -> { required_for_step?(:subscription) } do
     validates :charge_bee_subscription_id, presence: true, unless: lambda {
-                                                                     !!!ENV.fetch('PERVENCHE_CHARGEBEE_ENABLED', false)
+                                                                     !ENV.fetch('PERVENCHE_CHARGEBEE_ENABLED', false)
                                                                    }
   end
 
@@ -141,7 +146,7 @@ class AutomatedTicket < ApplicationRecord
   end
 
   def should_renew_today?
-    weekdays.include?(Date.today.wday)
+    weekdays.include?(Time.zone.today.wday)
   end
 
   def running_ticket_in_database_for(zipcode:)
@@ -159,6 +164,12 @@ class AutomatedTicket < ApplicationRecord
 
   def setup(step = setup_step)
     AutomatedTickets::Setup.new(self, step) if step
+  end
+
+  def kinds_allowed
+    return [] unless localisation
+
+    KINDS_ALLOWED_FOR_LOCALISATION[localisation.to_sym]
   end
 
   private

@@ -14,12 +14,12 @@ RSpec.describe AutomatedTicket::Setup::FindPreviousStep, type: :actor do
     service.save(validate: false)
     service
   end
-  let(:step) { :localisation }
+  let(:step) { :vehicle }
 
   describe '.call' do
     context 'when there is a previous step' do
       it 'returns true' do
-        expect(subject).to eq(:vehicle)
+        expect(subject).to eq(:kind)
       end
     end
     context 'when there is no previous step' do

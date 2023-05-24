@@ -18,7 +18,7 @@ RSpec.describe AutomatedTicket::Setup::FindNextStep, type: :actor do
     let(:step) { :vehicle }
     context 'when there is a next step' do
       it 'returns it' do
-        expect(subject).to eq(:localisation)
+        expect(subject).to eq(:zipcodes)
       end
     end
     context 'when there is no next step' do

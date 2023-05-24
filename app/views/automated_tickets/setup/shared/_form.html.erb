@@ -1,7 +1,7 @@
 <%= simple_form_for automated_ticket, 
                     url: automated_ticket_setup_path(automated_ticket.id, step),
                     html: {
-                      class: "grow sandwich",
+                      class: "grow sidebar--bottom",
                       data: { 
                               controller: "form clickable-svg", 
                               action: "form#toggleSubmitButtonLoading form#addAssociatedHiddenInputsToData" ,
@@ -9,23 +9,25 @@
                               'clickable-svg-multiselect-param': local_assigns[:clickable_svg_multiselect] || false
                         }
                     } do |f| %>
-  <section class="sandwich__header header">
+  <div class="sidebar--bottom__content">
+    <section class="header">
     <span class="cluster cluster--no-wrap">
-      <h2><%= header_content %></h2>
       <%= render 'automated_tickets/setup/shared/previous_step', previous_step_path: @previous_step_path if @previous_step_path %>
+      <h2><%= header_content %></h2>
     </span>
-  </section>                    
-  <section class="sandwich__content">
-    <div class="visually-hidden">
-      <% AutomatedTicket.setup_steps[step.to_sym].each do |field| %>
-        <%= empty_inputs_for(f, automated_ticket.class, field) %>                  
-      <% end %>
-    </div>
-    <div class="sandwich__content__scrollable stack">
-      <%= yield(f) %>
-    </div>
-  </section>
-  <section class="sandwich__footer stack margin__bottom--l">
+    </section>                    
+    <section class="content">
+      <div class="visually-hidden">
+        <% AutomatedTicket.setup_steps[step.to_sym].each do |field| %>
+          <%= empty_inputs_for(f, automated_ticket.class, field) %>                  
+        <% end %>
+      </div>
+      <div class="sandwich__content__scrollable stack">
+        <%= yield(f) %>
+      </div>
+    </section>
+  </div>
+  <section class="sidebar--bottom__fixed stack margin__bottom--l">
       <div class="visually-hidden" data-form-target='hiddenInputsGroup'>
       </div>
       <% if local_assigns[:disabled] %>

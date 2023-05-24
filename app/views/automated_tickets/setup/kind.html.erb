@@ -9,6 +9,6 @@
         <%= f.input :kind, 
                as: :type_picker, 
                wrapper: false,
-               collection: AutomatedTicket.kinds.map{|kind, integer| [AutomatedTicket.human_enum_name(:kinds, kind.to_sym), kind]} %>
+               collection: @kinds.map{|kind| [AutomatedTicket.human_enum_name(:kinds, kind), kind.to_s]} %>
     <% end %>
 </main>
