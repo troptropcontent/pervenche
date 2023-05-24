@@ -12,7 +12,7 @@ class ServicesController < ApplicationController
       flash[:notice] = t('views.services.new.flash.success')
       redirect_to root_path
     else
-      flash[:alert] = @service.errors.full_messages
+      flash[:alert] = t('views.services.new.flash.alert')
       render 'new', status: :unprocessable_entity
     end
   end
