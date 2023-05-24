@@ -4,7 +4,8 @@ MoneyRails.configure do |config|
   # To set the default currency
   #
   config.default_currency = :eur
-
+  config.locale_backend = :i18n
+  config.rounding_mode = BigDecimal::ROUND_HALF_EVEN
   # Set default bank object
   #
   # Example:

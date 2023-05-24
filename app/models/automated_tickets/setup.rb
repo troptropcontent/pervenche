@@ -19,4 +19,9 @@ class AutomatedTickets::Setup
     AutomatedTicket::Setup::StepCompletable.call(automated_ticket: @automated_ticket,
                                                  step: step.to_sym).step_completable
   end
+
+  sig { params(target_step: T.any(Symbol, String)).returns(T::Boolean) }
+  def step_before?(target_step)
+    AutomatedTicket.setup_steps.keys.index(target_step.to_sym) < AutomatedTicket.setup_steps.keys.index(@step)
+  end
 end

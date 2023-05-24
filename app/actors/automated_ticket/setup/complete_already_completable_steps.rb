@@ -31,8 +31,8 @@ class AutomatedTicket::Setup::CompleteAlreadyCompletableSteps < Actor
 
   def completable_step?(step)
     return service_step_completable? if step == :service
-    return localisation_step_completable? if step == :localisation
-    return vehicle_step_completable? if step == :vehicle
+    # return localisation_step_completable? if step == :localisation
+    # return vehicle_step_completable? if step == :vehicle
     return zipcodes_step_completable? if step == :zipcodes
     return rate_option_completable? if step == :rate_option
     return weekdays_completable? if step == :weekdays
@@ -121,6 +121,7 @@ class AutomatedTicket::Setup::CompleteAlreadyCompletableSteps < Actor
 
   def zipcodes_step_completable?
     return false unless automated_ticket.kind == 'mobility_inclusion_card' && automated_ticket.localisation == 'paris'
+
     automated_ticket.assign_attributes(
       {
         zipcodes: ['75100']

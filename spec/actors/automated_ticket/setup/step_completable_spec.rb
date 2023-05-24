@@ -25,6 +25,7 @@ RSpec.describe AutomatedTicket::Setup::StepCompletable, type: :actor do
       end
       context 'when the step is not completed and the previous one is' do
         let(:step) { :localisation }
+        let(:setup_step_step_completed) { :with_localisation }
         it 'returns true' do
           expect(subject).to eq(true)
         end

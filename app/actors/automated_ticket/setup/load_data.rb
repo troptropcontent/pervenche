@@ -20,6 +20,7 @@ module AutomatedTicket::Setup
     def call
       load_base_data
       load_data_required_for_service_step if step == :service
+      load_data_required_for_kind_step if step == :kind
       load_data_required_for_zipcodes_step if step == :zipcodes
       load_data_required_for_vehicle_step if step == :vehicle
       load_data_required_for_rate_option_step if step == :rate_option
@@ -38,6 +39,12 @@ module AutomatedTicket::Setup
     def load_data_required_for_service_step
       data.merge!({
                     services: automated_ticket.user.services.pluck(:name, :id)
+                  })
+    end
+
+    def load_data_required_for_kind_step
+      data.merge!({
+                    kinds: automated_ticket.kinds_allowed
                   })
     end
 
@@ -99,16 +106,11 @@ module AutomatedTicket::Setup
       end
     end
 
-    def load_data_required_for_payment_methods_step
-      data.merge!({
-                    payment_methods: automated_ticket.service.payment_methods
-                  })
-    end
-
     sig { returns(T::Boolean) }
     def previous_step_param_valid?
       return false unless params[:previous_step]
       return false unless AutomatedTicket.setup_steps.keys.include?(params[:previous_step].to_sym)
+      return false unless setup.step_before?(params[:previous_step])
 
       setup.step_completable?(params[:previous_step])
     end
