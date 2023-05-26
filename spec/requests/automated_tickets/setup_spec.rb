@@ -75,10 +75,12 @@ RSpec.describe 'AutomatedTickets::Setups', type: :request do
         end
       end
 
-      response '200', 'Ok' do
+      response '302', 'Found' do
+        before { sign_in user }
         describe 'when the params are correct' do
-          it 'reset the automated ticket to the requested step' do |example|
+          it 'reset the automated ticket to the requested step and redirect to the requested step' do |example|
             run example
+            expect(automated_ticket.reload.zipcodes).to eq([])
           end
         end
       end

@@ -47,7 +47,11 @@ module AutomatedTickets
 
     # PUT   /automated_tickets/:automated_ticket_id/setup/:step_name/reset
     def reset
-      raise Pervenche::Errors::InvalidState unless @step.before? @automated_ticket.last_completed_step.name
+      raise Pervenche::Errors::InvalidState unless @step.before? @automated_ticket.last_completed_step
+
+      @automated_ticket.reset_to(@step)
+
+      redirect_to @step.show_path(@automated_ticket)
     end
 
     private
@@ -59,7 +63,7 @@ module AutomatedTickets
     def load_step!
       step_name = params[:step_name].to_s.to_sym
       if AutomatedTicket.setup_steps.keys.include?(step_name)
-        @step = AutomatedTickets::SetupStep.new(@automated_ticket, step_name)
+        @step = AutomatedTickets::SetupStep.new(step_name)
       else
         not_found
       end
@@ -104,7 +108,7 @@ module AutomatedTickets
     end
 
     def load_instance_variables_for(step:)
-      data_for(step: step.to_sym).each do |name, value|
+      data_for(step: step.name).each do |name, value|
         instance_variable_set("@#{name}".to_sym, value)
       end
     end
