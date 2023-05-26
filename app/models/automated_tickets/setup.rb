@@ -26,13 +26,25 @@ class AutomatedTickets::Setup
 
   sig { returns(AutomatedTickets::SetupStep) }
   def last_completed_step
-    last_completed_step_instance = AutomatedTickets::SetupStep.new(@automated_ticket, :null)
+    last_completed_step_instance = AutomatedTickets::SetupStep.new(:null)
     AutomatedTicket.setup_steps.each_key do |step_name|
       @automated_ticket.setup_step = step_name
       break if @automated_ticket.invalid?
 
-      last_completed_step_instance = AutomatedTickets::SetupStep.new(@automated_ticket, step_name)
+      last_completed_step_instance = AutomatedTickets::SetupStep.new(step_name)
     end
     last_completed_step_instance
+  end
+
+  sig { params(step: AutomatedTickets::SetupStep).void }
+  def reset_to(step)
+    return if @automated_ticket.ready?
+
+    attributes_to_reset = AutomatedTicket.setup_steps.reduce([]) do |memo, (step_name, fields)|
+      [*memo, *fields] if AutomatedTicket.setup_steps.keys.index(step_name) > step.index
+    end
+    default_attributes = AutomatedTicket.column_defaults.with_indifferent_access.slice(*attributes_to_reset)
+    @automated_ticket.setup_step = step.name
+    @automated_ticket.update!(default_attributes)
   end
 end
