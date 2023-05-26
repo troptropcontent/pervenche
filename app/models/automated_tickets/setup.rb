@@ -27,7 +27,7 @@ class AutomatedTickets::Setup
   sig { returns(AutomatedTickets::SetupStep) }
   def last_completed_step
     last_completed_step_instance = AutomatedTickets::SetupStep.new(@automated_ticket, :null)
-    AutomatedTicket.setup_steps.keys.each do |step_name|
+    AutomatedTicket.setup_steps.each_key do |step_name|
       @automated_ticket.setup_step = step_name
       break if @automated_ticket.invalid?
 
