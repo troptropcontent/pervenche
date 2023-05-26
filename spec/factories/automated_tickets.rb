@@ -22,6 +22,7 @@ FactoryBot.define do
     end
 
     trait :with_zipcodes do
+      setup_step { :zipcodes }
       with_vehicle
       zipcodes { %w[75018 75019 75020] }
     end
