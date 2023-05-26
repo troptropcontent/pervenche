@@ -3,21 +3,37 @@
 
 class AutomatedTickets::SetupStep
   extend T::Sig
-  sig { params(automated_ticket: AutomatedTicket, step: Symbol).void }
-  def initialize(automated_ticket, step)
-    @automated_ticket = automated_ticket
-    @step = step
+  include Rails.application.routes.url_helpers
+
+  sig { params(step_name: Symbol).void }
+  def initialize(step_name)
+    @step_name = step_name
   end
 
-  sig { params(another_step_name: Symbol).returns(T::Boolean) }
-  def before?(another_step_name)
-    step_index = AutomatedTicket.setup_steps.keys.index(@step)
-    another_step_index = AutomatedTicket.setup_steps.keys.index(another_step_name)
-    step_index < another_step_index
+  sig { params(another_step: AutomatedTickets::SetupStep).returns(T::Boolean) }
+  def before?(another_step)
+    index < another_step.index
+  end
+
+  sig { returns(Integer) }
+  def index
+    AutomatedTicket.setup_steps.keys.index(@step_name)
+  end
+
+  sig { params(automated_ticket: T.any(Integer, AutomatedTicket)).returns(String) }
+  def show_path(automated_ticket)
+    automated_ticket_id = T.let(automated_ticket.is_a?(Integer) ? automated_ticket : automated_ticket.id, Integer)
+
+    automated_ticket_setup_path(automated_ticket_id:, step_name: name)
   end
 
   sig { returns(Symbol) }
   def name
-    @step
+    @step_name
+  end
+
+  sig { returns(String) }
+  def to_s
+    @step_name.to_s
   end
 end
