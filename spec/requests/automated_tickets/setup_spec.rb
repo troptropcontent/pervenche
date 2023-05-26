@@ -43,6 +43,45 @@ RSpec.describe 'AutomatedTickets::Setups', type: :request do
     end
     put 'reset' do
       it_behaves_like 'An authenticated endpoint'
+
+      response '400', 'Unprocessable Entity' do
+        before { sign_in user }
+        describe 'when the step targeted is a step that is after the current step' do
+          let(:step_name) { :weekdays }
+          it 'returns a 422' do |example|
+            run example
+          end
+        end
+      end
+
+      response '403', 'Forbidden' do
+        before { sign_in user }
+        describe 'when the automated ticket does not belong to the current user' do
+          let(:another_user) { FactoryBot.create(:user, email: 'toto@example.com') }
+          let!(:automated_ticket) do
+            FactoryBot.create(:automated_ticket, :with_zipcodes, user: another_user, service:)
+          end
+          it 'returns a 403' do |example|
+            run example
+          end
+        end
+        describe 'when the automated ticket is ready' do
+          let!(:automated_ticket) do
+            FactoryBot.create(:automated_ticket, :set_up, user:, service:)
+          end
+          it 'returns a 403' do |example|
+            run example
+          end
+        end
+      end
+
+      response '200', 'Ok' do
+        describe 'when the params are correct' do
+          it 'reset the automated ticket to the requested step' do |example|
+            run example
+          end
+        end
+      end
     end
   end
 end
