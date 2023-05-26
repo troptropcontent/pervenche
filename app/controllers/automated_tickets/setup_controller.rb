@@ -45,8 +45,10 @@ module AutomatedTickets
       end
     end
 
-    # PUT  /automated_tickets/:automated_ticket_id/setup/:setup_step_name/reset
-    def reset; end
+    # PUT   /automated_tickets/:automated_ticket_id/setup/:step_name/reset
+    def reset
+      raise Pervenche::Errors::InvalidState unless @step.before? @automated_ticket.last_completed_step.name
+    end
 
     private
 

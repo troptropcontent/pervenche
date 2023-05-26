@@ -44,7 +44,7 @@ RSpec.describe 'AutomatedTickets::Setups', type: :request do
     put 'reset' do
       it_behaves_like 'An authenticated endpoint'
 
-      response '400', 'Unprocessable Entity' do
+      response '400', 'Bad Request' do
         before { sign_in user }
         describe 'when the step targeted is a step that is after the current step' do
           let(:step_name) { :weekdays }
