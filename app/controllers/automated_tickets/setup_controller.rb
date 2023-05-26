@@ -55,8 +55,9 @@ module AutomatedTickets
     end
 
     def load_step!
-      if AutomatedTicket.setup_steps[params[:step_name].to_sym]
-        @step = params[:step_name]
+      step_name = params[:step_name].to_s.to_sym
+      if AutomatedTicket.setup_steps.keys.include?(step_name)
+        @step = AutomatedTickets::SetupStep.new(@automated_ticket, step_name)
       else
         not_found
       end
