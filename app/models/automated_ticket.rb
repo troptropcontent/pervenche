@@ -86,7 +86,7 @@ class AutomatedTicket < ApplicationRecord
 
   attr_accessor :setup_step
 
-  delegate :last_completed_step, to: :setup
+  delegate :last_completed_step, :reset_to, to: :setup
 
   def self.missing_running_tickets_in_database
     AutomatedTicket.unnested_with_running_tickets
