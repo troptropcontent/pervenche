@@ -86,6 +86,8 @@ class AutomatedTicket < ApplicationRecord
 
   attr_accessor :setup_step
 
+  delegate :last_completed_step, to: :setup
+
   def self.missing_running_tickets_in_database
     AutomatedTicket.unnested_with_running_tickets
                    .where(active: true, status: :ready, running_tickets: { id: nil })
@@ -162,8 +164,8 @@ class AutomatedTicket < ApplicationRecord
     vehicle_type == 'electric_motorcycle'
   end
 
-  def setup(step = setup_step)
-    AutomatedTickets::Setup.new(self, step) if step
+  def setup
+    AutomatedTickets::Setup.new(self)
   end
 
   def kinds_allowed
