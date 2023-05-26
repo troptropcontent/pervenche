@@ -45,6 +45,9 @@ module AutomatedTickets
       end
     end
 
+    # PUT  /automated_tickets/:automated_ticket_id/setup/:setup_step_name/reset
+    def reset; end
+
     private
 
     def load_automated_ticket

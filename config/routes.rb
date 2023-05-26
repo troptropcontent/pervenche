@@ -8,7 +8,9 @@ Rails.application.routes.draw do
   root 'automated_tickets#index'
   resources :services, only: %i[new create]
   resources :automated_tickets, only: %i[new index destroy update] do
-    resources :setup, only: %i[show update edit], controller: 'automated_tickets/setup', param: :step_name
+    resources :setup, only: %i[show update edit], controller: 'automated_tickets/setup', param: :step_name do
+      put 'reset'
+    end
   end
 
   resource :onboarding, only: :show do
