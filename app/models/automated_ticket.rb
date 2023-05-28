@@ -87,6 +87,7 @@ class AutomatedTicket < ApplicationRecord
   attr_accessor :setup_step
 
   delegate :last_completed_step, :reset_to, to: :setup
+  delegate :next_completable_step, to: :operator
 
   def self.missing_running_tickets_in_database
     AutomatedTicket.unnested_with_running_tickets
@@ -166,6 +167,10 @@ class AutomatedTicket < ApplicationRecord
 
   def setup
     AutomatedTickets::Setup.new(self)
+  end
+
+  def operator
+    AutomatedTickets::Operator.new(self)
   end
 
   def kinds_allowed
