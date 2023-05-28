@@ -10,14 +10,15 @@ module AutomatedTickets
     before_action :load_step!
     before_action :authorize_action!
 
+    # GET /automated_tickets/:automated_ticket_id/setup/:step_name
     def show
-      @with_navbar = false
-      @automated_ticket.setup_step = @step
-      if step_completable?
+      @automated_ticket.setup_step = @step.name
+      if @step.completable?(@automated_ticket)
         load_instance_variables_for(step: @step)
-        render @step
+        render @step.to_s
       else
-        path = next_step ? path_for(@step) : root_path
+        next_step = @automated_ticket.next_completable_step
+        path = next_step ? next_step.show_path(@automated_ticket) : root_path
         redirect_to(path)
       end
     end
