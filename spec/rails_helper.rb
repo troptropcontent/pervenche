@@ -14,6 +14,7 @@ require 'sidekiq/testing'
 require Rails.root.join('spec/requests/shared_example/an_authenticated_endpoint')
 require Rails.root.join('spec/support/request_spec_extendable_helpers')
 require Rails.root.join('spec/support/request_spec_includable_helpers')
+require Rails.root.join('spec/support/shared_context/stubed_pay_by_phone')
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
