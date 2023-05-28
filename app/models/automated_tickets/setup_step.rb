@@ -22,8 +22,9 @@ class AutomatedTickets::SetupStep
 
   sig { returns(Integer) }
   def index
-    AutomatedTicket.setup_steps.keys.index(@step_name)
+    AutomatedTicket.setup_steps.keys.index(step_name)
   end
+  alias step_index index
 
   sig { params(automated_ticket: T.any(Integer, AutomatedTicket)).returns(String) }
   def show_path(automated_ticket)
@@ -62,5 +63,11 @@ class AutomatedTickets::SetupStep
   def completed?(automated_ticket)
     automated_ticket.setup_step = step_name
     automated_ticket.valid?
+  end
+
+  sig { returns(T.nilable(AutomatedTickets::SetupStep)) }
+  def next
+    next_step_name = AutomatedTicket.setup_steps.keys[step_index + 1]
+    return AutomatedTickets::SetupStep.new(next_step_name) if next_step_name
   end
 end

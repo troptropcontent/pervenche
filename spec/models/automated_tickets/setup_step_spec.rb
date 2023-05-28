@@ -80,7 +80,7 @@ RSpec.describe AutomatedTickets::SetupStep, type: :model do
       expect(subject.name).to eq(:vehicle)
     end
   end
-  describe '#tp_s' do
+  describe '#to_s' do
     it 'returns the step name as a string' do
       expect(subject.to_s).to eq('vehicle')
     end
@@ -99,6 +99,20 @@ RSpec.describe AutomatedTickets::SetupStep, type: :model do
       let(:automated_ticket_setup_step) { :with_vehicle }
       it 'returns true' do
         expect(subject.completed?(automated_ticket)).to be false
+      end
+    end
+  end
+  describe '#next' do
+    context 'when there is a step after the current one' do
+      let!(:step_name) { :vehicle }
+      it 'returns the next step' do
+        expect(subject.next.name).to eq(:zipcodes)
+      end
+    end
+    context 'when there is no step after the current one' do
+      let!(:step_name) { :subscription }
+      it 'returns nil' do
+        expect(subject.next).to be_nil
       end
     end
   end
