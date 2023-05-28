@@ -13,13 +13,14 @@ module AutomatedTickets
     # GET /automated_tickets/:automated_ticket_id/setup/:step_name
     def show
       @automated_ticket.setup_step = @step.name
-      if @step.completable?(@automated_ticket)
-        load_instance_variables_for(step: @step)
-        render @step.to_s
-      else
+
+      if @step.completed?(@automated_ticket)
         next_step = @automated_ticket.next_completable_step
         path = next_step ? next_step.show_path(@automated_ticket) : root_path
         redirect_to(path)
+      else
+        load_instance_variables_for(step: @step)
+        render @step.to_s
       end
     end
 
@@ -30,6 +31,7 @@ module AutomatedTickets
       render @step
     end
 
+    # GET /automated_tickets/:automated_ticket_id/setup/:step_name
     def update
       update_automated_ticket!
 

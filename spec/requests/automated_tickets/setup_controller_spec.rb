@@ -81,7 +81,7 @@ RSpec.describe 'AutomatedTickets::Setups', type: :request do
 
       response '302', 'Found' do
         before { sign_in user }
-        context 'when the step is not completable' do
+        context 'when the step is already completed' do
           context 'when there is a step completable' do
             describe 'localisation' do
               it 'redirects to the next completable step show'
