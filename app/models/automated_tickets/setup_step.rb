@@ -12,7 +12,12 @@ class AutomatedTickets::SetupStep
 
   sig { params(another_step: AutomatedTickets::SetupStep).returns(T::Boolean) }
   def before?(another_step)
-    index < another_step.index
+    self < another_step
+  end
+
+  sig { params(other: AutomatedTickets::SetupStep).returns(T::Boolean) }
+  def <(other)
+    index < other.index
   end
 
   sig { returns(Integer) }

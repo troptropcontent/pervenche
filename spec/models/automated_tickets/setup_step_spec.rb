@@ -28,6 +28,22 @@ RSpec.describe AutomatedTickets::SetupStep, type: :model do
       end
     end
   end
+
+  describe '#<(another_step)' do
+    context 'when the other step is after' do
+      let(:another_step) { described_class.new(:zipcodes) }
+      it 'returns false' do
+        expect(subject < another_step).to be true
+      end
+    end
+    context 'when the other step is before' do
+      let(:another_step) { described_class.new(:kind) }
+      it 'returns false' do
+        expect(subject < another_step).to be false
+      end
+    end
+  end
+
   describe '#index' do
     it 'returns the index of the step' do
       expect(subject.index).to eq(3)
