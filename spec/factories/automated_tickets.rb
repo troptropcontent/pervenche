@@ -16,6 +16,7 @@ FactoryBot.define do
     end
 
     trait :with_vehicle do
+      setup_step { :vehicle }
       with_kind
       license_plate { 'CL12345KK' }
       vehicle_type { 'electric_motorcycle' }
