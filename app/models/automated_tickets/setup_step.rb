@@ -36,4 +36,12 @@ class AutomatedTickets::SetupStep
   def to_s
     @step_name.to_s
   end
+
+  sig { params(automated_ticket: AutomatedTicket).returns(T::Boolean) }
+  def completable?(automated_ticket)
+    AutomatedTicket::Setup::StepCompletable.call(
+      automated_ticket:,
+      step: name
+    ).step_completable
+  end
 end
