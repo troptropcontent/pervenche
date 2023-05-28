@@ -24,11 +24,13 @@ module AutomatedTickets
       end
     end
 
+    # GET /automated_tickets/:automated_ticket_id/setup/:step_name/edit
     def edit
-      @with_navbar = false
+      raise Pervenche::Errors::InvalidState unless @step.completed?(@automated_ticket)
+
       @automated_ticket.setup_step = @step
       load_instance_variables_for(step: @step)
-      render @step
+      render @step.to_s
     end
 
     # GET /automated_tickets/:automated_ticket_id/setup/:step_name
@@ -123,8 +125,8 @@ module AutomatedTickets
     def update_automated_ticket!
       AutomatedTicket::Setup::UpdateAutomatedTicket.call(
         automated_ticket: @automated_ticket,
-        step: @step.to_sym,
-        params: sanitized_and_permited_automated_ticket_params_for(step: @step)
+        step: @step.name,
+        params: sanitized_and_permited_automated_ticket_params_for(step: @step.name)
       ).automated_ticket
     end
 

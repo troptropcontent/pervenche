@@ -25,6 +25,8 @@ RSpec.describe 'AutomatedTickets::Setups', type: :request do
       service
     end
     get 'show' do
+      it_behaves_like 'An authenticated endpoint'
+
       response '200', 'OK' do
         include_context 'stubed pay_by_phone auth'
         include_context 'stubed pay_by_phone account_id'
@@ -123,6 +125,58 @@ RSpec.describe 'AutomatedTickets::Setups', type: :request do
           context 'when the setup is finished and there is no more step completable' do
             it 'redirect to root path' do
             end
+          end
+        end
+      end
+    end
+
+    put 'update' do
+    end
+  end
+
+  path '/automated_tickets/:automated_ticket_id/setup/:step_name/edit' do
+    let(:automated_ticket_id) { automated_ticket.id }
+    let(:step_name) { :rate_option }
+    let!(:automated_ticket) do
+      FactoryBot.create(:automated_ticket, :with_vehicle, user:, service:)
+    end
+    let(:user) { FactoryBot.create(:user) }
+    let(:service) do
+      service = FactoryBot.build(:service, user_id: user.id, username: 'username', password: 'password')
+      service.save(validate: false)
+      service
+    end
+
+    get 'edit' do
+      include_context 'stubed pay_by_phone auth'
+      include_context 'stubed pay_by_phone account_id'
+      it_behaves_like 'An authenticated endpoint'
+
+      response '400', 'Bad Request' do
+        before { sign_in user }
+        describe 'when the step is not completed' do
+          let(:step_name) { :zipcodes }
+          it 'returns a 422' do |example|
+            run example
+          end
+        end
+      end
+
+      response '200', 'OK' do
+        before { sign_in user }
+        include_context 'stubed pay_by_phone vehicles'
+
+        describe 'when the step is completed' do
+          let(:step_name) { :vehicle }
+          it 'returns a the setup up view' do |example|
+            run example
+            expect(response).to render_template 'automated_tickets/setup/vehicle'
+            expect(assigns(:vehicles)).to eq([ParkingTicket::Clients::Models::Vehicle.new(
+              client_internal_id: '1111111111',
+              license_plate: 'AA123BB',
+              vehicle_description: nil,
+              vehicle_type: 'electric_motorcycle'
+            )])
           end
         end
       end
