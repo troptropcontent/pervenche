@@ -84,3 +84,24 @@ RSpec.shared_context 'stubed pay_by_phone quote' do |zipcode, license_plate, cos
     )
   end
 end
+
+RSpec.shared_context 'stubed pay_by_phone vehicles' do |token = 'a_token', vehicles = [
+  { license_plate: 'AA123BB', vehicle_type: 'ElectricMotorcycle' }, { license_plate: 'AA123BB', vehicle_type: 'Car' }
+]|
+  before do
+    stubed_vehicles = vehicles.map.with_index do |vehicle, index|
+      {
+        'vehicleId' => (index + 1).to_s * 10,
+        'licensePlate' => vehicle[:license_plate],
+        'type' => vehicle[:vehicle_type],
+        'profile' => { 'description' => vehicle[:vehicle_description] }
+
+      }
+    end
+    allow(ParkingTicket::Clients::PayByPhone::Client).to(
+      receive(:vehicles)
+        .with(token)
+          .and_return(stubed_vehicles)
+    )
+  end
+end
