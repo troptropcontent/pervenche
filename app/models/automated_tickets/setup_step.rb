@@ -31,6 +31,7 @@ class AutomatedTickets::SetupStep
   def name
     @step_name
   end
+  alias step_name name
 
   sig { returns(String) }
   def to_s
@@ -43,5 +44,11 @@ class AutomatedTickets::SetupStep
       automated_ticket:,
       step: name
     ).step_completable
+  end
+
+  sig { params(automated_ticket: AutomatedTicket).returns(T::Boolean) }
+  def completed?(automated_ticket)
+    automated_ticket.setup_step = step_name
+    automated_ticket.valid?
   end
 end

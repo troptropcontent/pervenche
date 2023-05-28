@@ -3,6 +3,16 @@ require 'rails_helper'
 RSpec.describe AutomatedTickets::SetupStep, type: :model do
   subject { described_class.new(step_name) }
   let!(:step_name) { :vehicle }
+  let!(:automated_ticket) do
+    FactoryBot.create(:automated_ticket, automated_ticket_setup_step, user:, service:)
+  end
+  let(:automated_ticket_setup_step) { :with_zipcodes }
+  let(:user) { FactoryBot.create(:user) }
+  let(:service) do
+    service = FactoryBot.build(:service, user_id: user.id)
+    service.save(validate: false)
+    service
+  end
 
   describe '#before?(another_step)' do
     context 'when the other step is after' do
@@ -24,15 +34,6 @@ RSpec.describe AutomatedTickets::SetupStep, type: :model do
     end
   end
   describe '#show_path(automated_ticket)' do
-    let!(:automated_ticket) do
-      FactoryBot.create(:automated_ticket, :with_zipcodes, user:, service:)
-    end
-    let(:user) { FactoryBot.create(:user) }
-    let(:service) do
-      service = FactoryBot.build(:service, user_id: user.id)
-      service.save(validate: false)
-      service
-    end
     let(:expected_show_path) { "/automated_tickets/#{automated_ticket.id}/setup/vehicle" }
     context 'when automated_ticket is an Integer' do
       it 'returns the path to the setup step show' do
@@ -53,6 +54,23 @@ RSpec.describe AutomatedTickets::SetupStep, type: :model do
   describe '#tp_s' do
     it 'returns the step name as a string' do
       expect(subject.to_s).to eq('vehicle')
+    end
+  end
+
+  describe '#completed?(automated_ticket)' do
+    context 'when the step is completed' do
+      let!(:step_name) { :zipcodes }
+      let(:automated_ticket_setup_step) { :with_zipcodes }
+      it 'returns true' do
+        expect(subject.completed?(automated_ticket)).to be true
+      end
+    end
+    context 'when the step is not completed' do
+      let!(:step_name) { :zipcodes }
+      let(:automated_ticket_setup_step) { :with_vehicle }
+      it 'returns true' do
+        expect(subject.completed?(automated_ticket)).to be false
+      end
     end
   end
 end
