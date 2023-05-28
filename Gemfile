@@ -106,6 +106,7 @@ gem 'service_actor-rails', '~> 1.0'
 group :development, :test do
   gem 'byebug', platform: :mri
   gem 'rspec-rails'
+  gem 'rspec-sorbet'
 end
 
 group :development do
