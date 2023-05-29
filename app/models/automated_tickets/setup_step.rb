@@ -5,6 +5,18 @@ class AutomatedTickets::SetupStep
   extend T::Sig
   include Rails.application.routes.url_helpers
 
+  class << self
+    extend T::Sig
+    sig { params(automated_ticket: AutomatedTicket).returns(T.nilable(AutomatedTickets::SetupStep)) }
+    def next_completable_step(automated_ticket)
+      AutomatedTicket.setup_steps.each_key do |step_name|
+        automated_ticket.setup_step = step_name
+        return AutomatedTickets::SetupStep.new(step_name) if automated_ticket.invalid?
+      end
+      nil
+    end
+  end
+
   sig { params(step_name: Symbol).void }
   def initialize(step_name)
     @step_name = step_name
