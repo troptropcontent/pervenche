@@ -17,7 +17,7 @@ module RequestSpecExtendableHelpers
     describe("#{code} #{message}", code:, message:, &)
   end
 
-  def params(params)
-    let(:params) { params }
+  def params(&)
+    metadata[:params] = yield
   end
 end
