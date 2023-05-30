@@ -11,6 +11,7 @@ FactoryBot.define do
     end
 
     trait :with_kind do
+      setup_step { :kind }
       with_localisation
       kind { 'electric_motorcycle' }
     end
@@ -47,22 +48,25 @@ FactoryBot.define do
     end
 
     trait :with_payment_methods do
-      with_kind
-      with_vehicle
-      with_localisation
-      with_zipcodes
-      with_rate_option
+      setup_step { :payment_methods }
       with_weekdays
       payment_method_client_internal_ids { ['rytrtt88ppezoezpeop'] }
     end
 
     trait :with_charge_bee_subscription_id do
+      setup_step { :subscription }
       with_kind
       with_vehicle
       with_localisation
       with_zipcodes
       with_rate_option
       with_weekdays
+      with_payment_methods
+      charge_bee_subscription_id { ['hgjhkghjghgghgkhgk'] }
+    end
+
+    trait :with_subscription do
+      setup_step { :subscription }
       with_payment_methods
       charge_bee_subscription_id { ['hgjhkghjghgghgkhgk'] }
     end
