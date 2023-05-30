@@ -15,9 +15,10 @@ RSpec.describe 'AutomatedTickets::Setups', type: :request do
     let(:automated_ticket_id) { automated_ticket.id }
     let(:step_name) { :rate_option }
     let!(:automated_ticket) do
-      FactoryBot.create(:automated_ticket, :with_zipcodes, user:, service:, zipcodes: %w[75008 75017 75019],
-                                                           license_plate: 'license_plate')
+      FactoryBot.create(:automated_ticket, automated_ticket_setup_step, user:, service:, zipcodes: %w[75008 75017 75019],
+                                                                        license_plate: 'license_plate')
     end
+    let!(:automated_ticket_setup_step) { :with_zipcodes }
     let(:user) { FactoryBot.create(:user) }
     let(:service) do
       service = FactoryBot.build(:service, user_id: user.id, username: 'username', password: 'password')
@@ -131,6 +132,79 @@ RSpec.describe 'AutomatedTickets::Setups', type: :request do
     end
 
     put 'update' do
+      it_behaves_like 'An authenticated endpoint'
+      response '302', 'Found' do
+        before { sign_in user }
+        include_context 'stubed pay_by_phone auth'
+        include_context 'stubed pay_by_phone account_id'
+
+        context 'when the updated automated_ticket is valid' do
+          context 'when there is a next step to complete' do
+            let(:step_name) { :vehicle }
+            let!(:automated_ticket_setup_step) { :with_kind }
+            params do
+              {
+                automated_ticket: {
+                  license_plate: 'a_license_plate',
+                  vehicle_type: 'car'
+                }
+              }
+            end
+
+            it 'redirect to the next step' do |example|
+              run example
+              expect(response).to redirect_to("/automated_tickets/#{automated_ticket.id}/setup/zipcodes")
+            end
+          end
+          context 'when there is no more step to complete' do
+            let(:step_name) { :subscription }
+            let!(:automated_ticket_setup_step) { :with_payment_methods }
+            params do
+              {
+                automated_ticket: {
+                  charge_bee_subscription_id: 'a_charge_bee_subscription_id'
+                }
+              }
+            end
+
+            it 'redirect to the root' do |example|
+              run example
+              expect(response).to redirect_to('/')
+            end
+          end
+        end
+      end
+      response '422', 'Unprocessable Entity' do
+        before { sign_in user }
+        include_context 'stubed pay_by_phone auth'
+        include_context 'stubed pay_by_phone account_id'
+        let(:step_name) { :zipcodes }
+        let!(:automated_ticket_setup_step) { :with_vehicle }
+        params do
+          {
+            automated_ticket: {
+              zipcodes: []
+            }
+          }
+        end
+        context 'when the updated automated_ticket is not valid' do
+          it 'returns a 422 with the errors in a flash' do |example|
+            run example
+            expect(response.body).to include('Aucun code zone selectionné')
+          end
+        end
+      end
+
+      response '400', 'Bad Request' do
+        before { sign_in user }
+        context 'when no automated_ticket are provided' do
+          it 'returns a 400 bad request' do |example|
+            run example
+            response_body = JSON.parse(response.body)
+            expect(response_body['message']).to eq('Le paramètre automated_ticket est manquant')
+          end
+        end
+      end
     end
   end
 

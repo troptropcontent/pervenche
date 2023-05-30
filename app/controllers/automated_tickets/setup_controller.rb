@@ -36,17 +36,16 @@ module AutomatedTickets
     # GET /automated_tickets/:automated_ticket_id/setup/:step_name
     def update
       update_automated_ticket!
-
       if @automated_ticket.valid?
-        @automated_ticket = automated_ticket_with_all_completable_steps_completed
+        complete_all_already_completable_steps
+        next_step = SetupStep.next_completable_step(@automated_ticket)
         @automated_ticket.update!(status: :ready, active: true) unless next_step
-        path = next_step ? path_for(next_step, previous_step: @step) : root_path
         flash[:notice] = t("views.setup.flash.#{next_step ? 'information_saved' : 'finished'}")
-        redirect_to path
+        redirect_to next_step ? next_step.show_path(@automated_ticket) : root_path
       else
         load_instance_variables_for(step: @step)
         flash[:alert] = @automated_ticket.errors.full_messages
-        render @step, status: :unprocessable_entity
+        render @step.to_s, status: :unprocessable_entity
       end
     end
 
@@ -135,6 +134,10 @@ module AutomatedTickets
         automated_ticket: @automated_ticket,
         step: @step.to_sym
       ).step_completable
+    end
+
+    def complete_all_already_completable_steps
+      @automated_ticket = automated_ticket_with_all_completable_steps_completed
     end
   end
 end
