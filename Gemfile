@@ -142,5 +142,6 @@ group :test do
   gem "vcr"
   gem "webmock"
   gem "json_matchers"
+  gem 'database_cleaner-active_record'
 end
 
