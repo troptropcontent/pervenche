@@ -11,10 +11,15 @@
                     } do |f| %>
   <div class="sidebar--bottom__content">
     <section class="header">
-    <span class="cluster cluster--no-wrap">
-      <%= render 'automated_tickets/setup/shared/previous_step', previous_step_path: @previous_step_path if @previous_step_path %>
-      <h2><%= header_content %></h2>
-    </span>
+      <div class="stack">
+        <span class="cluster cluster--no-wrap">
+          <%= render 'automated_tickets/setup/shared/previous_step', previous_step_path: @previous_step_path if @previous_step_path %>
+          <h2><%= header_content %></h2>
+        </span>
+        <% if local_assigns[:header_sub_content] %>
+          <p><%= header_sub_content %></p>
+        <% end %>
+      </div>
     </section>                    
     <section class="content">
       <div class="visually-hidden">
