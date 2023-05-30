@@ -18,7 +18,7 @@ module AutomatedTicket::Setup
     output :data
 
     def call
-      load_base_data
+      self.data = {}
       load_data_required_for_service_step if step == :service
       load_data_required_for_kind_step if step == :kind
       load_data_required_for_zipcodes_step if step == :zipcodes
@@ -29,12 +29,6 @@ module AutomatedTicket::Setup
     end
 
     private
-
-    def load_base_data
-      self.data = {}.tap do |base_data|
-        base_data[:previous_step_path] = setup.path_for(step: params[:previous_step]) if previous_step_param_valid?
-      end
-    end
 
     def load_data_required_for_service_step
       data.merge!({
@@ -75,49 +69,33 @@ module AutomatedTicket::Setup
     end
 
     def load_data_required_for_subscription_step
-      plan_id = automated_ticket.free ? 'electric_scooter' : 'combustion_car'
-      charge_bee_subscription_id = params.permit(:id)[:id]
-      if charge_bee_subscription_id
-        data.merge!({ charge_bee_subscription_id: })
-      else
-        data.merge!({
-                      plan_id:,
-                      hosted_page_data: ChargeBee::HostedPage.checkout_new_for_items({
-                                                                                       subscription: {
-                                                                                         cf_automated_ticket_id: automated_ticket.id
-                                                                                       },
-                                                                                       subscription_items: [{
-                                                                                         item_price_id: "#{plan_id}_eur_monthly"
-                                                                                       }],
-                                                                                       customer: {
-                                                                                         id: automated_ticket.user.chargebee_customer_id,
-                                                                                         cf_environment: Rails.env.to_s
-                                                                                       },
-                                                                                       redirect_url: automated_ticket_setup_url(
-                                                                                         host: HOSTS[Rails.env.to_sym],
-                                                                                         automated_ticket_id: automated_ticket.id,
-                                                                                         step_name: :subscription
-                                                                                       ),
-                                                                                       type: 'checkout_new'
+      item_price_id = ChargeBee::ITEM_PRICE_IDS.dig(
+        automated_ticket.vehicle_type, automated_ticket.kind
+      )
 
-                                                                                     }).hosted_page.to_json
+      charge_bee_subscription = ChargeBee::Subscription.create_with_items(automated_ticket.user.chargebee_customer_id, {
+                                                                            cf_automated_ticket_id: automated_ticket.id,
+                                                                            subscription_items: [{
+                                                                              item_price_id:
+                                                                            }]
+                                                                          }).subscription
 
-                    })
-      end
-    end
+      charge_bee_item_price = ChargeBee::ItemPrice.retrieve(item_price_id).item_price
 
-    sig { returns(T::Boolean) }
-    def previous_step_param_valid?
-      return false unless params[:previous_step]
-      return false unless AutomatedTicket.setup_steps.keys.include?(params[:previous_step].to_sym)
-      return false unless setup.step_before?(params[:previous_step])
-
-      setup.step_completable?(params[:previous_step])
+      data.merge!({
+                    charge_bee_subscription_id: charge_bee_subscription.id,
+                    charge_bee_item_price_external_name: charge_bee_item_price.external_name,
+                    charge_bee_item_price_price: Money.new(charge_bee_item_price.price,
+                                                           charge_bee_item_price.currency_code),
+                    charge_bee_item_price_period: charge_bee_item_price.period_unit,
+                    charge_bee_item_price_trial_period: charge_bee_item_price.trial_period,
+                    charge_bee_item_price_trial_period_unit: charge_bee_item_price.trial_period_unit
+                  })
     end
 
     sig { returns(AutomatedTickets::Setup) }
     def setup
-      automated_ticket.setup(step)
+      automated_ticket.setup
     end
   end
 end
