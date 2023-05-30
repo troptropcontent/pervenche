@@ -92,6 +92,10 @@ RSpec.configure do |config|
   config.before(:each) do
     Sidekiq::Worker.clear_all
   end
+
+  config.before(:each) do
+    DatabaseCleaner.strategy = :transaction
+  end
 end
 
 Shoulda::Matchers.configure do |config|
