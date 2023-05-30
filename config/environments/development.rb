@@ -1,9 +1,6 @@
 require 'active_support/core_ext/integer/time'
 
 Rails.application.configure do
-  # allow NGROK
-  config.hosts << /[a-z0-9-.]+\.ngrok-free\.app/
-
   # Devise recoverable email
 
   # Settings specified here will take precedence over those in config/application.rb.
