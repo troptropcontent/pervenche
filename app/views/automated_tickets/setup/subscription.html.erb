@@ -4,15 +4,19 @@
         step: @step, 
         header_content: @charge_bee_item_price_external_name,  
         header_sub_content: subscription_with_period(@charge_bee_item_price_price ,@charge_bee_item_price_period) do |f| %>
-       <%= render(InfoCardComponent.new(
-        color: 'primary', 
-        center: true,
-        title: t('views.setup.subscription.info_card.title', period: t('datetime.distance_in_words.x_days', count: @charge_bee_item_price_trial_period)),
-        sub_title: t('views.setup.subscription.info_card.sub_title')))
-       %>
-       <span class="stack">
-        <%= t('views.setup.subscription.advantages_html') %>
-       </span>
+       <div class="stack stack--l">
+       <% if @charge_bee_item_price_trial_period %> 
+            <%= render(InfoCardComponent.new(
+                color: 'primary', 
+                center: true,
+                title: t('views.setup.subscription.info_card.title', period: t('datetime.distance_in_words.x_days', count: @charge_bee_item_price_trial_period)),
+                sub_title: t('views.setup.subscription.info_card.sub_title')))
+            %>
+       <% end %>
+        <span class="stack">
+            <%= t('views.setup.subscription.advantages_html') %>
+        </span>
+       </div>
        <%= f.input :charge_bee_subscription_id, as: :hidden, input_html: { value: @charge_bee_subscription_id } %>
     <% end %>
 </main>
