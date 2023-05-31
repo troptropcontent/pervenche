@@ -106,6 +106,7 @@ gem 'service_actor-rails', '~> 1.0'
 group :development, :test do
   gem 'byebug', platform: :mri
   gem 'rspec-rails'
+  gem 'rspec-sorbet'
 end
 
 group :development do
@@ -141,5 +142,6 @@ group :test do
   gem "vcr"
   gem "webmock"
   gem "json_matchers"
+  gem 'database_cleaner-active_record'
 end
 

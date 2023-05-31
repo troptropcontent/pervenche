@@ -11,6 +11,10 @@ require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
 require 'json_matchers/rspec'
 require 'sidekiq/testing'
+require Rails.root.join('spec/requests/shared_example/an_authenticated_endpoint')
+require Rails.root.join('spec/support/request_spec_extendable_helpers')
+require Rails.root.join('spec/support/request_spec_includable_helpers')
+require Rails.root.join('spec/support/shared_context/stubed_pay_by_phone')
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
@@ -48,7 +52,7 @@ RSpec.configure do |config|
   # config.treat_symbols_as_metadata_keys_with_true_values = true
 
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
-  config.fixture_path = "#{Rails.root}/spec/fixtures"
+  config.fixture_path = Rails.root.join('spec/fixtures')
 
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
@@ -79,9 +83,18 @@ RSpec.configure do |config|
   # config.filter_gems_from_backtrace("gem name")
   config.include Devise::Test::IntegrationHelpers, type: :feature
   config.include Devise::Test::IntegrationHelpers, type: :request
+
+  # custom ReqestHelper 'home made' rswagger syntax
+  config.extend RequestSpecExtendableHelpers, type: :request
+  config.include RequestSpecIncludableHelpers, type: :request
+
   # sidekiq
   config.before(:each) do
     Sidekiq::Worker.clear_all
+  end
+
+  config.before(:each) do
+    DatabaseCleaner.strategy = :transaction
   end
 end
 

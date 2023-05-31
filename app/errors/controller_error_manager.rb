@@ -32,7 +32,7 @@ module ControllerErrorManager
       ###########
       ### 400 ###
       ###########
-      rescue_from ActionController::BadRequest do |error|
+      rescue_from ActionController::BadRequest, Pervenche::Errors::InvalidState do |error|
         render json: { code: :bad_request, message: error }, status: :bad_request
       end
 

@@ -31,13 +31,10 @@ class AutomatedTicket::Setup::CompleteAlreadyCompletableSteps < Actor
 
   def completable_step?(step)
     return service_step_completable? if step == :service
-    # return localisation_step_completable? if step == :localisation
-    # return vehicle_step_completable? if step == :vehicle
     return zipcodes_step_completable? if step == :zipcodes
     return rate_option_completable? if step == :rate_option
     return weekdays_completable? if step == :weekdays
     return payment_methods_completable? if step == :payment_methods
-    return subscription_step_completable? if step == :subscription
 
     false
   end
@@ -49,18 +46,6 @@ class AutomatedTicket::Setup::CompleteAlreadyCompletableSteps < Actor
     end
   end
 
-  def localisation_step_completable?
-    return false if automated_ticket.kind == 'custom'
-
-    automated_ticket.assign_attributes(
-      {
-        localisation: 'paris'
-      }
-    )
-
-    automated_ticket.valid?
-  end
-
   def service_step_completable?
     services = automated_ticket.user.services
     return false if services.count != 1
@@ -69,22 +54,6 @@ class AutomatedTicket::Setup::CompleteAlreadyCompletableSteps < Actor
     automated_ticket.assign_attributes(
       {
         service_id: service.id
-      }
-    )
-
-    automated_ticket.valid?
-  end
-
-  def vehicle_step_completable?
-    vehicles = automated_ticket.service&.vehicles_allowed_for(automated_ticket.kind) || []
-    return false if vehicles.count != 1
-
-    vehicle = vehicles.first
-    automated_ticket.assign_attributes(
-      {
-        license_plate: vehicle.license_plate,
-        vehicle_type: vehicle.vehicle_type,
-        vehicle_description: vehicle.vehicle_description
       }
     )
 

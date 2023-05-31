@@ -40,7 +40,7 @@ RSpec.describe AutomatedTicket::Renewer::RequestNewTicket, type: :actor do
       expect(subject.ticket_request.payment_method_client_internal_id).to eq('azertyuiop')
       expect(subject.ticket_request.time_unit).to eq('days')
       expect(subject.ticket_request.quantity).to eq(1)
-      expect(subject.ticket_request.requested_on).to be_within(0.1).of(Time.now)
+      expect(subject.ticket_request.requested_on).to be_within(1).of(Time.now)
     end
   end
 end

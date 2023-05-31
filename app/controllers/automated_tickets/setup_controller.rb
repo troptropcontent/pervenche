@@ -10,39 +10,52 @@ module AutomatedTickets
     before_action :load_step!
     before_action :authorize_action!
 
+    # GET /automated_tickets/:automated_ticket_id/setup/:step_name
     def show
-      @with_navbar = false
-      @automated_ticket.setup_step = @step
-      if step_completable?
-        load_instance_variables_for(step: @step)
-        render @step
-      else
-        path = next_step ? path_for(@step) : root_path
+      @automated_ticket.setup_step = @step.name
+
+      if @step.completed?(@automated_ticket)
+        next_step = @automated_ticket.next_completable_step
+        path = next_step ? next_step.show_path(@automated_ticket) : root_path
         redirect_to(path)
+      else
+        load_instance_variables_for(step: @step)
+        render @step.to_s
       end
     end
 
+    # GET /automated_tickets/:automated_ticket_id/setup/:step_name/edit
     def edit
-      @with_navbar = false
+      raise Pervenche::Errors::InvalidState unless @step.completed?(@automated_ticket)
+
       @automated_ticket.setup_step = @step
       load_instance_variables_for(step: @step)
-      render @step
+      render @step.to_s
     end
 
+    # GET /automated_tickets/:automated_ticket_id/setup/:step_name
     def update
       update_automated_ticket!
-
       if @automated_ticket.valid?
-        @automated_ticket = automated_ticket_with_all_completable_steps_completed
+        complete_all_already_completable_steps
+        next_step = SetupStep.next_completable_step(@automated_ticket)
         @automated_ticket.update!(status: :ready, active: true) unless next_step
-        path = next_step ? path_for(next_step, previous_step: @step) : root_path
         flash[:notice] = t("views.setup.flash.#{next_step ? 'information_saved' : 'finished'}")
-        redirect_to path
+        redirect_to next_step ? next_step.show_path(@automated_ticket) : root_path
       else
         load_instance_variables_for(step: @step)
         flash[:alert] = @automated_ticket.errors.full_messages
-        render @step, status: :unprocessable_entity
+        render @step.to_s, status: :unprocessable_entity
       end
+    end
+
+    # PUT   /automated_tickets/:automated_ticket_id/setup/:step_name/reset
+    def reset
+      raise Pervenche::Errors::InvalidState unless @step.before? @automated_ticket.last_completed_step
+
+      @automated_ticket.reset_to(@step)
+
+      redirect_to @step.show_path(@automated_ticket)
     end
 
     private
@@ -52,8 +65,9 @@ module AutomatedTickets
     end
 
     def load_step!
-      if AutomatedTicket.setup_steps[params[:step_name].to_sym]
-        @step = params[:step_name]
+      step_name = params[:step_name].to_s.to_sym
+      if AutomatedTicket.setup_steps.keys.include?(step_name)
+        @step = AutomatedTickets::SetupStep.new(step_name)
       else
         not_found
       end
@@ -98,7 +112,7 @@ module AutomatedTickets
     end
 
     def load_instance_variables_for(step:)
-      data_for(step: step.to_sym).each do |name, value|
+      data_for(step: step.name).each do |name, value|
         instance_variable_set("@#{name}".to_sym, value)
       end
     end
@@ -110,8 +124,8 @@ module AutomatedTickets
     def update_automated_ticket!
       AutomatedTicket::Setup::UpdateAutomatedTicket.call(
         automated_ticket: @automated_ticket,
-        step: @step.to_sym,
-        params: sanitized_and_permited_automated_ticket_params_for(step: @step)
+        step: @step.name,
+        params: sanitized_and_permited_automated_ticket_params_for(step: @step.name)
       ).automated_ticket
     end
 
@@ -120,6 +134,10 @@ module AutomatedTickets
         automated_ticket: @automated_ticket,
         step: @step.to_sym
       ).step_completable
+    end
+
+    def complete_all_already_completable_steps
+      @automated_ticket = automated_ticket_with_all_completable_steps_completed
     end
   end
 end
