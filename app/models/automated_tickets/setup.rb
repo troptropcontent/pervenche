@@ -35,16 +35,4 @@ class AutomatedTickets::Setup
     end
     last_completed_step_instance
   end
-
-  sig { params(step: AutomatedTickets::SetupStep).void }
-  def reset_to(step)
-    return if @automated_ticket.ready?
-
-    attributes_to_reset = AutomatedTicket.setup_steps.reduce([]) do |memo, (step_name, fields)|
-      [*memo, *fields] if AutomatedTicket.setup_steps.keys.index(step_name) > step.index
-    end
-    default_attributes = AutomatedTicket.column_defaults.with_indifferent_access.slice(*attributes_to_reset)
-    @automated_ticket.setup_step = step.name
-    @automated_ticket.update!(default_attributes)
-  end
 end
