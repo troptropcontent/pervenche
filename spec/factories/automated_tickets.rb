@@ -49,6 +49,7 @@ FactoryBot.define do
 
     trait :with_payment_methods do
       setup_step { :payment_methods }
+      free { false }
       with_weekdays
       payment_method_client_internal_ids { ['rytrtt88ppezoezpeop'] }
     end

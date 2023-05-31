@@ -31,7 +31,40 @@ RSpec.describe AutomatedTickets::SetupStep, type: :model do
         end
       end
     end
+
+    describe '.previous_completable_step' do
+      let(:automated_ticket_setup_step) { :with_service }
+      context 'when some steps directly behind are auto completed' do
+        it 'returns the last completable step' do
+          previous_completable_step = described_class.previous_completable_step(automated_ticket)
+          expect(previous_completable_step.name).to eq(:kind)
+        end
+      end
+      context 'when some steps behind are not required' do
+        let(:automated_ticket_setup_step) { :with_payment_methods }
+        it 'returns the last completable step' do
+          previous_completable_step = described_class.previous_completable_step(automated_ticket)
+          expect(previous_completable_step.name).to eq(:rate_option)
+        end
+      end
+      context 'when some steps directly behind are both not required or autocompleted' do
+        let(:automated_ticket_setup_step) { :with_payment_methods }
+        it 'returns the last completable step' do
+          previous_completable_step = described_class.previous_completable_step(automated_ticket)
+          expect(previous_completable_step.name).to eq(:zipcodes)
+        end
+      end
+
+      context 'when the step behind is completable' do
+        let(:automated_ticket_setup_step) { :with_vehicle }
+        it 'returns the step behind' do
+          previous_completable_step = described_class.previous_completable_step(automated_ticket)
+          expect(previous_completable_step.name).to eq(:vehicle)
+        end
+      end
+    end
   end
+
   describe 'instance methods' do
     subject { described_class.new(step_name) }
     let!(:step_name) { :vehicle }

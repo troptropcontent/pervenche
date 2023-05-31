@@ -15,6 +15,9 @@ class AutomatedTickets::SetupStep
       end
       nil
     end
+
+    sig { params(automated_ticket: AutomatedTicket).returns(T.nilable(AutomatedTickets::SetupStep)) }
+    def previous_completable_step(automated_ticket); end
   end
 
   sig { params(step_name: Symbol).void }
