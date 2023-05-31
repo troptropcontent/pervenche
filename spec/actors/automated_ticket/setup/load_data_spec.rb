@@ -14,8 +14,8 @@ RSpec.describe AutomatedTicket::Setup::LoadData, type: :actor do
   describe '.call' do
     describe 'base_data' do
       let(:automated_ticket) do
-        automated_ticket = FactoryBot.create(:automated_ticket, :with_localisation, user:, service:,
-                                                                                    setup_step: :localisation)
+        FactoryBot.create(:automated_ticket, :with_localisation, user:, service:,
+                                                                 setup_step: :localisation)
       end
       let(:user) { FactoryBot.create(:user) }
       let(:service) do
