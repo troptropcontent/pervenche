@@ -53,25 +53,41 @@ RSpec.shared_context 'stubed pay_by_phone account_id' do |token = 'a_token', acc
   end
 end
 
-RSpec.shared_context 'stubed pay_by_phone rate_options' do |zipcode, license_plate, rate_option_id = 'a_rate_option_id', rate_option_type = 'RES', token = 'a_token', account_id = 'a_account_id'|
+RSpec.shared_context 'stubed pay_by_phone rate_options' do |zipcode, license_plate, rate_options_count = 1, options = {}|
   before do
+    token = options[:token] || 'a_token'
+    account_id = options[:account_id] || 'a_account_id'
+    possible_rate_options = [
+      {
+        'acceptedTimeUnits' => ['Days'],
+        'name' => 'stubed_name',
+        'type' => 'RES',
+        'rateOptionId' => 'a_res_rate_option_id'
+      },
+      {
+        'acceptedTimeUnits' => ['Days'],
+        'name' => 'stubed_name',
+        'type' => 'CUSTOM',
+        'rateOptionId' => 'a_custom_rate_option_id'
+      }
+    ]
+
     allow(ParkingTicket::Clients::PayByPhone::Client).to(
       receive(:rate_options)
         .with(token, account_id, zipcode, license_plate)
-          .and_return([
-                        {
-                          'acceptedTimeUnits' => ['Days'],
-                          'name' => 'stubed_name',
-                          'type' => rate_option_type,
-                          'rateOptionId' => rate_option_id
-                        }
-                      ])
+          .and_return(possible_rate_options[0...rate_options_count])
     )
   end
 end
 
-RSpec.shared_context 'stubed pay_by_phone quote' do |zipcode, license_plate, cost = 1.5, rate_option_id = 'a_rate_option_id', quantity = 1, time_unit = 'Days', token = 'a_token', account_id = 'a_account_id'|
+RSpec.shared_context 'stubed pay_by_phone quote' do |zipcode, license_plate, options = {}|
   before do
+    cost = options[:cost] || 1.5
+    rate_option_id = options[:rate_option_id] || 'a_rate_option_id'
+    quantity = options[:quantity] || 1
+    time_unit = options[:time_unit] || 'Days'
+    token = options[:token] || 'a_token'
+    account_id = options[:account_id] || 'a_account_id'
     allow(ParkingTicket::Clients::PayByPhone::Client).to(
       receive(:quote)
         .with(token, account_id, rate_option_id, zipcode, license_plate, quantity, time_unit)
