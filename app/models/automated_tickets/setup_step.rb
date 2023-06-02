@@ -4,6 +4,7 @@
 class AutomatedTickets::SetupStep
   extend T::Sig
   include Rails.application.routes.url_helpers
+  include AutomatedTickets::AutoCompletable
 
   class << self
     extend T::Sig
@@ -84,5 +85,10 @@ class AutomatedTickets::SetupStep
   def next
     next_step_name = AutomatedTicket.setup_steps.keys[step_index + 1]
     return AutomatedTickets::SetupStep.new(next_step_name) if next_step_name
+  end
+
+  sig { params(automated_ticket: AutomatedTicket).returns(T::Hash[Symbol, T.untyped]) }
+  def auto_completable?(automated_ticket)
+    autocompletable_attributes(name, automated_ticket)
   end
 end
