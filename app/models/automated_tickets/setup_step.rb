@@ -87,8 +87,8 @@ class AutomatedTickets::SetupStep
     return AutomatedTickets::SetupStep.new(next_step_name) if next_step_name
   end
 
-  sig { params(automated_ticket: AutomatedTicket).returns(T::Hash[Symbol, T.untyped]) }
+  sig { params(automated_ticket: AutomatedTicket).returns(T::Boolean) }
   def auto_completable?(automated_ticket)
-    autocompletable_attributes(name, automated_ticket)
+    !auto_completable_attributes(name, automated_ticket).empty?
   end
 end

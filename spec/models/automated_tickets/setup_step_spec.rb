@@ -167,5 +167,19 @@ RSpec.describe AutomatedTickets::SetupStep, type: :model do
         end
       end
     end
+    describe '#auto_completable?(automated_ticket)' do
+      context 'when the step is auto_completable for the automated_ticket' do
+        let!(:step_name) { :weekdays }
+        it 'returns true' do
+          expect(subject.auto_completable?(automated_ticket)).to be true
+        end
+      end
+      context 'when the step is not auto_completable for the automated_ticket' do
+        let!(:step_name) { :kind }
+        it 'returns false' do
+          expect(subject.auto_completable?(automated_ticket)).to be false
+        end
+      end
+    end
   end
 end
