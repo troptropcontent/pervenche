@@ -48,6 +48,12 @@ class AutomatedTickets::SetupStep
     @step_name = step_name
   end
 
+  sig { returns(T::Hash[Symbol, T.untyped]) }
+  def default_attributes
+    attributes = T.must(AutomatedTicket.setup_steps[name])
+    AutomatedTicket.column_defaults.with_indifferent_access.slice(*attributes)
+  end
+
   sig { params(another_step: AutomatedTickets::SetupStep).returns(T::Boolean) }
   def before?(another_step)
     self < another_step

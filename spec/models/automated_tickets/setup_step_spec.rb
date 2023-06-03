@@ -95,6 +95,18 @@ module AutomatedTickets
     describe 'instance methods' do
       subject { described_class.new(step_name) }
       let!(:step_name) { :vehicle }
+
+      describe '#default_attributes' do
+        let!(:step_name) { :rate_option }
+        it 'returns the default attributes for the step' do
+          expect(subject.default_attributes).to eq({
+                                                     'accepted_time_units' => nil,
+                                                     'free' => false,
+                                                     'rate_option_client_internal_id' => nil
+                                                   })
+        end
+      end
+
       describe '#before?(another_step)' do
         context 'when the other step is after' do
           let(:another_step) { described_class.new(:zipcodes) }
