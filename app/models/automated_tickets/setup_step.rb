@@ -31,7 +31,9 @@ class AutomatedTickets::SetupStep
     end
 
     sig { params(automated_ticket: AutomatedTicket).returns(T.nilable(AutomatedTickets::SetupStep)) }
-    def previous_completable_step(automated_ticket); end
+    def previous_completable_step(automated_ticket)
+      current_step = current_step(automated_ticket)
+    end
   end
 
   sig { params(step_name: Symbol).void }
@@ -104,6 +106,14 @@ class AutomatedTickets::SetupStep
   def auto_completable?(automated_ticket)
     !auto_completable_attributes(name, automated_ticket).empty?
   end
+
+  sig { returns(T::Array[AutomatedTickets::SetupStep]) }
+  def steps
+    AutomatedTicket.setup_steps.keys.map do |step_name|
+      self.class.new(step_name)
+    end
+  end
+
   sig { params(other: AutomatedTickets::SetupStep).returns(T::Boolean) }
   def ==(other)
     name == other.name
