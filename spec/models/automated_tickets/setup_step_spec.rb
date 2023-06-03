@@ -71,6 +71,25 @@ module AutomatedTickets
           end
         end
       end
+
+      describe '.steps' do
+        let(:expected_return) do
+          [
+            SetupStep.new(:service),
+            SetupStep.new(:localisation),
+            SetupStep.new(:kind),
+            SetupStep.new(:vehicle),
+            SetupStep.new(:zipcodes),
+            SetupStep.new(:rate_option),
+            SetupStep.new(:weekdays),
+            SetupStep.new(:payment_methods),
+            SetupStep.new(:subscription)
+          ]
+        end
+        it 'returns all the steps as SetupStep instances' do
+          expect(described_class.steps).to eq(expected_return)
+        end
+      end
     end
 
     describe 'instance methods' do
@@ -187,25 +206,6 @@ module AutomatedTickets
           it 'returns false' do
             expect(subject.auto_completable?(automated_ticket)).to be false
           end
-        end
-      end
-
-      describe '#steps' do
-        let(:expected_return) do
-          [
-            SetupStep.new(:service),
-            SetupStep.new(:localisation),
-            SetupStep.new(:kind),
-            SetupStep.new(:vehicle),
-            SetupStep.new(:zipcodes),
-            SetupStep.new(:rate_option),
-            SetupStep.new(:weekdays),
-            SetupStep.new(:payment_methods),
-            SetupStep.new(:subscription)
-          ]
-        end
-        it 'returns all the steps as SetupStep instances' do
-          expect(subject.steps).to eq(expected_return)
         end
       end
 

@@ -30,6 +30,13 @@ class AutomatedTickets::SetupStep
       last_completed_step
     end
 
+    sig { returns(T::Array[AutomatedTickets::SetupStep]) }
+    def steps
+      AutomatedTicket.setup_steps.keys.map do |step_name|
+        new(step_name)
+      end
+    end
+
     sig { params(automated_ticket: AutomatedTicket).returns(T.nilable(AutomatedTickets::SetupStep)) }
     def previous_completable_step(automated_ticket)
       current_step = current_step(automated_ticket)
