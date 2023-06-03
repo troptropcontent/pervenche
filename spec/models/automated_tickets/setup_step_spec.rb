@@ -186,6 +186,22 @@ RSpec.describe AutomatedTickets::SetupStep, type: :model do
         let!(:step_name) { :kind }
         it 'returns false' do
           expect(subject.auto_completable?(automated_ticket)).to be false
+      describe '#==(other)' do
+        let(:first_step) { described_class.new(first_step_name) }
+        let(:second_step) { described_class.new(second_step_name) }
+        context 'when names are equal' do
+          let(:first_step_name) { :vehicle }
+          let(:second_step_name) { :vehicle }
+          it 'returns true' do
+            expect(first_step == second_step).to be true
+          end
+        end
+        context 'when names are not equal' do
+          let(:first_step_name) { :vehicle }
+          let(:second_step_name) { :zipcodes }
+          it 'returns false' do
+            expect(first_step == second_step).to be false
+          end
         end
       end
     end

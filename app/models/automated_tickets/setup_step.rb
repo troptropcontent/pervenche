@@ -104,4 +104,8 @@ class AutomatedTickets::SetupStep
   def auto_completable?(automated_ticket)
     !auto_completable_attributes(name, automated_ticket).empty?
   end
+  sig { params(other: AutomatedTickets::SetupStep).returns(T::Boolean) }
+  def ==(other)
+    name == other.name
+  end
 end
