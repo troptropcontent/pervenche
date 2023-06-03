@@ -7,10 +7,12 @@ FactoryBot.define do
     active { true }
 
     trait :with_service do
+      setup_step { :service }
       service { FactoryBot.create(:service, :without_validations) }
     end
 
     trait :with_localisation do
+      setup_step { :localisation }
       with_service
       localisation { 'paris' }
     end
@@ -35,27 +37,20 @@ FactoryBot.define do
     end
 
     trait :with_rate_option do
-      with_kind
-      with_vehicle
-      with_localisation
       with_zipcodes
       rate_option_client_internal_id { 'bhkjhlkjhkljhlkjhlkjhkjhkzeizeoiruzeo' }
       accepted_time_units { ['days'] }
     end
 
     trait :with_weekdays do
-      with_kind
-      with_vehicle
-      with_localisation
-      with_zipcodes
       with_rate_option
       weekdays { [1, 2, 3, 4, 5, 6] }
     end
 
     trait :with_payment_methods do
       setup_step { :payment_methods }
-      free { false }
       with_weekdays
+      free { false }
       payment_method_client_internal_ids { ['rytrtt88ppezoezpeop'] }
     end
 
