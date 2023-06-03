@@ -3,16 +3,12 @@
 require 'rails_helper'
 
 RSpec.describe AutomatedTickets::SetupStep, type: :model do
-  let!(:automated_ticket) do
+  let(:automated_ticket) do
     FactoryBot.create(:automated_ticket, automated_ticket_setup_step, user:, service:)
   end
   let(:automated_ticket_setup_step) { :with_zipcodes }
   let(:user) { FactoryBot.create(:user) }
-  let(:service) do
-    service = FactoryBot.build(:service, user_id: user.id)
-    service.save(validate: false)
-    service
-  end
+  let(:service) { FactoryBot.build(:service, :without_validations, user_id: user.id) }
 
   describe 'class methods' do
     describe '.next_completable_step' do
@@ -28,6 +24,18 @@ RSpec.describe AutomatedTickets::SetupStep, type: :model do
         it 'it retrns the next completable step' do
           next_completable_step = described_class.next_completable_step(automated_ticket)
           expect(next_completable_step).to be_nil
+        end
+      end
+    end
+
+    describe '.current_step(automated_ticket)' do
+      AutomatedTicket.setup_steps.each do |step_name, _fields|
+        context "#{step_name} step" do
+          it 'it returns the last completed step' do
+            automated_ticket = FactoryBot.build(:automated_ticket, "with_#{step_name}".to_sym, user:)
+            current_step = described_class.current_step(automated_ticket)
+            expect(current_step.name).to eq(step_name)
+          end
         end
       end
     end

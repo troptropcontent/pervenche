@@ -17,6 +17,19 @@ class AutomatedTickets::SetupStep
       nil
     end
 
+    sig { params(automated_ticket: AutomatedTicket).returns(AutomatedTickets::SetupStep) }
+    def current_step(automated_ticket)
+      steps = AutomatedTicket.setup_steps.keys.map { |step_name| AutomatedTickets::SetupStep.new(step_name) }
+      last_completed_step = T.must(steps.first)
+
+      steps.each do |step|
+        break unless step.completed?(automated_ticket)
+
+        last_completed_step = step
+      end
+      last_completed_step
+    end
+
     sig { params(automated_ticket: AutomatedTicket).returns(T.nilable(AutomatedTickets::SetupStep)) }
     def previous_completable_step(automated_ticket); end
   end
