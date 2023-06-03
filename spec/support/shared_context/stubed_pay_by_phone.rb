@@ -121,3 +121,23 @@ RSpec.shared_context 'stubed pay_by_phone vehicles' do |token = 'a_token', vehic
     )
   end
 end
+
+RSpec.shared_context 'stubed pay_by_phone payment_methods' do |token = 'a_token', payment_methods_count = 0|
+  before do
+    stubed_payment_methods = []
+
+    payment_methods_count.times do |i|
+      stubed_payment_methods << {
+        'paymentAccountId' => i.to_s * 10,
+        'maskedCardNumber' => i.to_s * 10,
+        'cardType' => 'MasterCard'
+      }
+    end
+
+    allow(ParkingTicket::Clients::PayByPhone::Client).to(
+      receive(:payment_methods)
+        .with(token)
+          .and_return({ 'paymentCards' => stubed_payment_methods })
+    )
+  end
+end
