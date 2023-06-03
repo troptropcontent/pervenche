@@ -128,4 +128,9 @@ class AutomatedTickets::SetupStep
   def ==(other)
     name == other.name
   end
+  sig { params(automated_ticket: AutomatedTicket).returns(T::Boolean) }
+  def required?(automated_ticket)
+    automated_ticket.assign_attributes(default_attributes)
+    uncompleted?(automated_ticket)
+  end
 end

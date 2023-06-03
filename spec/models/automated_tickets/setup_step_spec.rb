@@ -258,6 +258,26 @@ module AutomatedTickets
           end
         end
       end
+
+      describe '#required?(automated_ticket)' do
+        let!(:step_name) { :payment_methods }
+        context 'when the step is required' do
+          let(:automated_ticket) do
+            FactoryBot.build(:automated_ticket, :with_payment_methods, user:, free: false)
+          end
+          it 'returns true' do
+            expect(subject.required?(automated_ticket)).to be true
+          end
+        end
+        context 'when the step is not required' do
+          let(:automated_ticket) do
+            FactoryBot.build(:automated_ticket, :with_payment_methods, user:, free: true)
+          end
+          it 'returns false' do
+            expect(subject.required?(automated_ticket)).to be false
+          end
+        end
+      end
     end
   end
 end
