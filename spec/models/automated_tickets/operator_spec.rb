@@ -29,6 +29,17 @@ RSpec.describe AutomatedTickets::Operator, type: :model do
     end
   end
 
+  describe '#reset_to_unsaved(step)' do
+    let(:step) do
+      AutomatedTickets::SetupStep.new(:vehicle)
+    end
+    it 'reset the relevant attributes to there default vales but do not save the record' do
+      subject.reset_to_unsaved(step)
+      expect(automated_ticket.zipcodes).to eq([])
+      expect(automated_ticket.reload.zipcodes).to eq(%w[75018 75019 75020])
+    end
+  end
+
   describe '#reset_to(step)' do
     let(:step) do
       AutomatedTickets::SetupStep.new(:vehicle)
