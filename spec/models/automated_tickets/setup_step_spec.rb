@@ -180,6 +180,22 @@ module AutomatedTickets
           end
         end
       end
+      describe '#uncompleted?(automated_ticket)' do
+        context 'when the step is completed' do
+          let!(:step_name) { :zipcodes }
+          let(:automated_ticket_setup_step) { :with_zipcodes }
+          it 'returns true' do
+            expect(subject.uncompleted?(automated_ticket)).to be false
+          end
+        end
+        context 'when the step is not completed' do
+          let!(:step_name) { :zipcodes }
+          let(:automated_ticket_setup_step) { :with_vehicle }
+          it 'returns true' do
+            expect(subject.uncompleted?(automated_ticket)).to be true
+          end
+        end
+      end
       describe '#next' do
         context 'when there is a step after the current one' do
           let!(:step_name) { :vehicle }

@@ -103,6 +103,11 @@ class AutomatedTickets::SetupStep
     automated_ticket.valid?
   end
 
+  sig { params(automated_ticket: AutomatedTicket).returns(T::Boolean) }
+  def uncompleted?(automated_ticket)
+    !completed?(automated_ticket)
+  end
+
   sig { returns(T.nilable(AutomatedTickets::SetupStep)) }
   def next
     next_step_name = AutomatedTicket.setup_steps.keys[step_index + 1]
