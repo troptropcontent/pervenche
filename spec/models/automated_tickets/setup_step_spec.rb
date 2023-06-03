@@ -4,11 +4,10 @@ require 'rails_helper'
 module AutomatedTickets
   RSpec.describe SetupStep, type: :model do
     let(:automated_ticket) do
-      FactoryBot.create(:automated_ticket, automated_ticket_setup_step, user:, service:)
+      FactoryBot.create(:automated_ticket, automated_ticket_setup_step, user:)
     end
     let(:automated_ticket_setup_step) { :with_zipcodes }
     let(:user) { FactoryBot.create(:user) }
-    let(:service) { FactoryBot.build(:service, :without_validations, user_id: user.id) }
 
     describe 'class methods' do
       describe '.next_completable_step' do
@@ -29,45 +28,149 @@ module AutomatedTickets
       end
 
       describe '.current_step(automated_ticket)' do
-        AutomatedTicket.setup_steps.each do |step_name, _fields|
-          context "#{step_name} step" do
-            it 'it returns the last completed step' do
-              automated_ticket = FactoryBot.build(:automated_ticket, "with_#{step_name}".to_sym, user:)
-              current_step = described_class.current_step(automated_ticket)
-              expect(current_step.name).to eq(step_name)
-            end
+        context 'when no steps have been completed yet' do
+          let(:automated_ticket) do
+            FactoryBot.build(:automated_ticket, user:)
+          end
+          it 'returns the first step on the steps' do
+            expect(described_class.next_completable_step(automated_ticket).name).to eq(:service)
+          end
+        end
+        context 'in the middle of the setup' do
+          let(:automated_ticket) do
+            FactoryBot.build(:automated_ticket, :with_service, user:)
+          end
+          it 'returns the next step to complete' do
+            expect(described_class.next_completable_step(automated_ticket).name).to eq(:localisation)
+          end
+        end
+
+        context 'when all steps have been completed' do
+          let(:automated_ticket) do
+            FactoryBot.build(:automated_ticket, :set_up, user:)
+          end
+          it 'returns no step' do
+            expect(described_class.next_completable_step(automated_ticket)).to eq(nil)
           end
         end
       end
 
-      describe '.previous_completable_step' do
-        let(:automated_ticket_setup_step) { :with_service }
-        context 'when some steps directly behind are auto completed' do
-          it 'returns the last completable step' do
-            previous_completable_step = described_class.previous_completable_step(automated_ticket)
-            expect(previous_completable_step.name).to eq(:kind)
+      describe '.last_completed_step' do
+        context 'when no steps have been completed' do
+          let(:automated_ticket) do
+            FactoryBot.build(:automated_ticket, user:)
+          end
+          it 'returns nil' do
+            expect(described_class.last_completed_step(automated_ticket)).to eq(nil)
           end
         end
-        context 'when some steps behind are not required' do
-          let(:automated_ticket_setup_step) { :with_payment_methods }
+        context 'in the middle of the flow' do
+          let(:automated_ticket) do
+            FactoryBot.build(:automated_ticket, :with_zipcodes, user:)
+          end
+          it 'returns the last completed step' do
+            expect(described_class.last_completed_step(automated_ticket).name).to eq(:zipcodes)
+          end
+        end
+        context 'when all steps have been completed' do
+          let(:automated_ticket) do
+            FactoryBot.build(:automated_ticket, :set_up)
+          end
+          it 'returns the last completed step' do
+            expect(described_class.last_completed_step(automated_ticket).name).to eq(:subscription)
+          end
+        end
+      end
+
+      describe '.last_completable_step' do
+        context 'when no step have been completed yet' do
+          let(:automated_ticket) do
+            FactoryBot.build(:automated_ticket, user:)
+          end
+          it 'returns nil' do
+            expect(described_class.last_completable_step(automated_ticket)).to eq(nil)
+          end
+        end
+        context 'when there is no step behind' do
+          let(:automated_ticket) do
+            FactoryBot.create(
+              :automated_ticket,
+              :with_service
+            )
+          end
+          it 'returns nil' do
+            expect(described_class.last_completable_step(automated_ticket)).to eq(nil)
+          end
+        end
+        context 'when some steps directly behind are auto completed' do
+          let(:automated_ticket) do
+            FactoryBot.build(
+              :automated_ticket,
+              :with_zipcodes,
+              user:,
+              kind: 'mobility_inclusion_card',
+              localisation: 'paris'
+            )
+          end
           it 'returns the last completable step' do
-            previous_completable_step = described_class.previous_completable_step(automated_ticket)
-            expect(previous_completable_step.name).to eq(:rate_option)
+            last_completable_step = described_class.last_completable_step(automated_ticket)
+            expect(last_completable_step.name).to eq(:vehicle)
+          end
+        end
+        context 'when some steps behind are required' do
+          include_context 'stubed pay_by_phone auth', 'username', 'password'
+          include_context 'stubed pay_by_phone account_id'
+          include_context 'stubed pay_by_phone payment_methods', 'a_token', 2
+
+          let(:automated_ticket) do
+            FactoryBot.create(
+              :automated_ticket,
+              :with_payment_methods,
+              service:,
+              user:,
+              free: false
+            )
+          end
+
+          let(:service) { FactoryBot.create(:service, :without_validations, username: 'username', password: 'password') }
+
+          it 'returns the last completable step' do
+            last_completable_step = described_class.last_completable_step(automated_ticket)
+            expect(last_completable_step.name).to eq(:payment_methods)
           end
         end
         context 'when some steps directly behind are both not required or autocompleted' do
+          let(:automated_ticket) do
+            FactoryBot.create(
+              :automated_ticket,
+              :with_payment_methods,
+              zipcodes: %w[75008 75017 75019],
+              service:,
+              user:,
+              free: true
+            )
+          end
+          let(:service) { FactoryBot.create(:service, :without_validations, username: 'username', password: 'password') }
           let(:automated_ticket_setup_step) { :with_payment_methods }
+          include_context 'stubed pay_by_phone auth', 'username', 'password'
+          include_context 'stubed pay_by_phone account_id'
+          include_context 'stubed pay_by_phone rate_options', '75008', 'CL12345KK'
+          include_context 'stubed pay_by_phone quote', '75008', 'CL12345KK'
+          include_context 'stubed pay_by_phone rate_options', '75017', 'CL12345KK'
+          include_context 'stubed pay_by_phone quote', '75017', 'CL12345KK'
+          include_context 'stubed pay_by_phone rate_options', '75019', 'CL12345KK'
+          include_context 'stubed pay_by_phone quote', '75019', 'CL12345KK'
           it 'returns the last completable step' do
-            previous_completable_step = described_class.previous_completable_step(automated_ticket)
-            expect(previous_completable_step.name).to eq(:zipcodes)
+            last_completable_step = described_class.last_completable_step(automated_ticket)
+            expect(last_completable_step.name).to eq(:zipcodes)
           end
         end
 
         context 'when the step behind is completable' do
           let(:automated_ticket_setup_step) { :with_vehicle }
           it 'returns the step behind' do
-            previous_completable_step = described_class.previous_completable_step(automated_ticket)
-            expect(previous_completable_step.name).to eq(:vehicle)
+            last_completable_step = described_class.last_completable_step(automated_ticket)
+            expect(last_completable_step.name).to eq(:vehicle)
           end
         end
       end
@@ -222,6 +325,7 @@ module AutomatedTickets
           end
         end
       end
+
       describe '#auto_completable?(automated_ticket)' do
         context 'when the step is auto_completable for the automated_ticket' do
           let!(:step_name) { :weekdays }

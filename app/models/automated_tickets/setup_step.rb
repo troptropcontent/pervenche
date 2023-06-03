@@ -8,27 +8,6 @@ class AutomatedTickets::SetupStep
 
   class << self
     extend T::Sig
-    sig { params(automated_ticket: AutomatedTicket).returns(T.nilable(AutomatedTickets::SetupStep)) }
-    def next_completable_step(automated_ticket)
-      AutomatedTicket.setup_steps.each_key do |step_name|
-        automated_ticket.setup_step = step_name
-        return AutomatedTickets::SetupStep.new(step_name) if automated_ticket.invalid?
-      end
-      nil
-    end
-
-    sig { params(automated_ticket: AutomatedTicket).returns(AutomatedTickets::SetupStep) }
-    def current_step(automated_ticket)
-      steps = AutomatedTicket.setup_steps.keys.map { |step_name| AutomatedTickets::SetupStep.new(step_name) }
-      last_completed_step = T.must(steps.first)
-
-      steps.each do |step|
-        break unless step.completed?(automated_ticket)
-
-        last_completed_step = step
-      end
-      last_completed_step
-    end
 
     sig { returns(T::Array[AutomatedTickets::SetupStep]) }
     def steps
@@ -38,8 +17,42 @@ class AutomatedTickets::SetupStep
     end
 
     sig { params(automated_ticket: AutomatedTicket).returns(T.nilable(AutomatedTickets::SetupStep)) }
-    def previous_completable_step(automated_ticket)
-      current_step = current_step(automated_ticket)
+    def current_step(automated_ticket)
+      steps.each do |step|
+        return step if step.uncompleted?(automated_ticket)
+      end
+      nil
+    end
+    alias next_completable_step current_step
+
+    sig { params(automated_ticket: AutomatedTicket).returns(T.nilable(AutomatedTickets::SetupStep)) }
+    def last_completed_step(automated_ticket)
+      first_step = T.must(steps.first)
+      return if first_step.uncompleted?(automated_ticket)
+
+      last_completed_step = first_step
+
+      steps.each do |step|
+        break if step.uncompleted?(automated_ticket)
+
+        last_completed_step = step
+      end
+
+      last_completed_step
+    end
+
+    sig { params(automated_ticket: AutomatedTicket).returns(T.nilable(AutomatedTickets::SetupStep)) }
+    def last_completable_step(automated_ticket)
+      last_completed_step = last_completed_step(automated_ticket)
+      return if last_completed_step.nil?
+
+      completed_steps = T.must(steps[0..last_completed_step.index])
+      return if completed_steps.length == 1
+
+      completed_steps.reverse.each do |step|
+        return step if step.required?(automated_ticket) && step.not_auto_completable?(automated_ticket)
+      end
+      nil
     end
   end
 
@@ -130,10 +143,13 @@ class AutomatedTickets::SetupStep
     auto_completable_attributes(name, automated_ticket).empty?
   end
 
-  sig { params(other: AutomatedTickets::SetupStep).returns(T::Boolean) }
+  sig { params(other: T.untyped).returns(T::Boolean) }
   def ==(other)
+    return false unless other.is_a?(AutomatedTickets::SetupStep)
+
     name == other.name
   end
+
   sig { params(automated_ticket: AutomatedTicket).returns(T::Boolean) }
   def required?(automated_ticket)
     automated_ticket.assign_attributes(default_attributes)
