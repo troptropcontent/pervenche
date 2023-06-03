@@ -119,11 +119,9 @@ class AutomatedTickets::SetupStep
     !auto_completable_attributes(name, automated_ticket).empty?
   end
 
-  sig { returns(T::Array[AutomatedTickets::SetupStep]) }
-  def steps
-    AutomatedTicket.setup_steps.keys.map do |step_name|
-      self.class.new(step_name)
-    end
+  sig { params(automated_ticket: AutomatedTicket).returns(T::Boolean) }
+  def not_auto_completable?(automated_ticket)
+    auto_completable_attributes(name, automated_ticket).empty?
   end
 
   sig { params(other: AutomatedTickets::SetupStep).returns(T::Boolean) }

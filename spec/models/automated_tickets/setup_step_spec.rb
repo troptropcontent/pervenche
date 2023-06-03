@@ -225,6 +225,21 @@ module AutomatedTickets
         end
       end
 
+      describe '#not_auto_completable?(automated_ticket)' do
+        context 'when the step is auto_completable for the automated_ticket' do
+          let!(:step_name) { :weekdays }
+          it 'returns true' do
+            expect(subject.not_auto_completable?(automated_ticket)).to be false
+          end
+        end
+        context 'when the step is not auto_completable for the automated_ticket' do
+          let!(:step_name) { :kind }
+          it 'returns false' do
+            expect(subject.not_auto_completable?(automated_ticket)).to be true
+          end
+        end
+      end
+
       describe '#==(other)' do
         let(:first_step) { described_class.new(first_step_name) }
         let(:second_step) { described_class.new(second_step_name) }
