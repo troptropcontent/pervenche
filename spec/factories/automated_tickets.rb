@@ -6,7 +6,12 @@ FactoryBot.define do
     service
     active { true }
 
+    trait :with_service do
+      service { FactoryBot.create(:service, :without_validations) }
+    end
+
     trait :with_localisation do
+      with_service
       localisation { 'paris' }
     end
 
@@ -82,6 +87,10 @@ FactoryBot.define do
       with_payment_methods
       with_charge_bee_subscription_id
       status { :ready }
+    end
+
+    trait :without_validations do
+      to_create { |instance| instance.save(validate: false) }
     end
   end
 end

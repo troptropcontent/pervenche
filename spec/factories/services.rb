@@ -5,5 +5,9 @@ FactoryBot.define do
     name { 'MyString' }
     username { 'MyString' }
     password { 'MyString' }
+
+    trait :without_validations do
+      to_create { |instance| instance.save(validate: false) }
+    end
   end
 end
