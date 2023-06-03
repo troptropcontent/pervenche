@@ -83,7 +83,7 @@ end
 RSpec.shared_context 'stubed pay_by_phone quote' do |zipcode, license_plate, options = {}|
   before do
     cost = options[:cost] || 1.5
-    rate_option_id = options[:rate_option_id] || 'a_rate_option_id'
+    rate_option_id = options[:rate_option_id] || 'a_res_rate_option_id'
     quantity = options[:quantity] || 1
     time_unit = options[:time_unit] || 'Days'
     token = options[:token] || 'a_token'
