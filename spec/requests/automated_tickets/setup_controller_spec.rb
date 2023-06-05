@@ -64,7 +64,7 @@ RSpec.describe 'AutomatedTickets::Setups', type: :request do
               expect(response).to render_template 'automated_tickets/setup/rate_option'
               expect(assigns(:rate_options)).to eq([ParkingTicket::Clients::Models::RateOption.new(
                 accepted_time_units: ['days'],
-                client_internal_id: 'a_rate_option_id',
+                client_internal_id: 'a_res_rate_option_id',
                 free: true, name: 'stubed_name',
                 type: 'RES'
               )])
@@ -310,6 +310,7 @@ RSpec.describe 'AutomatedTickets::Setups', type: :request do
           it 'reset the automated ticket to the requested step and redirect to the requested step' do |example|
             run example
             expect(automated_ticket.reload.zipcodes).to eq([])
+            expect(response).to redirect_to("/automated_tickets/#{automated_ticket.id}/setup/vehicle/edit")
           end
         end
       end

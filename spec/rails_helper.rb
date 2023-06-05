@@ -96,6 +96,14 @@ RSpec.configure do |config|
   config.before(:each) do
     DatabaseCleaner.strategy = :transaction
   end
+
+  # chargee_bee stubs
+  config.before(:each) do |_example|
+    chargebee_customer_double = double(ChargeBee::Customer)
+    allow(chargebee_customer_double).to receive(:id).and_return('a_charge_bee_customer_id')
+    allow(chargebee_customer_double).to receive(:customer).and_return(chargebee_customer_double)
+    allow(ChargeBee::Customer).to receive(:create).and_return(chargebee_customer_double)
+  end
 end
 
 Shoulda::Matchers.configure do |config|

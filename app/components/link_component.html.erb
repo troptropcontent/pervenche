@@ -1,0 +1,19 @@
+<% if @action.nil? || @action == :get %>
+    <%= link_to @path, class: 'text__color--dark' do %>
+      <span class="cluster">
+        <% if @icon %>
+          <%= inline_svg("#{@icon}.svg") %>
+        <% end %>
+        <p><%=  @text %></p>
+      </span>
+    <% end %>
+  <% else %>
+    <%= button_to @path, method: @action, class: 'text__color--dark'  do %>
+      <span class="cluster">
+        <% if @icon %>
+          <%= inline_svg("#{@icon}.svg") %>
+        <% end %>
+        <p><%=  @text %></p>
+      </span>
+    <% end %>
+<% end %>

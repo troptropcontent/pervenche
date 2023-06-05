@@ -2,6 +2,7 @@
 # typed: true
 
 class AutomatedTicket < ApplicationRecord
+  extend T::Sig
   encrypts :license_plate, deterministic: true
   has_many :tickets, dependent: :destroy
   has_many :ticket_requests, dependent: :destroy
@@ -9,17 +10,20 @@ class AutomatedTicket < ApplicationRecord
   belongs_to :service, optional: true
   belongs_to :user
 
-  SETUP_STEPS = {
-    service: [:service_id],
-    localisation: [:localisation],
-    kind: %i[kind],
-    vehicle: %i[license_plate vehicle_description vehicle_type],
-    zipcodes: %i[zipcodes],
-    rate_option: %i[rate_option_client_internal_id accepted_time_units free],
-    weekdays: %i[weekdays],
-    payment_methods: %i[payment_method_client_internal_ids],
-    subscription: [:charge_bee_subscription_id]
-  }.freeze
+  SETUP_STEPS = T.let(
+    {
+      service: [:service_id],
+      localisation: [:localisation],
+      kind: %i[kind],
+      vehicle: %i[license_plate vehicle_description vehicle_type],
+      zipcodes: %i[zipcodes],
+      rate_option: %i[rate_option_client_internal_id accepted_time_units free],
+      weekdays: %i[weekdays],
+      payment_methods: %i[payment_method_client_internal_ids],
+      subscription: [:charge_bee_subscription_id]
+    }.freeze,
+    T::Hash[Symbol, T::Array[Symbol]]
+  )
 
   KINDS_ALLOWED_FOR_LOCALISATION = {
     paris: %i[residential electric_motorcycle mobility_inclusion_card],
@@ -77,9 +81,7 @@ class AutomatedTicket < ApplicationRecord
   end
 
   with_options if: -> { required_for_step?(:subscription) } do
-    validates :charge_bee_subscription_id, presence: true, unless: lambda {
-                                                                     !ENV.fetch('PERVENCHE_CHARGEBEE_ENABLED', false)
-                                                                   }
+    validates :charge_bee_subscription_id, presence: true
   end
 
   validate :similar_ticket_already_registered
@@ -114,6 +116,7 @@ class AutomatedTicket < ApplicationRecord
     AutomatedTicket.joins(join_sql)
   end
 
+  sig { returns(T::Hash[Symbol, T::Array[Symbol]]) }
   def self.setup_steps
     SETUP_STEPS
   end

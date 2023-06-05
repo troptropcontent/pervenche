@@ -28,6 +28,7 @@
         <%= hidden_field_tag 'navigation[redirect_to]', redirect_to %>
     <% end %>
     <%= render(ModalComponent.new(
+        id: 'connexion_issues_modal',
         title:t('views.services.new.form.modal.title'), 
         link_content: t('views.services.new.form.modal.link_content'), 
         content_full_screen: true) ) do %>

@@ -12,14 +12,12 @@ module AutomatedTickets
 
     # GET /automated_tickets/:automated_ticket_id/setup/:step_name
     def show
-      @automated_ticket.setup_step = @step.name
-
       if @step.completed?(@automated_ticket)
-        next_step = @automated_ticket.next_completable_step
+        next_step = SetupStep.current_step(@automated_ticket)
         path = next_step ? next_step.show_path(@automated_ticket) : root_path
         redirect_to(path)
       else
-        load_instance_variables_for(step: @step)
+        load_instance_variables
         render @step.to_s
       end
     end
@@ -28,8 +26,7 @@ module AutomatedTickets
     def edit
       raise Pervenche::Errors::InvalidState unless @step.completed?(@automated_ticket)
 
-      @automated_ticket.setup_step = @step
-      load_instance_variables_for(step: @step)
+      load_instance_variables
       render @step.to_s
     end
 
@@ -38,12 +35,12 @@ module AutomatedTickets
       update_automated_ticket!
       if @automated_ticket.valid?
         complete_all_already_completable_steps
-        next_step = SetupStep.next_completable_step(@automated_ticket)
+        next_step = SetupStep.current_step(@automated_ticket)
         @automated_ticket.update!(status: :ready, active: true) unless next_step
         flash[:notice] = t("views.setup.flash.#{next_step ? 'information_saved' : 'finished'}")
         redirect_to next_step ? next_step.show_path(@automated_ticket) : root_path
       else
-        load_instance_variables_for(step: @step)
+        load_instance_variables
         flash[:alert] = @automated_ticket.errors.full_messages
         render @step.to_s, status: :unprocessable_entity
       end
@@ -51,11 +48,11 @@ module AutomatedTickets
 
     # PUT   /automated_tickets/:automated_ticket_id/setup/:step_name/reset
     def reset
-      raise Pervenche::Errors::InvalidState unless @step.before? @automated_ticket.last_completed_step
+      raise Pervenche::Errors::InvalidState unless @step.before? SetupStep.current_step(@automated_ticket)
 
       @automated_ticket.reset_to(@step)
 
-      redirect_to @step.show_path(@automated_ticket)
+      redirect_to @step.edit_path(@automated_ticket)
     end
 
     private
@@ -138,6 +135,24 @@ module AutomatedTickets
 
     def complete_all_already_completable_steps
       @automated_ticket = automated_ticket_with_all_completable_steps_completed
+    end
+
+    sig { returns(T.nilable(Ui::Link)) }
+    def find_reset_link_if_it_exists
+      last_completable_step = SetupStep.last_completable_step(@automated_ticket)
+
+      return unless last_completable_step.present?
+
+      Ui::Link.new(
+        path: last_completable_step.reset_path(@automated_ticket),
+        action: :put,
+        icon: 'chevron_left'
+      )
+    end
+
+    def load_instance_variables
+      @back_link = find_reset_link_if_it_exists
+      load_instance_variables_for(step: @step)
     end
   end
 end

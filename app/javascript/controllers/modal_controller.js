@@ -7,10 +7,20 @@ export default class extends Controller {
   }
 
   open(e) {
+    const {id: modal_id} = e.params
+    const modal = this.findModal(modal_id)
     e.preventDefault()
-    this.modalTarget.style.display = "block";
+    modal.style.display = "block";
   }
+
   close(e) {
-    this.modalTarget.style.display = "none";
+    const {id: modal_id} = e.params
+    const modal = this.findModal(modal_id)
+    e.preventDefault()
+    modal.style.display = "none";
+  }
+
+  findModal(modal_id) {
+    return this.modalTargets.find(modal => modal.id === modal_id)
   }
 }

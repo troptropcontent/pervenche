@@ -58,5 +58,17 @@ RSpec.describe AutomatedTicket::Setup::CompleteAlreadyCompletableSteps, type: :a
         expect(reloaded_automated_ticket.payment_method_client_internal_ids).to eq(['fake-payment-methof-id-9654e1084eb1'])
       end
     end
+
+    describe 'when the automated_ticket is already completed' do
+      include_context 'stubed pay_by_phone auth', '+33678901234', 'password'
+      include_context 'stubed pay_by_phone account_id'
+      let(:service) { FactoryBot.create(:service, :without_validations, username: '+33678901234', password: 'password') }
+      let(:automated_ticket) { FactoryBot.create(:automated_ticket, :set_up, service:) }
+      it 'does nothing' do
+        subject
+        reloaded_automated_ticket = automated_ticket.reload
+        expect(reloaded_automated_ticket.attributes).to eq(automated_ticket.attributes)
+      end
+    end
   end
 end

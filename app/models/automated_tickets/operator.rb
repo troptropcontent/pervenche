@@ -18,15 +18,22 @@ class AutomatedTickets::Operator
     nil
   end
 
-  sig { params(step: AutomatedTickets::SetupStep).void }
-  def reset_to(step)
-    return if @automated_ticket.ready?
-
+  sig { params(step: AutomatedTickets::SetupStep).returns(AutomatedTicket) }
+  def reset_to_unsaved(step)
     attributes_to_reset = AutomatedTicket.setup_steps.reduce([]) do |memo, (step_name, fields)|
       [*memo, *fields] if AutomatedTicket.setup_steps.keys.index(step_name) > step.index
     end
     default_attributes = AutomatedTicket.column_defaults.with_indifferent_access.slice(*attributes_to_reset)
+    @automated_ticket.assign_attributes(default_attributes)
+    @automated_ticket
+  end
+
+  sig { params(step: AutomatedTickets::SetupStep).void }
+  def reset_to(step)
+    return if @automated_ticket.ready?
+
+    reset_to_unsaved(step)
     @automated_ticket.setup_step = step.name
-    @automated_ticket.update!(default_attributes)
+    @automated_ticket.save!
   end
 end
