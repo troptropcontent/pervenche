@@ -97,6 +97,13 @@ class AutomatedTickets::SetupStep
     edit_automated_ticket_setup_path(automated_ticket_id:, step_name: name)
   end
 
+  sig { params(automated_ticket: T.any(Integer, AutomatedTicket)).returns(String) }
+  def reset_path(automated_ticket)
+    automated_ticket_id = T.let(automated_ticket.is_a?(Integer) ? automated_ticket : automated_ticket.id, Integer)
+
+    reset_automated_ticket_setup_path(automated_ticket_id:, step_name: name)
+  end
+
   sig { returns(Symbol) }
   def name
     @step_name

@@ -269,6 +269,19 @@ module AutomatedTickets
           end
         end
       end
+      describe '#reset_path(automated_ticket)' do
+        let(:expected_reset_path) { "/automated_tickets/#{automated_ticket.id}/setup/vehicle/reset" }
+        context 'when automated_ticket is an Integer' do
+          it 'returns the path to the setup step show' do
+            expect(subject.reset_path(automated_ticket.id)).to eq(expected_reset_path)
+          end
+        end
+        context 'when automated_ticket is an AutomatedTicket' do
+          it 'returns the path to the setup step show' do
+            expect(subject.reset_path(automated_ticket)).to eq(expected_reset_path)
+          end
+        end
+      end
       describe '#name' do
         it 'returns the step name' do
           expect(subject.name).to eq(:vehicle)
