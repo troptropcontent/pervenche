@@ -30,6 +30,8 @@ class ApplicationController < ActionController::Base
   end
 
   def load_menu_links
+    return unless current_user
+
     @menu_links = [
       Ui::Link.new(path: destroy_user_session_path, action: :delete, icon: 'log_out',
                    text: t('views.application.menu.log_out'))
