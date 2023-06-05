@@ -2,23 +2,15 @@
   
   .sidebar {
     &--bottom {
-        display: grid;
-        grid-template-rows: 1fr auto;
-        min-height: 100%;
-        row-gap: var(--space-s);
-
-        &__content{
-            grid-row: 1;
-            overflow-y: auto;
-            position: relative;
-
-            &__scrollable {
-                width: 100%;
-                position: absolute
-            }
-        }
-        &__fixed{
-            grid-row: 2;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        &__fixed {
+            background-color: var(--color-white);
+            padding-block: var(--space-m);
         }
     }
   }
