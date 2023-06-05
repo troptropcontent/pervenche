@@ -36,8 +36,8 @@ RSpec.describe AutomatedTickets::AutoCompletable do
     end
 
     describe 'localisation step' do
-      it 'returns an empty hash' do
-        expect(auto_completable_attributes(:localisation, automated_ticket)).to eq({})
+      it 'returns paris' do
+        expect(auto_completable_attributes(:localisation, automated_ticket)).to eq({ localisation: 'paris' })
       end
     end
 

@@ -7,6 +7,7 @@ module AutomatedTickets
     sig { params(name: Symbol, automated_ticket: AutomatedTicket).returns(T::Hash[Symbol, T.untyped]) }
     def auto_completable_attributes(name, automated_ticket)
       return service_auto_completable_attributes(automated_ticket) if name == :service
+      return localisation_auto_completable_attributes if name == :localisation
       return zipcodes_auto_completable_attributes(automated_ticket) if name == :zipcodes
       return rate_option_auto_completable_attributes(automated_ticket) if name == :rate_option
       return weekdays_auto_completable_attributes if name == :weekdays
@@ -30,6 +31,13 @@ module AutomatedTickets
 
       {
         zipcodes: ['75100']
+      }
+    end
+
+    sig { returns(T::Hash[Symbol, T::Array[String]]) }
+    def localisation_auto_completable_attributes
+      {
+        localisation: 'paris'
       }
     end
 
