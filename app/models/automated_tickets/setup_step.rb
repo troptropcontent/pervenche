@@ -159,7 +159,7 @@ class AutomatedTickets::SetupStep
 
   sig { params(automated_ticket: AutomatedTicket).returns(T::Boolean) }
   def required?(automated_ticket)
-    automated_ticket.assign_attributes(default_attributes)
-    uncompleted?(automated_ticket)
+    automated_ticket_with_default_attributes = AutomatedTicket.new(automated_ticket.attributes.merge(default_attributes))
+    uncompleted?(automated_ticket_with_default_attributes)
   end
 end
