@@ -310,6 +310,7 @@ RSpec.describe 'AutomatedTickets::Setups', type: :request do
           it 'reset the automated ticket to the requested step and redirect to the requested step' do |example|
             run example
             expect(automated_ticket.reload.zipcodes).to eq([])
+            expect(response).to redirect_to("/automated_tickets/#{automated_ticket.id}/setup/vehicle/edit")
           end
         end
       end
