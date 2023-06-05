@@ -10,6 +10,16 @@
       left: var(--space-l);
     }
 
+    &__icon_end {
+      position: absolute;
+      right: var(--space-l);
+    }
+
+    &__icon_start {
+      position: absolute;
+      left: var(--space-l);
+    }
+
     @include media(tabletAndUp) {
       margin-bottom: var(--space-xl);
     }

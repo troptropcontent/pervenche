@@ -1,1 +1,23 @@
-<div>Add Header template here</div>
+<section class="header center">
+    <% if @back_link %>
+      <div class="header__icon_start">
+        <%= render(LinkComponent.new(link: @back_link)) %>
+      </div>
+    <% end %>
+    <span class='cluster'>
+        <% if @icon %>  
+          <div class="center">
+              <%= inline_svg "#{@icon}.svg"%>
+          </div>
+        <% end %>
+        <h2><%= @title %></h2>
+    </span>
+    <div class="header__icon_end">
+      <%= render(ModalComponent.new(
+          title: t('views.application.menu.title'), 
+          link_content: inline_svg('menu.svg', class: 'text__color--dark'), 
+          content_full_screen: true) ) do %>
+            <%= render(LinkComponent.with_collection(@menu_links)) %>
+      <% end %>
+    </div>
+</section>
