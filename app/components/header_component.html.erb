@@ -15,6 +15,7 @@
     <% if  @menu_links %>
       <div class="header__icon_end">
       <%= render(ModalComponent.new(
+          id: 'menu_modal',
           title: t('views.application.menu.title'), 
           link_content: inline_svg('menu.svg', class: 'text__color--dark'), 
           content_full_screen: true) ) do %>
