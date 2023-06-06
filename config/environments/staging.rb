@@ -5,6 +5,6 @@ Rails.application.configure do
   # custom logging
   config.lograge.enabled = false
   config.log_level = :debug
-  config.log_formatter = ActiveSupport::Logger::SimpleFormatter
+  config.log_formatter = ActiveSupport::Logger::SimpleFormatter.new
   config.colorize_logging = true
 end
