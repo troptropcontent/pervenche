@@ -1,0 +1,19 @@
+- client: 'pay_by_phone'
+  client_internal_id: '1244259777'
+  accepted_time_units: 
+    - 'days'
+  localisation:  'paris'
+  free: true
+  elligible_vehicle_types:
+    - 'electric_scooter'
+  kind: 'electric_motorcycle'
+- client: 'pay_by_phone'
+  client_internal_id: '75100'
+  accepted_time_units:
+    - 'days'
+  localisation: 'paris'
+  free: true
+  elligible_vehicle_types:
+    - 'electric_scooter'
+    - 'combustion_car'
+  kind: 'mobility_inclusion_card'
