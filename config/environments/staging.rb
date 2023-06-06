@@ -2,6 +2,9 @@ require File.expand_path('production.rb', __dir__)
 
 Rails.application.configure do
   # Here override any defaults
-  config.log_level = :debug
+  # custom logging
   config.lograge.enabled = false
+  config.log_level = :debug
+  config.log_formatter = ActiveSupport::Logger::SimpleFormatter
+  config.colorize_logging = true
 end
