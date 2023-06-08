@@ -50,4 +50,34 @@ RSpec.describe Service, type: :model do
       end
     end
   end
+
+  describe 'instance methods' do
+    let(:service) { FactoryBot.build(:service, :without_validations) }
+    describe 'rate_options(zipcodes, license_plate, localisation, kind, vehicle_type)' do
+      context 'when the rate_option is known' do
+        let(:known_rate_option_argments) do
+          [
+            ['75018'],
+            'a_license_plate',
+            'paris',
+            'electric_motorcycle',
+            'electric_motorcycle'
+          ]
+        end
+        let(:expected_return) do
+          [ParkingTicket::Clients::Models::RateOption.new(
+            accepted_time_units: %w[days],
+            client_internal_id: '1244259777',
+            free: true,
+            name: ' 2 roues électriques',
+            type: 'VP-2RM'
+          )]
+        end
+        it 'returns the known rate_options without asking the client' do
+          expect(ParkingTicket::Base).not_to receive(:new)
+          expect(subject.rate_options(*known_rate_option_argments)).to eq(expected_return)
+        end
+      end
+    end
+  end
 end

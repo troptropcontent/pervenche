@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+# typed: true
 
 # The Service represent the parking application account
 class Service < ApplicationRecord
@@ -41,7 +42,10 @@ class Service < ApplicationRecord
     end
   end
 
-  def rate_options(zipcodes, license_plate)
+  def rate_options(zipcodes, license_plate, localisation, kind, vehicle_type)
+    registered_rate_options = registered_rate_options(zipcodes:, localisation:, kind:, vehicle_type:)
+    return registered_rate_options if registered_rate_options.present?
+
     rate_options = zipcodes.map do |zipcode|
       client.rate_options(zipcode, license_plate).filter do |rate_option|
         SUPPORTED_RATE_OPTION_TYPES.include?(rate_option.type)
@@ -89,5 +93,14 @@ class Service < ApplicationRecord
     time_unit = rate_option.accepted_time_units.include?('days') ? 'days' : 'hours'
     rate_option.free = quote(rate_option.client_internal_id, zipcodes.first, license_plate, 1, time_unit).cost.zero?
     rate_option
+  end
+
+  def registered_rate_options(zipcodes:, localisation:, kind:, vehicle_type:)
+    registered_rate_options = AutomatedTickets::Static::RegisteredRateOption.where(localisation:, kind:)
+    registered_rate_options.filter! do |registered_rate_option|
+      zipcodes.all? { |zipcode| registered_rate_option.elligible_zipcodes.include?(zipcode) } &&
+        registered_rate_option.elligible_vehicle_types.include?(vehicle_type)
+    end
+    registered_rate_options.map!(&:to_rate_option)
   end
 end
