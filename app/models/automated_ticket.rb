@@ -192,7 +192,7 @@ class AutomatedTicket < ApplicationRecord
   end
 
   def similar_ticket_already_registered
-    return unless service_id && license_plate && rate_option_client_internal_id && zipcodes
+    return unless service_id && license_plate && kind && zipcodes
 
     zipcodes_already_covered = AutomatedTickets::FindSimilarTicket.call(automated_ticket: self).zipcodes_already_covered
     return unless zipcodes_already_covered.length.positive?

@@ -11,7 +11,11 @@ module Admin::Diagnostics
         automated_ticket = service.automated_tickets.ready.sample
         zipcodes = [automated_ticket.zipcodes.sample]
         license_plate = automated_ticket.license_plate
-        check { service.rate_options(zipcodes, license_plate) }
+        localisation = automated_ticket.localisation
+        kind = automated_ticket.kind
+        vehicle_type = automated_ticket.vehicle_type
+
+        check { service.rate_options(zipcodes, license_plate, localisation, kind, vehicle_type) }
       end
 
       def payment_methods(service)

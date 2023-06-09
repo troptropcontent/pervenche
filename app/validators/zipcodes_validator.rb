@@ -12,7 +12,8 @@ class ZipcodesValidator < ActiveModel::EachValidator
 
     return if ENV['CI'] || record.errors[attribute].length.positive?
 
-    rate_options = record.service.rate_options(values, record.license_plate)
+    rate_options = record.service.rate_options(values, record.license_plate, record.localisation, record.kind,
+                                               record.vehicle_type)
     message = I18n.t('activerecord.errors.models.automated_ticket.attributes.zipcodes.not_possible',
                      count: values.count)
     record.errors.add attribute, message unless rate_options.length >= 1

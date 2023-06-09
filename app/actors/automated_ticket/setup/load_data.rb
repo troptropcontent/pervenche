@@ -51,7 +51,10 @@ module AutomatedTicket::Setup
     def load_data_required_for_rate_option_step
       data.merge!({
                     rate_options: automated_ticket.service.rate_options(automated_ticket.zipcodes,
-                                                                        automated_ticket.license_plate)
+                                                                        automated_ticket.license_plate,
+                                                                        automated_ticket.localisation,
+                                                                        automated_ticket.kind,
+                                                                        automated_ticket.vehicle_type)
 
                   })
     end
