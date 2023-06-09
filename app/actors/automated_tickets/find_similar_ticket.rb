@@ -14,7 +14,7 @@ class AutomatedTickets::FindSimilarTicket < Actor
   private
 
   def similar_ticket_for_zipcode(zipcode)
-    AutomatedTicket.ready.where(automated_ticket.slice(:service_id, :license_plate, :rate_option_client_internal_id))
+    AutomatedTicket.ready.where(automated_ticket.slice(:service_id, :license_plate, :kind))
                    .where(':zipcode = ANY (zipcodes)', zipcode:)
                    .where.not(id: automated_ticket.id)
                    .exists?

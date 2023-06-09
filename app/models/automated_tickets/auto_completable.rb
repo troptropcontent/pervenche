@@ -54,7 +54,11 @@ module AutomatedTickets
     sig { params(automated_ticket: AutomatedTicket).returns(T::Hash[Symbol, T.untyped]) }
     def rate_option_auto_completable_attributes(automated_ticket)
       rate_options = T.let(
-        automated_ticket.service.rate_options(automated_ticket.zipcodes, automated_ticket.license_plate),
+        automated_ticket.service.rate_options(automated_ticket.zipcodes,
+                                              automated_ticket.license_plate,
+                                              automated_ticket.localisation,
+                                              automated_ticket.kind,
+                                              automated_ticket.vehicle_type),
         T::Array[ParkingTicket::Clients::Models::RateOption]
       )
 

@@ -42,6 +42,8 @@ gem 'lograge'
 gem 'lograge-sql'
 gem 'newrelic_rpm'
 
+# store static data in hashes
+gem 'active_hash', '~> 2.3.0'
 
 # Use Tailwind CSS [https://github.com/rails/tailwindcss-rails]
 # gem 'tailwindcss-rails'

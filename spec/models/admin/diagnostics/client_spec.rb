@@ -46,6 +46,7 @@ module Admin::Diagnostics
             end
           end
           context 'when and error is raised' do
+            let(:zipcode) { '77888' }
             it 'returns Fail' do
               VCR.use_cassette('pay_by_phone_rate_options_fail') do
                 expect(described_class.rate_options(service)).to eq('Fail')
@@ -131,6 +132,7 @@ module Admin::Diagnostics
             end
           end
           context 'when and error is raised' do
+            let(:zipcode) { '77888' }
             it 'returns Fail' do
               VCR.use_cassette('pay_by_phone_rate_options_fail') do
                 expect(subject.rate_options).to eq('Fail')
