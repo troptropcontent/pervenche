@@ -29,12 +29,15 @@ module Http
              headers: T.nilable(T::Hash[T.untyped, T.untyped]),
              params: T.nilable(T.any(T::Hash[T.untyped, T.untyped], String)),
              token: T.nilable(String),
+             user: T.nilable(String),
+             password: T.nilable(String),
              use_proxy: T.nilable(T::Boolean),
-             raise_error: T.nilable(T::Boolean))
+             raise_error: T.nilable(T::Boolean),
+             logger: T.nilable(T::Boolean))
         .returns(Faraday::Response)
     end
-    def self.get(url:, headers: nil, params: nil, token: nil, use_proxy: false, raise_error: true)
-      connection(url:, headers:, token:, use_proxy:, raise_error:).get do |request|
+    def self.get(url:, headers: nil, params: nil, token: nil, user: nil, password: nil, use_proxy: false, raise_error: true, logger: true)
+      connection(url:, headers:, token:, user:, password:, use_proxy:, raise_error:, logger:).get do |request|
         request.params = params if params
       end
     end
@@ -44,12 +47,15 @@ module Http
              body: T.nilable(T.any(T::Hash[T.untyped, T.untyped], String)),
              headers: T.nilable(T::Hash[T.untyped, T.untyped]),
              token: T.nilable(String),
+             user: T.nilable(String),
+             password: T.nilable(String),
              use_proxy: T.nilable(T::Boolean),
-             raise_error: T.nilable(T::Boolean))
+             raise_error: T.nilable(T::Boolean),
+             logger: T.nilable(T::Boolean))
         .returns(Faraday::Response)
     end
-    def self.post(url:, body: nil, headers: nil, token: nil, use_proxy: false, raise_error: true)
-      connection(url:, headers:, token:, use_proxy:, raise_error:).post do |request|
+    def self.post(url:, body: nil, headers: nil, token: nil, user: nil, password: nil, use_proxy: false, raise_error: true, logger: true)
+      connection(url:, headers:, token:, user:, password:, use_proxy:, raise_error:, logger:).post do |request|
         request.body =  URI.encode_www_form(body) if body.is_a? Hash
         request.body =  body if body.is_a? String
       end
@@ -59,11 +65,13 @@ module Http
       params(url: String,
              headers: T.nilable(T::Hash[T.untyped, T.untyped]),
              token: T.nilable(String),
+             user: T.nilable(String),
+             password: T.nilable(String),
              use_proxy: T.nilable(T::Boolean),
-             raise_error: T.nilable(T::Boolean))
-        .returns(Faraday::Connection)
+             raise_error: T.nilable(T::Boolean),
+             logger: T.nilable(T::Boolean)).returns(Faraday::Connection)
     end
-    def self.connection(url:, headers:, token: nil, use_proxy: false, raise_error: true)
+    def self.connection(url:, headers:, token: nil, user: nil, password: nil, use_proxy: false, raise_error: true, logger: true)
       Faraday.new(
         url:,
         headers:,
@@ -71,7 +79,8 @@ module Http
       ) do |conn|
         conn.response :raise_error if raise_error
         conn.request(:authorization, 'Bearer', token) if token
-        conn.response :logger, Rails.logger, { formatter: JsonFormater }
+        conn.request :authorization, :basic, user, password || '' if user
+        conn.response :logger, Rails.logger, { formatter: JsonFormater } if logger
         conn.use Faraday::Response::NotifyErrors
         conn.response :json
       end
