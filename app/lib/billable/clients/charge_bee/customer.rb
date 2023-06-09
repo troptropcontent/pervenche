@@ -8,7 +8,7 @@ module Billable
         class << self
           extend T::Sig
 
-          sig { params(customer_id: String).returns(T.nilable(Billable::Customer)) }
+          sig { params(customer_id: String).returns(T.nilable(Billable::Customer::Base)) }
           def find(customer_id)
             response = get_client(path: "/#{customer_id}")
             return unless response.status == 200
@@ -17,7 +17,7 @@ module Billable
             build_customer(customer_hash)
           end
 
-          sig { params(filter_params: T::Hash[String, T.untyped]).returns(T::Array[Billable::Customer]) }
+          sig { params(filter_params: T::Hash[String, T.untyped]).returns(T::Array[Billable::Customer::Base]) }
           def list(filter_params: {})
             response = get_client(params: filter_params)
             return [] unless response.status == 200
@@ -41,9 +41,9 @@ module Billable
             )
           end
 
-          sig { params(customer_hash: T::Hash[String, T.untyped]).returns(Billable::Customer) }
+          sig { params(customer_hash: T::Hash[String, T.untyped]).returns(Billable::Customer::Base) }
           def build_customer(customer_hash)
-            Billable::Customer.new(
+            Billable::Customer::Base.new(
               customer_billing_client_internal_id: customer_hash['id'],
               email: customer_hash['email'],
               first_name: customer_hash['first_name'],
