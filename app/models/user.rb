@@ -2,6 +2,8 @@
 
 class User < ApplicationRecord
   include HasRoles
+  include Billable::Customer
+
   before_create :set_chargebee_customer_id
   after_create :send_notification
   # Include default devise modules. Others available are:
@@ -36,5 +38,9 @@ class User < ApplicationRecord
 
     new_chargebee_customer = ChargeBee::Customer.create({ email: }).customer
     self.chargebee_customer_id = new_chargebee_customer.id
+  end
+
+  def customer_billing_client_internal_id
+    chargebee_customer_id
   end
 end
