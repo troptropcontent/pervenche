@@ -14,7 +14,7 @@ module Billable
       const :deleted, T::Boolean
     end
     sig { params(filter_params: T::Hash[String, T.untyped]).returns(T::Array[Billable::Customer::Base]) }
-    def self.list_customers(filter_params: {})
+    def self.list(filter_params: {})
       customer_client.list(filter_params:)
     end
 
