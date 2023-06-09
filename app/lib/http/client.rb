@@ -53,7 +53,7 @@ module Http
         .returns(Faraday::Response)
     end
     def self.post(url:, body: nil, headers: nil, token: nil, user: nil, password: nil, use_proxy: false, raise_error: true)
-      connection(url:, headers:, token:, use_proxy:, raise_error:).post do |request|
+      connection(url:, headers:, token:, user:, password:, use_proxy:, raise_error:).post do |request|
         request.body =  URI.encode_www_form(body) if body.is_a? Hash
         request.body =  body if body.is_a? String
       end
