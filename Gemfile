@@ -39,6 +39,8 @@ gem 'lograge'
 gem 'lograge-sql'
 gem 'newrelic_rpm'
 
+# Explore your data with SQL. Easily create charts and dashboards, and share them with your team.
+gem "blazer"
 
 # Use Tailwind CSS [https://github.com/rails/tailwindcss-rails]
 # gem 'tailwindcss-rails'
