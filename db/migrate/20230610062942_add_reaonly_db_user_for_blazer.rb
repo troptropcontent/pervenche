@@ -11,7 +11,7 @@ class AddReaonlyDbUserForBlazer < ActiveRecord::Migration[7.0]
         execute <<-SQL.squish
           BEGIN;
           CREATE ROLE #{db_blazer_user} LOGIN PASSWORD #{db_user_password};
-          GRANT CONNECT ON DATABASE #{dbname} TO #{db_blazer_user};
+          GRANT CONNECT ON DATABASE "#{dbname}" TO #{db_blazer_user};
           GRANT USAGE ON SCHEMA public TO #{db_blazer_user};
           GRANT SELECT ON ALL TABLES IN SCHEMA public TO #{db_blazer_user};
           ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO #{db_blazer_user};
