@@ -1,4 +1,6 @@
-if ActiveRecord::Base.connected?
+begin
+  ActiveRecord::Base.establish_connection # Establishes connection
+  ActiveRecord::Base.connection # Calls connection object
   db_user = Rails.application.credentials.dig(:blazer, :db_user)
   db_password = Rails.application.credentials.dig(:blazer, :db_password)
   db_name = ActiveRecord::Base.connection.raw_connection.conninfo_hash[:dbname]
