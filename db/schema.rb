@@ -33,7 +33,6 @@ ActiveRecord::Schema[7.0].define(version: 20_230_610_062_942) do
     t.string 'localisation'
     t.boolean 'free', default: false
     t.string 'charge_bee_subscription_id'
-    t.integer 'kind'
     t.index ['service_id'], name: 'index_automated_tickets_on_service_id'
     t.index ['user_id'], name: 'index_automated_tickets_on_user_id'
   end
