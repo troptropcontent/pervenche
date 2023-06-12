@@ -4,7 +4,7 @@ fr:
       new:
         flash:
           success: "Compte connecté  👍"
-          alert: "Email ou mot de passe incorrect"
+          alert: "Les identifiants utilisés ne semblent pas corrects"
         header:
           title: "Connecte ton compte de ticket de stationnement"
           subtitle: "On en a besoin pour prendre des tickets automatiquement à ta place et les renouveller"
