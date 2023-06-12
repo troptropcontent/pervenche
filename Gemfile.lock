@@ -81,6 +81,11 @@ GEM
       parser (>= 2.4)
       smart_properties
     bindex (0.8.1)
+    blazer (2.6.5)
+      activerecord (>= 5)
+      chartkick (>= 3.2)
+      railties (>= 5)
+      safely_block (>= 0.1.1)
     bootsnap (1.16.0)
       msgpack (~> 1.2)
     builder (3.2.4)
@@ -100,6 +105,7 @@ GEM
       cgi (>= 0.1.0, < 1.0.0)
       json_pure (~> 2.1)
       rest-client (>= 1.8, <= 2.0.2)
+    chartkick (5.0.2)
     concurrent-ruby (1.2.2)
     connection_pool (2.4.1)
     crack (0.4.5)
@@ -348,6 +354,7 @@ GEM
     ruby-progressbar (1.13.0)
     ruby2_keywords (0.0.5)
     rubyzip (2.3.2)
+    safely_block (0.4.0)
     sassc (2.4.0)
       ffi (~> 1.9)
     sassc-rails (2.1.2)
@@ -471,6 +478,7 @@ DEPENDENCIES
   active_hash (~> 2.3.0)
   amazing_print
   bcrypt (~> 3.1.7)
+  blazer
   bootsnap
   byebug
   cancancan

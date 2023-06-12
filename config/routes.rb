@@ -43,5 +43,6 @@ Rails.application.routes.draw do
 
   authenticate :user, ->(user) { user.has_role?('admin') } do
     mount Sidekiq::Web => '/sidekiq'
+    mount Blazer::Engine => '/blazer'
   end
 end

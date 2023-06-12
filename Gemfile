@@ -42,6 +42,8 @@ gem 'lograge'
 gem 'lograge-sql'
 gem 'newrelic_rpm'
 
+# Explore your data with SQL. Easily create charts and dashboards, and share them with your team.
+gem "blazer"
 # store static data in hashes
 gem 'active_hash', '~> 2.3.0'
 

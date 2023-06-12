@@ -5,6 +5,9 @@ class AutomatedTicket < ApplicationRecord
   extend T::Sig
   include Billable::Subscription
 
+  extend T::Sig
+  include Billable::Subscription
+
   encrypts :license_plate, deterministic: true
   has_many :tickets, dependent: :destroy
   has_many :ticket_requests, dependent: :destroy
@@ -214,6 +217,10 @@ class AutomatedTicket < ApplicationRecord
         .where(':zipcode = ANY (zipcodes)', zipcode:)
         .where.not(id:)
         .exists?
+  end
+
+  def subscription_billing_client_internal_id
+    charge_bee_subscription_id
   end
 
   def subscription_billing_client_internal_id

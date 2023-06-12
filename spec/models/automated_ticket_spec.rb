@@ -6,6 +6,7 @@ RSpec.describe AutomatedTicket, type: :model do
   let(:zipcodes) { %w[75018 75017 75016] }
   let(:user) { FactoryBot.create(:user) }
   let(:vehicle_type) { :combustion_car }
+  let(:vehicle_type) { :combustion_car }
   let(:service) do
     service = FactoryBot.build(:service, user_id: user.id)
     service.save(validate: false)
@@ -116,6 +117,7 @@ RSpec.describe AutomatedTicket, type: :model do
           end
         end
         context 'non empty array' do
+          let(:vehicle_type) { :electric_motorcycle }
           let(:vehicle_type) { :electric_motorcycle }
           it do
             expect(subject).to be_valid
