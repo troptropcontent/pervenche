@@ -10,4 +10,6 @@ begin
     db_name = ActiveRecord::Base.connection.raw_connection.conninfo_hash[:dbname]
     ENV['BLAZER_DATABASE_URL'] = "postgresql://localhost/#{db_name}?user=#{db_user}"
   end
+rescue ActiveRecord::NoDatabaseError
+  Rails.logger.warn('Can not connect to blazer')
 end
