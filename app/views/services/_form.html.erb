@@ -24,17 +24,18 @@
         <h4><%= t('views.services.new.form.password.label') %></h4>
         <%= f.input :password, as: :password %>
     </div>
-    <% if service.errors.present? %>
-      <p class="text__color--danger">
-        <%= t('views.services.new.form.errors.text_html') %>
-      </p>
-    <% end %>
     <% if local_assigns[:redirect_to] %>
         <%= hidden_field_tag 'navigation[redirect_to]', redirect_to %>
     <% end %>
-    <p>
-        <%= t('views.services.new.form.hint.text_html') %>
-    </p>
+    <%= render(ModalComponent.new(
+        id: 'connexion_issues_modal',
+        title:t('views.services.new.form.modal.title'), 
+        link_content: t('views.services.new.form.modal.link_content'), 
+        content_full_screen: true) ) do %>
+        <span>
+            <%= t('views.services.new.form.modal.content_html') %>
+        </span>
+    <% end %>
     </section>
     <section class="footer cluster margin__bottom--l">
     <%= link_to redirect_to, class: 'btn btn--white center' do %>

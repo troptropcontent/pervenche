@@ -31,7 +31,10 @@
   </head>
 
   <body data-controller='modal'>
-    <%= render 'components/flash' %>
+    <div class="flash">
+      <%= render "layouts/flash" %>
+    </div>
+    <%= render(HeaderComponent.new(title: t('application.name'), icon: 'ticket', menu_links: @menu_links, back_link: @back_link) )%>
     <%= yield %>  
   </body>
 </html>

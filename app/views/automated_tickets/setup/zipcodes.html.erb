@@ -1,17 +1,9 @@
 
 
 <main class="grow container stack stack--no-gap">
-    <section class="header">
+  <%= render 'automated_tickets/setup/shared/form', automated_ticket: @automated_ticket, step: @step, header_content: t("views.setup.zipcodes.header.title.#{@localisation}.#{@automated_ticket.vehicle_type}") do |f| %>
       <% if @localisation == 'paris' %>
-        <h2><%= t("views.setup.zipcodes.header.title.#{@automated_ticket.vehicle_type}") %></h2>
-      <% end %>
-      <% if @localisation == 'other' %>
-        <h2><%= t("views.setup.zipcodes.header.title.neutral") %></h2>
-      <% end %>
-    </section>
-    <%= render 'automated_tickets/setup/shared/form', automated_ticket: @automated_ticket, step: @step, clickable_svg_multiselect: @automated_ticket.allow_multiple_zipcodes? do |f| %>
-      <% if @localisation == 'paris' %>
-        <%= render 'automated_tickets/setup/zipcodes/paris', zipcodes: @automated_ticket.zipcodes || [] %>
+        <%= render 'automated_tickets/setup/zipcodes/paris', zipcodes: @automated_ticket.zipcodes || [], form: f, multiple: @automated_ticket.allow_multiple_zipcodes? %>
       <% end %>
       <% if @localisation == 'other' %>
         <%= render 'automated_tickets/setup/zipcodes/other', form: f %>

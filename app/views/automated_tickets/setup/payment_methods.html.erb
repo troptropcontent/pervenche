@@ -1,8 +1,5 @@
 <main class="grow container stack stack--no-gap">
-    <section class="header">
-      <h2><%= t('views.setup.payment_methods.header.title') %></h2>
-    </section>
-    <%= render 'automated_tickets/setup/shared/form', automated_ticket: @automated_ticket, step: @step do |f| %>
+    <%= render 'automated_tickets/setup/shared/form', automated_ticket: @automated_ticket, step: @step, header_content: t('views.setup.payment_methods.header.title') do |f| %>
       <div class="form_group stack stack--xs">
         <%= f.input :payment_method_client_internal_ids, wrapper_html: {class: 'stack'} do %>
           <% @payment_methods.each do |payment_method| %>

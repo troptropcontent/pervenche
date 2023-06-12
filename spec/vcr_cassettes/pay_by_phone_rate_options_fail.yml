@@ -164,7 +164,7 @@ http_interactions:
   recorded_at: Tue, 11 Apr 2023 15:58:32 GMT
 - request:
     method: get
-    uri: https://consumer.paybyphoneapis.com/parking/locations/75018/rateOptions?licensePlate=CL123UU&parkingAccountId=account_id
+    uri: https://consumer.paybyphoneapis.com/parking/locations/77888/rateOptions?licensePlate=CL123UU&parkingAccountId=account_id
     body:
       encoding: US-ASCII
       string: ''
@@ -376,7 +376,7 @@ http_interactions:
   recorded_at: Tue, 11 Apr 2023 15:58:35 GMT
 - request:
     method: get
-    uri: https://consumer.paybyphoneapis.com/parking/accounts/account_id/quote?durationQuantity=1&durationTimeUnit=Hours&isParkUntil=false&licensePlate=CL123UU&locationId=75018&parkingAccountId=account_id&rateOptionId=1085252721
+    uri: https://consumer.paybyphoneapis.com/parking/accounts/account_id/quote?durationQuantity=1&durationTimeUnit=Hours&isParkUntil=false&licensePlate=CL123UU&locationId=77888&parkingAccountId=account_id&rateOptionId=1085252721
     body:
       encoding: US-ASCII
       string: ''
@@ -422,6 +422,6 @@ http_interactions:
       - '2023-04-11T15:58:36+00:00'
     body:
       encoding: UTF-8
-      string: '{"locationId":"75018","stall":null,"quoteDate":"2023-04-11T15:58:35Z","totalCost":{"amount":4.0,"currency":"EUR"},"parkingAccountId":"account_id","parkingStartTime":"2023-04-11T15:58:35Z","parkingExpiryTime":"2023-04-11T16:58:35Z","parkingDurationAdjustment":"NotAdjusted","licensePlate":"CL123UU","quoteItems":[{"quoteItemType":"Parking","name":"Parking","costAmount":{"amount":4.0,"currency":"EUR"}}],"quoteId":"7e56d834-df2f-4d02-b0b6-e5b5e9d5fd26","paymentMode":"Paid","promotionApplied":null}'
+      string: '{"locationId":"77888","stall":null,"quoteDate":"2023-04-11T15:58:35Z","totalCost":{"amount":4.0,"currency":"EUR"},"parkingAccountId":"account_id","parkingStartTime":"2023-04-11T15:58:35Z","parkingExpiryTime":"2023-04-11T16:58:35Z","parkingDurationAdjustment":"NotAdjusted","licensePlate":"CL123UU","quoteItems":[{"quoteItemType":"Parking","name":"Parking","costAmount":{"amount":4.0,"currency":"EUR"}}],"quoteId":"7e56d834-df2f-4d02-b0b6-e5b5e9d5fd26","paymentMode":"Paid","promotionApplied":null}'
   recorded_at: Tue, 11 Apr 2023 15:58:36 GMT
 recorded_with: VCR 6.1.0

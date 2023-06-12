@@ -28,16 +28,15 @@
                     <%= inline_svg 'shield.svg' %>
                   </span>
                 <% else %>
-                  <span class="cluster text__color--danger" >
-                    <%= t 'partials.automated_ticket.not_covered' %>
-                    <%= inline_svg 'cross.svg' %>
+                  <span class="cluster text__color--muted" >
+                    <%= t 'partials.automated_ticket.renewing' %>
+                    <%= render 'components/loader', color: 'muted'%>
                   </span>
               <% end %>
-              
      </div>
-     <div class="divider divider--muted"></div>
   <% end %>
   <% if automated_ticket.allow_multiple_zipcodes? %>
+    <div class="divider divider--muted"></div>
     <%= link_to edit_automated_ticket_setup_path(automated_ticket_id: automated_ticket.id, step_name: :zipcodes, params: {localisation: automated_ticket.localisation}) do %>
       <div class="cluster">
           <div class="center"><%= inline_svg 'round_plus.svg'%></div>

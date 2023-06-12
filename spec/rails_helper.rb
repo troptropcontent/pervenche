@@ -3,6 +3,7 @@
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 require 'spec_helper'
 ENV['RAILS_ENV'] ||= 'test'
+ENV['CI'] ||= 'true'
 require_relative '../config/environment'
 # Prevent database truncation if the environment is production
 abort('The Rails environment is running in production mode!') if Rails.env.production?
@@ -10,6 +11,10 @@ require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
 require 'json_matchers/rspec'
 require 'sidekiq/testing'
+require Rails.root.join('spec/requests/shared_example/an_authenticated_endpoint')
+require Rails.root.join('spec/support/request_spec_extendable_helpers')
+require Rails.root.join('spec/support/request_spec_includable_helpers')
+require Rails.root.join('spec/support/shared_context/stubed_pay_by_phone')
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
@@ -34,8 +39,20 @@ rescue ActiveRecord::PendingMigrationError => e
   abort e.to_s.strip
 end
 RSpec.configure do |config|
+  # will allow things like that
+  # before do |example|
+  #   puts 'before hook' unless example.metadata[:skip]
+  # end
+
+  # it 'will use before hook' do
+  # end
+
+  # it 'will not use before hook', :skip do
+  # end
+  # config.treat_symbols_as_metadata_keys_with_true_values = true
+
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
-  config.fixture_path = "#{Rails.root}/spec/fixtures"
+  config.fixture_path = Rails.root.join('spec/fixtures')
 
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
@@ -64,11 +81,28 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
+  config.include Devise::Test::IntegrationHelpers, type: :feature
   config.include Devise::Test::IntegrationHelpers, type: :request
+
+  # custom ReqestHelper 'home made' rswagger syntax
+  config.extend RequestSpecExtendableHelpers, type: :request
+  config.include RequestSpecIncludableHelpers, type: :request
 
   # sidekiq
   config.before(:each) do
     Sidekiq::Worker.clear_all
+  end
+
+  config.before(:each) do
+    DatabaseCleaner.strategy = :transaction
+  end
+
+  # chargee_bee stubs
+  config.before(:each) do |_example|
+    chargebee_customer_double = double(ChargeBee::Customer)
+    allow(chargebee_customer_double).to receive(:id).and_return('a_charge_bee_customer_id')
+    allow(chargebee_customer_double).to receive(:customer).and_return(chargebee_customer_double)
+    allow(ChargeBee::Customer).to receive(:create).and_return(chargebee_customer_double)
   end
 end
 
@@ -82,4 +116,6 @@ end
 VCR.configure do |config|
   config.cassette_library_dir = 'spec/vcr_cassettes'
   config.hook_into :webmock
+  config.configure_rspec_metadata!
+  config.ignore_localhost = true
 end

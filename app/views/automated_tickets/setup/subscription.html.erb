@@ -1,25 +1,22 @@
 <main class="grow container stack stack--no-gap">
-    <section class="header">
-      <h2><%= t('views.setup.subscription.header.title') %></h2>
-    </section>
-    <%= render 'automated_tickets/setup/shared/form', automated_ticket: @automated_ticket, step: @step, disabled: !!!@charge_bee_subscription_id do |f| %>
-       <% if @charge_bee_subscription_id %>
-          <span><%= t('views.setup.subscription.text_subscribed_html', count: @automated_ticket.zipcodes.length, license_plate: @automated_ticket.license_plate, zipcodes: @automated_ticket.zipcodes.to_sentence) %></span></span>
-          <%= f.input :charge_bee_subscription_id, :as => :hidden, :input_html => { :value => @charge_bee_subscription_id } %>
-        <% else %> 
-          <span><%= t('views.setup.subscription.text_html', count: @automated_ticket.zipcodes.length, license_plate: @automated_ticket.license_plate, zipcodes: @automated_ticket.zipcodes.to_sentence) %></span></span>
-          <div class="grow stack stack--justify-content--end">
-            <%= link_to t('views.setup.subscription.subscribe_cta'),
-                  new_automated_ticket_path,
-                  class: "btn btn--primary center",
-                  data: { 
-                    controller: "subscription",
-                    action: "click->subscription#openCheckoutNew",
-                    'plan-id': @plan_id,
-                    'hosted-page-data': @hosted_page_data,
-                  } 
+    <%= render 'automated_tickets/setup/shared/form', 
+        automated_ticket: @automated_ticket, 
+        step: @step, 
+        header_content: @charge_bee_item_price_external_name,  
+        header_sub_content: subscription_with_period(@charge_bee_item_price_price ,@charge_bee_item_price_period) do |f| %>
+       <div class="stack stack--l">
+       <% if @charge_bee_item_price_trial_period %> 
+            <%= render(InfoCardComponent.new(
+                color: 'primary', 
+                center: true,
+                title: t('views.setup.subscription.info_card.title', period: t('datetime.distance_in_words.x_days', count: @charge_bee_item_price_trial_period)),
+                sub_title: t('views.setup.subscription.info_card.sub_title')))
             %>
-          </div>
-      <% end %>
+       <% end %>
+        <span class="stack">
+            <%= t('views.setup.subscription.advantages_html') %>
+        </span>
+       </div>
+       <%= f.input :charge_bee_subscription_id, as: :hidden, input_html: { value: @charge_bee_subscription_id } %>
     <% end %>
 </main>

@@ -1,27 +1,32 @@
 .flash {
-  position:fixed; 
-  top: 0px; 
-  left: 0px; 
-  width: 100%;
-  z-index:9999; 
-  color: var(--color-white);
+  position:fixed;
+  z-index: 9999;
+  top: 5rem;
+  left: 50%;
+  transform: translateX(-50%);
 
-  > .flash__content {
-    margin: var(--space-l);
-    border-radius: var(--border-radius);
-    padding-block: var(--space-xs);
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-s);
 
-  &--alert{
-    > .flash__content {
+  max-width: 100%;
+  width: max-content;
+  padding: 0 var(--space-m);
+
+  &__message {
+    font-size: var(--font-size-s);
+    color: var(--color-white);
+    padding: var(--space-xs) var(--space-m);
+    background-color: var(--color-dark);
+    animation: appear-then-fade 4s both;
+    border-radius: var(--border-radius);;
+
+    &--alert{
       background-color: var(--color-danger);
     }
-  }
-  &--notice{
-    > .flash__content {
+    &--notice{
       background-color: var(--color-success);
     }
   }
 }
-
-

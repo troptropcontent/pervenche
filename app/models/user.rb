@@ -34,7 +34,7 @@ class User < ApplicationRecord
   end
 
   def set_chargebee_customer_id
-    return unless ENV['PERVENCHE_CHARGEBEE_ENABLED'] && email
+    return unless email
 
     new_chargebee_customer = ChargeBee::Customer.create({ email: }).customer
     self.chargebee_customer_id = new_chargebee_customer.id

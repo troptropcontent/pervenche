@@ -1,0 +1,12 @@
+<%= form.input attribute_name, wrapper_html: {class: 'stack'} do %>
+  <%= form.label "#{attribute_name.to_s}_#{value.to_s}", class: 'form__input__type__picker__type' do %>
+      <%= form.radio_button attribute_name.to_s, 
+                          value, 
+                          class: 'visually-hidden', 
+                          checked: local_assigns[:checked] || false %>
+                        
+      <span class= 'clickable'>
+        <h4><%= local_assigns[:content] || value %></h4>
+      </span>
+  <% end %>
+<% end %>

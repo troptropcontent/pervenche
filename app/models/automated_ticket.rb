@@ -1,6 +1,10 @@
 # frozen_string_literal: true
+# typed: true
 
 class AutomatedTicket < ApplicationRecord
+  extend T::Sig
+  include Billable::Subscription
+
   extend T::Sig
   include Billable::Subscription
 
@@ -11,15 +15,24 @@ class AutomatedTicket < ApplicationRecord
   belongs_to :service, optional: true
   belongs_to :user
 
-  SETUP_STEPS = {
-    service: [:service_id],
-    vehicle: %i[license_plate vehicle_description vehicle_type],
-    localisation: [:localisation],
-    zipcodes: %i[zipcodes],
-    rate_option: %i[rate_option_client_internal_id accepted_time_units free],
-    weekdays: %i[weekdays],
-    payment_methods: %i[payment_method_client_internal_ids],
-    subscription: [:charge_bee_subscription_id]
+  SETUP_STEPS = T.let(
+    {
+      service: [:service_id],
+      localisation: [:localisation],
+      kind: %i[kind],
+      vehicle: %i[license_plate vehicle_description vehicle_type],
+      zipcodes: %i[zipcodes],
+      rate_option: %i[rate_option_client_internal_id accepted_time_units free],
+      weekdays: %i[weekdays],
+      payment_methods: %i[payment_method_client_internal_ids],
+      subscription: [:charge_bee_subscription_id]
+    }.freeze,
+    T::Hash[Symbol, T::Array[Symbol]]
+  )
+
+  KINDS_ALLOWED_FOR_LOCALISATION = {
+    paris: %i[residential electric_motorcycle mobility_inclusion_card],
+    other: [:custom]
   }.freeze
 
   enum status: {
@@ -27,6 +40,17 @@ class AutomatedTicket < ApplicationRecord
     setup: 1,
     ready: 2
   }
+
+  enum kind: {
+    residential: 0,
+    electric_motorcycle: 1,
+    mobility_inclusion_card: 2,
+    custom: 3
+  }
+
+  with_options if: -> { required_for_step?(:kind) } do
+    validates :kind, presence: true
+  end
 
   with_options if: -> { required_for_step?(:service) } do
     validates :service_id, presence: true
@@ -41,9 +65,11 @@ class AutomatedTicket < ApplicationRecord
   end
 
   with_options if: -> { required_for_step?(:zipcodes) } do
-    validates :zipcodes, length: { minimum: 1, message: I18n.t('errors.messages.empty_array') }
+    validates :zipcodes,
+              length: { minimum: 1,
+                        message: I18n.t('activerecord.errors.models.automated_ticket.attributes.zipcodes.empty_array') }
     validates :zipcodes, length: { is: 1 }, unless: :allow_multiple_zipcodes?
-    validates :zipcodes, array: { format: { with: /[0-9]+/ } }
+    validates :zipcodes, zipcodes: true
   end
 
   with_options if: -> { required_for_step?(:rate_option) } do
@@ -60,14 +86,15 @@ class AutomatedTicket < ApplicationRecord
   end
 
   with_options if: -> { required_for_step?(:subscription) } do
-    validates :charge_bee_subscription_id, presence: true, unless: lambda {
-                                                                     !!!ENV.fetch('PERVENCHE_CHARGEBEE_ENABLED', false)
-                                                                   }
+    validates :charge_bee_subscription_id, presence: true
   end
 
   validate :similar_ticket_already_registered
 
   attr_accessor :setup_step
+
+  delegate :last_completed_step, to: :setup
+  delegate :next_completable_step, :reset_to, to: :operator
 
   def self.missing_running_tickets_in_database
     AutomatedTicket.unnested_with_running_tickets
@@ -94,6 +121,7 @@ class AutomatedTicket < ApplicationRecord
     AutomatedTicket.joins(join_sql)
   end
 
+  sig { returns(T::Hash[Symbol, T::Array[Symbol]]) }
   def self.setup_steps
     SETUP_STEPS
   end
@@ -129,7 +157,7 @@ class AutomatedTicket < ApplicationRecord
   end
 
   def should_renew_today?
-    weekdays.include?(Date.today.wday)
+    weekdays.include?(Time.zone.today.wday)
   end
 
   def running_ticket_in_database_for(zipcode:)
@@ -145,6 +173,20 @@ class AutomatedTicket < ApplicationRecord
     vehicle_type == 'electric_motorcycle'
   end
 
+  def setup
+    AutomatedTickets::Setup.new(self)
+  end
+
+  def operator
+    AutomatedTickets::Operator.new(self)
+  end
+
+  def kinds_allowed
+    return [] unless localisation
+
+    KINDS_ALLOWED_FOR_LOCALISATION[localisation.to_sym]
+  end
+
   private
 
   def required_for_step?(step)
@@ -155,7 +197,7 @@ class AutomatedTicket < ApplicationRecord
   end
 
   def similar_ticket_already_registered
-    return unless service_id && license_plate && rate_option_client_internal_id && zipcodes
+    return unless service_id && license_plate && kind && zipcodes
 
     zipcodes_already_covered = AutomatedTickets::FindSimilarTicket.call(automated_ticket: self).zipcodes_already_covered
     return unless zipcodes_already_covered.length.positive?
@@ -175,6 +217,10 @@ class AutomatedTicket < ApplicationRecord
         .where(':zipcode = ANY (zipcodes)', zipcode:)
         .where.not(id:)
         .exists?
+  end
+
+  def subscription_billing_client_internal_id
+    charge_bee_subscription_id
   end
 
   def subscription_billing_client_internal_id

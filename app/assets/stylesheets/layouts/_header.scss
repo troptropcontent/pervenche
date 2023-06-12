@@ -3,9 +3,24 @@
     flex-wrap: wrap;
     gap: var(--space-s);
     justify-content: space-between;
-    margin: var(--space-xl) 0;
-  
+    margin-block: var(--space-l);
+
+    &__menu {
+      position: absolute;
+      left: var(--space-l);
+    }
+
+    &__icon_end {
+      position: absolute;
+      right: var(--space-l);
+    }
+
+    &__icon_start {
+      position: absolute;
+      left: var(--space-l);
+    }
+
     @include media(tabletAndUp) {
-      margin-bottom: var(--space-xl);
+      margin-block: var(--space-xl);
     }
   }

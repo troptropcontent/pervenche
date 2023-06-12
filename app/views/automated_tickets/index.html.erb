@@ -1,11 +1,15 @@
 <main class="grow container stack">
-    <%= render 'components/header' %>
     <section class="stack grow">
        <%= render @automated_tickets %>
     </section>
     <section class="footer cluster margin__bottom--l">
         <% unless ENV['PERVENCHE_CRISP_ENABLED'] %>
-          <%= render 'components/modal', btn_content: inline_svg('help-circle.svg', class: 'text__color--muted') do %>
+          <%= render(ModalComponent.new(
+            id: 'help_contact_modal',
+            title: t('views.automated_tickets.index.modal.title'), 
+            link_content: inline_svg('help-circle.svg', class: 'text__color--muted'), 
+            link_class: 'btn btn--white center',
+            content_full_screen: true) ) do %>
             <p><%= t('views.automated_tickets.index.modal.text_html') %></p>
           <% end %>
         <% end %>

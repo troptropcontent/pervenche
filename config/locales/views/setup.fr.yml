@@ -1,9 +1,16 @@
 fr:
   views:
     setup:
+      flash:
+        information_saved: Informations bien prises en compte
+        finished: Paramétrage fini, ticket automatique correctement configuré
       loading:
         title: Création des tickets en cours
         subtitle: Ça peut prendre 1 à 2 min, plus il y a de tickets plus c’est long.
+      kind:
+        header:
+          title: Type de ticket
+        cta: Continuer
       localisation:
         header:
           title: Votre vehicule est-il à Paris ?
@@ -18,9 +25,12 @@ fr:
       zipcodes:
         header:
           title: 
-            neutral: Dans quelle zone veux-tu renouveler automatiquement ton ticket ? 
-            electric_motorcycle: Dans quels arrondissements veux-tu renouveler un ticket ?
-            combustion_car: Dans quel arronsissement es-tu résident ?
+            paris:
+              electric_motorcycle: Dans quels arrondissements veux-tu renouveler un ticket ?
+              combustion_car: Dans quel arronsissement es-tu résident ?
+            other:
+              electric_motorcycle: Dans quelle zone veux-tu renouveler automatiquement ton ticket ? 
+              combustion_car: Dans quelle zone veux-tu renouveler automatiquement ton ticket ? 
         inputs:
           zipcodes: 
             placeholder: Code de la zone souhaitée
@@ -38,11 +48,15 @@ fr:
         master_card: MasterCard ending by %{anonymised_card_number}
         cta: Continuer
       subscription:
-        cta: Terminer
+        cta: Commencer l'éssai gratuit
+        info_card: 
+          title: "%{period} d'essai gratuit"
+          sub_title: "Pas besoin de carte bleue"
         header:
           title: Abonne toi au service
         subscribe_cta: Renseigner un moyen de paiement
         subscribed: Abonnement bien pris en compte.
+        advantages_html: <h3>Avantages:</h3><ul><li>Tickets renouvellés automatiquement tous les jours</li><li>Plus d'amendes possible à cause d’un oubli</li><li>Mettez le renouvellement automatique en pause à tout moment</li></ul>
         text_subscribed_html: 
           one: Et voilà, c'est fini, d'ici quelques instants tu pourras oublier de renouveler le ticket de ton véhicule (<b>%{license_plate}</b>) dans la zone <b>%{zipcodes}</b>.<br><br>Aprés avoir cliqué sur <b>Terminer</b>, le ticket apparaîtra comme non couvert mais c'est normal, il faut attendre quelques instants pour que le robot se mette en place.
           other: Et voilà, c'est fini, d'ici quelques instants tu pourras oublier de renouveler les tickets de ton véhicule (<b>%{license_plate}</b>) dans les zones <b>%{zipcodes}</b>.<br><br>Aprés avoir cliqué sur <b>Terminer</b>, les tickets apparaîtront comme non couverts mais c'est normal, il faut attendre quelques instants pour que le robot se mette en place.

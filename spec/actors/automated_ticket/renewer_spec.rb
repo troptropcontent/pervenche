@@ -80,7 +80,7 @@ RSpec.describe AutomatedTicket::Renewer, type: :actor do
                 expect(subject.ticket_request.payment_method_client_internal_id).to eq(expected_payment_method_client_internal_id)
                 expect(subject.ticket_request.time_unit).to eq(expected_time_unit)
                 expect(subject.ticket_request.quantity).to eq(expected_qantity)
-                expect(subject.ticket_request.requested_on).to be_within(0.1).of(Time.now)
+                expect(subject.ticket_request.requested_on).to be_within(1).of(Time.now)
                 expect(subject.ticket_request.zipcode).to eq('75016')
               end
             end

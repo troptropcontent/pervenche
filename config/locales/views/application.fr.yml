@@ -12,3 +12,6 @@ fr:
       continue: "Continuer"
       or: "ou"
       and: "et"
+      menu:
+        title: Menu
+        log_out: Me déconnecter

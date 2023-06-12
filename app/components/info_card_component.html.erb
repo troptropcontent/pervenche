@@ -1,0 +1,14 @@
+<div class="<%= class_names('infocard', "infocard--#{@color}", @wrapper_class, center: @center) %>"  >  
+  <% if content %>
+    <%= content %>
+    <% else %>
+    <div class="<%= class_names('stack', "infocard__content", center: @center) %>">
+      <% if @title %>
+        <h3 class='infocard__title'><%= @title %></h3>  
+      <% end %>
+      <% if @sub_title %>
+        <p><%= @sub_title %></p>
+      <% end %>
+    </div>
+  <% end %> 
+</div>

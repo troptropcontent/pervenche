@@ -17,17 +17,18 @@ RSpec.describe AutomatedTicket::Setup::CompleteAlreadyCompletableSteps, type: :a
         expect { subject }.to change(automated_ticket, :service_id).from(nil).to(service.id)
       end
     end
-    describe 'when there is only one vehicle' do
-      include_context 'a user with a service with an automated ticket', :service
+    # vehicule auto completion step currently turned off
+    # describe 'when there is only one vehicle' do
+    #   include_context 'a user with a service with an automated ticket', :localisation
 
-      it 'automatically set the license_plate, vehicle_type and vehicle_description' do
-        subject
-        reloaded_automated_ticket = automated_ticket.reload
-        expect(reloaded_automated_ticket.license_plate).to eq('CL123UU')
-        expect(reloaded_automated_ticket.vehicle_type).to eq('electric_motorcycle')
-        expect(reloaded_automated_ticket.vehicle_description).to eq('a_fake_name')
-      end
-    end
+    #   it 'automatically set the license_plate, vehicle_type and vehicle_description' do
+    #     subject
+    #     reloaded_automated_ticket = automated_ticket.reload
+    #     expect(reloaded_automated_ticket.license_plate).to eq('CL123UU')
+    #     expect(reloaded_automated_ticket.vehicle_type).to eq('electric_motorcycle')
+    #     expect(reloaded_automated_ticket.vehicle_description).to eq('a_fake_name')
+    #   end
+    # end
     describe 'when there is only one rate_options_shared_between_zipcodes' do
       include_context 'a user with a service with an automated ticket', :zipcodes
       it 'automatically set the license_plate, vehicle_type and vehicle_description' do
@@ -55,6 +56,18 @@ RSpec.describe AutomatedTicket::Setup::CompleteAlreadyCompletableSteps, type: :a
         subject
         reloaded_automated_ticket = automated_ticket.reload
         expect(reloaded_automated_ticket.payment_method_client_internal_ids).to eq(['fake-payment-methof-id-9654e1084eb1'])
+      end
+    end
+
+    describe 'when the automated_ticket is already completed' do
+      include_context 'stubed pay_by_phone auth', '+33678901234', 'password'
+      include_context 'stubed pay_by_phone account_id'
+      let(:service) { FactoryBot.create(:service, :without_validations, username: '+33678901234', password: 'password') }
+      let(:automated_ticket) { FactoryBot.create(:automated_ticket, :set_up, service:) }
+      it 'does nothing' do
+        subject
+        reloaded_automated_ticket = automated_ticket.reload
+        expect(reloaded_automated_ticket.attributes).to eq(automated_ticket.attributes)
       end
     end
   end

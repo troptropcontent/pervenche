@@ -34,6 +34,9 @@ gem 'phonelib'
 gem 'sentry-rails'
 gem 'sentry-ruby'
 
+#view component
+gem "view_component"
+
 #Logging
 gem 'lograge'
 gem 'lograge-sql'
@@ -41,6 +44,8 @@ gem 'newrelic_rpm'
 
 # Explore your data with SQL. Easily create charts and dashboards, and share them with your team.
 gem "blazer"
+# store static data in hashes
+gem 'active_hash', '~> 2.3.0'
 
 # Use Tailwind CSS [https://github.com/rails/tailwindcss-rails]
 # gem 'tailwindcss-rails'
@@ -105,6 +110,7 @@ gem 'service_actor-rails', '~> 1.0'
 group :development, :test do
   gem 'byebug', platform: :mri
   gem 'rspec-rails'
+  gem 'rspec-sorbet'
 end
 
 group :development do
@@ -140,5 +146,6 @@ group :test do
   gem "vcr"
   gem "webmock"
   gem "json_matchers"
+  gem 'database_cleaner-active_record'
 end
 

@@ -1,0 +1,14 @@
+
+
+<main class="grow container stack">
+    <%= render 'automated_tickets/setup/shared/form', 
+        automated_ticket: @automated_ticket, 
+        step: @step, 
+        header_content: t("views.setup.kind.header.title") do |f| %>
+      <div class="form_group stack stack--xs">
+        <%= f.input :kind, 
+               as: :type_picker, 
+               wrapper: false,
+               collection: @kinds.map{|kind| [AutomatedTicket.human_enum_name(:kinds, kind), kind.to_s]} %>
+    <% end %>
+</main>

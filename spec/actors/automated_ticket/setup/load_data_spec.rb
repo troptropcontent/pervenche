@@ -7,13 +7,26 @@ require 'support/shared_context/service_stubs'
 RSpec.describe AutomatedTicket::Setup::LoadData, type: :actor do
   include Rails.application.routes.url_helpers
   subject { described_class.call(automated_ticket:, step:, params:) }
-  include_context 'a user with a service with an automated ticket', :payment_methods
-  include_context 'a stubed service'
   let(:step) { :service }
   let(:params) do
+    {}
   end
   describe '.call' do
+    describe 'base_data' do
+      let(:automated_ticket) do
+        FactoryBot.create(:automated_ticket, :with_localisation, user:, service:,
+                                                                 setup_step: :localisation)
+      end
+      let(:user) { FactoryBot.create(:user) }
+      let(:service) do
+        service = FactoryBot.build(:service, user_id: user.id, chargebee_customer_id: 'kjhghkjhkjghjgqisd')
+        service.save(validate: false)
+        service
+      end
+    end
     describe 'step' do
+      include_context 'a user with a service with an automated ticket', :payment_methods
+      include_context 'a stubed service'
       context 'service' do
         let(:expected_data) do
           { services: [[service.name, service.id]] }
@@ -91,30 +104,33 @@ RSpec.describe AutomatedTicket::Setup::LoadData, type: :actor do
       context 'subscription' do
         let(:step) { :subscription }
         context 'when the payment have not been processed' do
-          let(:params) do
-            ActionController::Parameters.new(
-              {}
-            )
-          end
           let(:expected_data) do
             {
-              plan_id: 'combustion_car',
-              hosted_page_data: '{"values":{"id":"oXZvOrUdHBk7WGakcd5upSFwPivz1BcdtV","type":"checkout_new","url":"https://pervenche-test.chargebee.com/pages/v3/oXZvOrUdHBk7WGakcd5upSFwPivz1BcdtV/","state":"created","embed":false,"created_at":1682670453,"expires_at":1682681253,"object":"hosted_page","updated_at":1682670453,"resource_version":1682670453426},"sub_types":{},"dependant_types":{},"id":"oXZvOrUdHBk7WGakcd5upSFwPivz1BcdtV","type":"checkout_new","url":"https://pervenche-test.chargebee.com/pages/v3/oXZvOrUdHBk7WGakcd5upSFwPivz1BcdtV/","state":"created","embed":false,"created_at":1682670453,"expires_at":1682681253,"object":"hosted_page","updated_at":1682670453,"resource_version":1682670453426}'
+              charge_bee_subscription_id: 'BTM8jcTflrfneOn0',
+              charge_bee_item_price_external_name: 'Abonnement mensuel scooter électrique',
+              charge_bee_item_price_price: Money.new(500, 'EUR'),
+              charge_bee_item_price_period: 'month',
+              charge_bee_item_price_trial_period: 15,
+              charge_bee_item_price_trial_period_unit: 'day'
             }
           end
-          it 'loads the correct data' do
-            VCR.use_cassette('chargebee_checkout_new_for_items') do
-              expect(subject.data).to eq(expected_data)
-            end
+          before do
+            charge_bee_subscription_stub = cat = OpenStruct.new(subscription: OpenStruct.new(id: 'BTM8jcTflrfneOn0'))
+            charge_bee_price_item_stub = OpenStruct.new(item_price: OpenStruct.new(
+              external_name: 'Abonnement mensuel scooter électrique',
+              price: 500,
+              currency_code: 'EUR',
+              period_unit: 'month',
+              trial_period: 15,
+              trial_period_unit: 'day'
+            ))
+            allow(ChargeBee::Subscription).to receive(:create_with_items).and_return(charge_bee_subscription_stub)
+            allow(ChargeBee::ItemPrice).to receive(:retrieve).and_return(charge_bee_price_item_stub)
           end
-        end
-        context 'when the payment have been processed' do
-          let(:params) do
-            ActionController::Parameters.new(
-              {
-                id: 'a_chargebee_customer_id'
-              }
-            )
+
+          it 'loads the correct data', :vcr do
+            output_data = subject.data
+            expect(output_data).to eq(expected_data)
           end
         end
       end
