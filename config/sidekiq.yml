@@ -6,5 +6,5 @@ production:
 
 :queues:
   - default
-  - mailers
+  - mailer
   - broadcasters
