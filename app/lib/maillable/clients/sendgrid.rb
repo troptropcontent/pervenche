@@ -7,18 +7,17 @@ module Maillable
       class << self
         include SendGrid
         extend T::Sig
-        sig { params(to: String, subject: String, content: String).void }
-        def send_email(to:, subject:, content:)
-          from = Email.new(email: Maillable.default_from)
-          to = Email.new(email: to)
-          content = Content.new(type: 'text/plain', value: content)
-          mail = Mail.new(from, subject, to, content)
 
+        sig { params(to: String, template_id: String, template_data: T::Hash[String, T.untyped]).void }
+        def send_email(to:, template_id:, template_data:)
+          mail = build_email(to:, template_id:, template_data:)
           deliver(mail)
         end
 
-        sig { params(to: String, template_id: String, template_data: T::Hash[String, T.untyped]).void }
-        def send_template_email(to:, template_id:, template_data:)
+        private
+
+        sig { params(to: String, template_id: String, template_data: T::Hash[String, T.untyped]).returns(Mail) }
+        def build_email(to:, template_id:, template_data:)
           mail = Mail.new
           mail.from = Email.new(email: Maillable.default_from)
           personalization = Personalization.new
@@ -26,11 +25,8 @@ module Maillable
           personalization.add_dynamic_template_data(template_data)
           mail.add_personalization(personalization)
           mail.template_id = template_id
-
-          deliver(mail)
+          mail
         end
-
-        private
 
         sig { params(mail: Mail).void }
         def deliver(mail)

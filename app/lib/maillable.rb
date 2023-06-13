@@ -2,6 +2,7 @@
 # typed: strict
 
 module Maillable
+  extend T::Sig
   @mailing_client = T.let(:unassigned, Symbol)
   @default_from = T.let('unassigned', String)
   class MaillableError < StandardError; end
@@ -21,21 +22,9 @@ module Maillable
     end
     # rubocop:enable Naming/BlockForwarding, Lint/UnusedMethodArgument
 
-    sig do
-      params(
-        to: String,
-        subject: String,
-        content: String
-      )
-        .returns(T.untyped)
-    end
-    def send_email(to:, subject:, content:)
-      client.send_email(to:, subject:, content:)
-    end
-
     sig { params(to: String, template_id: String, template_data: T::Hash[String, T.untyped]).returns(T.untyped) }
-    def send_template_email(to:, template_id:, template_data:)
-      client.send_template_email(to:, template_id:, template_data:)
+    def send_email(to:, template_id:, template_data:)
+      client.send_email(to:, template_id:, template_data:)
     end
 
     private
@@ -46,5 +35,15 @@ module Maillable
 
       raise MaillableError, "#{mailing_client} client is not supported"
     end
+  end
+
+  sig { params(to: String, template_id: String, template_data: T::Hash[String, T.untyped]).void }
+  def deliver_later(to:, template_id:, template_data:)
+    Maillable::EmailJob.perform_async(to, template_id, template_data)
+  end
+
+  sig { params(to: String, template_id: String, template_data: T::Hash[String, T.untyped]).void }
+  def deliver_now(to:, template_id:, template_data:)
+    Maillable::EmailJob.new.perform(to, template_id, template_data)
   end
 end
