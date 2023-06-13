@@ -353,6 +353,7 @@ GEM
       rubocop (>= 0.90.0)
     ruby-progressbar (1.13.0)
     ruby2_keywords (0.0.5)
+    ruby_http_client (3.5.5)
     rubyzip (2.3.2)
     safely_block (0.4.0)
     sassc (2.4.0)
@@ -367,6 +368,8 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
+    sendgrid-ruby (6.6.2)
+      ruby_http_client (~> 3.4)
     sentry-rails (5.9.0)
       railties (>= 5.0)
       sentry-ruby (~> 5.9.0)
@@ -513,6 +516,7 @@ DEPENDENCIES
   rubocop-sorbet
   sassc-rails
   selenium-webdriver
+  sendgrid-ruby
   sentry-rails
   sentry-ruby
   service_actor-rails (~> 1.0)

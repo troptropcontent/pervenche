@@ -92,6 +92,8 @@ gem 'faraday', '>= 2.7.2'
 #Typing with sorbet
 gem 'sorbet-runtime'
 
+#emails
+gem 'sendgrid-ruby'
 
 #Authorisation
 gem 'cancancan'
