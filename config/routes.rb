@@ -36,7 +36,7 @@ Rails.application.routes.draw do
   end
 
   namespace :webhooks do
-    namespace :charge_bee do
+    namespace :billable do
       post '/:token', action: 'handle'
     end
   end

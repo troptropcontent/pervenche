@@ -137,6 +137,7 @@ RSpec.describe AutomatedTicket, type: :model do
         end
 
         context 'format' do
+          let(:vehicle_type) { :electric_motorcycle }
           let(:zipcodes) { %w[75018 a u7] }
           it 'Returns an invalid record' do
             subject.valid?

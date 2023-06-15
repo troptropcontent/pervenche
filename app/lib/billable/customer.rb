@@ -29,9 +29,16 @@ module Billable
       Billable::Clients::ChargeBee::Customer
     end
 
+    sig { params(customer_billing_client_internal_id: String).returns(T.nilable(String)) }
+    def self.update_payment_method_hosted_page_url(customer_billing_client_internal_id)
+      # later here we can switch the Customer depending on Billable.billing_client
+      customer_client.update_payment_method_hosted_page_url(customer_billing_client_internal_id)
+    end
+
     sig { returns(T.nilable(Billable::Customer::Base)) }
     def customer
-      @customer ||= Billable::Customer.find(customer_billing_client_internal_id)
+      @customer ||= T.let(Billable::Customer.find(customer_billing_client_internal_id),
+                          T.nilable(Billable::Customer::Base))
     end
   end
 end
