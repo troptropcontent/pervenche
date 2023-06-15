@@ -11,4 +11,9 @@ Billable.configure do |config|
     api_key: Rails.application.credentials.dig(:chargebee,
                                                ENV['PERVENCHE_CHARGEBEE_PRODUCTION_SITE'] ? :production : :sandbox, :api_key)
   }
+  config.webhook_token = Rails.application.credentials.dig(
+    :chargebee,
+    ENV['PERVENCHE_CHARGEBEE_PRODUCTION_SITE'] ? :production : :sandbox,
+    :webhooks
+  )
 end

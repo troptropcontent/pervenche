@@ -26,7 +26,7 @@ class ApplicationController < ActionController::Base
   end
 
   def webhooks_controller?
-    [Webhooks::ChargeBeeController].include? self.class
+    [Webhooks::BillableController].include? self.class
   end
 
   def load_menu_links
