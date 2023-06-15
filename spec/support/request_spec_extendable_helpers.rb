@@ -13,6 +13,10 @@ module RequestSpecExtendableHelpers
     describe(description, method: :put, &)
   end
 
+  def post(description, &)
+    describe(description, method: :post, &)
+  end
+
   def response(code, message, &)
     describe("#{code} #{message}", code:, message:, &)
   end
