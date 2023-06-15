@@ -28,6 +28,20 @@ module Billable
             end
           end
 
+          sig { params(customer_billing_client_internal_id: String).returns(T.nilable(String)) }
+          def update_payment_method_hosted_page_url(customer_billing_client_internal_id)
+            response = Http::Client.post(
+              url: "https://#{Billable.billing_client_configuration[:site]}.chargebee.com/api/v2/hosted_pages/manage_payment_sources",
+              body: "customer[id]=#{customer_billing_client_internal_id}",
+              user: Billable.billing_client_configuration[:api_key],
+              raise_error: false,
+              logger: false
+            )
+            return if response.status != 200
+
+            response.body.dig('hosted_page', 'url').to_s
+          end
+
           private
 
           sig { params(path: String, params: T::Hash[String, T.untyped]).returns(Faraday::Response) }
