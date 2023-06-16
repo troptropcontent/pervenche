@@ -6,7 +6,10 @@ module Billable
     module Mixins
       module Subscription
         RSpec.describe TrialEndReminder do
-          include TrialEndReminder
+          subject do
+            test_class = Class.new { include Billable::Webhook::Mixins::Subscription::TrialEndReminder }
+            test_class.new
+          end
           describe 'process_trial_end_reminder_webhook(content)' do
             let!(:automated_ticket) do
               FactoryBot.create(:automated_ticket, :set_up, user:, service:, license_plate: 'a_license_plate', charge_bee_subscription_id: 'BTM8jcTfo0J6IVpC')
@@ -43,10 +46,10 @@ module Billable
             context 'when the user have not setup its credit card yet' do
               it 'sends an email to the user to ask him to update its paiment method' do
                 message_delivery = instance_double(ActionMailer::MessageDelivery)
-                allow(Billable::Customer).to receive(:update_payment_method_hosted_page_url).with('BTM8jcTfo0J6IVpC').and_return('an_url_to_the_hosted_page_to_manage_payments')
+                allow(Billable::Customer).to receive(:update_payment_method_hosted_page_url).with('BTM8jcTfo0J6IVpC', { redirect_url: 'http://localhost:3000/' }).and_return('an_url_to_the_hosted_page_to_manage_payments')
                 allow(AutomatedTicketMailer).to receive(:trial_period_ends_soon).with(expected_mailer_arguments).and_return(message_delivery)
                 expect(message_delivery).to receive(:deliver_later)
-                process_trial_end_reminder_webhook(content)
+                subject.process_trial_end_reminder_webhook(content)
               end
             end
             context 'when the user have already setup its credit card' do

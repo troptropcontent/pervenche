@@ -26,4 +26,10 @@ module Pervenche
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
   end
+  HOSTS = T.let({
+    development: 'localhost:3000',
+    test: 'localhost:3000',
+    staging: 'app.staging.pervenche.eu',
+    production: 'app.pervenche.eu'
+  }.freeze, T::Hash[Symbol, String])
 end
