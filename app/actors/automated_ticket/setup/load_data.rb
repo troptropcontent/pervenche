@@ -4,13 +4,6 @@
 module AutomatedTicket::Setup
   class LoadData < Actor
     extend T::Sig
-    include Rails.application.routes.url_helpers
-    HOSTS = T.let({
-      development: 'localhost:3000',
-      test: 'localhost:3000',
-      staging: 'app.staging.pervenche.eu',
-      production: 'app.pervenche.eu'
-    }.freeze, T::Hash[Symbol, String])
 
     input :automated_ticket, type: AutomatedTicket
     input :params, type: [Hash, ActionController::Parameters]

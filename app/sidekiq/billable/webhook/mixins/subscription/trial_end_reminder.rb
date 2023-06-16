@@ -26,7 +26,7 @@ module Billable
             AutomatedTicketMailer.trial_period_ends_soon(
               to: automated_ticket.user.email,
               license_plate: automated_ticket.license_plate,
-              update_payment_method_url: retrieve_update_payment_method_hosted_page_utl(customer_id)
+              update_payment_method_url: retrieve_update_payment_method_hosted_page_url(customer_id)
             ).deliver_later
           end
 
@@ -36,8 +36,13 @@ module Billable
           end
 
           sig { params(customer_id: String).returns(String) }
-          def retrieve_update_payment_method_hosted_page_utl(customer_id)
-            T.must(Billable::Customer.update_payment_method_hosted_page_url(customer_id))
+          def retrieve_update_payment_method_hosted_page_url(customer_id)
+            T.must(Billable::Customer.update_payment_method_hosted_page_url(customer_id, redirect_url: find_root_url))
+          end
+
+          sig { returns(String) }
+          def find_root_url
+            Rails.application.routes.url_helpers.root_url(host: Pervenche::HOSTS[Rails.env.to_sym])
           end
         end
       end
