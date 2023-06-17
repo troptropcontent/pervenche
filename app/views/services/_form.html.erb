@@ -3,16 +3,18 @@
                               data: { turbo: false, controller: "form tabs phone-input" , action: "form#toggleSubmitButtonLoading form#removeEmptyValue"}
                             } do |f| %>
     <section class="content grow stack stack--l">
-    <div class="form_group stack stack--xs">
-        <h4><%= t('views.services.new.form.kind.label') %></h4>
-        <%= f.input :kind, as: :radio_tiles, 
-        collection: [
-            [Service.human_enum_name(:kinds, 'pay_by_phone'), nil, 'pay_by_phone', checked: true],
-            [Service.human_enum_name(:kinds, 'easy_park'), t('views.services.new.form.kind.disabled_subtitle'), 'easy_park', disabled: true],
-            [Service.human_enum_name(:kinds, 'flow_bird'), t('views.services.new.form.kind.disabled_subtitle'), 'flow_bird', disabled: true]
-        ], 
-        wrapper: false %>
-    </div>
+    <% if service.new_record? %>      
+        <div class="form_group stack stack--xs">
+            <h4><%= t('views.services.new.form.kind.label') %></h4>
+            <%= f.input :kind, as: :radio_tiles, 
+            collection: [
+                [Service.human_enum_name(:kinds, 'pay_by_phone'), nil, 'pay_by_phone', checked: true],
+                [Service.human_enum_name(:kinds, 'easy_park'), t('views.services.new.form.kind.disabled_subtitle'), 'easy_park', disabled: true],
+                [Service.human_enum_name(:kinds, 'flow_bird'), t('views.services.new.form.kind.disabled_subtitle'), 'flow_bird', disabled: true]
+            ], 
+            wrapper: false %>
+        </div>
+    <% end %>
     <div class="form_group stack stack--xs" >
         <h4><%= t('views.services.new.form.phone_number.label') %></h4>
                 <%= f.input :username,
@@ -22,12 +24,13 @@
     </div>
     <div class="form_group stack stack--xs" >
         <h4><%= t('views.services.new.form.password.label') %></h4>
-        <%= f.input :password, as: :password %>
+        <%= f.input :password, as: :password, required: true %>
     </div>
     <% if local_assigns[:redirect_to] %>
         <%= hidden_field_tag 'navigation[redirect_to]', redirect_to %>
     <% end %>
-    <%= render(ModalComponent.new(
+    <% if service.new_record? %>      
+            <%= render(ModalComponent.new(
         id: 'connexion_issues_modal',
         title:t('views.services.new.form.modal.title'), 
         link_content: t('views.services.new.form.modal.link_content'), 
@@ -36,13 +39,16 @@
             <%= t('views.services.new.form.modal.content_html') %>
         </span>
     <% end %>
+    <% end %>
     </section>
     <section class="footer cluster margin__bottom--l">
-    <%= link_to redirect_to, class: 'btn btn--white center' do %>
-        <%= inline_svg 'chevron_left.svg' %>
-    <% end %>
+        <% if local_assigns[:redirect_to] %>
+          <%= link_to redirect_to, class: 'btn btn--white center' do %>
+            <%= inline_svg 'chevron_left.svg' %>
+          <% end %>
+        <% end %>
         <%= button_tag(type: 'submit', class: "btn btn--primary grow", data: {'form-target': 'inputButton'}) do %>
-            <p data-form-target='inputButtonContent'><%= t('views.services.new.cta') %></p>
+            <p data-form-target='inputButtonContent'><%= service.new_record? ? t('views.services.new.cta') : t('views.services.edit.cta') %></p>
         <% end %>
         <div class="btn btn--light grow visually-hidden" data-form-target='loader'>
             <%= render 'components/loader' %>
