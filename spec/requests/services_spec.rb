@@ -58,6 +58,46 @@ RSpec.describe 'Services', type: :request do
       end
     end
   end
+
+  path '/services/:id' do
+    let(:user) { FactoryBot.create(:user) }
+    let(:service) { FactoryBot.create(:service, :without_validations, user:) }
+    let(:id) { service.id }
+    put '#update' do
+      it_behaves_like 'An authenticated endpoint'
+
+      response '422', 'Unprocessable Entity' do
+        before { sign_in user }
+        context 'when the updated service is not valid' do
+          include_context 'stubed pay_by_phone failed auth', 'toto', 'tata'
+          params do
+            { service: {
+              username: 'toto',
+              password: 'tata'
+            } }
+          end
+          it 'returns a 422' do |example|
+            run example
+          end
+        end
+      end
+      response '302', 'Found' do
+        before { sign_in user }
+        context 'when the updated service is valid' do
+          include_context 'stubed pay_by_phone auth', '+33612345678', 'correct_password'
+          params do
+            { service: {
+              username: '+33612345678',
+              password: 'correct_password'
+            } }
+          end
+          it 'redirect to the root' do |example|
+            expect(run(example)).to redirect_to('/')
+          end
+        end
+      end
+    end
+  end
   describe '/services/new' do
     context 'GET' do
       describe 'services#new' do

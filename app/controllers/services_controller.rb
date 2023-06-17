@@ -2,13 +2,14 @@
 
 class ServicesController < ApplicationController
   def new
-    @with_navbar = false
     @redirect_to = navigation_params&.dig(:redirect_to)
   end
 
+  def edit; end
+
   def create
+    assign_default_name unless service_params[:name]
     if @service.save
-      assign_default_name unless service_params[:name]
       flash[:notice] = t('views.services.new.flash.success')
       redirect_to root_path
     else
@@ -17,15 +18,25 @@ class ServicesController < ApplicationController
     end
   end
 
+  # POST /services/:id
+  def update
+    if @service.update(service_params)
+      flash[:notice] = t('views.services.edit.flash.success')
+      redirect_to root_path
+    else
+      flash[:alert] = t('views.services.edit.flash.alert')
+      render 'edit', status: :unprocessable_entity
+    end
+  end
+
   private
 
   def service_params
-    params.require(:service).permit(:username, :password, :name, :kind).compact_blank
+    params.require(:service).permit(:username, :password, :name, :kind)
   end
 
   def assign_default_name
     @service.name = "#{t("models.service.attributes.kind.enum.#{@service.kind}")} - #{@service.username}"
-    @service.save
   end
 
   def navigation_params
