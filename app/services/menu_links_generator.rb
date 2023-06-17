@@ -18,7 +18,7 @@ class MenuLinksGenerator
 
   def call
     @links << logout_link
-    @links << edit_service_link if service
+    @links << edit_service_link if @user.operationnal?
     @links
   end
 
@@ -37,14 +37,9 @@ class MenuLinksGenerator
   sig { returns(Ui::Link) }
   def edit_service_link
     Ui::Link.new(
-      path: edit_service_path(service),
+      path: edit_service_path(@user.services.first),
       icon: 'settings',
       text: I18n.t('views.application.menu.parking_service')
     )
-  end
-
-  sig { returns(T.nilable(Service)) }
-  def service
-    @service ||= T.let(@user.services.first, T.nilable(Service))
   end
 end

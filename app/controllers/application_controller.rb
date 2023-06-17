@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+# typed: true
 
 class ApplicationController < ActionController::Base
   include ControllerErrorManager
@@ -32,9 +33,6 @@ class ApplicationController < ActionController::Base
   def load_menu_links
     return unless current_user
 
-    @menu_links = [
-      Ui::Link.new(path: destroy_user_session_path, action: :delete, icon: 'log_out',
-                   text: t('views.application.menu.log_out'))
-    ]
+    @menu_links = MenuLinksGenerator.call(current_user)
   end
 end
