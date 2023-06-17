@@ -1,6 +1,14 @@
 fr:
   views:
     services:
+      edit:
+          flash:
+            success: "Modifications prises en compte"
+            alert: "Les identifiants renseignés ne semblent pas corrects"
+          header:
+            title: "Mise à jour des identifiants PayByPhone"
+            subtitle: "Si tu as changé ton mot de passe ou souhaite utiliser un autre compte."
+          cta: Metre à jour
       new:
         flash:
           success: "Compte connecté  👍"
