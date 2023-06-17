@@ -43,6 +43,19 @@ RSpec.shared_context 'stubed pay_by_phone auth' do |username = 'username', passw
   end
 end
 
+RSpec.shared_context 'stubed pay_by_phone failed auth' do |username = 'username', password = 'password', _token = 'a_token'|
+  let(:stubed_token) { 'a_token' }
+  let(:stubed_auth_endpoint_body) do
+  end
+  before do
+    allow(ParkingTicket::Clients::PayByPhone::Client).to(
+      receive(:auth)
+        .with(username, password)
+          .and_return({})
+    )
+  end
+end
+
 RSpec.shared_context 'stubed pay_by_phone account_id' do |token = 'a_token', account_id = 'a_account_id'|
   before do
     allow(ParkingTicket::Clients::PayByPhone::Client).to(
