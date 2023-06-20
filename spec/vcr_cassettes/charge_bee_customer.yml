@@ -1,0 +1,67 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://pervenche-test.chargebee.com/api/v2/customers/BTTzPTThSY5dNHw3
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.7.5
+      Authorization:
+      - Basic dGVzdF8yM0g1TWhpZUhpMTFtRXBjc1N6MVNnVlVoY2pSb3paSDo=
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 20 Jun 2023 06:31:01 GMT
+      Content-Type:
+      - application/json;charset=utf-8
+      Content-Length:
+      - '609'
+      Connection:
+      - keep-alive
+      Cache-Control:
+      - no-store, no-cache, must-revalidate
+      Expires:
+      - Thu, 01 Jan 1970 00:00:00 UTC
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Pragma:
+      - no-cache
+      Server:
+      - ChargeBee
+    body:
+      encoding: UTF-8
+      string: |-
+        {"customer": {
+            "id": "BTTzPTThSY5dNHw3",
+            "email": "tomecrepont@gmail.com",
+            "auto_collection": "on",
+            "net_term_days": 0,
+            "allow_direct_debit": false,
+            "created_at": 1687022405,
+            "taxability": "taxable",
+            "updated_at": 1687022405,
+            "pii_cleared": "active",
+            "channel": "web",
+            "resource_version": 1687022405945,
+            "deleted": false,
+            "object": "customer",
+            "card_status": "no_card",
+            "promotional_credits": 0,
+            "refundable_credits": 0,
+            "excess_payments": 0,
+            "unbilled_charges": 0,
+            "preferred_currency_code": "EUR",
+            "tax_providers_fields": []
+        }}
+  recorded_at: Tue, 20 Jun 2023 06:31:01 GMT
+recorded_with: VCR 6.1.0
