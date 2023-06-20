@@ -8,13 +8,18 @@ module Billable
         class << self
           extend T::Sig
 
-          sig { params(customer_id: String).returns(T.nilable(Billable::Customer::Base)) }
+          sig { params(customer_id: String).returns(T.untyped) }
           def find(customer_id)
             response = get_client(path: "/#{customer_id}")
             return unless response.status == 200
 
+            response.body
             customer_hash = response.body['customer']
-            build_customer(customer_hash)
+            card_hash = response.body['card']
+            customer = build_customer(customer_hash)
+            customer.billing_address = build_billing_address(customer_hash)
+            customer.payment_method = build_payment_method(card_hash) if card_hash
+            customer
           end
 
           sig { params(filter_params: T::Hash[String, T.untyped]).returns(T::Array[Billable::Customer::Base]) }
@@ -59,16 +64,40 @@ module Billable
             )
           end
 
-          sig { params(customer_hash: T::Hash[String, T.untyped]).returns(Billable::Customer::Base) }
+          sig do
+            params(customer_hash: T::Hash[String, T.untyped]).returns(Billable::Customer::Base)
+          end
           def build_customer(customer_hash)
             Billable::Customer::Base.new(
               customer_billing_client_internal_id: customer_hash['id'],
               email: customer_hash['email'],
-              first_name: customer_hash['first_name'],
-              last_name: customer_hash['last_name'],
               payment_method_valid: customer_hash['card_status'] != 'no_card',
               payment_method_status: customer_hash['card_status'],
               deleted: customer_hash['deleted']
+            )
+          end
+
+          sig do
+            params(card_hash: T::Hash[String, T.untyped]).returns(Billable::Customer::PaymentMethod)
+          end
+          def build_payment_method(card_hash)
+            Billable::Customer::PaymentMethod.new(
+              status: card_hash['status'],
+              last_four_digits: card_hash['last4'],
+              card_type: card_hash['card_type'],
+              funding_type: card_hash['funding_type'],
+              expiry_month: card_hash['expiry_month'],
+              expiry_year: card_hash['expiry_year']
+            )
+          end
+
+          sig do
+            params(customer_hash: T::Hash[String, T.untyped]).returns(Billable::Customer::Address)
+          end
+          def build_billing_address(customer_hash)
+            Billable::Customer::Address.new(
+              last_name: customer_hash['last_name'],
+              first_name: customer_hash['last_name']
             )
           end
         end
