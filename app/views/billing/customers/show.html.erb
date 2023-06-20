@@ -1,0 +1,41 @@
+<main class="grow container stack stack--l">
+    <section class="stack">
+      <div class="cluster">
+        <h3 class='grow'><%= t('views.billing.customers.show.billing_address.title') %></h3>
+        <% if !@billing_address.serialize.empty? %>
+          <%= render( LinkComponent.new(path: '/', icon: 'edit') ) %>
+        <% end %>
+      </div>
+      <span>  
+        <%= render 'billing/customers/billing_address/billing_address' %>
+        <%= render EmptyStateComponent.new do %>
+            <%= render InfoCardComponent.new(
+                color: 'muted', 
+                center: true,
+                title: t('views.billing.customers.show.billing_address.empty_state.title'),
+                sub_title: t('views.billing.customers.show.billing_address.empty_state.sub_title_html')) %>
+        <% end %>
+      </span>
+    </section>
+    <section class="stack">
+      <div class="cluster">
+        <h3 class='grow'><%= t('views.billing.customers.show.payment_method.title') %></h3>
+        <% if @payment_method %>
+          <%= render( LinkComponent.new(path: @update_payment_method_hosted_page_url, icon: 'edit') ) %>
+        <% end %>
+      </div>
+      <span>  
+        <%= render 'billing/customers/payment_method/payment_method', payment_method: @payment_method %>
+        <%= render EmptyStateComponent.new do %>
+            <%= render InfoCardComponent.new(
+                color: 'muted', 
+                center: true,
+                title: t('views.billing.customers.show.payment_method.empty_state.title'),
+                sub_title: t('views.billing.customers.show.payment_method.empty_state.sub_title_html', href: @update_payment_method_hosted_page_url)) %>
+        <% end %>
+      </span>
+    </section>
+    <section class="stack">
+       <h3>Factures à venir</h3>
+    </section>
+</main>

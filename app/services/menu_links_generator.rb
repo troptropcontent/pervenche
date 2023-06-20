@@ -19,6 +19,7 @@ class MenuLinksGenerator
   def call
     @links << logout_link
     @links << edit_service_link if @user.operationnal?
+    @links << billing_customer_link if @user.operationnal?
     @links
   end
 
@@ -40,6 +41,14 @@ class MenuLinksGenerator
       path: edit_service_path(@user.services.first),
       icon: 'settings',
       text: I18n.t('views.application.menu.parking_service')
+    )
+  end
+
+  def billing_customer_link
+    Ui::Link.new(
+      path: billing_customer_path(customer_id: @user.chargebee_customer_id),
+      icon: 'dollar-sign',
+      text: I18n.t('views.application.menu.billing_customer')
     )
   end
 end
