@@ -15,6 +15,9 @@ class Ability
     can %i[update], AutomatedTicket, { user: }
     can %i[index destroy], AutomatedTicket, { user_id: user.id, status: :ready }
     can %i[new create update], Service, { user_id: user.id }
+    can %i[show], Billable::Customer::Base do |customer|
+      user.chargebee_customer_id == customer.customer_billing_client_internal_id
+    end
 
     return unless user.has_role?('admin')
 

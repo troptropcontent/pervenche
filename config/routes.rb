@@ -15,6 +15,10 @@ Rails.application.routes.draw do
     end
   end
 
+  namespace :billing do
+    resources :customers, only: %i[show], param: :customer_id
+  end
+
   resource :onboarding, only: :show do
     get 'welcome', to: 'onboardings#welcome'
   end
