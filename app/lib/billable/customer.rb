@@ -4,16 +4,6 @@
 module Billable
   module Customer
     extend T::Sig
-    class Base < T::Struct
-      const :customer_billing_client_internal_id, String
-      const :email, String
-      const :last_name, T.nilable(String)
-      const :first_name, T.nilable(String)
-      const :payment_method_valid, T::Boolean
-      const :payment_method_status, String
-      const :deleted, T::Boolean
-    end
-
     class Error < StandardError; end
     class RecordNotFound < Error; end
     sig { params(filter_params: T::Hash[String, T.untyped]).returns(T::Array[Billable::Customer::Base]) }
