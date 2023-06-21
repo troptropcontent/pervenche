@@ -1,0 +1,24 @@
+.grid {
+    display: grid;
+    &--gap-m {
+        gap: var(--space-m);
+    }
+    &--gap-l {
+        gap: var(--space-l);
+    }
+    &--gap-s {
+        gap: var(--space-s);
+    }
+    &--2-columns {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    &--3-columns {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    &__item {
+        &--full {
+            grid-column: 1 / -1;
+        }
+    }
+}
