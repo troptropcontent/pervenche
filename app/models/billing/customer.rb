@@ -17,5 +17,23 @@ module Billing
         deleted: customer_data.dig('customer', 'deleted')
       )
     end
+
+    def billing_address
+      customer_data = Billable::Clients::ChargeBee::Customer.find(billing_client_id)
+      raise Error, "Customer with id #{billing_client_id} does not exist" if customer_data.nil?
+
+      address_data = customer_data.dig('customer', 'billing_address')
+      Address.new(
+        customer_id: billing_client_id,
+        last_name: address_data['last_name'],
+        first_name: address_data['first_name'],
+        company: address_data['company'],
+        phone: address_data['phone'],
+        address: address_data['line1'],
+        city: address_data['city'],
+        zipcode: address_data['zip'],
+        country: address_data['country']
+      )
+    end
   end
 end
