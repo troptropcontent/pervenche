@@ -2,7 +2,7 @@
 
 class User < ApplicationRecord
   include HasRoles
-  include Billable::Customer
+  include Billing::Customerable
 
   before_create :set_chargebee_customer_id
   after_create :send_notification
@@ -43,5 +43,9 @@ class User < ApplicationRecord
 
   def customer_billing_client_internal_id
     chargebee_customer_id
+  end
+
+  def billing_client_id_attribute
+    :chargebee_customer_id
   end
 end
