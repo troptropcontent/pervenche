@@ -16,7 +16,9 @@ Rails.application.routes.draw do
   end
 
   namespace :billing do
-    resources :customers, only: %i[show], param: :customer_id
+    resources :customers, only: %i[show], param: :customer_id do
+      resource :billing_address, only: %i[update]
+    end
   end
 
   resource :onboarding, only: :show do

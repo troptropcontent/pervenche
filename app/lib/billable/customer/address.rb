@@ -7,8 +7,7 @@ module Billable
       const :phone, T.nilable(String)
       const :address, T.nilable(String)
       const :city, T.nilable(String)
-      const :state, T.nilable(String)
-      const :zip, T.nilable(String)
+      const :zipcode, T.nilable(String)
       const :country, T.nilable(String)
     end
   end

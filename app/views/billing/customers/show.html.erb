@@ -7,7 +7,7 @@
         <% end %>
       </div>
       <span>  
-        <%= render 'billing/customers/billing_address/billing_address' %>
+        <%= render 'billing/customers/billing_address/billing_address', billing_address: @billing_address %>
         <%= render EmptyStateComponent.new do %>
             <%= render InfoCardComponent.new(
                 color: 'muted', 

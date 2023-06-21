@@ -17,7 +17,7 @@ module Billable
             customer_hash = response.body['customer']
             card_hash = response.body['card']
             customer = build_customer(customer_hash)
-            customer.billing_address = build_billing_address(customer_hash)
+            customer.billing_address = build_billing_address(customer_hash['billing_address'])
             customer.payment_method = build_payment_method(card_hash) if card_hash
             customer
           end
@@ -31,6 +31,30 @@ module Billable
             customers_array.map! do |customer_hash|
               build_customer(customer_hash['customer'])
             end
+          end
+
+          sig do
+            params(customer_billing_client_internal_id: String, first_name: T.nilable(String), last_name: T.nilable(String), address: T.nilable(String),
+                   city: T.nilable(String), zipcode: T.nilable(String), country: T.nilable(String)).returns(T.nilable(Billable::Customer::Base))
+          end
+          def update_billing_address(customer_billing_client_internal_id, first_name: nil, last_name: nil, address: nil, city: nil,
+                                     zipcode: nil, country: 'FR')
+
+            response = Http::Client.post(
+              url: "https://#{Billable.billing_client_configuration[:site]}.chargebee.com/api/v2/customers/#{customer_billing_client_internal_id}/update_billing_info",
+              body: "billing_address[first_name]=#{first_name}&billing_address[last_name]=#{last_name}&billing_address[line1]=#{address}&billing_address[city]=#{city}&billing_address[zip]=#{zipcode}&billing_address[country]=#{country}",
+              user: Billable.billing_client_configuration[:api_key],
+              raise_error: false,
+              logger: false
+            )
+            return unless response.status == 200
+
+            customer_hash = response.body['customer']
+            card_hash = response.body['card']
+            customer = build_customer(customer_hash)
+            customer.billing_address = build_billing_address(customer_hash['billing_address'])
+            customer.payment_method = build_payment_method(card_hash) if card_hash
+            customer
           end
 
           sig do
@@ -92,12 +116,12 @@ module Billable
           end
 
           sig do
-            params(customer_hash: T::Hash[String, T.untyped]).returns(Billable::Customer::Address)
+            params(billing_address_hash: T::Hash[String, T.untyped]).returns(Billable::Customer::Address)
           end
-          def build_billing_address(customer_hash)
+          def build_billing_address(billing_address_hash)
             Billable::Customer::Address.new(
-              last_name: customer_hash['last_name'],
-              first_name: customer_hash['last_name']
+              last_name: billing_address_hash['last_name'],
+              first_name: billing_address_hash['first_name']
             )
           end
         end
