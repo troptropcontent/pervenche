@@ -14,47 +14,26 @@ module Billable
             return unless response.status == 200
 
             response.body
-            customer_hash = response.body['customer']
-            card_hash = response.body['card']
-            customer = build_customer(customer_hash)
-            customer.billing_address = build_billing_address(customer_hash['billing_address'])
-            customer.payment_method = build_payment_method(card_hash) if card_hash
-            customer
-          end
-
-          sig { params(filter_params: T::Hash[String, T.untyped]).returns(T::Array[Billable::Customer::Base]) }
-          def list(filter_params: {})
-            response = get_client(params: filter_params)
-            return [] unless response.status == 200
-
-            customers_array = response.body.fetch('list')
-            customers_array.map! do |customer_hash|
-              build_customer(customer_hash['customer'])
-            end
           end
 
           sig do
-            params(customer_billing_client_internal_id: String, first_name: T.nilable(String), last_name: T.nilable(String), address: T.nilable(String),
-                   city: T.nilable(String), zipcode: T.nilable(String), country: T.nilable(String)).returns(T.nilable(Billable::Customer::Base))
+            params(
+              customer_billing_client_internal_id: String,
+              attributes: T::Hash[Symbol, T.untyped]
+            )
+              .returns(T.untyped)
           end
-          def update_billing_address(customer_billing_client_internal_id, first_name: nil, last_name: nil, address: nil, city: nil,
-                                     zipcode: nil, country: 'FR')
-
+          def update_billing_address(customer_billing_client_internal_id, attributes)
             response = Http::Client.post(
               url: "https://#{Billable.billing_client_configuration[:site]}.chargebee.com/api/v2/customers/#{customer_billing_client_internal_id}/update_billing_info",
-              body: "billing_address[first_name]=#{first_name}&billing_address[last_name]=#{last_name}&billing_address[line1]=#{address}&billing_address[city]=#{city}&billing_address[zip]=#{zipcode}&billing_address[country]=#{country}",
+              body: "billing_address[first_name]=#{attributes[:first_name]}&billing_address[last_name]=#{attributes[:last_name]}&billing_address[line1]=#{attributes[:address]}&billing_address[city]=#{attributes[:city]}&billing_address[zip]=#{attributes[:zipcode]}&billing_address[country]=#{attributes[:country]}",
               user: Billable.billing_client_configuration[:api_key],
               raise_error: false,
               logger: false
             )
             return unless response.status == 200
 
-            customer_hash = response.body['customer']
-            card_hash = response.body['card']
-            customer = build_customer(customer_hash)
-            customer.billing_address = build_billing_address(customer_hash['billing_address'])
-            customer.payment_method = build_payment_method(card_hash) if card_hash
-            customer
+            response.body.dig('customer', 'billing_address')
           end
 
           sig do
