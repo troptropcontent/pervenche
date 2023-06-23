@@ -20,7 +20,7 @@ module Billing
       )
     end
 
-    def billing_address
+    def address
       address_data = customer_data.dig('customer', 'billing_address') || {}
       Address.new(
         customer_id: client_id,

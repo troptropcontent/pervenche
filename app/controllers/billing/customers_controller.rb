@@ -6,7 +6,7 @@ module Billing
 
     # GET /billing/customers/:customer_id
     def show
-      @billing_address = @customer.billing_address
+      @address = @customer.address
       @payment_method = @customer.payment_method
       @update_payment_method_hosted_page_url = @payment_method.update_payment_method_hosted_page_url(
         redirect_url: billing_customer_url(customer_id: @customer.client_id)

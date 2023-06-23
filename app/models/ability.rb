@@ -18,6 +18,9 @@ class Ability
     can %i[show], Billing::Customer do |customer|
       user.chargebee_customer_id == customer.client_id
     end
+    can %i[edit], Billing::Address do |address|
+      user.chargebee_customer_id == address.customer.client_id
+    end
 
     return unless user.has_role?('admin')
 
