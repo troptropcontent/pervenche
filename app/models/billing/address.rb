@@ -20,5 +20,13 @@ module Billing
       self.first_name = updated_billing_address_data['first_name']
       self
     end
+
+    def to_partial_path
+      'billing/addresses/address'
+    end
+
+    def customer
+      Customer.find(customer_id)
+    end
   end
 end
