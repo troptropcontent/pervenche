@@ -1,0 +1,2 @@
+<p class='text__weigth--bold'><%= t("models.billing.attributes.address.#{field.to_s}") %> : </p>
+<%= render 'billing/addresses/private/values', value:  address.send(field) %>

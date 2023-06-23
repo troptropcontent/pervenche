@@ -2,12 +2,12 @@
     <section class="stack">
       <div class="cluster">
         <h3 class='grow'><%= t('views.billing.customers.show.billing_address.title') %></h3>
-        <% if !@billing_address.serialize.empty? %>
-          <%= render( LinkComponent.new(path: '/', icon: 'edit') ) %>
+        <% if !@address.serialize.empty? %>
+          <%= render( LinkComponent.new(path: edit_billing_address_path(customer_id: @address.customer_id), icon: 'edit') ) %>
         <% end %>
       </div>
       <span>  
-        <%= render 'billing/customers/billing_address/billing_address', billing_address: @billing_address %>
+        <%= render @address %>
         <%= render EmptyStateComponent.new do %>
             <%= render InfoCardComponent.new(
                 color: 'muted', 

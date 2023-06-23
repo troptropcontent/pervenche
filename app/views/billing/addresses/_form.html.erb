@@ -1,0 +1,30 @@
+
+<%= simple_form_for address, as: :address, method: , url:, html: {class: "grow stack stack--justify-content--between margin__bottom--l"} do |f| %>
+  <%= render Grid::ContainerComponent.new(gap: 'm', columns: 2) do %>
+    <%= render Grid::ItemComponent.new do %>
+      <p class='text__weigth--bold'><%= t("models.billing.attributes.address.first_name") %> : </p>
+      <%= f.input :first_name %>
+    <% end %>
+    <%= render Grid::ItemComponent.new do %>
+      <p class='text__weigth--bold'><%= t("models.billing.attributes.address.last_name") %> : </p>
+      <%= f.input :last_name %>
+    <% end %>
+    <%= render Grid::ItemComponent.new(full: true) do %>
+      <p class='text__weigth--bold'><%= t("models.billing.attributes.address.company") %> : </p>
+      <%= f.input :company %>
+    <% end %>
+    <%= render Grid::ItemComponent.new(full: true) do %>
+      <p class='text__weigth--bold'><%= t("models.billing.attributes.address.address") %> : </p>
+      <%= f.input :address %>
+    <% end %>
+    <%= render Grid::ItemComponent.new do %>
+      <p class='text__weigth--bold'><%= t("models.billing.attributes.address.city") %> : </p>
+      <%= f.input :city %>
+    <% end %>
+    <%= render Grid::ItemComponent.new do %>
+      <p class='text__weigth--bold'><%= t("models.billing.attributes.address.zipcode") %> : </p>
+      <%= f.input :zipcode %>
+    <% end %>
+  <% end %>
+  <%= f.submit "Enregistrer", class: "btn btn--primary" %>
+<% end %>

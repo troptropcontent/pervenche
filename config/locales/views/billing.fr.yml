@@ -17,5 +17,24 @@ fr:
             empty_state:
               title: Vous n'avez pas encore renseigné de carte bancaire
               sub_title_html: Vos tickets ne seront plus renouvelés à la fin de la période d'éssai, <a href='%{href}'>cliquez ici</a> pour enregistrer une carte bancaire, vous serez redirigé vers notre partenaire de paiment ChargeBee. 
-
-              
+      addresses:
+        partial:
+          private:
+            values: 
+              unknown: 'Non renseigné'
+        edit:
+          header:
+            title: Modifier votre addresse de facturation
+            subtitle: Cette addresse apparaitra sur vos factures
+  models:
+    billing:
+      attributes:
+        address:
+          last_name: Nom de famille
+          first_name: Prenom
+          company: Entreprise
+          phone: Numéro de téléphone
+          address: Adresse
+          city: Ville
+          zipcode: Code postal
+          country: Pays
