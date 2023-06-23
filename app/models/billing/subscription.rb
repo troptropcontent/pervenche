@@ -53,8 +53,9 @@ class Billing::Subscription < T::Struct
   end
 
   def holder
-    return if holder_id.nil? && holder_type.nil
+    return @holder if @holder
+    return if holder_id.nil? && holder_type.nil?
 
-    holder_type.constantize.find(holder_id)
+    @holder = holder_type.constantize.find(holder_id)
   end
 end
