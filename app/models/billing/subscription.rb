@@ -4,6 +4,8 @@ class Billing::Subscription < T::Struct
 
   const :customer_id, String
   const :plan_id, String
+  const :holder_id, T.nilable(Integer)
+  const :holder_type, T.nilable(String)
   prop :amount, T.nilable(Integer)
   prop :client_id, T.nilable(String)
   prop :started_at, T.nilable(DateTime)
@@ -35,6 +37,8 @@ class Billing::Subscription < T::Struct
       new(
         customer_id: subscription_hash.dig('subscription', 'customer_id'),
         client_id: subscription_hash.dig('subscription', 'id'),
+        holder_id: subscription_hash.dig('subscription', 'cf_holder_id'),
+        holder_type: subscription_hash.dig('subscription', 'cf_holder_type'),
         plan_id: subscription_hash.dig('subscription', 'subscription_items', 0, 'item_price_id'),
         started_at: Time.zone.at(subscription_hash.dig('subscription', 'started_at')).to_datetime,
         trial_ends_at: Time.zone.at(subscription_hash.dig('subscription', 'trial_end')).to_datetime,
@@ -46,5 +50,11 @@ class Billing::Subscription < T::Struct
         client_data: subscription_hash
       )
     end
+  end
+
+  def holder
+    return if holder_id.nil? && holder_type.nil
+
+    holder_type.constantize.find(holder_id)
   end
 end

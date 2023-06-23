@@ -70,6 +70,8 @@ module AutomatedTicket::Setup
       )
 
       charge_bee_subscription = ChargeBee::Subscription.create_with_items(automated_ticket.user.chargebee_customer_id, {
+                                                                            cf_holder_id: automated_ticket.id,
+                                                                            cf_holder_type: automated_ticket.class.name,
                                                                             cf_automated_ticket_id: automated_ticket.id,
                                                                             subscription_items: [{
                                                                               item_price_id:
