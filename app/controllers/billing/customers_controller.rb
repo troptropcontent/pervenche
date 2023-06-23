@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Billing
   class CustomersController < ApplicationController
     skip_load_and_authorize_resource
@@ -11,6 +13,7 @@ module Billing
       @update_payment_method_hosted_page_url = @payment_method.update_payment_method_hosted_page_url(
         redirect_url: billing_customer_url(customer_id: @customer.client_id)
       )
+      @subscriptions = @customer.subscriptions
     end
 
     private

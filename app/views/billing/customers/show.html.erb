@@ -35,7 +35,21 @@
         <% end %>
       </span>
     </section>
-    <section class="stack">
-       <h3>Factures à venir</h3>
-    </section>
+    <%= render StackComponent.new do %>
+        <%= render TitleComponent.new(size: 'm')  do %>
+          <%= t('views.billing.customers.show.subscriptions.title') %>
+        <% end %>
+        <%= render StackComponent.new  do %>
+          <%= render StackComponent.new(gap: 'm') do %>
+            <%= render @subscriptions %>
+          <% end %>
+          <%= render EmptyStateComponent.new do %>
+              <%= render InfoCardComponent.new(
+                  color: 'muted', 
+                  center: true,
+                  title: t('views.billing.customers.show.subscriptions.empty_state.title'),
+                  sub_title: t('views.billing.customers.show.subscriptions.empty_state.sub_title_html', href: root_path)) %>
+          <% end %>
+        <% end %>
+    <% end %>
 </main>

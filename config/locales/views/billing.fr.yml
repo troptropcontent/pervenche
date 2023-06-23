@@ -17,6 +17,11 @@ fr:
             empty_state:
               title: Vous n'avez pas encore renseigné de carte bancaire
               sub_title_html: Vos tickets ne seront plus renouvelés à la fin de la période d'éssai, <a href='%{href}'>cliquez ici</a> pour enregistrer une carte bancaire, vous serez redirigé vers notre partenaire de paiment ChargeBee. 
+          subscriptions: 
+            title: Mes abonnements
+            empty_state:
+              title: Vous n'avez pas encore souscrit à un abonnement.
+              sub_title_html: Vous pouvez souscrire à un abonnement en créant un ticket automatique via la page principale (<a href='%{href}'>ici</a>).
       addresses:
         partial:
           private:
@@ -26,6 +31,15 @@ fr:
           header:
             title: Modifier votre addresse de facturation
             subtitle: Cette addresse apparaitra sur vos factures
+      subscriptions:
+        holder: 
+          automated_ticket:
+            description: 
+              one: Pour le véhicule %{license_plate} dans la zone %{zipcodes}
+              other: Pour le véhicule %{license_plate} dans les zones %{zipcodes}
+        partial:
+          trial_ends_at_html: "Fin de la période d'éssai le <b>%{trial_ends_at}</b>"
+          started_at_html: "Depuis le <b>%{started_at}</b>"
   models:
     billing:
       attributes:
