@@ -26,7 +26,7 @@ module Billable
           def update_address(customer_billing_client_internal_id, attributes)
             response = Http::Client.post(
               url: "https://#{Billable.billing_client_configuration[:site]}.chargebee.com/api/v2/customers/#{customer_billing_client_internal_id}/update_billing_info",
-              body: "billing_address[first_name]=#{attributes[:first_name]}&billing_address[last_name]=#{attributes[:last_name]}&billing_address[line1]=#{attributes[:address]}&billing_address[city]=#{attributes[:city]}&billing_address[zip]=#{attributes[:zipcode]}&billing_address[country]=#{attributes[:country]}",
+              body: "billing_address[first_name]=#{attributes[:first_name]}&billing_address[last_name]=#{attributes[:last_name]}&billing_address[company]=#{attributes[:company]}&billing_address[line1]=#{attributes[:address]}&billing_address[city]=#{attributes[:city]}&billing_address[zip]=#{attributes[:zipcode]}&billing_address[country]=#{attributes[:country]}",
               user: Billable.billing_client_configuration[:api_key],
               raise_error: false,
               logger: false
