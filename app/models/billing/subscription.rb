@@ -1,4 +1,7 @@
 class Billing::Subscription < T::Struct
+  extend ActiveModel::Naming
+  include ActiveModel::Conversion
+
   const :customer_id, String
   const :plan_id, String
   prop :amount, T.nilable(Integer)
