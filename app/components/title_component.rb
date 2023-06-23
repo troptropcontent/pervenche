@@ -14,6 +14,7 @@ class TitleComponent < ViewComponent::Base
     return 3 if size == 'm'
     return 4 if size == 's'
     return 5 if size == 'xs'
+
     3
   end
 end
