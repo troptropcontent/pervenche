@@ -2,7 +2,6 @@
 
 module Billing
   class Customer < T::Struct
-    class Error < StandardError; end
     const :client_id, String
     const :email, String
     const :deleted, T::Boolean
@@ -10,7 +9,7 @@ module Billing
 
     def self.find(id)
       customer_data = Billable::Clients::ChargeBee::Customer.find(id)
-      raise Error, "Customer with id #{id} does not exist" if customer_data.nil?
+      raise Errors::NotFound, "Customer with id #{id} does not exist" if customer_data.nil?
 
       new(
         client_id: customer_data.dig('customer', 'id'),
@@ -46,6 +45,10 @@ module Billing
         expiry_month: payment_method_data['expiry_month'],
         expiry_year: payment_method_data['expiry_year']
       )
+    end
+
+    def subscriptions
+      @subscriptions ||= Billing::Subscription.list(filter_params: { 'customer_id[is]' => client_id })
     end
   end
 end

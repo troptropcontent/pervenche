@@ -13,18 +13,15 @@ module Billable
             response = get_client(path: "/#{subscription_id}")
             return unless response.status == 200
 
-            build_subscription(subscription_hash: response.body)
+            response.body
           end
 
-          sig { params(filter_params: T::Hash[String, T.untyped]).returns(T::Array[Billable::Subscription::Base]) }
+          sig { params(filter_params: T::Hash[String, T.untyped]).returns(T.untyped) }
           def list(filter_params: {})
             response = get_client(params: filter_params)
             return [] unless response.status == 200
 
-            subscriptions_array = response.body.fetch('list')
-            subscriptions_array.map! do |subscription_hash|
-              build_subscription(subscription_hash:)
-            end
+            response.body
           end
 
           private

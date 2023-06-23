@@ -3,6 +3,9 @@
 module Billing
   module Customerable
     extend ActiveSupport::Concern
+    included do
+      delegate :subscriptions, to: :customer
+    end
 
     def customer
       @customer ||= Billing::Customer.find(self[billing_client_id_attribute])
