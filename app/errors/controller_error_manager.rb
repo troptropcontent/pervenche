@@ -10,7 +10,8 @@ module ControllerErrorManager
                   ActiveRecord::DeleteRestrictionError,
                   ActiveRecord::RecordNotSaved,
                   ActiveRecord::RecordNotDestroyed,
-                  ActiveModel::ValidationError do |error|
+                  ActiveModel::ValidationError,
+                  Billing::Errors::UnprocessableEntity do |error|
         render json: { code: :unprocessable_entity, message: error }, status: :unprocessable_entity
       end
 

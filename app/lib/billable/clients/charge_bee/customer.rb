@@ -19,7 +19,7 @@ module Billable
           sig do
             params(
               customer_billing_client_internal_id: String,
-              attributes: T::Hash[Symbol, T.untyped]
+              attributes: T.any(T::Hash[Symbol, T.untyped], ActionController::Parameters)
             )
               .returns(T.untyped)
           end
