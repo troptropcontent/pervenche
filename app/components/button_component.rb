@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ButtonComponent < ViewComponent::Base
-  def initialize(path: , method: , text: nil, color: 'primary')
+  def initialize(path:, method:, text: nil, color: 'primary')
     @color = color
     @path = path
     @method = method
