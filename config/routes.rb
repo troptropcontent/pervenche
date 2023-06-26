@@ -21,6 +21,7 @@ Rails.application.routes.draw do
         resource :address, only: %i[update edit]
       end
     end
+    resources :subscriptions, only: %i[destroy], param: :subscription_id
   end
 
   resource :onboarding, only: :show do

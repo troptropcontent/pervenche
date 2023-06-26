@@ -9,6 +9,7 @@ class Billing::Subscription < T::Struct
   prop :amount, T.nilable(Integer)
   prop :client_id, T.nilable(String)
   prop :started_at, T.nilable(DateTime)
+  prop :cancelled_at, T.nilable(DateTime)
   prop :trial_ends_at, T.nilable(DateTime)
   prop :status, T.nilable(String)
   prop :next_billing_at, T.nilable(DateTime)
@@ -44,12 +45,23 @@ class Billing::Subscription < T::Struct
         trial_ends_at: Time.zone.at(subscription_hash.dig('subscription', 'trial_end')).to_datetime,
         amount: subscription_hash.dig('subscription', 'subscription_items').sum { |item| item['amount'] },
         status: subscription_hash.dig('subscription', 'status'),
-        next_billing_at: Time.zone.at(subscription_hash.dig('subscription', 'next_billing_at')).to_datetime,
+        cancelled_at: build_datetime(subscription_hash.dig('subscription', 'cancelled_at')),
+        next_billing_at: build_datetime(subscription_hash.dig('subscription', 'next_billing_at')),
         deleted: subscription_hash.dig('subscription', 'deleted'),
         due_invoices_count: subscription_hash.dig('subscription', 'due_invoices_count'),
         client_data: subscription_hash
       )
     end
+
+    def build_datetime(int)
+      return if int.nil?
+
+      Time.zone.at(int).to_datetime
+    end
+  end
+
+  def destroy
+    Billable::Clients::ChargeBee::Subscription.cancel(client_id)
   end
 
   def holder

@@ -37,7 +37,7 @@
     </section>
     <%= render StackComponent.new do %>
         <%= render TitleComponent.new(size: 'm')  do %>
-          <%= t('views.billing.customers.show.subscriptions.title') %>
+          <%= t('views.billing.customers.show.subscriptions.title', count: @subscriptions.count) %>
         <% end %>
         <%= render StackComponent.new  do %>
           <%= render StackComponent.new(gap: 'm') do %>

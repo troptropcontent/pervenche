@@ -24,6 +24,21 @@ module Billable
             response.body
           end
 
+          sig { params(subscription_id: String).returns(T.untyped) }
+          def cancel(subscription_id)
+            response = Http::Client.post(
+              url: "https://#{Billable.billing_client_configuration[:site]}.chargebee.com/api/v2/subscriptions/#{subscription_id}/cancel_for_items",
+              body: 'end_of_term=true',
+              user: Billable.billing_client_configuration[:api_key],
+              raise_error: false,
+              logger: false
+            )
+
+            return unless response.status == 200
+
+            response.body
+          end
+
           private
 
           sig { params(path: String, params: T::Hash[String, T.untyped]).returns(Faraday::Response) }

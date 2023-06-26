@@ -1,20 +1,31 @@
-<%= render CardComponent.new(padding: 'm') do %>
+<%= render CardComponent.new(padding: 'm', color: ('muted' if subscription.cancelled_at)) do %>
   <%= render StackComponent.new do %>
     <%= render TitleComponent.new(color: 'primary', size: 's') do %>
       <%= number_to_currency(subscription.amount / 100) %> / <%= t("datetime.prompts.month").downcase %>
     <% end %>
-      <%= render TextComponent.new do %>
-        <%= t('views.billing.subscriptions.partial.started_at_html', started_at: l(subscription.started_at, format: :short)) %>
-      <% end %>
-      
-    <% if subscription.trial_ends_at.future? %>
-      <%= render TextComponent.new do %>
-        <%= t('views.billing.subscriptions.partial.trial_ends_at_html', trial_ends_at: l(subscription.trial_ends_at, format: :short)) %>
-      <% end %>
-    <% end %>
-
     <% if subscription.holder %>
         <%= render "billing/subscriptions/holder/#{subscription.holder.model_name.singular}", holder: subscription.holder %>
+    <% end %>
+    <%= render TextComponent.new do %>
+      <%= t('views.billing.subscriptions.partial.started_at_html', started_at: l(subscription.started_at, format: :short)) %>
+    <% end %>
+    <% if subscription.cancelled_at %>
+        <%= render TextComponent.new do %>
+          <%= t('views.billing.subscriptions.partial.cancelled_at_html', cancelled_at: l(subscription.cancelled_at, format: :short)) %>
+        <% end %>
+      <% elsif subscription.trial_ends_at.future? %>
+        <%= render TextComponent.new do %>
+          <%= t('views.billing.subscriptions.partial.trial_ends_at_html', trial_ends_at: l(subscription.trial_ends_at, format: :short)) %>
+        <% end %>
+      <% else %>
+        <%= render TextComponent.new do %>
+          <%= t('views.billing.subscriptions.partial.next_billing_at_html', next_billing_at: l(subscription.next_billing_at, format: :short)) %>
+        <% end %>
+    <% end %>
+    <% if subscription.cancelled_at.nil? %>      
+      <%= render ButtonComponent.new(path: billing_subscription_path(subscription_id: subscription.client_id), method: :delete, color: 'danger')  do %>
+        <%= t('views.billing.subscriptions.partial.cancel_cta') %>
+      <% end %>
     <% end %>
   <% end %>
 <% end %>
