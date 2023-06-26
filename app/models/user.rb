@@ -40,7 +40,8 @@ class User < ApplicationRecord
     new_chargebee_customer = ChargeBee::Customer.create({
                                                           email:,
                                                           cf_holder_id: id,
-                                                          cf_holder_type: self.class.name
+                                                          cf_holder_type: self.class.name,
+                                                          taxability: 'exempt'
                                                         }).customer
     update!(chargebee_customer_id: new_chargebee_customer.id)
   end

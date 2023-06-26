@@ -64,6 +64,11 @@ class Billing::Subscription < T::Struct
     Billable::Clients::ChargeBee::Subscription.cancel(client_id)
   end
 
+  def update(attributes)
+    Billable::Clients::ChargeBee::Subscription.update(client_id, attributes)
+    self.class.find(client_id)
+  end
+
   def holder
     return @holder if @holder
     return if holder_id.nil? && holder_type.nil?

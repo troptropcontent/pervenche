@@ -39,6 +39,25 @@ module Billable
             response.body
           end
 
+          sig do
+            params(subscription_id: String,
+                   attributes: T.any(T::Hash[Symbol, T.untyped], ActionController::Parameters)).returns(T.untyped)
+          end
+          def update(subscription_id, attributes)
+            body = URI.encode_www_form(attributes)
+            response = Http::Client.post(
+              url: "https://#{Billable.billing_client_configuration[:site]}.chargebee.com/api/v2/subscriptions/#{subscription_id}/update_for_items",
+              body:,
+              user: Billable.billing_client_configuration[:api_key],
+              raise_error: false,
+              logger: false
+            )
+
+            return unless response.status == 200
+
+            response.body
+          end
+
           private
 
           sig { params(path: String, params: T::Hash[String, T.untyped]).returns(Faraday::Response) }
