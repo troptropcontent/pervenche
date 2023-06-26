@@ -1,0 +1,405 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://pervenche-test.chargebee.com/api/v2/customers/BTTzPTThSY5dNHw3
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.7.5
+      Authorization:
+      - Basic dGVzdF8yM0g1TWhpZUhpMTFtRXBjc1N6MVNnVlVoY2pSb3paSDo=
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Mon, 26 Jun 2023 14:27:49 GMT
+      Content-Type:
+      - application/json;charset=utf-8
+      Content-Length:
+      - '1991'
+      Connection:
+      - keep-alive
+      Cache-Control:
+      - no-store, no-cache, must-revalidate
+      Expires:
+      - Thu, 01 Jan 1970 00:00:00 UTC
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Pragma:
+      - no-cache
+      Server:
+      - ChargeBee
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+            "customer": {
+                "id": "BTTzPTThSY5dNHw3",
+                "email": "tomecrepont@gmail.com",
+                "auto_collection": "on",
+                "net_term_days": 0,
+                "allow_direct_debit": false,
+                "created_at": 1687022405,
+                "taxability": "exempt",
+                "updated_at": 1687782116,
+                "pii_cleared": "active",
+                "channel": "web",
+                "resource_version": 1687782116995,
+                "deleted": false,
+                "object": "customer",
+                "billing_address": {
+                    "first_name": "Ecrepont",
+                    "last_name": "Tom",
+                    "company": "Pervenche",
+                    "line1": "14 rue lapeyrere",
+                    "city": "Paris",
+                    "zip": "75018",
+                    "validation_status": "not_validated",
+                    "object": "billing_address"
+                },
+                "card_status": "valid",
+                "promotional_credits": 0,
+                "refundable_credits": 0,
+                "excess_payments": 0,
+                "unbilled_charges": 0,
+                "preferred_currency_code": "EUR",
+                "primary_payment_source_id": "pm_BTM8miThkpPLUDq6",
+                "payment_method": {
+                    "object": "payment_method",
+                    "type": "card",
+                    "reference_id": "tok_BTM8miThkpPLLDq5",
+                    "gateway": "chargebee",
+                    "gateway_account_id": "gw_BTcXgJTcSJFcz1nz",
+                    "status": "valid"
+                },
+                "tax_providers_fields": []
+            },
+            "card": {
+                "status": "valid",
+                "gateway": "chargebee",
+                "gateway_account_id": "gw_BTcXgJTcSJFcz1nz",
+                "iin": "411111",
+                "last4": "1111",
+                "card_type": "visa",
+                "funding_type": "credit",
+                "expiry_month": 12,
+                "expiry_year": 2029,
+                "created_at": 1687292507,
+                "updated_at": 1687292507,
+                "ip_address": "176.159.43.232",
+                "resource_version": 1687292507333,
+                "object": "card",
+                "masked_number": "************1111",
+                "customer_id": "BTTzPTThSY5dNHw3",
+                "payment_source_id": "pm_BTM8miThkpPLUDq6"
+            }
+        }
+  recorded_at: Mon, 26 Jun 2023 14:27:49 GMT
+- request:
+    method: post
+    uri: https://pervenche-test.chargebee.com/api/v2/hosted_pages/manage_payment_sources
+    body:
+      encoding: UTF-8
+      string: customer[id]=BTTzPTThSY5dNHw3&redirect_url=http://www.example.com/billing/customers/BTTzPTThSY5dNHw3
+    headers:
+      User-Agent:
+      - Faraday v2.7.5
+      Authorization:
+      - Basic dGVzdF8yM0g1TWhpZUhpMTFtRXBjc1N6MVNnVlVoY2pSb3paSDo=
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Mon, 26 Jun 2023 14:27:50 GMT
+      Content-Type:
+      - application/json;charset=utf-8
+      Content-Length:
+      - '405'
+      Connection:
+      - keep-alive
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Cache-Control:
+      - no-store, no-cache, must-revalidate
+      Pragma:
+      - no-cache
+      Server:
+      - ChargeBee
+    body:
+      encoding: UTF-8
+      string: |-
+        {"hosted_page": {
+            "id": "6yXc3XKoPvsFFPwYcuPTcdNGsJho2XocuSJ",
+            "type": "manage_payment_sources",
+            "url": "https://pervenche-test.chargebee.com/pages/v3/6yXc3XKoPvsFFPwYcuPTcdNGsJho2XocuSJ/",
+            "state": "created",
+            "embed": false,
+            "created_at": 1687789670,
+            "expires_at": 1688221670,
+            "object": "hosted_page",
+            "updated_at": 1687789670,
+            "resource_version": 1687789670265
+        }}
+  recorded_at: Mon, 26 Jun 2023 14:27:50 GMT
+- request:
+    method: get
+    uri: https://pervenche-test.chargebee.com/api/v2/subscriptions?customer_id%5Bis%5D=BTTzPTThSY5dNHw3
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.7.5
+      Authorization:
+      - Basic dGVzdF8yM0g1TWhpZUhpMTFtRXBjc1N6MVNnVlVoY2pSb3paSDo=
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Mon, 26 Jun 2023 14:27:50 GMT
+      Content-Type:
+      - application/json;charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Cache-Control:
+      - no-store, no-cache, must-revalidate
+      Expires:
+      - Thu, 01 Jan 1970 00:00:00 UTC
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Pragma:
+      - no-cache
+      Vary:
+      - Accept-Encoding
+      Server:
+      - ChargeBee
+    body:
+      encoding: ASCII-8BIT
+      string: |-
+        {"list": [
+            {
+                "subscription": {
+                    "id": "BTcd4bTi6ndWBIYX",
+                    "billing_period": 1,
+                    "billing_period_unit": "month",
+                    "trial_end": 1688913164,
+                    "customer_id": "BTTzPTThSY5dNHw3",
+                    "status": "in_trial",
+                    "trial_start": 1687617164,
+                    "next_billing_at": 1688913164,
+                    "created_at": 1687617164,
+                    "started_at": 1687617164,
+                    "updated_at": 1687617170,
+                    "has_scheduled_changes": false,
+                    "channel": "web",
+                    "resource_version": 1687617170374,
+                    "deleted": false,
+                    "object": "subscription",
+                    "currency_code": "EUR",
+                    "subscription_items": [{
+                        "item_price_id": "cc_residential-EUR-Monthly",
+                        "item_type": "plan",
+                        "quantity": 1,
+                        "unit_price": 900,
+                        "amount": 900,
+                        "free_quantity": 0,
+                        "trial_end": 1688913164,
+                        "object": "subscription_item"
+                    }],
+                    "due_invoices_count": 0,
+                    "cf_automated_ticket_id": "11",
+                    "cf_holder_type": "AutomatedTicket",
+                    "cf_holder_id": 11,
+                    "has_scheduled_advance_invoices": false
+                },
+                "customer": {
+                    "id": "BTTzPTThSY5dNHw3",
+                    "email": "tomecrepont@gmail.com",
+                    "auto_collection": "on",
+                    "net_term_days": 0,
+                    "allow_direct_debit": false,
+                    "created_at": 1687022405,
+                    "taxability": "exempt",
+                    "updated_at": 1687782116,
+                    "pii_cleared": "active",
+                    "channel": "web",
+                    "resource_version": 1687782116995,
+                    "deleted": false,
+                    "object": "customer",
+                    "billing_address": {
+                        "first_name": "Ecrepont",
+                        "last_name": "Tom",
+                        "company": "Pervenche",
+                        "line1": "14 rue lapeyrere",
+                        "city": "Paris",
+                        "zip": "75018",
+                        "validation_status": "not_validated",
+                        "object": "billing_address"
+                    },
+                    "card_status": "valid",
+                    "promotional_credits": 0,
+                    "refundable_credits": 0,
+                    "excess_payments": 0,
+                    "unbilled_charges": 0,
+                    "preferred_currency_code": "EUR",
+                    "primary_payment_source_id": "pm_BTM8miThkpPLUDq6",
+                    "payment_method": {
+                        "object": "payment_method",
+                        "type": "card",
+                        "reference_id": "tok_BTM8miThkpPLLDq5",
+                        "gateway": "chargebee",
+                        "gateway_account_id": "gw_BTcXgJTcSJFcz1nz",
+                        "status": "valid"
+                    },
+                    "tax_providers_fields": []
+                },
+                "card": {
+                    "status": "valid",
+                    "gateway": "chargebee",
+                    "gateway_account_id": "gw_BTcXgJTcSJFcz1nz",
+                    "iin": "411111",
+                    "last4": "1111",
+                    "card_type": "visa",
+                    "funding_type": "credit",
+                    "expiry_month": 12,
+                    "expiry_year": 2029,
+                    "created_at": 1687292507,
+                    "updated_at": 1687292507,
+                    "ip_address": "176.159.43.232",
+                    "resource_version": 1687292507333,
+                    "object": "card",
+                    "masked_number": "************1111",
+                    "customer_id": "BTTzPTThSY5dNHw3",
+                    "payment_source_id": "pm_BTM8miThkpPLUDq6"
+                }
+            }
+        ]}
+  recorded_at: Mon, 26 Jun 2023 14:27:50 GMT
+- request:
+    method: get
+    uri: https://pervenche-test.chargebee.com/api/v2/customers/another_customer_id
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.7.5
+      Authorization:
+      - Basic dGVzdF8yM0g1TWhpZUhpMTFtRXBjc1N6MVNnVlVoY2pSb3paSDo=
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Mon, 26 Jun 2023 14:27:49 GMT
+      Content-Type:
+      - application/json;charset=utf-8
+      Content-Length:
+      - '1991'
+      Connection:
+      - keep-alive
+      Cache-Control:
+      - no-store, no-cache, must-revalidate
+      Expires:
+      - Thu, 01 Jan 1970 00:00:00 UTC
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Pragma:
+      - no-cache
+      Server:
+      - ChargeBee
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+            "customer": {
+                "id": "another_customer_id",
+                "email": "tomecrepont@gmail.com",
+                "auto_collection": "on",
+                "net_term_days": 0,
+                "allow_direct_debit": false,
+                "created_at": 1687022405,
+                "taxability": "exempt",
+                "updated_at": 1687782116,
+                "pii_cleared": "active",
+                "channel": "web",
+                "resource_version": 1687782116995,
+                "deleted": false,
+                "object": "customer",
+                "billing_address": {
+                    "first_name": "Ecrepont",
+                    "last_name": "Tom",
+                    "company": "Pervenche",
+                    "line1": "14 rue lapeyrere",
+                    "city": "Paris",
+                    "zip": "75018",
+                    "validation_status": "not_validated",
+                    "object": "billing_address"
+                },
+                "card_status": "valid",
+                "promotional_credits": 0,
+                "refundable_credits": 0,
+                "excess_payments": 0,
+                "unbilled_charges": 0,
+                "preferred_currency_code": "EUR",
+                "primary_payment_source_id": "pm_BTM8miThkpPLUDq6",
+                "payment_method": {
+                    "object": "payment_method",
+                    "type": "card",
+                    "reference_id": "tok_BTM8miThkpPLLDq5",
+                    "gateway": "chargebee",
+                    "gateway_account_id": "gw_BTcXgJTcSJFcz1nz",
+                    "status": "valid"
+                },
+                "tax_providers_fields": []
+            },
+            "card": {
+                "status": "valid",
+                "gateway": "chargebee",
+                "gateway_account_id": "gw_BTcXgJTcSJFcz1nz",
+                "iin": "411111",
+                "last4": "1111",
+                "card_type": "visa",
+                "funding_type": "credit",
+                "expiry_month": 12,
+                "expiry_year": 2029,
+                "created_at": 1687292507,
+                "updated_at": 1687292507,
+                "ip_address": "176.159.43.232",
+                "resource_version": 1687292507333,
+                "object": "card",
+                "masked_number": "************1111",
+                "customer_id": "another_customer_id",
+                "payment_source_id": "pm_BTM8miThkpPLUDq6"
+            }
+        }
+  recorded_at: Mon, 26 Jun 2023 14:27:49 GMT
+recorded_with: VCR 6.1.0

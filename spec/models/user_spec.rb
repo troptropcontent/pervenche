@@ -3,7 +3,6 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
   let(:user) { FactoryBot.build(:user, roles:) }
   let(:roles) { %w[customer] }
   describe 'roles' do
@@ -88,6 +87,19 @@ RSpec.describe User, type: :model do
           it 'returns false' do
             expect(user.has_role?('admin')).to eq(false)
           end
+        end
+      end
+    end
+  end
+
+  describe 'callbacks' do
+    describe 'before_create :set_chargebee_customer_id' do
+      context 'when there is already a chargebee_customer_id' do
+        let!(:user) {}
+        it 'does not overide it' do
+          expect(ChargeBee::Customer).not_to receive(:create)
+          user = FactoryBot.create(:user, chargebee_customer_id: 'a_user_id')
+          expect(user.chargebee_customer_id).to eq('a_user_id')
         end
       end
     end

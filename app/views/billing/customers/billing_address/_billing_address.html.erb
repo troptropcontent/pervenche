@@ -1,0 +1,17 @@
+<%= render Grid::ContainerComponent.new(gap: 'm', columns: 2) do %>
+  <%= render Grid::ItemComponent.new do %>
+    <p>Nom : </p>
+  <% end %>
+  <%= render Grid::ItemComponent.new do %>
+    <p>Prenom : </p>
+  <% end %>
+  <%= render Grid::ItemComponent.new(full: true) do %>
+    <p class='grid__item--full'>Address : </p>
+  <% end %>
+  <%= render Grid::ItemComponent.new do %>
+    <p>Ville : </p>
+  <% end %>
+  <%= render Grid::ItemComponent.new do %>
+    <p>Code postale : </p>
+  <% end %>
+<% end %>

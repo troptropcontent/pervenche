@@ -1,0 +1,12 @@
+<main class="grow container stack stack--l">
+     <%= render PageHeaderComponent.new(
+      title: t('views.billing.addresses.edit.header.title'), 
+      subtitle: t('views.billing.addresses.edit.header.subtitle')
+     ) %> 
+
+     <%= render 'form', 
+         address: @address, 
+         method: :put, 
+         url: billing_address_path(customer_id: @address.customer_id) 
+     %>
+</main>

@@ -10,14 +10,17 @@ module ControllerErrorManager
                   ActiveRecord::DeleteRestrictionError,
                   ActiveRecord::RecordNotSaved,
                   ActiveRecord::RecordNotDestroyed,
-                  ActiveModel::ValidationError do |error|
+                  ActiveModel::ValidationError,
+                  Billing::Errors::UnprocessableEntity do |error|
         render json: { code: :unprocessable_entity, message: error }, status: :unprocessable_entity
       end
 
       ###########
       ### 404 ###
       ###########
-      rescue_from ActiveRecord::RecordNotFound do |error|
+      rescue_from ActiveRecord::RecordNotFound,
+                  Billable::Customer::RecordNotFound,
+                  Billing::Errors::NotFound do |error|
         render json: { code: :not_found, message: error }, status: :not_found
       end
 

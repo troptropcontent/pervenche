@@ -1,0 +1,59 @@
+fr:
+  views:
+    billing:
+      customers:
+        show:
+          billing_address:
+            title: Addresse de facturation
+            empty_state:
+              title: Vous n'avez pas encore renseigné d'addresse de facturation
+              sub_title_html: Ce sont les coordonnées qui apparaitront sur vos factures, <a href='%{href}'>cliquez ici</a> pour renseigner une addresse de facturation. 
+          payment_method:
+            title: Carte bancaire
+            last_four_digits: "Numéro se terminant par :  %{last_four_digits}"
+            type: "Type : %{card_type} - %{funding_type}"
+            expiration: "Expiration: %{expiry_month} / %{expiry_year}"
+            status: "Status: %{status} "
+            empty_state:
+              title: Vous n'avez pas encore renseigné de carte bancaire
+              sub_title_html: Vos tickets ne seront plus renouvelés à la fin de la période d'éssai, <a href='%{href}'>cliquez ici</a> pour enregistrer une carte bancaire, vous serez redirigé vers notre partenaire de paiment ChargeBee. 
+          subscriptions: 
+            title: 
+              one: Mon abonnement
+              other : Mes abonnements
+            empty_state:
+              title: Vous n'avez pas encore souscrit à un abonnement.
+              sub_title_html: Vous pouvez souscrire à un abonnement en créant un ticket automatique via la page principale (<a href='%{href}'>ici</a>).
+      addresses:
+        partial:
+          private:
+            values: 
+              unknown: 'Non renseigné'
+        edit:
+          header:
+            title: Modifier votre addresse de facturation
+            subtitle: Cette addresse apparaitra sur vos factures
+      subscriptions:
+        holder: 
+          automated_ticket:
+            description: 
+              one: Pour le véhicule %{license_plate} dans la zone %{zipcodes}
+              other: Pour le véhicule %{license_plate} dans les zones %{zipcodes}
+        partial:
+          cancel_cta: Terminer l'abonnement
+          trial_ends_at_html: "Fin de la période d'éssai le <b>%{trial_ends_at}</b>"
+          next_billing_at_html: "Prochaine échéance le <b>%{next_billing_at}</b>"
+          cancelled_at_html: "Fin de l'abonnement le <b>%{cancelled_at}</b>"
+          started_at_html: "Depuis le <b>%{started_at}</b>"
+  models:
+    billing:
+      attributes:
+        address:
+          last_name: Nom de famille
+          first_name: Prenom
+          company: Entreprise
+          phone: Numéro de téléphone
+          address: Adresse
+          city: Ville
+          zipcode: Code postal
+          country: Pays

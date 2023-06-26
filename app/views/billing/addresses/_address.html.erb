@@ -1,0 +1,20 @@
+<%= render Grid::ContainerComponent.new(gap: 'm', columns: 2) do %>
+  <%= render Grid::ItemComponent.new do %>
+    <%= render 'billing/addresses/private/field', address: , field: :first_name %>
+  <% end %>
+  <%= render Grid::ItemComponent.new do %>
+    <%= render 'billing/addresses/private/field', address: , field: :last_name %>
+  <% end %>
+  <%= render Grid::ItemComponent.new(full: true) do %>
+    <%= render 'billing/addresses/private/field', address: , field: :company %>
+  <% end %>
+  <%= render Grid::ItemComponent.new(full: true) do %>
+    <%= render 'billing/addresses/private/field', address: , field: :address %>
+  <% end %>
+  <%= render Grid::ItemComponent.new do %>
+    <%= render 'billing/addresses/private/field', address: , field: :city %>
+  <% end %>
+  <%= render Grid::ItemComponent.new do %>
+    <%= render 'billing/addresses/private/field', address: , field: :zipcode %>
+  <% end %>
+<% end %>

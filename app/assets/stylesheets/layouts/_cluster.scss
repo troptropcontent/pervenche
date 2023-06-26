@@ -15,9 +15,21 @@
             align-items: end;
         }
     }
+
+    &__gap {
+        &--s {
+            gap: var(--space-s);
+        }
+        &--m {
+            gap: var(--space-m);
+        }
+        &--m {
+            gap: var(--space-l);
+        }
+    }
     
     &__justify-content{
-        &--between {
+        &--space-between {
             justify-content: space-between;
         }
         &--end {

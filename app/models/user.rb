@@ -2,9 +2,9 @@
 
 class User < ApplicationRecord
   include HasRoles
-  include Billable::Customer
+  include Billing::Customerable
 
-  before_create :set_chargebee_customer_id
+  after_create :create_chargebee_customer
   after_create :send_notification
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -33,14 +33,24 @@ class User < ApplicationRecord
     ActiveSupport::Notifications.instrument 'users.created', attributes
   end
 
-  def set_chargebee_customer_id
+  def create_chargebee_customer
+    return if chargebee_customer_id
     return unless email
 
-    new_chargebee_customer = ChargeBee::Customer.create({ email: }).customer
-    self.chargebee_customer_id = new_chargebee_customer.id
+    new_chargebee_customer = ChargeBee::Customer.create({
+                                                          email:,
+                                                          cf_holder_id: id,
+                                                          cf_holder_type: self.class.name,
+                                                          taxability: 'exempt'
+                                                        }).customer
+    update!(chargebee_customer_id: new_chargebee_customer.id)
   end
 
   def customer_billing_client_internal_id
     chargebee_customer_id
+  end
+
+  def billing_client_id_attribute
+    :chargebee_customer_id
   end
 end
