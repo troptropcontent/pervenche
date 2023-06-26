@@ -17,16 +17,36 @@ module Billable
           end
 
           sig do
+            params(client_id: String,
+                   attributes: T.any(T::Hash[Symbol, T.untyped], ActionController::Parameters))
+              .returns(T.nilable(T::Hash[String, T.untyped]))
+          end
+          def update(client_id, attributes)
+            body = URI.encode_www_form(attributes)
+            response = Http::Client.post(
+              url: "https://#{Billable.billing_client_configuration[:site]}.chargebee.com/api/v2/customers/#{client_id}",
+              body:,
+              user: Billable.billing_client_configuration[:api_key],
+              raise_error: false,
+              logger: false
+            )
+            return unless response.status == 200
+
+            response.body
+          end
+
+          sig do
             params(
-              customer_billing_client_internal_id: String,
+              client_id: String,
               attributes: T.any(T::Hash[Symbol, T.untyped], ActionController::Parameters)
             )
               .returns(T.untyped)
           end
-          def update_address(customer_billing_client_internal_id, attributes)
+          def update_address(client_id, attributes)
+            body = attributes.transform_keys { |key| "billing_address[#{key}]" }
             response = Http::Client.post(
-              url: "https://#{Billable.billing_client_configuration[:site]}.chargebee.com/api/v2/customers/#{customer_billing_client_internal_id}/update_billing_info",
-              body: "billing_address[first_name]=#{attributes[:first_name]}&billing_address[last_name]=#{attributes[:last_name]}&billing_address[company]=#{attributes[:company]}&billing_address[line1]=#{attributes[:address]}&billing_address[city]=#{attributes[:city]}&billing_address[zip]=#{attributes[:zipcode]}&billing_address[country]=#{attributes[:country]}",
+              url: "https://#{Billable.billing_client_configuration[:site]}.chargebee.com/api/v2/customers/#{client_id}/update_billing_info",
+              body:,
               user: Billable.billing_client_configuration[:api_key],
               raise_error: false,
               logger: false

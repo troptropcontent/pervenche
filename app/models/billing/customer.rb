@@ -5,6 +5,7 @@ module Billing
     const :client_id, String
     const :email, String
     const :deleted, T::Boolean
+    const :taxability, String
     prop :customer_data, T::Hash[String, T.untyped]
 
     def self.find(id)
@@ -15,8 +16,14 @@ module Billing
         client_id: customer_data.dig('customer', 'id'),
         email: customer_data.dig('customer', 'email'),
         deleted: customer_data.dig('customer', 'deleted'),
+        taxability: customer_data.dig('customer', 'taxability'),
         customer_data:
       )
+    end
+
+    def update(attributes)
+      Billable::Clients::ChargeBee::Customer.update(client_id, attributes)
+      self.class.find(client_id)
     end
 
     def address
