@@ -10,7 +10,8 @@ RSpec.describe 'Billing::Customers', type: :request do
       response '200', 'OK' do
         before { sign_in user }
         let(:service) { FactoryBot.create(:service, :without_validations, user:) }
-        let!(:automated_ticket) { FactoryBot.create(:automated_ticket, :set_up, user:, service:) }
+        # we have to set the id here because the vcr return a cf_holder_id = 11
+        let!(:automated_ticket) { FactoryBot.create(:automated_ticket, :set_up, id: 11, user:, service:) }
         it 'returns a 200', vcr: 'charge_bee_customer' do |example|
           run example
         end

@@ -19,7 +19,7 @@ module Billing
     private
 
     def load_customer!
-      @customer = current_user.customer
+      @customer = Billing::Customer.find(params[:customer_id])
     end
 
     def authorize_customer!
