@@ -7,6 +7,10 @@ module Billable
       class Customer
         class << self
           extend T::Sig
+          MAPPING_ADDRESS_KEY = T.let({
+            address: 'line1',
+            zipcode: 'zip'
+          }.freeze, T::Hash[Symbol, String])
 
           sig { params(customer_id: String).returns(T.untyped) }
           def find(customer_id)
@@ -43,7 +47,7 @@ module Billable
               .returns(T.untyped)
           end
           def update_address(client_id, attributes)
-            body = attributes.transform_keys { |key| "billing_address[#{key}]" }
+            body = mapped_address_attributes(attributes)
             response = Http::Client.post(
               url: "https://#{Billable.billing_client_configuration[:site]}.chargebee.com/api/v2/customers/#{client_id}/update_billing_info",
               body:,
@@ -122,6 +126,13 @@ module Billable
               last_name: billing_address_hash['last_name'],
               first_name: billing_address_hash['first_name']
             )
+          end
+
+          def mapped_address_attributes(attributes)
+            attributes.transform_keys do |key|
+              key = MAPPING_ADDRESS_KEY[key.to_sym] || key
+              "billing_address[#{key}]"
+            end
           end
         end
       end

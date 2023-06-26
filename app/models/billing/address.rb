@@ -17,8 +17,10 @@ module Billing
     prop :country, T.nilable(String)
 
     def update!(attributes)
-      updated_billing_address_data = Billable::Clients::ChargeBee::Customer.update_address(customer_id,
-                                                                                           attributes)
+      updated_billing_address_data = Billable::Clients::ChargeBee::Customer.update_address(
+        customer_id,
+        attributes.to_h
+      )
 
       raise Errors::UnprocessableEntity, 'The address could not been saved' if updated_billing_address_data.nil?
 
