@@ -30,4 +30,14 @@ RSpec.describe AutomatedTickets::RenewerJob, type: :job do
       subject
     end
   end
+  context 'when there is already a ticket running for the automated_ticket and zipcode' do
+    let!(:ticket) do
+      FactoryBot.create(:ticket, zipcode: '75018', automated_ticket_id: automated_ticket.id,
+                                 ends_on: Time.zone.today + 1.day)
+    end
+    it 'calls the renewer actor with the relevant argments' do
+      expect(AutomatedTicket::Renewer).not_to receive(:call)
+      subject
+    end
+  end
 end
