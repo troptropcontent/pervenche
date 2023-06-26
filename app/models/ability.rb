@@ -22,7 +22,6 @@ class Ability
       user.chargebee_customer_id == address.customer.client_id
     end
     can %i[destroy], Billing::Subscription, customer_id: user.chargebee_customer_id
-
     return unless user.has_role?('admin')
 
     # all admin abilities goes here
