@@ -4,23 +4,22 @@
 module Billable
   module Customer
     extend T::Sig
-    class Base < T::Struct
-      const :customer_billing_client_internal_id, String
-      const :email, String
-      const :last_name, T.nilable(String)
-      const :first_name, T.nilable(String)
-      const :payment_method_valid, T::Boolean
-      const :payment_method_status, String
-      const :deleted, T::Boolean
-    end
+    class Error < StandardError; end
+    class RecordNotFound < Error; end
     sig { params(filter_params: T::Hash[String, T.untyped]).returns(T::Array[Billable::Customer::Base]) }
     def self.list(filter_params: {})
       customer_client.list(filter_params:)
     end
 
-    sig { params(customer_billing_client_internal_id: String).returns(T.nilable(Billable::Customer::Base)) }
+    sig { params(customer_billing_client_internal_id: String).returns(Billable::Customer::Base) }
     def self.find(customer_billing_client_internal_id)
-      customer_client.find(customer_billing_client_internal_id)
+      customer = customer_client.find(customer_billing_client_internal_id)
+      unless customer
+        raise RecordNotFound,
+              "Customer with an id of #{customer_billing_client_internal_id} does not exists"
+      end
+
+      customer
     end
 
     sig { returns(T.class_of(Billable::Clients::ChargeBee::Customer)) }

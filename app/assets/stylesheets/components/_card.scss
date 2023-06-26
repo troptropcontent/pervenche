@@ -1,0 +1,24 @@
+.card {
+  padding: var(--space-m);
+  border-radius: var(--border-radius);
+  border: solid 2px var(--color-muted);
+    &--padding {
+      &-s {
+        padding: var(--space-s);
+      }
+      &-m {
+        padding: var(--space-m);
+      }
+      &-l {
+        padding: var(--space-l);
+      }
+    }
+    &--color {
+      &-muted {
+        background-color: var(--color-muted);
+      }
+      &-primary {
+        background-color: var(--color-primary-light);
+      }
+    }
+  }

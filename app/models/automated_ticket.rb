@@ -3,10 +3,7 @@
 
 class AutomatedTicket < ApplicationRecord
   extend T::Sig
-  include Billable::Subscription
-
-  extend T::Sig
-  include Billable::Subscription
+  include Billing::Subscribable
 
   encrypts :license_plate, deterministic: true
   has_many :tickets, dependent: :destroy
@@ -223,7 +220,7 @@ class AutomatedTicket < ApplicationRecord
     charge_bee_subscription_id
   end
 
-  def subscription_billing_client_internal_id
-    charge_bee_subscription_id
+  def billing_client_id_attribute
+    :charge_bee_subscription_id
   end
 end

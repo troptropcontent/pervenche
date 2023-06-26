@@ -1,0 +1,6 @@
+.empty_state {
+  display: none;
+  &:only-child {
+      display: block;
+  }
+}

@@ -1,0 +1,16 @@
+
+<%= render CardComponent.new do %>
+  <%= render StackComponent.new  do %>
+    <%= render ClusterComponent.new(justify_content: 'space-between')  do %>
+      <%= render TextComponent.new do %>
+        <%= payment_method.card_type %>
+      <% end %>
+      <%= render TextComponent.new do %>
+        <%= "****" + payment_method.last_four_digits %>
+      <% end %>
+    <% end %>
+    <%= render TextComponent.new do %>
+        <%= payment_method.expiry_month.to_s + "/" + payment_method.expiry_year.to_s %>
+    <% end %>
+  <% end %>
+<% end %>

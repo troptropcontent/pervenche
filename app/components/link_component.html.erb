@@ -4,7 +4,9 @@
         <% if @icon %>
           <%= inline_svg("#{@icon}.svg") %>
         <% end %>
-        <p><%=  @text %></p>
+        <% if @text %>   
+          <p><%=  @text %></p>
+        <% end %>
       </span>
     <% end %>
   <% else %>
@@ -13,7 +15,9 @@
         <% if @icon %>
           <%= inline_svg("#{@icon}.svg") %>
         <% end %>
-        <p><%=  @text %></p>
+        <% if @text %>   
+          <p><%=  @text %></p>
+        <% end %>
       </span>
     <% end %>
 <% end %>

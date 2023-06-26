@@ -1,0 +1,6 @@
+<%= render TextComponent.new do %>
+  <%= t('views.billing.subscriptions.holder.automated_ticket.description', 
+        zipcodes: holder.zipcodes.to_sentence,
+        license_plate: holder.license_plate,
+        count: holder.zipcodes.count) %>
+<% end %>

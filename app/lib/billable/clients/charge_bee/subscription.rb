@@ -13,18 +13,49 @@ module Billable
             response = get_client(path: "/#{subscription_id}")
             return unless response.status == 200
 
-            build_subscription(subscription_hash: response.body)
+            response.body
           end
 
-          sig { params(filter_params: T::Hash[String, T.untyped]).returns(T::Array[Billable::Subscription::Base]) }
+          sig { params(filter_params: T::Hash[String, T.untyped]).returns(T.untyped) }
           def list(filter_params: {})
             response = get_client(params: filter_params)
             return [] unless response.status == 200
 
-            subscriptions_array = response.body.fetch('list')
-            subscriptions_array.map! do |subscription_hash|
-              build_subscription(subscription_hash:)
-            end
+            response.body
+          end
+
+          sig { params(subscription_id: String).returns(T.untyped) }
+          def cancel(subscription_id)
+            response = Http::Client.post(
+              url: "https://#{Billable.billing_client_configuration[:site]}.chargebee.com/api/v2/subscriptions/#{subscription_id}/cancel_for_items",
+              body: 'end_of_term=true',
+              user: Billable.billing_client_configuration[:api_key],
+              raise_error: false,
+              logger: false
+            )
+
+            return unless response.status == 200
+
+            response.body
+          end
+
+          sig do
+            params(subscription_id: String,
+                   attributes: T.any(T::Hash[Symbol, T.untyped], ActionController::Parameters)).returns(T.untyped)
+          end
+          def update(subscription_id, attributes)
+            body = URI.encode_www_form(attributes)
+            response = Http::Client.post(
+              url: "https://#{Billable.billing_client_configuration[:site]}.chargebee.com/api/v2/subscriptions/#{subscription_id}/update_for_items",
+              body:,
+              user: Billable.billing_client_configuration[:api_key],
+              raise_error: false,
+              logger: false
+            )
+
+            return unless response.status == 200
+
+            response.body
           end
 
           private

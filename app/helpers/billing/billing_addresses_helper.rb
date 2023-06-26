@@ -1,0 +1,2 @@
+module Billing::BillingAddressesHelper
+end

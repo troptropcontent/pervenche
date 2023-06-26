@@ -9,6 +9,12 @@
     }
   }
 
+  &__weigth {
+    &--bold{
+      font-weight: bold;
+    }
+  }
+
   &__color{
     &--light{
       color: var(--color-light)  !important;;
