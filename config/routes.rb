@@ -48,6 +48,9 @@ Rails.application.routes.draw do
     namespace :billable do
       post '/:token', action: 'handle'
     end
+    namespace :billing do
+      post '/:token', action: 'handle'
+    end
   end
 
   authenticate :user, ->(user) { user.has_role?('admin') } do
