@@ -16,7 +16,7 @@ fr:
             status: "Status: %{status} "
             empty_state:
               title: Vous n'avez pas encore renseigné de carte bancaire
-              sub_title_html: Vos tickets ne seront plus renouvelés à la fin de la période d'éssai, <a href='%{href}'>cliquez ici</a> pour enregistrer une carte bancaire, vous serez redirigé vers notre partenaire de paiment ChargeBee. 
+              sub_title_html: Vos tickets ne seront plus renouvelés à la fin de la période d'éssai, <a href='%{href}'>cliquez ici</a> pour enregistrer une carte bancaire, vous serez redirigé vers notre partenaire de paiement ChargeBee. 
           subscriptions: 
             title: 
               one: Mon abonnement
