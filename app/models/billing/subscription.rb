@@ -11,6 +11,7 @@ module Billing
     prop :client_id, T.nilable(String)
     prop :started_at, T.nilable(DateTime)
     prop :cancelled_at, T.nilable(DateTime)
+    prop :cancel_reason, T.nilable(String)
     prop :trial_ends_at, T.nilable(DateTime)
     prop :status, T.nilable(String)
     prop :next_billing_at, T.nilable(DateTime)
@@ -47,6 +48,7 @@ module Billing
           amount: subscription_hash.dig('subscription', 'subscription_items').sum { |item| item['amount'] },
           status: subscription_hash.dig('subscription', 'status'),
           cancelled_at: build_datetime(subscription_hash.dig('subscription', 'cancelled_at')),
+          cancel_reason: subscription_hash.dig('subscription', 'cancel_reason'),
           next_billing_at: build_datetime(subscription_hash.dig('subscription', 'next_billing_at')),
           deleted: subscription_hash.dig('subscription', 'deleted'),
           due_invoices_count: subscription_hash.dig('subscription', 'due_invoices_count'),
@@ -67,6 +69,11 @@ module Billing
 
     def update(attributes)
       Billable::Clients::ChargeBee::Subscription.update(client_id, attributes)
+      self.class.find(client_id)
+    end
+
+    def reactivate
+      Billable::Clients::ChargeBee::Subscription.reactivate(client_id)
       self.class.find(client_id)
     end
 

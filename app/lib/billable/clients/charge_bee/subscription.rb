@@ -39,6 +39,21 @@ module Billable
             response.body
           end
 
+          sig { params(subscription_id: String).returns(T.untyped) }
+          def reactivate(subscription_id)
+            response = Http::Client.post(
+              url: "https://#{Billable.billing_client_configuration[:site]}.chargebee.com/api/v2/subscriptions/#{subscription_id}/reactivate",
+              body: 'invoice_immediately=true',
+              user: Billable.billing_client_configuration[:api_key],
+              raise_error: false,
+              logger: false
+            )
+
+            return unless response.status == 200
+
+            response.body
+          end
+
           sig do
             params(subscription_id: String,
                    attributes: T.any(T::Hash[Symbol, T.untyped], ActionController::Parameters)).returns(T.untyped)
