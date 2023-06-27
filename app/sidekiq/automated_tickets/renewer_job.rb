@@ -5,6 +5,9 @@ class AutomatedTickets::RenewerJob
   extend T::Sig
   include Sidekiq::Job
 
+  # we can disable the retry here as it is a cron job that is exected every minutes
+  sidekiq_options retry: false
+
   sig do
     params(automated_ticket_id: Integer, zipcode: String).void
   end
