@@ -17,15 +17,15 @@ namespace :billing do
   end
   task update_all_subscription_with_holder_id_and_holder_type: :environment do
     automated_tickets = AutomatedTicket.where.not(charge_bee_subscription_id: nil)
-    automated_tickets.find_each.with_index do |_automated_ticket, _index|
+    automated_tickets.find_each.with_index do |automated_ticket, _index|
       GenericJob.perform_async(
         'Billing::Subscription',
         'update',
         {
-          'cf_holder_id' => 123,
-          'cf_holder_type' => 'Test::Class'
+          'cf_holder_id' => automated_ticket.id,
+          'cf_holder_type' => automated_ticket.class.name
         },
-        { 'find_id' => AutomatedTicket.last.charge_bee_subscription_id }
+        { 'find_id' => automated_ticket.charge_bee_subscription_id }
       )
     end
   end
