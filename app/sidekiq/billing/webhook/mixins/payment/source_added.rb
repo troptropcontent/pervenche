@@ -13,8 +13,7 @@ module Billing
             subscriptions = customer.subscriptions
 
             subscriptions.each do |subscription|
-              # next if [subscription.status, subscription.cancel_reason] != %w[cancelled no_card]
-              next if subscription.status != 'cancelled'
+              next if [subscription.status, subscription.cancel_reason] != %w[cancelled no_card]
 
               GenericJob.perform_async(
                 'Billing::Subscription',
