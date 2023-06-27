@@ -22,8 +22,8 @@ namespace :billing do
         'Billing::Subscription',
         'update',
         {
-          'cf_holder_id' => 123,
-          'cf_holder_type' => 'Test::Class'
+          'cf_holder_id' => automated_ticket.id,
+          'cf_holder_type' => automated_ticket.class.name
         },
         { 'find_id' => automated_ticket.charge_bee_subscription_id }
       )
