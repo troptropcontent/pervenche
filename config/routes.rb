@@ -16,6 +16,9 @@ Rails.application.routes.draw do
   end
 
   namespace :billing do
+    namespace :reportings do
+      get 'subscription_statuses'
+    end
     resources :customers, only: %i[show], param: :customer_id do
       member do
         resource :address, only: %i[update edit]
