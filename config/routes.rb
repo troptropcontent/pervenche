@@ -16,15 +16,12 @@ Rails.application.routes.draw do
   end
 
   namespace :billing do
-    namespace :reportings do
-      get 'subscription_statuses'
-    end
     resources :customers, only: %i[show], param: :customer_id do
       member do
         resource :address, only: %i[update edit]
       end
     end
-    resources :subscriptions, only: %i[destroy], param: :subscription_id
+    resources :subscriptions, only: %i[index destroy], param: :subscription_id
   end
 
   resource :onboarding, only: :show do

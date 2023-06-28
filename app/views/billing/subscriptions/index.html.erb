@@ -1,0 +1,37 @@
+<main class="grow container stack stack--l">
+  <%= render TitleComponent.new(size: 'l', text: t('views.billing.subscriptions.index.title')) %>
+  <%= render TableComponent.new(
+                header_translation_key: 'views.billing.subscriptions.index.columns',
+                rows: @rows, 
+                columns: [
+                  {
+                    attribute: :customer_email
+                  }, 
+                  {
+                    attribute: :customer_id
+                  }, 
+                  { 
+                    attribute: :plan_id
+                  }, 
+                  { 
+                    attribute: :holder_id
+                  },
+                  {
+                    attribute: :status
+                  }, 
+                  {
+                    attribute: :cancel_reason
+                  },
+                  { 
+                    attribute: :trial_ends_at,
+                    format: :date
+                  }, 
+                  { 
+                    attribute: :next_billing_at,
+                    format: :date
+                  }, 
+                  {
+                    attribute: :amount,
+                    format: -> (amount) { number_to_currency(amount / 100 ) }
+                  } ]) %>
+</main>
