@@ -1,9 +1,10 @@
 # frozen_string_literal: true
 
 class TitleComponent < ViewComponent::Base
-  def initialize(size: nil, color: nil)
+  def initialize(text: nil, size: nil, color: nil)
     @size = find_html_size(size)
     @color = color
+    @text = text
   end
 
   private
