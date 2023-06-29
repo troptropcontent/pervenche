@@ -19,7 +19,7 @@ class MenuLinksGenerator
   def call
     @links << logout_link
     @links << edit_service_link if @user.operationnal?
-    @links << billing_customer_link if @user.operationnal? && billing_customer_feature_allowed?
+    @links << billing_customer_link if @user.operationnal?
     @links << subscriptions_link if @user.has_role?('admin')
     @links << dashboard_link if @user.has_role?('admin')
     @links
@@ -70,12 +70,5 @@ class MenuLinksGenerator
       text: I18n.t('views.application.menu.dashboard'),
       color: 'admin'
     )
-  end
-
-  def billing_customer_feature_allowed?
-    return true if Rails.env.development?
-
-    allowed_user_ids = ENV['PERVENCHE_BILLING_SECTION_ALLOWED_USER_IDS']&.split(',') || []
-    allowed_user_ids.include?(@user.id.to_s)
   end
 end
