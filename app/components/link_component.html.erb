@@ -2,10 +2,10 @@
     <%= link_to @path, class: 'text__color--dark' do %>
       <span class="cluster">
         <% if @icon %>
-          <%= inline_svg("#{@icon}.svg") %>
+          <%= render SvgComponent.new(name: @icon, color: @color) %>
         <% end %>
         <% if @text %>   
-          <p><%=  @text %></p>
+          <%= render TextComponent.new(color: @color, text: @text) %>
         <% end %>
       </span>
     <% end %>
@@ -13,10 +13,10 @@
     <%= button_to @path, method: @action, class: 'text__color--dark'  do %>
       <span class="cluster">
         <% if @icon %>
-          <%= inline_svg("#{@icon}.svg") %>
+          <%= render SvgComponent.new(name: @icon, color: @color) %>
         <% end %>
         <% if @text %>   
-          <p><%=  @text %></p>
+          <%= render TextComponent.new(color: @color, text: @text) %>
         <% end %>
       </span>
     <% end %>
