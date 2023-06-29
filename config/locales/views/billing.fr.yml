@@ -49,6 +49,7 @@ fr:
           index: 
             title: Abonnements
             columns:
+              started_at: Depuis le
               customer_email: Email client
               customer_id: Identifiant client
               customer_internal_id: Identifiant interne client
@@ -59,6 +60,10 @@ fr:
               trial_ends_at: Fin éssai
               next_billing_at: Prochaine échéance
               amount: Montant
+              holder_status: Holder status
+              holder_active: Holder active
+              holder_license_plate: Holder Immatriculation
+              holder_zipcodes: Holder Codes zone
           holder: 
             automated_ticket:
               description: 

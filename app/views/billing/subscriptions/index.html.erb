@@ -16,6 +16,19 @@
                   { 
                     attribute: :holder_id
                   },
+                  { 
+                    attribute: :holder_status
+                  },
+                  { 
+                    attribute: :holder_active
+                  },
+                  { 
+                    attribute: :holder_license_plate
+                  },
+                  { 
+                    attribute: :holder_zipcodes,
+                    format: -> (zipcodes_array) { zipcodes_array.to_sentence }
+                  },
                   {
                     attribute: :status
                   }, 
@@ -23,13 +36,17 @@
                     attribute: :cancel_reason
                   },
                   { 
+                    attribute: :started_at,
+                    format: :date
+                  },  
+                  { 
                     attribute: :trial_ends_at,
                     format: :date
                   }, 
                   { 
                     attribute: :next_billing_at,
                     format: :date
-                  }, 
+                  },
                   {
                     attribute: :amount,
                     format: -> (amount) { number_to_currency(amount / 100 ) }

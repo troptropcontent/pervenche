@@ -6,7 +6,10 @@ module Billing
 
     def index
       subscriptions = Subscription.list(filter_params: params[:filters])
-      @rows = subscriptions.map { |subscription| mapped_subscription(subscription) }
+      mapped_subscriptions = subscriptions.map { |subscription| mapped_subscription(subscription) }
+      @rows = mapped_subscriptions.sort { |a, b| 
+      [a[:customer_email] , a[:trial_ends_at].to_i] <=> [b[:customer_email], b[:trial_ends_at].to_i] 
+    }
     end
 
     # DELETE /billing/subscriptions/:subscription_id
@@ -27,7 +30,11 @@ module Billing
 
     def mapped_subscription(subscription)
       subscription.serialize.symbolize_keys.merge({
-                                                    customer_email: subscription.customer.email
+                                                    customer_email: subscription.customer.email,
+                                                    holder_status: subscription.holder&.status,
+                                                    holder_active: subscription.holder&.active,
+                                                    holder_license_plate: subscription.holder&.license_plate,
+                                                    holder_zipcodes: subscription.holder&.zipcodes,
                                                   })
     end
   end
