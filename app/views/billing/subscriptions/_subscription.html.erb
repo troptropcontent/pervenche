@@ -9,7 +9,7 @@
     <%= render TextComponent.new do %>
       <%= t('views.billing.subscriptions.partial.started_at_html', started_at: l(subscription.started_at, format: :short)) %>
     <% end %>
-    <% if subscription.cancelled_at %>
+    <% if subscription.cancelled_at && subscription.cancel_reason != 'no_card' %>
         <%= render TextComponent.new do %>
           <%= t('views.billing.subscriptions.partial.cancelled_at_html', cancelled_at: l(subscription.cancelled_at, format: :short)) %>
         <% end %>

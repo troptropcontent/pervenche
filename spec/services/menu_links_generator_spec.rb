@@ -11,7 +11,7 @@ RSpec.describe MenuLinksGenerator do
     let(:service) { FactoryBot.create(:service, :without_validations, user:) }
     let!(:automated_ticket) { FactoryBot.create(:automated_ticket, :set_up, user:, service:) }
     let(:expected_links) do
-      ['Me déconnecter', 'Compte PayByPhone']
+      ['Me déconnecter', 'Compte PayByPhone', 'Facturation et moyen de paiement']
     end
     it 'returns the edit service link' do
       expect(subject.map(&:text)).to eq(expected_links)
