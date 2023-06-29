@@ -7,9 +7,9 @@ module Billable
       module Subscription
         RSpec.describe TrialEndReminder do
           subject do
-            test_class = Class.new { 
-              include Billable::Webhook::Mixins::Subscription::TrialEndReminder 
-            }
+            test_class = Class.new do
+              include Billable::Webhook::Mixins::Subscription::TrialEndReminder
+            end
             test_class.new
           end
           describe 'process_trial_end_reminder_webhook(content)' do
@@ -41,7 +41,7 @@ module Billable
               {
                 to: 'toto@example.com',
                 license_plate: 'a_license_plate',
-                billing_customer_url: "http://localhost:3000/billing/customers/BTM8jcTfo0J6IVpC"
+                billing_customer_url: 'http://localhost:3000/billing/customers/BTM8jcTfo0J6IVpC'
               }
             end
 

@@ -31,7 +31,7 @@ module Billable
             AutomatedTicketMailer.trial_period_ends_soon(
               to: automated_ticket.user.email,
               license_plate: automated_ticket.license_plate,
-              billing_customer_url: billing_customer_url(customer_id: , host: Pervenche::HOSTS[Rails.env.to_sym])
+              billing_customer_url: billing_customer_url(customer_id:, host: Pervenche::HOSTS[Rails.env.to_sym])
             ).deliver_later
           end
 
