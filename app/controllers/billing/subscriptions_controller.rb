@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Billing
   class SubscriptionsController < ApplicationController
     skip_load_and_authorize_resource
@@ -7,9 +9,9 @@ module Billing
     def index
       subscriptions = Subscription.list(filter_params: params[:filters])
       mapped_subscriptions = subscriptions.map { |subscription| mapped_subscription(subscription) }
-      @rows = mapped_subscriptions.sort { |a, b| 
-      [a[:customer_email] , a[:trial_ends_at].to_i] <=> [b[:customer_email], b[:trial_ends_at].to_i] 
-    }
+      @rows = mapped_subscriptions.sort do |a, b|
+        [a[:customer_email], a[:trial_ends_at].to_i] <=> [b[:customer_email], b[:trial_ends_at].to_i]
+      end
     end
 
     # DELETE /billing/subscriptions/:subscription_id
@@ -34,7 +36,7 @@ module Billing
                                                     holder_status: subscription.holder&.status,
                                                     holder_active: subscription.holder&.active,
                                                     holder_license_plate: subscription.holder&.license_plate,
-                                                    holder_zipcodes: subscription.holder&.zipcodes,
+                                                    holder_zipcodes: subscription.holder&.zipcodes
                                                   })
     end
   end

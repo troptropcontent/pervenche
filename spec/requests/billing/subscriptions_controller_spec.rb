@@ -10,8 +10,19 @@ RSpec.describe 'Billing::Subscriptions', type: :request do
       response '200', 'OK' do
         before { sign_in user }
         let(:service) { FactoryBot.create(:service, :without_validations, user:) }
-        let!(:automated_ticket) { FactoryBot.create(:automated_ticket, :set_up, user:, service:) }
-        it 'returns a 200', vcr: 'charge_bee_customer' do |example|
+        [11, 10, 9, 8].each do |holder_id|
+          let!("automated_ticket_#{holder_id}".to_sym) do
+            FactoryBot.create(
+              :automated_ticket,
+              :set_up,
+              id: holder_id,
+              user:,
+              service:,
+              zipcodes: ["750#{holder_id <= 9 ? "0#{holder_id}" : "#{holder_id}"}"]
+            )
+          end
+        end
+        it 'returns a 200', :vcr do |example|
           run example
         end
       end
