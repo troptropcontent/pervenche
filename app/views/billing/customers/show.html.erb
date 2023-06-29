@@ -2,30 +2,30 @@
     <section class="stack">
       <div class="cluster">
         <h3 class='grow'><%= t('views.billing.customers.show.billing_address.title') %></h3>
-        <% if !@address.serialize.empty? %>
+        <% if !@address.empty? %>
           <%= render( LinkComponent.new(path: edit_billing_address_path(customer_id: @customer.client_id), icon: 'edit') ) %>
         <% end %>
       </div>
       <span>  
-        <%= render @address %>
+        <%= render @address if !@address.empty? %>
         <%= render EmptyStateComponent.new do %>
             <%= render InfoCardComponent.new(
                 color: 'muted', 
                 center: true,
                 title: t('views.billing.customers.show.billing_address.empty_state.title'),
-                sub_title: t('views.billing.customers.show.billing_address.empty_state.sub_title_html')) %>
+                sub_title: t('views.billing.customers.show.billing_address.empty_state.sub_title_html', href: edit_billing_address_path)) %>
         <% end %>
       </span>
     </section>
     <section class="stack">
       <div class="cluster">
         <h3 class='grow'><%= t('views.billing.customers.show.payment_method.title') %></h3>
-        <% if @payment_method %>
+        <% if !@payment_method.empty? %>
           <%= render( LinkComponent.new(path: @update_payment_method_hosted_page_url, icon: 'edit') ) %>
         <% end %>
       </div>
       <span>  
-        <%= render 'billing/customers/payment_method/payment_method', payment_method: @payment_method %>
+        <%= render('billing/customers/payment_method/payment_method', payment_method: @payment_method) if !@payment_method.empty? %>
         <%= render EmptyStateComponent.new do %>
             <%= render InfoCardComponent.new(
                 color: 'muted', 
@@ -40,8 +40,10 @@
           <%= t('views.billing.customers.show.subscriptions.title', count: @subscriptions.count) %>
         <% end %>
         <%= render StackComponent.new  do %>
-          <%= render StackComponent.new(gap: 'm') do %>
-            <%= render @subscriptions %>
+          <% if !@subscriptions.empty? %>  
+            <%= render StackComponent.new(gap: 'm') do %>
+              <%= render @subscriptions %>
+            <% end %>
           <% end %>
           <%= render EmptyStateComponent.new do %>
               <%= render InfoCardComponent.new(

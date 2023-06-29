@@ -37,6 +37,10 @@ module Billing
       Customer.find(customer_id)
     end
 
+    def empty?
+      serialize.keys == ['customer_id']
+    end
+
     def persisted?
       true
     end

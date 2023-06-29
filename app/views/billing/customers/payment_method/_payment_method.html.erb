@@ -6,7 +6,7 @@
         <%= payment_method.card_type %>
       <% end %>
       <%= render TextComponent.new do %>
-        <%= "****" + payment_method.last_four_digits %>
+        <%= "****" + payment_method.last_four_digits.to_s %>
       <% end %>
     <% end %>
     <%= render TextComponent.new do %>

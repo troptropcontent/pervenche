@@ -13,4 +13,8 @@ class Billing::PaymentMethod < T::Struct
       redirect_url:
     )
   end
+
+  def empty?
+    serialize.keys == ['customer_id']
+  end
 end
