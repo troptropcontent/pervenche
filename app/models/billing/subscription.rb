@@ -27,7 +27,7 @@ module Billing
         build_subscription_from_hash(client_data)
       end
 
-      def list(filter_params: filters)
+      def list(filter_params: nil)
         client_data = Billable::Clients::ChargeBee::Subscription.list(filter_params:)
         client_data['list'].map do |subscription_hash|
           build_subscription_from_hash(subscription_hash)
@@ -82,6 +82,10 @@ module Billing
       return if holder_id.nil? && holder_type.nil?
 
       @holder = holder_type.constantize.find(holder_id)
+    end
+
+    def customer
+      @customer ||= Billing::Customer.find(customer_id)
     end
   end
 end

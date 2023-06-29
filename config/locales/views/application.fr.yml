@@ -17,3 +17,5 @@ fr:
         log_out: Me déconnecter
         parking_service: Compte PayByPhone
         billing_customer: Facturation et moyen de paiement
+        subscriptions: Abonnements
+        dashboard: Dashboard
