@@ -28,6 +28,8 @@ class Ability
     can %i[dashboard], :admin
     can %i[show], Admin::Diagnostics::Client
     can %i[show], Admin::Diagnostics::TicketsToRenew
-    can %i[index], Billing::Subscription
+    can %i[show index destroy], Billing::Subscription
+    can %i[show], Billing::Customer
+    can %i[edit update], Billing::Address
   end
 end

@@ -4,10 +4,10 @@ fr:
         customers:
           show:
             billing_address:
-              title: Addresse de facturation
+              title: Adresse de facturation
               empty_state:
-                title: Vous n'avez pas encore renseigné d'addresse de facturation
-                sub_title_html: Ce sont les coordonnées qui apparaitront sur vos factures, <a href='%{href}'>cliquez ici</a> pour renseigner une addresse de facturation. 
+                title: Vous n'avez pas encore renseigné d'adresse de facturation
+                sub_title_html: Ce sont les coordonnées qui apparaitront sur vos factures, <a href='%{href}'>cliquez ici</a> pour renseigner une adresse de facturation. 
             payment_method:
               title: Carte bancaire
               last_four_digits: "Numéro se terminant par :  %{last_four_digits}"
@@ -16,7 +16,7 @@ fr:
               status: "Status: %{status} "
               empty_state:
                 title: Vous n'avez pas encore renseigné de carte bancaire
-                sub_title_html: Vos tickets ne seront plus renouvelés à la fin de la période d'éssai, <a href='%{href}'>cliquez ici</a> pour enregistrer une carte bancaire, vous serez redirigé vers notre partenaire de paiement ChargeBee. 
+                sub_title_html: Vos tickets ne seront plus renouvelés à la fin de la période d'essai, <a href='%{href}'>cliquez ici</a> pour enregistrer une carte bancaire, vous serez redirigé vers notre partenaire de paiement ChargeBee. 
             subscriptions: 
               title: 
                 one: Mon abonnement
