@@ -7,6 +7,11 @@ module Billable
       module Subscription
         module TrialEndReminder
           extend T::Sig
+          include Rails.application.routes.url_helpers
+          def default_url_options
+            { host: Pervenche::HOSTS[Rails.env.to_sym] }
+          end
+
           sig { params(content: T::Hash[String, T.untyped]).void }
           def process_trial_end_reminder_webhook(content)
             automated_ticket = AutomatedTicket.find(content.dig('subscription', 'cf_automated_ticket_id'))
@@ -26,23 +31,13 @@ module Billable
             AutomatedTicketMailer.trial_period_ends_soon(
               to: automated_ticket.user.email,
               license_plate: automated_ticket.license_plate,
-              update_payment_method_url: retrieve_update_payment_method_hosted_page_url(customer_id)
+              billing_customer_url: billing_customer_url(customer_id: , host: Pervenche::HOSTS[Rails.env.to_sym])
             ).deliver_later
           end
 
           sig { params(automated_ticket: AutomatedTicket).void }
           def notify_end_of_trial(automated_ticket)
             # to implement here a new email to inform the user that he will soon be charged
-          end
-
-          sig { params(customer_id: String).returns(String) }
-          def retrieve_update_payment_method_hosted_page_url(customer_id)
-            T.must(Billable::Customer.update_payment_method_hosted_page_url(customer_id, redirect_url: find_root_url))
-          end
-
-          sig { returns(String) }
-          def find_root_url
-            Rails.application.routes.url_helpers.root_url(host: Pervenche::HOSTS[Rails.env.to_sym])
           end
         end
       end
