@@ -5,5 +5,4 @@ class SvgComponent < ViewComponent::Base
     @color = color
     @name = name
   end
-
 end
