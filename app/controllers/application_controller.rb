@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!
   load_and_authorize_resource unless: :devise_controller?
   before_action :require_operationnal, if: :operationnal_required?
-  before_action :load_menu_links
+  before_action :load_layout_variables, if: :html_request?
 
   def require_operationnal
     redirect_to(onboarding_path)
@@ -30,9 +30,13 @@ class ApplicationController < ActionController::Base
     [Webhooks::BillableController, Webhooks::BillingController].include? self.class
   end
 
-  def load_menu_links
+  def load_layout_variables
     return unless current_user
 
     @menu_links = MenuLinksGenerator.call(current_user)
+  end
+
+  def html_request?
+    request.format.symbol == :html
   end
 end

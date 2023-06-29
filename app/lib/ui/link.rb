@@ -7,5 +7,6 @@ module Ui
     const :path, String
     const :icon, T.nilable(String)
     const :text, T.nilable(String)
+    const :color, T.nilable(String)
   end
 end

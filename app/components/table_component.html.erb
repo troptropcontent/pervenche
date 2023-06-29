@@ -1,0 +1,14 @@
+<table>
+    <tr>
+      <% @columns.each do |column| %>
+          <th><%= column.title %> </th>
+      <% end %>
+    </tr>
+    <% @rows.each do |cells| %>
+      <tr>
+        <% cells.each do |cell| %>
+          <td><%= cell.content%></td>
+        <% end %>
+      </tr>
+    <% end %>
+</table>
