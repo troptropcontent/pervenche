@@ -6,6 +6,18 @@ class AutomatedTicketsController < ApplicationController
     @automated_tickets = @automated_tickets.includes(:running_tickets_in_database)
   end
 
+  # GET   /automated_tickets/export
+  def export
+    @automated_tickets = AutomatedTicket.ready.where(active: true)
+    respond_to do |format|
+      format.csv do
+        response.headers['Content-Type'] = 'text/csv'
+        response.headers['Content-Disposition'] =
+          "attachment; filename=#{Date.today.iso8601}-automated-ticket-with-subscription.csv"
+      end
+    end
+  end
+
   # GET   /automated_tickets/:id
   def show
     @last_tickets = @automated_ticket.tickets.order(starts_on: :desc).limit(10)

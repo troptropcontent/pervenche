@@ -1,0 +1,36 @@
+
+<%= CSV.generate_line( %w[
+      user_id
+      customer_id
+      user_email
+      automated_ticket_id
+      automated_ticket_zipcodes
+      automated_ticket_license_plate
+      automated_ticket_kind
+      subscription_status
+      subscription_cancel_reason
+      subscription_trial_ends_at
+      subscription_next_billing_at
+      subscription_cancelled_at
+      subscription_started_at
+      subscription_amount
+    ].map{|key| t("views.automated_tickets.export.column_name.#{key}")}, col_sep: ';') -%>
+<%- @automated_tickets.each do |automated_ticket| -%>
+  <%- subscription = automated_ticket.subscription  -%>
+  <%= CSV.generate_line([
+      automated_ticket.user.id, 
+      automated_ticket.user.chargebee_customer_id, 
+      automated_ticket.user.email, 
+      automated_ticket.id, 
+      automated_ticket.zipcodes.to_sentence,
+      automated_ticket.license_plate,
+      automated_ticket.kind,
+      subscription.status,
+      subscription.cancel_reason,
+      subscription.trial_ends_at&.iso8601(0),
+      subscription.next_billing_at&.iso8601(0),
+      subscription.cancelled_at&.iso8601(0),
+      subscription.started_at&.iso8601(0),
+      number_to_currency(subscription.amount / 100)
+    ], col_sep: ';') -%>
+<%- end -%>
