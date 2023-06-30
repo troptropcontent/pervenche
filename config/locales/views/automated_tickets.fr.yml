@@ -1,6 +1,22 @@
 fr:
   views:
     automated_tickets:
+      export:
+        column_name:
+          user_id: Utilisateur id 
+          customer_id: Client id 
+          user_email: Utilisateur email 
+          automated_ticket_id: Ticket id
+          automated_ticket_zipcodes: Ticket Codes zones
+          automated_ticket_license_plate: Ticket immatriculation
+          automated_ticket_kind: Ticket kind
+          subscription_status: Abonnement status
+          subscription_cancel_reason: Abonnement motif annul
+          subscription_trial_ends_at: Abonnement fin éssai
+          subscription_next_billing_at: Abonnement prochaine facture
+          subscription_cancelled_at: Abonnement date annul
+          subscription_started_at: Abonnement date départ
+          subscription_amount: Abonnement montant
       index:
         cta: 'Ajouter un ticket'
         modal: 
