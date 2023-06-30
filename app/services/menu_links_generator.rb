@@ -22,6 +22,7 @@ class MenuLinksGenerator
     @links << billing_customer_link if @user.operationnal?
     @links << subscriptions_link if @user.has_role?('admin')
     @links << dashboard_link if @user.has_role?('admin')
+    @links << export_link if @user.has_role?('admin')
     @links
   end
 
@@ -68,6 +69,15 @@ class MenuLinksGenerator
       path: dashboard_admin_path,
       icon: 'chart',
       text: I18n.t('views.application.menu.dashboard'),
+      color: 'admin'
+    )
+  end
+
+  def export_link
+    Ui::Link.new(
+      path: export_automated_tickets_path(format: :csv),
+      icon: 'table',
+      text: I18n.t('views.application.menu.export'),
       color: 'admin'
     )
   end

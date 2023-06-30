@@ -8,7 +8,7 @@ class AutomatedTicketsController < ApplicationController
 
   # GET   /automated_tickets/export
   def export
-    @automated_tickets = AutomatedTicket.ready.where(active: true)
+    @automated_tickets = AutomatedTicket.ready.where(active: true).where.not(charge_bee_subscription_id: nil)
     respond_to do |format|
       format.csv do
         response.headers['Content-Type'] = 'text/csv'
