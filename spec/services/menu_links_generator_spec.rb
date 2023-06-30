@@ -20,7 +20,7 @@ RSpec.describe MenuLinksGenerator do
   context 'when the user is admin' do
     let(:user) { FactoryBot.create(:user, roles: ['admin']) }
     let(:expected_links) do
-      ['Me déconnecter', 'Abonnements', 'Dashboard']
+      ['Me déconnecter', 'Abonnements', 'Dashboard', 'Export tickets et abonnements']
     end
     it 'returns the dashboard and sbscriptions links' do
       expect(subject.map(&:text)).to eq(expected_links)

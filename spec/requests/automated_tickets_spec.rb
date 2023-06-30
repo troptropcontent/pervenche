@@ -22,7 +22,7 @@ RSpec.describe 'AutomatedTickets', type: :request do
         context 'when there is no automated_tickets' do
           it 'returns an empty csv' do |example|
             run example
-            expect response.body.to eq("\nUtilisateur id;Client id;Utilisateur email;Ticket Codes zones;Ticket immatriculation;Ticket kind;Abonnement status;Abonnement motif annul;Abonnement fin éssai;Abonnement prochaine facture;Abonnement date annul;Abonnement date départ;Abonnement montant\n")
+            expect(response.body).to eq("\nUtilisateur id;Client id;Utilisateur email;Ticket id;Ticket Codes zones;Ticket immatriculation;Ticket kind;Abonnement status;Abonnement motif annul;Abonnement fin éssai;Abonnement prochaine facture;Abonnement date annul;Abonnement date départ;Abonnement montant\n")
           end
         end
         context 'when there is some automated_tickets' do
@@ -31,7 +31,7 @@ RSpec.describe 'AutomatedTickets', type: :request do
           let!(:automated_ticket) { FactoryBot.create(:automated_ticket, :set_up, user: another_user, service:, charge_bee_subscription_id: 'BTcd4bTi6ndWBIYX') }
           it 'returns an empty csv', :vcr do |example|
             run example
-            expect(response.body).to eq("\nUtilisateur id;Client id;Utilisateur email;Ticket id;Ticket Codes zones;Ticket immatriculation;Ticket kind;Abonnement status;Abonnement motif annul;Abonnement fin éssai;Abonnement prochaine facture;Abonnement date annul;Abonnement date départ;Abonnement montant\n  #{another_user.id};another_customer_id;person2@example.com;#{automated_ticket.id};75018, 75019 et 75020;CL12345KK;electric_motorcycle;in_trial;;2023-07-09T14:32:44+00:00;2023-07-09T14:32:44+00:00;;2023-06-24T14:32:44+00:00;9,00 €\n")
+            expect(response.body).to eq("\nUtilisateur id;Client id;Utilisateur email;Ticket id;Ticket Codes zones;Ticket immatriculation;Ticket kind;Abonnement status;Abonnement motif annul;Abonnement fin éssai;Abonnement prochaine facture;Abonnement date annul;Abonnement date départ;Abonnement montant\n  #{another_user.id};another_customer_id;#{another_user.email};#{automated_ticket.id};75018, 75019 et 75020;CL12345KK;electric_motorcycle;in_trial;;2023-07-09T14:32:44+00:00;2023-07-09T14:32:44+00:00;;2023-06-24T14:32:44+00:00;9,00 €\n")
           end
         end
       end
