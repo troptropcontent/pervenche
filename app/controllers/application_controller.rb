@@ -23,7 +23,7 @@ class ApplicationController < ActionController::Base
   end
 
   def operationnal_required?
-    operationnal_controller? && !current_user.operationnal?
+    operationnal_controller? && current_user.has_role?('customer') && !current_user.operationnal?
   end
 
   def webhooks_controller?

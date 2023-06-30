@@ -63,13 +63,13 @@ FactoryBot.define do
       with_rate_option
       with_weekdays
       with_payment_methods
-      charge_bee_subscription_id { ['hgjhkghjghgghgkhgk'] }
+      charge_bee_subscription_id { 'hgjhkghjghgghgkhgk' }
     end
 
     trait :with_subscription do
       setup_step { :subscription }
       with_payment_methods
-      charge_bee_subscription_id { ['hgjhkghjghgghgkhgk'] }
+      charge_bee_subscription_id { 'hgjhkghjghgghgkhgk' }
     end
 
     trait :set_up do
