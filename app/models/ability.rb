@@ -5,6 +5,7 @@ class Ability
 
   def initialize(user)
     return unless user.present?
+
     # all common signed in abilities goes here
 
     if user.has_role?('customer')
@@ -23,15 +24,15 @@ class Ability
       can %i[destroy], Billing::Subscription, customer_id: user.chargebee_customer_id
     end
 
-    if user.has_role?('admin')      
-      # all admin abilities goes here
-      can %i[dashboard], :admin
-      can %i[show], Admin::Diagnostics::Client
-      can %i[show], Admin::Diagnostics::TicketsToRenew
-      can %i[show index destroy], Billing::Subscription
-      can %i[show], Billing::Customer
-      can %i[edit update], Billing::Address
-      can %i[export], AutomatedTicket 
-    end
+    return unless user.has_role?('admin')
+
+    # all admin abilities goes here
+    can %i[dashboard], :admin
+    can %i[show], Admin::Diagnostics::Client
+    can %i[show], Admin::Diagnostics::TicketsToRenew
+    can %i[show index destroy], Billing::Subscription
+    can %i[show], Billing::Customer
+    can %i[edit update], Billing::Address
+    can %i[export], AutomatedTicket
   end
 end
