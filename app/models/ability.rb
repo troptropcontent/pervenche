@@ -34,6 +34,7 @@ class Ability
       can %i[edit update], Billing::Address
 
       can %i[export], AutomatedTicket
+      can %i[index show deliver], :email_templates
     end
   end
 end
