@@ -23,18 +23,18 @@ class Ability
       end
       can %i[destroy], Billing::Subscription, customer_id: user.chargebee_customer_id
     end
-    
-    if user.has_role?('admin')
-      # all admin abilities goes here
-      can %i[dashboard], :admin
-      can %i[show], Admin::Diagnostics::Client
-      can %i[show], Admin::Diagnostics::TicketsToRenew
-      can %i[show index destroy], Billing::Subscription
-      can %i[show], Billing::Customer
-      can %i[edit update], Billing::Address
 
-      can %i[export], AutomatedTicket
-      can %i[index show deliver], :email_templates
-    end
+    return unless user.has_role?('admin')
+
+    # all admin abilities goes here
+    can %i[dashboard], :admin
+    can %i[show], Admin::Diagnostics::Client
+    can %i[show], Admin::Diagnostics::TicketsToRenew
+    can %i[show index destroy], Billing::Subscription
+    can %i[show], Billing::Customer
+    can %i[edit update], Billing::Address
+
+    can %i[export], AutomatedTicket
+    can %i[index show deliver], :email_templates
   end
 end
