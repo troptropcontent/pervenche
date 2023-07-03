@@ -1,2 +1,2 @@
-class Emails::Template < ApplicationRecord
+class Emails::Template
 end
