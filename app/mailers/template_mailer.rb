@@ -6,21 +6,18 @@ class TemplateMailer < ApplicationMailer
           delivery_method: ApEmail::DeliveryMethod,
           body: ''
 
-  def self.template_id(template_id = nil)
-    @template_id ||= template_id
+  def notify
+    @to = params[:to]
+    @template_id = params[:template_id]
+    @template_data = params[:template_data]
+    mail(to: @to,
+         template_id: @template_id,
+         template_data: build_template_data(@template_data))
   end
 
-  def build_template_data(template_data_fields)
-    template_data_fields.deep_stringify_keys
-  end
+  private
 
-  def template_email(to:, template_data: {})
-    mail(to:,
-         template_id: self.class.template_id,
-         template_data: build_template_data(template_data))
-  end
-
-  def action_name
-    self.class.name
+  def build_template_data(template_data)
+    template_data.deep_stringify_keys
   end
 end
