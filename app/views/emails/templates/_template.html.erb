@@ -1,17 +1,15 @@
 <%= render CardComponent.new do %>
-  <%= render ClusterComponent.new(justify_content: 'space-between')  do %>
+  <%= render StackComponent.new(justify_content: 'space-between')  do %>
     <%= render StackComponent.new(justify_content: 'center')  do %>
-      <%= render TextComponent.new(text: template.name) %>
-      <%= render ClusterComponent.new do %>
+      <%= render ClusterComponent.new(justify_content: 'end') do %>
         <% template.tags.each do |tag| %>
           <%= render TagComponent.new(text: tag.to_s) %>
         <% end %>
       <% end %>
+      <%= render TextComponent.new(text: template.name) %>
     <% end %>
-    <%= render LinkComponent.new(
-      path: emails_template_path(id: template.template_id),
-      text: 'lien'
-      ) %>
-    
+    <%= render StackComponent.new(justify_content: 'center')  do %>
+      <%= render ButtonComponent.new(path: emails_template_path(id: template.template_id), method: :get).with_content('utiliser ce template') %>
+    <% end %>
   <% end %>
 <% end %>
