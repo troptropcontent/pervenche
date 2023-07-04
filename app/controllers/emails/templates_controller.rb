@@ -4,10 +4,13 @@ module Emails
   class TemplatesController < ApplicationController
     def index
       require_template_descendants if Emails::Template.descendants.empty?
-      @mailers = Emails::Template.descendants
+      @templates = Emails::Template.descendants
     end
 
-    def show; end
+    def show
+      @table_rows = []
+      @table_columns = [:to, *@template.template_data]
+    end
 
     def deliver; end
 

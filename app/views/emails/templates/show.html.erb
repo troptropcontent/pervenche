@@ -1,2 +1,13 @@
-<h1>Emails::Templates#show</h1>
-<p>Find me in app/views/emails/templates/show.html.erb</p>
+<%= render MainComponent.new do %>
+  <%= render TitleComponent.new(text: "Template #{@template.template_id}") %>
+  <%= render StackComponent.new do %>
+    <%= render ClusterComponent.new(justify_content: 'end')  do %>
+      <%= render ButtonComponent.new(path: '#', method: :get).with_content(t("views.emails.templates.show.csv_import_cta")) %>
+    <% end %>
+    <%= render TableComponent.new(rows: @table_rows, columns: @table_columns.map{|table_column| {attribute: table_column}}) do |component| %>
+      <% component.with_empty_state do %>
+        <%= render TextComponent.new.with_content(t("views.emails.templates.show.table.empty_state")) %>
+      <% end %>
+    <% end %>   
+  <% end %>
+<% end %>

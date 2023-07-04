@@ -1,0 +1,8 @@
+fr: 
+  views:
+    emails:
+      templates:
+        show: 
+          csv_import_cta: Import CSV
+          table:
+            empty_state: Vous pouvez ajouter des lignes via le bouton import CSV juste au dessus
