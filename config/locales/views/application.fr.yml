@@ -20,3 +20,7 @@ fr:
         subscriptions: Abonnements
         dashboard: Dashboard
         export: Export tickets et abonnements
+    ui:
+      table:
+        totals:
+          number_of_rows: Nombre de lignes

@@ -1,14 +1,30 @@
 <table>
-    <tr>
-      <% @columns.each do |column| %>
-          <th><%= column.title %> </th>
-      <% end %>
-    </tr>
-    <% @rows.each do |cells| %>
-      <tr>
-        <% cells.each do |cell| %>
-          <td><%= cell.content%></td>
-        <% end %>
-      </tr>
-    <% end %>
+    <thead>
+        <tr>
+          <% @columns.each do |column| %>
+              <th><%= column.title %> </th>
+          <% end %>
+        </tr> 
+    </thead>
+    <tbody>
+        <% if @rows.empty? && empty_state? %>
+            <tr>
+              <td colspan="<%= @columns.length %>"><%= empty_state %></td>
+            </tr> 
+          <% else %>      
+            <% @rows.each do |cells| %>
+            <tr>
+              <% cells.each do |cell| %>
+                <td><%= cell.content%></td>
+              <% end %>
+            </tr>
+          <% end %>
+        <% end %> 
+    </tbody>
+    <tfoot>
+        <tr>
+            <th><%= t("views.ui.table.totals.number_of_rows") %> : </th>
+            <td><%= @rows.length %></td>
+        </tr>
+    </tfoot>
 </table>
