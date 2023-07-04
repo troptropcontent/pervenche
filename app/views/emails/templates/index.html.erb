@@ -1,2 +1,4 @@
-<h1>Emails::Templates#index</h1>
-<p>Find me in app/views/emails/templates/index.html.erb</p>
+<%= render MainComponent.new do %>
+  <%= render TitleComponent.new(text: "Templates d'email") %>
+  <%= render @mailers %>
+<% end %>
