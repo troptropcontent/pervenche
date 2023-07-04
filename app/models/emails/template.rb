@@ -28,6 +28,10 @@ module Emails
         mailers = Dir[Rails.root.join('app/models/emails/**/*.rb')]
         mailers.each { |file| require file }
       end
+
+      def to_partial_path
+        'template'
+      end
     end
 
     delegate :deliver_now, to: :mail

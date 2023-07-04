@@ -3,8 +3,8 @@
 module Emails
   class TemplatesController < ApplicationController
     def index
-      load_mailers if TemplateMailer.descendants.empty?
-      @mailers = TemplateMailer.descendants
+      require_template_descendants if Emails::Template.descendants.empty?
+      @mailers = Emails::Template.descendants
     end
 
     def show; end
@@ -13,8 +13,8 @@ module Emails
 
     private
 
-    def load_mailers
-      mailers = Dir[Rails.root.join('app/mailers/**/*.rb')]
+    def require_template_descendants
+      mailers = Dir[Rails.root.join('app/models/emails/**/*.rb')]
       mailers.each { |file| require file }
     end
   end
