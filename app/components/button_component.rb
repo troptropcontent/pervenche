@@ -7,4 +7,8 @@ class ButtonComponent < ViewComponent::Base
     @method = method
     @text = text
   end
+
+  def classes
+    "btn btn--#{@color}"
+  end
 end
