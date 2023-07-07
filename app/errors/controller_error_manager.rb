@@ -20,7 +20,8 @@ module ControllerErrorManager
       ###########
       rescue_from ActiveRecord::RecordNotFound,
                   Billable::Customer::RecordNotFound,
-                  Billing::Errors::NotFound do |error|
+                  Billing::Errors::NotFound,
+                  Pervenche::Errors::NotFound do |error|
         render json: { code: :not_found, message: error }, status: :not_found
       end
 

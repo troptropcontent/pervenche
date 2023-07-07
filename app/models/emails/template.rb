@@ -16,7 +16,10 @@ module Emails
       end
 
       def find(id)
-        all.find { |template| template.template_id == id }
+        result = all.find { |template| template.template_id == id }
+        raise Pervenche::Errors::NotFound if result.nil?
+
+        result
       end
 
       def all
