@@ -20,6 +20,7 @@ fr:
         subscriptions: Abonnements
         dashboard: Dashboard
         export: Export tickets et abonnements
+        emails: Emails template
     ui:
       table:
         totals:
