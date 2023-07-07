@@ -1,9 +1,9 @@
 <% if @method.nil? || @method == :get %>
-    <%= link_to @path, class: classes do %>
+    <%= link_to @path, class: classes, data: @data do %>
       <%= content %>
     <% end %>
   <% else %>
-    <%= button_to @path, method: @method, form_class: 'stack', class: ['btn', "btn--#{@color}"]  do %>
+    <%= button_to @path, method: @method, form_class: 'stack', class: ['btn', "btn--#{@color}"], data: @data  do %>
       <%= content %>
     <% end %>
 <% end %>
