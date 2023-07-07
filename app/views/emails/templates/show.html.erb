@@ -1,0 +1,4 @@
+<%= render MainComponent.new do %>
+  <%= render TitleComponent.new(text: "Template #{@template.template_id}") %>
+  <%= render Emails::Templates::TableFillableWithCsvComponent.new(rows: @table_rows, columns: @table_columns, template_id: @template.template_id)%>
+<% end %>

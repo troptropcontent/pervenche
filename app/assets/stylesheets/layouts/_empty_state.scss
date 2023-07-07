@@ -1,6 +1,11 @@
 .empty_state {
   display: none;
   &:only-child {
-      display: block;
+    display: block;
+  }
+  &--tr {
+    &:only-child {
+      display: table-row;
+    }
   }
 }

@@ -24,8 +24,12 @@ table {
       text-align: left;
     }
 
-    tr:nth-child(even) {
-      background-color: #f2f2f2
+    // tr:nth-child(even) {
+    //   background-color: #f2f2f2
+    // }
+
+    tr.table-fillable-with-csv-component__row--completed {
+      background-color: var(--color-success-light);
     }
 
 }

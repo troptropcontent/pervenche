@@ -4,8 +4,8 @@
         <% if @icon %>
           <%= render SvgComponent.new(name: @icon, color: @color) %>
         <% end %>
-        <% if @text %>   
-          <%= render TextComponent.new(color: @color, text: @text) %>
+        <% if @text || content %>   
+          <%= render TextComponent.new(color: @color, text: @text || content) %>
         <% end %>
       </span>
     <% end %>
@@ -15,8 +15,8 @@
         <% if @icon %>
           <%= render SvgComponent.new(name: @icon, color: @color) %>
         <% end %>
-        <% if @text %>   
-          <%= render TextComponent.new(color: @color, text: @text) %>
+        <% if @text || content %>   
+          <%= render TextComponent.new(color: @color, text: @text || content) %>
         <% end %>
       </span>
     <% end %>

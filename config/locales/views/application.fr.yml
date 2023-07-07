@@ -20,3 +20,12 @@ fr:
         subscriptions: Abonnements
         dashboard: Dashboard
         export: Export tickets et abonnements
+    ui:
+      table:
+        totals:
+          number_of_rows: Nombre de lignes
+      emails:
+        templates: 
+          table_fillable_with_csv_component:
+            cta_submit: Envoyer les emails
+            cta_csv: Import CSV
