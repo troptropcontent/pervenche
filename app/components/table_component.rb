@@ -6,9 +6,12 @@ class TableComponent < ViewComponent::Base
     const :attribute, Symbol
     const :format, T.nilable(T.any(Symbol, Proc))
   end
+
   class Cell < T::Struct
     const :content, T.nilable(T.untyped)
   end
+
+  renders_one :empty_state
 
   def initialize(columns:, rows:, header_translation_key: nil)
     @header_translation_key = header_translation_key
@@ -19,29 +22,30 @@ class TableComponent < ViewComponent::Base
   private
 
   def build_columns(columns)
-    columns.map{|column|
+    columns.map do |column|
       Column.new(
-        title: @header_translation_key ? I18n.t("#{@header_translation_key}.#{column[:attribute]}") : column[:attribute].to_s, 
-        attribute:  column[:attribute],
+        title: @header_translation_key ? I18n.t("#{@header_translation_key}.#{column[:attribute]}") : column[:attribute].to_s,
+        attribute: column[:attribute],
         format: column[:format]
       )
-    }
+    end
   end
 
   def build_rows(rows)
-    rows.map{ |row| 
-      @columns.map { |column| 
+    rows.map do |row|
+      @columns.map do |column|
         value = row[column.attribute]
         value = format_value(column.format, value)
         Cell.new(content: value)
-      }
-    }
+      end
+    end
   end
 
   def format_value(format, value)
     return value if format.nil? || value.nil?
     return format_with_proc(value, format) if format.is_a?(Proc)
     return format_as_date(value) if format == :date
+
     format_as_text(value)
   end
 
