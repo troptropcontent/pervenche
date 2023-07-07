@@ -1,0 +1,11 @@
+# frozen_string_literal: true
+
+module Emails
+  module Templates
+    class <%= class_name %> < Emails::Template
+      template_id '<%= @template_id %>'
+      <%= "tags #{@tags.map{|tag| ":#{tag}"}.join(', ')}" unless @tags.empty? %>
+      <%= "template_data #{@template_data.map{|tag| ":#{tag}"}.join(', ')}" unless @template_data.empty? %>
+    end
+  end
+end
