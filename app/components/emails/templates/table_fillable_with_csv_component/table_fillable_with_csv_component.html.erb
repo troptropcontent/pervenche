@@ -1,0 +1,53 @@
+<div data-controller="table-fillable-with-csv-component">
+  <%= render StackComponent.new do %>
+    <%= render ClusterComponent.new(justify_content: 'end')  do %>
+      <%= form_with url: "/#", method: :post do |form| %>
+        <%= form.label :csv, "Search for:", class: 'btn btn--primary' do %>
+          <%= render TextComponent.new.with_content(t("views.ui.emails.templates.table_fillable_with_csv_component.cta_csv")) %>
+          <%= form.file_field :csv, accept: 'csv', class: 'visually-hidden', data: {
+            "action": "table-fillable-with-csv-component#useCsvFile"
+            } %>
+        <% end %>  
+      <% end %>
+    <% end %>
+    <table>
+        <thead>
+            <tr>
+              <% @columns.each do |column| %>
+                  <th><%= column %></th>
+              <% end %>
+            </tr> 
+        </thead>
+        <tbody data-table-fillable-with-csv-component-target="tBody">
+              <tr class='empty_state empty_state--tr'>
+                <td colspan="<%= @columns.length %>">Empty state</td>
+              </tr> 
+        </tbody>
+        <tfoot>
+            <tr>
+                <th><%= t("views.ui.table.totals.number_of_rows") %> : </th>
+                <td data-table-fillable-with-csv-component-target="footerCount">0</td>
+            </tr>
+        </tfoot>
+        <template data-results-target="itemTemplate" data-table-fillable-with-csv-component-target="rowTemplate">
+          <tr data-table-fillable-with-csv-component-target="dataRow"">
+              <% @columns.each do |column| %>
+                <td data-field-name="<%= column %>">{{<%= column %>}}</td>
+              <% end %>
+          </tr> 
+        </template>
+    </table> 
+    <%= render ClusterComponent.new(justify_content: 'end')  do %>
+      <%= render ButtonComponent.new(
+          path: '#', 
+          method: :post, 
+          color: 'primary', 
+          data: {
+            "table-fillable-with-csv-component-url-param": emails_template_deliver_url(@template_id), 
+            "action": "table-fillable-with-csv-component#deliverEmails"
+          })  do %>
+        <%= t("views.ui.emails.templates.table_fillable_with_csv_component.cta_submit") %>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>
