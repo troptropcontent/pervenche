@@ -1,6 +1,5 @@
 import { Controller } from "@hotwired/stimulus";
 import * as XLSX from 'xlsx';
-import Rails from "@rails/ujs";
 
 export default class extends Controller {
 
