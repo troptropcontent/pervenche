@@ -109,6 +109,9 @@ gem 'sidekiq', '~> 7.0'
 #Actors
 gem 'service_actor-rails', '~> 1.0'
 
+#Uistiti toolkit
+gem 'uistiti', git: 'https://github.com/troptropcontent/uistiti.git', branch: 'development'
+
 group :development, :test do
   gem 'byebug', platform: :mri
   gem 'rspec-rails'
