@@ -85,6 +85,17 @@ module Billable
             )
           end
 
+          sig { params(subscription_id: String).returns(T.untyped) }
+          def resume(subscription_id)
+            Http::Client.post(
+              url: "https://#{Billable.billing_client_configuration[:site]}.chargebee.com/api/v2/subscriptions/#{subscription_id}/resume",
+              body: 'resume_option=immediately',
+              user: Billable.billing_client_configuration[:api_key],
+              raise_error: false,
+              logger: false
+            )
+          end
+
           private
 
           sig { params(path: String, params: T::Hash[String, T.untyped]).returns(Faraday::Response) }

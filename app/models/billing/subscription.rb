@@ -84,6 +84,13 @@ module Billing
       "Chargebee - #{client_response.body['message']}"
     end
 
+    def resume
+      client_response = Billable::Clients::ChargeBee::Subscription.resume(client_id)
+      return 'OK' if client_response.status == 200
+
+      "Chargebee - #{client_response.body['message']}"
+    end
+
     def holder
       return @holder if @holder
       return if holder_id.nil? && holder_type.nil?
