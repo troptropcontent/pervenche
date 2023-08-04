@@ -1,0 +1,93 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://pervenche-test.chargebee.com/api/v2/subscriptions/BTcd4sThFVEMHRSz
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.7.10
+      Authorization:
+      - Basic dGVzdF8yM0g1TWhpZUhpMTFtRXBjc1N6MVNnVlVoY2pSb3paSDo=
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 04 Aug 2023 15:58:50 GMT
+      Content-Type:
+      - application/json;charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Cache-Control:
+      - no-store, no-cache, must-revalidate
+      Expires:
+      - Thu, 01 Jan 1970 00:00:00 UTC
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Pragma:
+      - no-cache
+      Vary:
+      - Accept-Encoding
+      Server:
+      - ChargeBee
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        ewogICAgInN1YnNjcmlwdGlvbiI6IHsKICAgICAgICAiaWQiOiAiQlRjZDRzVGhGVkVNSFJTeiIsCiAgICAgICAgImJpbGxpbmdfcGVyaW9kIjogMSwKICAgICAgICAiYmlsbGluZ19wZXJpb2RfdW5pdCI6ICJtb250aCIsCiAgICAgICAgInRyaWFsX2VuZCI6IDE2ODgxMjU2MzIsCiAgICAgICAgImN1c3RvbWVyX2lkIjogIkJUVHpXMFRjWktDYWM5V0oiLAogICAgICAgICJzdGF0dXMiOiAicGF1c2VkIiwKICAgICAgICAidHJpYWxfc3RhcnQiOiAxNjg2ODI5NjMyLAogICAgICAgICJjdXJyZW50X3Rlcm1fc3RhcnQiOiAxNjkwNzE3NjMyLAogICAgICAgICJjdXJyZW50X3Rlcm1fZW5kIjogMTY5MzM5NjAzMiwKICAgICAgICAiY3JlYXRlZF9hdCI6IDE2ODY4Mjk2MzIsCiAgICAgICAgInN0YXJ0ZWRfYXQiOiAxNjg2ODI5NjMyLAogICAgICAgICJhY3RpdmF0ZWRfYXQiOiAxNjg4MTI1NjMyLAogICAgICAgICJ1cGRhdGVkX2F0IjogMTY5MTE2NDYyNSwKICAgICAgICAiaGFzX3NjaGVkdWxlZF9jaGFuZ2VzIjogZmFsc2UsCiAgICAgICAgImNoYW5uZWwiOiAid2ViIiwKICAgICAgICAicmVzb3VyY2VfdmVyc2lvbiI6IDE2OTExNjQ2MjUwNDksCiAgICAgICAgImRlbGV0ZWQiOiBmYWxzZSwKICAgICAgICAib2JqZWN0IjogInN1YnNjcmlwdGlvbiIsCiAgICAgICAgImN1cnJlbmN5X2NvZGUiOiAiRVVSIiwKICAgICAgICAic3Vic2NyaXB0aW9uX2l0ZW1zIjogW3sKICAgICAgICAgICAgIml0ZW1fcHJpY2VfaWQiOiAiY2NfcmVzaWRlbnRpYWwtRVVSLU1vbnRobHkiLAogICAgICAgICAgICAiaXRlbV90eXBlIjogInBsYW4iLAogICAgICAgICAgICAicXVhbnRpdHkiOiAxLAogICAgICAgICAgICAidW5pdF9wcmljZSI6IDkwMCwKICAgICAgICAgICAgImFtb3VudCI6IDkwMCwKICAgICAgICAgICAgImZyZWVfcXVhbnRpdHkiOiAwLAogICAgICAgICAgICAidHJpYWxfZW5kIjogMTY4ODEyNTYzMiwKICAgICAgICAgICAgIm9iamVjdCI6ICJzdWJzY3JpcHRpb25faXRlbSIKICAgICAgICB9XSwKICAgICAgICAiZHVlX2ludm9pY2VzX2NvdW50IjogMCwKICAgICAgICAibXJyIjogMCwKICAgICAgICAiY2ZfYXV0b21hdGVkX3RpY2tldF9pZCI6ICI3IiwKICAgICAgICAicGF1c2VfZGF0ZSI6IDE2OTExNjQ2MjUsCiAgICAgICAgImhhc19zY2hlZHVsZWRfYWR2YW5jZV9pbnZvaWNlcyI6IGZhbHNlCiAgICB9LAogICAgImN1c3RvbWVyIjogewogICAgICAgICJpZCI6ICJCVFR6VzBUY1pLQ2FjOVdKIiwKICAgICAgICAiZmlyc3RfbmFtZSI6ICJUb20iLAogICAgICAgICJsYXN0X25hbWUiOiAiRWNyZXBvbnQiLAogICAgICAgICJlbWFpbCI6ICJ0b21AcGVydmVuY2hlLmV1IiwKICAgICAgICAiYXV0b19jb2xsZWN0aW9uIjogIm9uIiwKICAgICAgICAibmV0X3Rlcm1fZGF5cyI6IDAsCiAgICAgICAgImFsbG93X2RpcmVjdF9kZWJpdCI6IGZhbHNlLAogICAgICAgICJjcmVhdGVkX2F0IjogMTY4MjU0MTg2NiwKICAgICAgICAidGF4YWJpbGl0eSI6ICJ0YXhhYmxlIiwKICAgICAgICAidXBkYXRlZF9hdCI6IDE2ODY4OTY4MjAsCiAgICAgICAgInBpaV9jbGVhcmVkIjogImFjdGl2ZSIsCiAgICAgICAgImNoYW5uZWwiOiAid2ViIiwKICAgICAgICAicmVzb3VyY2VfdmVyc2lvbiI6IDE2ODY4OTY4MjA5OTksCiAgICAgICAgImRlbGV0ZWQiOiBmYWxzZSwKICAgICAgICAib2JqZWN0IjogImN1c3RvbWVyIiwKICAgICAgICAiYmlsbGluZ19hZGRyZXNzIjogewogICAgICAgICAgICAiZmlyc3RfbmFtZSI6ICJUb20iLAogICAgICAgICAgICAibGFzdF9uYW1lIjogIkVjcmVwb250IiwKICAgICAgICAgICAgImxpbmUxIjogIjE0IFJ1ZSBMYXBleXJlcmUiLAogICAgICAgICAgICAiY2l0eSI6ICJQYXJpcyIsCiAgICAgICAgICAgICJzdGF0ZSI6ICLDjmxlLWRlLUZyYW5jZSIsCiAgICAgICAgICAgICJjb3VudHJ5IjogIkZSIiwKICAgICAgICAgICAgInppcCI6ICI3NTAxOCIsCiAgICAgICAgICAgICJ2YWxpZGF0aW9uX3N0YXR1cyI6ICJub3RfdmFsaWRhdGVkIiwKICAgICAgICAgICAgIm9iamVjdCI6ICJiaWxsaW5nX2FkZHJlc3MiCiAgICAgICAgfSwKICAgICAgICAiY2FyZF9zdGF0dXMiOiAidmFsaWQiLAogICAgICAgICJwcm9tb3Rpb25hbF9jcmVkaXRzIjogMCwKICAgICAgICAicmVmdW5kYWJsZV9jcmVkaXRzIjogMCwKICAgICAgICAiZXhjZXNzX3BheW1lbnRzIjogMCwKICAgICAgICAidW5iaWxsZWRfY2hhcmdlcyI6IDAsCiAgICAgICAgInByZWZlcnJlZF9jdXJyZW5jeV9jb2RlIjogIkVVUiIsCiAgICAgICAgInByaW1hcnlfcGF5bWVudF9zb3VyY2VfaWQiOiAicG1fQlRjZDJTVGNibEJtNEN0ZiIsCiAgICAgICAgInBheW1lbnRfbWV0aG9kIjogewogICAgICAgICAgICAib2JqZWN0IjogInBheW1lbnRfbWV0aG9kIiwKICAgICAgICAgICAgInR5cGUiOiAiY2FyZCIsCiAgICAgICAgICAgICJyZWZlcmVuY2VfaWQiOiAidG9rX0JUY2QyU1RjYmxCbHVDdGUiLAogICAgICAgICAgICAiZ2F0ZXdheSI6ICJjaGFyZ2ViZWUiLAogICAgICAgICAgICAiZ2F0ZXdheV9hY2NvdW50X2lkIjogImd3X0JUY1hnSlRjU0pGY3oxbnoiLAogICAgICAgICAgICAic3RhdHVzIjogInZhbGlkIgogICAgICAgIH0sCiAgICAgICAgInRheF9wcm92aWRlcnNfZmllbGRzIjogW10KICAgIH0sCiAgICAiY2FyZCI6IHsKICAgICAgICAic3RhdHVzIjogInZhbGlkIiwKICAgICAgICAiZ2F0ZXdheSI6ICJjaGFyZ2ViZWUiLAogICAgICAgICJnYXRld2F5X2FjY291bnRfaWQiOiAiZ3dfQlRjWGdKVGNTSkZjejFueiIsCiAgICAgICAgImlpbiI6ICI0MTExMTEiLAogICAgICAgICJsYXN0NCI6ICIxMTExIiwKICAgICAgICAiY2FyZF90eXBlIjogInZpc2EiLAogICAgICAgICJmdW5kaW5nX3R5cGUiOiAiY3JlZGl0IiwKICAgICAgICAiZXhwaXJ5X21vbnRoIjogMTIsCiAgICAgICAgImV4cGlyeV95ZWFyIjogMjAyOSwKICAgICAgICAiY3JlYXRlZF9hdCI6IDE2ODI1Nzc4NTAsCiAgICAgICAgInVwZGF0ZWRfYXQiOiAxNjgyNTc3ODUwLAogICAgICAgICJpcF9hZGRyZXNzIjogIjE1OC4yNTUuMTE2LjUwIiwKICAgICAgICAicmVzb3VyY2VfdmVyc2lvbiI6IDE2ODI1Nzc4NTA2NjgsCiAgICAgICAgIm9iamVjdCI6ICJjYXJkIiwKICAgICAgICAibWFza2VkX251bWJlciI6ICIqKioqKioqKioqKioxMTExIiwKICAgICAgICAiY3VzdG9tZXJfaWQiOiAiQlRUelcwVGNaS0NhYzlXSiIsCiAgICAgICAgInBheW1lbnRfc291cmNlX2lkIjogInBtX0JUY2QyU1RjYmxCbTRDdGYiCiAgICB9Cn0=
+  recorded_at: Fri, 04 Aug 2023 15:58:50 GMT
+- request:
+    method: post
+    uri: https://pervenche-test.chargebee.com/api/v2/subscriptions/BTcd4sThFVEMHRSz/pause
+    body:
+      encoding: UTF-8
+      string: pause_option=immediately
+    headers:
+      User-Agent:
+      - Faraday v2.7.10
+      Authorization:
+      - Basic dGVzdF8yM0g1TWhpZUhpMTFtRXBjc1N6MVNnVlVoY2pSb3paSDo=
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 409
+      message: Conflict
+    headers:
+      Date:
+      - Fri, 04 Aug 2023 15:58:50 GMT
+      Content-Type:
+      - application/json;charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Cache-Control:
+      - no-store, no-cache, must-revalidate
+      Pragma:
+      - no-cache
+      Vary:
+      - Accept-Encoding
+      Server:
+      - ChargeBee
+    body:
+      encoding: ASCII-8BIT
+      string: '{"message":"Cannot pause subscription in Paused state. Only Active,
+        Non-renewing subscriptions can be paused.","type":"invalid_request","api_error_code":"invalid_state_for_request","error_code":"invalid_state_for_pause","error_msg":"Cannot
+        pause subscription in Paused state. Only Active, Non-renewing subscriptions
+        can be paused.","http_status_code":409}'
+  recorded_at: Fri, 04 Aug 2023 15:58:50 GMT
+recorded_with: VCR 6.2.0
