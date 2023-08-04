@@ -77,6 +77,13 @@ module Billing
       self.class.find(client_id)
     end
 
+    def pause
+      client_response = Billable::Clients::ChargeBee::Subscription.pause(client_id)
+      return 'OK' if client_response.status == 200
+
+      "Chargebee - #{client_response.body['message']}"
+    end
+
     def holder
       return @holder if @holder
       return if holder_id.nil? && holder_type.nil?
