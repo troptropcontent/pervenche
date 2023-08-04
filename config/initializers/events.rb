@@ -30,3 +30,13 @@ ActiveSupport::Notifications.subscribe 'charge_bee.subscription_created' do |_na
            user_email: payload.fetch(:user_email))
   )
 end
+
+ActiveSupport::Notifications.subscribe 'charge_bee.subscription_pause_error' do |_name, _start, _finish, _id, payload|
+  Notifiers::Discord.send_message_later(
+    :errors,
+    I18n.t('notifications.discord.charge_bee.subscription_pause_error',
+           message: payload.fetch(:message),
+           automated_ticket_id: payload.fetch(:automated_ticket_id),
+           user_email: payload.fetch(:user_email))
+  )
+end
