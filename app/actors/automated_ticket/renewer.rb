@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class AutomatedTicket::Renewer < Actor
+  input :jid, default: nil
   play ->(actor) { actor.automated_ticket ||= AutomatedTicket.find(actor.automated_ticket_id) },
        FindOrSaveRunningTicket
   play FindPaymentMethod,

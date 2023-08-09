@@ -6,11 +6,16 @@ class AutomatedTicket::Renewer::RequestNewTicket < Actor
   input :time_unit
   input :quantity
   input :payment_method_id, allow_nil: true
+  input :jid, default: nil
   output :ticket_request
 
   def call
-    request_new_ticket!
-    save_ticket_request!
+    instrumentation_data = { jid: }
+    instrumentation_name = 'job.automated_tickets.renewer_job.request_new_ticket_actor'
+    ActiveSupport::Notifications.instrument instrumentation_name, instrumentation_data do
+      request_new_ticket!
+      save_ticket_request!
+    end
   end
 
   private
