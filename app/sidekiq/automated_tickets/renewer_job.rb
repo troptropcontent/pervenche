@@ -18,7 +18,7 @@ class AutomatedTickets::RenewerJob
       running_ticket = Ticket.find_by(automated_ticket_id:, zipcode:, ends_on: Time.zone.now..)
       return if running_ticket.present?
 
-      AutomatedTicket::Renewer.result(automated_ticket_id:, zipcode:, last_request_on:, jid:)
+      AutomatedTicket::Renewer.call(automated_ticket_id:, zipcode:, last_request_on:, jid:)
     end
   end
 end
