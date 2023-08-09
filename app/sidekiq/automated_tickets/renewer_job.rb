@@ -17,7 +17,7 @@ class AutomatedTickets::RenewerJob
       last_request_on = TicketRequest.where(automated_ticket_id:).maximum(:requested_on) || DateTime.new
       running_ticket = Ticket.find_by(automated_ticket_id:, zipcode:, ends_on: Time.zone.now..)
       return if running_ticket.present?
-
+      
       AutomatedTicket::Renewer.call(automated_ticket_id:, zipcode:, last_request_on:, jid:)
     end
   end
