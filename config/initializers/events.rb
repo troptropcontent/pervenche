@@ -30,3 +30,70 @@ ActiveSupport::Notifications.subscribe 'charge_bee.subscription_created' do |_na
            user_email: payload.fetch(:user_email))
   )
 end
+
+ActiveSupport::Notifications.monotonic_subscribe 'job.automated_tickets.renewer_job.main' do |name, started, finished, _unique_id, data|
+  log_data_hash = {
+    jid: data[:jid],
+    kind: 'custom_instrumentation',
+    name:,
+    started:,
+    finished:,
+    elapsed: (finished - started),
+    automated_ticket_id: data[:automated_ticket_id],
+    zipcode: data[:zipcode]
+  }
+  log_data_json = JSON.generate(log_data_hash)
+  Rails.logger.info log_data_json
+end
+
+ActiveSupport::Notifications.monotonic_subscribe 'job.automated_tickets.renewer_job.find_or_save_running_ticket_actor' do |name, started, finished, _unique_id, data|
+  log_data_hash = {
+    jid: data[:jid],
+    kind: 'custom_instrumentation',
+    name:,
+    started:,
+    finished:,
+    elapsed: (finished - started)
+  }
+  log_data_json = JSON.generate(log_data_hash)
+  Rails.logger.info log_data_json
+end
+
+ActiveSupport::Notifications.monotonic_subscribe 'job.automated_tickets.renewer_job.find_payment_method_actor' do |name, started, finished, _unique_id, data|
+  log_data_hash = {
+    jid: data[:jid],
+    kind: 'custom_instrumentation',
+    name:,
+    started:,
+    finished:,
+    elapsed: (finished - started)
+  }
+  log_data_json = JSON.generate(log_data_hash)
+  Rails.logger.info log_data_json
+end
+
+ActiveSupport::Notifications.monotonic_subscribe 'job.automated_tickets.renewer_job.find_time_unit_and_quantity_actor' do |name, started, finished, _unique_id, data|
+  log_data_hash = {
+    jid: data[:jid],
+    kind: 'custom_instrumentation',
+    name:,
+    started:,
+    finished:,
+    elapsed: (finished - started)
+  }
+  log_data_json = JSON.generate(log_data_hash)
+  Rails.logger.info log_data_json
+end
+
+ActiveSupport::Notifications.monotonic_subscribe 'job.automated_tickets.renewer_job.request_new_ticket_actor' do |name, started, finished, _unique_id, data|
+  log_data_hash = {
+    jid: data[:jid],
+    kind: 'custom_instrumentation',
+    name:,
+    started:,
+    finished:,
+    elapsed: (finished - started)
+  }
+  log_data_json = JSON.generate(log_data_hash)
+  Rails.logger.info log_data_json
+end
