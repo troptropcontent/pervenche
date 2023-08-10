@@ -160,10 +160,12 @@ module ParkingTicket
               params: {
                 locationId: zipcode,
                 licensePlate: license_plate,
+                stall: nil,
                 rateOptionId: rate_option_id,
                 durationTimeUnit: time_unit,
                 durationQuantity: quantity,
                 isParkUntil: false,
+                expireTime: nil,
                 parkingAccountId: account_id
               },
               token:,
