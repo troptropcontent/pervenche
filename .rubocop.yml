@@ -11,6 +11,9 @@ Style/ClassAndModuleChildren:
   Enabled: false
 Style/Documentation:
   Enabled: false
+Lint/MissingSuper:
+  Exclude:
+    - 'app/services/**/*.rb'
 Metrics/BlockLength:
   Exclude:
     - '**/*_spec.rb'

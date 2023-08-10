@@ -1,7 +1,18 @@
 <%= render CardComponent.new(padding: 'm', color: ('muted' if subscription.cancelled_at)) do %>
   <%= render StackComponent.new do %>
-    <%= render TitleComponent.new(color: 'primary', size: 's') do %>
-      <%= number_to_currency(subscription.amount / 100) %> / <%= t("datetime.prompts.month").downcase %>
+    <%= render Uistiti::Alpha::Flex.new(direction: 'row', justify_content: 'space-between', align_items: 'center')  do %>
+      <%= render TitleComponent.new(color: 'primary', size: 's') do %>
+        <%= number_to_currency(subscription.amount / 100) %> / <%= t("datetime.prompts.month").downcase %>
+      <% end %>
+      <% if subscription.status == 'active' %>
+        <%= render Uistiti::Alpha::Token.new(color: :success, icon: :done).with_content(t('views.billing.subscriptions.partial.status.active')) %>
+      <% end %>
+      <% if subscription.status == 'paused' %>
+        <%= render Uistiti::Alpha::Token.new(color: :warning, icon: :pause).with_content(t('views.billing.subscriptions.partial.status.paused')) %>
+      <% end %>
+      <% if subscription.status == 'in_trial' %>
+        <%= render Uistiti::Alpha::Token.new(color: :disabled, icon: :redeem).with_content(t('views.billing.subscriptions.partial.status.in_trial')) %>
+      <% end %>
     <% end %>
     <% if subscription.holder %>
         <%= render "billing/subscriptions/holder/#{subscription.holder.model_name.singular}", holder: subscription.holder %>

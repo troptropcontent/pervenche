@@ -46,28 +46,67 @@ RSpec.describe 'AutomatedTickets', type: :request do
     end
   end
 
-  describe '/automated_tickets/new' do
-    context 'GET' do
-      describe 'automated_tickets#new' do
-        it 'returns the automated_ticket wizard'
+  path '/automated_tickets/:id' do
+    let(:id) { automated_ticket.id }
+    let!(:automated_ticket) do
+      FactoryBot.create(:automated_ticket, :set_up, user:, service:, active: initial_automated_ticket_active_attribute, charge_bee_subscription_id: 'BTcd4sThFVEMHRSz')
+    end
+    let(:initial_automated_ticket_active_attribute) { true }
+    let(:user) { FactoryBot.create(:user) }
+    let(:service) { FactoryBot.create(:service, :without_validations, user:) }
+
+    put '#update' do
+      it_behaves_like 'An authenticated endpoint'
+
+      response '204', 'No Content' do
+        before { sign_in user }
+        context 'when the active attribute is updated' do
+          context 'when the attribute is updated from true to false' do
+            let(:initial_automated_ticket_active_attribute) { true }
+            params { { automated_ticket: { active: false } } }
+            it 'updates the active attribute and pauses the subscription', vcr: true do |example|
+              expect(Billable::Clients::ChargeBee::Subscription).to receive(:pause).with('BTcd4sThFVEMHRSz').and_call_original
+              expect { run example }.to change { automated_ticket.reload.active }.from(true).to(false)
+            end
+          end
+          context 'when the attribute is updated from false to true' do
+            let(:initial_automated_ticket_active_attribute) { false }
+            params { { automated_ticket: { active: true } } }
+            it 'updates the active attribute and pauses the subscription', vcr: true do |example|
+              expect(Billable::Clients::ChargeBee::Subscription).to receive(:resume).with('BTcd4sThFVEMHRSz').and_call_original
+              expect { run example }.to change { automated_ticket.reload.active }.from(false).to(true)
+            end
+          end
+        end
+      end
+      response '422', 'Unprocessable Entity' do
+        before { sign_in user }
+        context 'when the active attribute is updated' do
+          context 'when the attribute is updated from true to false but the subscription can not be paused' do
+            let(:initial_automated_ticket_active_attribute) { true }
+            params { { automated_ticket: { active: false } } }
+            it 'does not update the active attribute', vcr: true do |example|
+              expect(Billable::Clients::ChargeBee::Subscription).to receive(:pause).with('BTcd4sThFVEMHRSz').and_call_original
+              expect { run example }.not_to(change { automated_ticket.reload.active })
+            end
+          end
+          context 'when the attribute is updated from false to true but the subscription can not be resumed' do
+            let(:initial_automated_ticket_active_attribute) { false }
+            params { { automated_ticket: { active: true } } }
+            it 'updates the active attribute and pauses the subscription', vcr: true do |example|
+              expect(Billable::Clients::ChargeBee::Subscription).to receive(:resume).with('BTcd4sThFVEMHRSz').and_call_original
+              expect { run example }.not_to(change { automated_ticket.reload.active })
+            end
+          end
+        end
       end
     end
   end
 
-  describe '/automated_tickets/:id' do
-    context 'PATCH' do
-      describe 'automated_tickets#update' do
-        it 'updates the automated_ticket'
-      end
-    end
-    context 'PUT' do
-      describe 'automated_tickets#update' do
-        it 'updates the automated_ticket'
-      end
-    end
-    context 'DELETE' do
-      describe 'automated_tickets#destroy' do
-        it 'destroys the automated_ticket'
+  describe '/automated_tickets/new' do
+    context 'GET' do
+      describe 'automated_tickets#new' do
+        it 'returns the automated_ticket wizard'
       end
     end
   end

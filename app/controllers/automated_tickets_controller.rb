@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 class AutomatedTicketsController < ApplicationController
+  PERMITED_PARAMS = [
+    :active
+  ].freeze
+
   # GET   /automated_tickets
   def index
     @automated_tickets = @automated_tickets.includes(:running_tickets_in_database)
@@ -13,7 +17,7 @@ class AutomatedTicketsController < ApplicationController
       format.csv do
         response.headers['Content-Type'] = 'text/csv'
         response.headers['Content-Disposition'] =
-          "attachment; filename=#{Date.today.iso8601}-automated-ticket-with-subscription.csv"
+          "attachment; filename=#{Time.zone.today.iso8601}-automated-ticket-with-subscription.csv"
       end
     end
   end
@@ -32,7 +36,8 @@ class AutomatedTicketsController < ApplicationController
   end
 
   def update
-    if @automated_ticket.update(automated_ticket_params)
+    actor = AutomatedTickets::Update.result(automated_ticket: @automated_ticket, automated_ticket_params:)
+    if actor.success?
       head :no_content
     else
       head :unprocessable_entity
@@ -52,7 +57,7 @@ class AutomatedTicketsController < ApplicationController
   private
 
   def automated_ticket_params
-    params.require(:automated_ticket).permit(:active)
+    params.require(:automated_ticket).permit(*PERMITED_PARAMS)
   end
 
   def new_automated_ticket
