@@ -63,13 +63,18 @@ module ParkingTicket
               url: "https://consumer.paybyphoneapis.com/parking/locations/#{zipcode}/rateOptions",
               headers: {
                 accept: 'application/json, text/plain, */*',
-                'accept-language': 'fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7',
+                'accept-language': 'en-US,en;q=0.9',
                 'content-type': 'application/json',
                 'sec-fetch-dest': 'empty',
                 'sec-fetch-mode': 'cors',
                 'sec-fetch-site': 'cross-site',
                 'x-pbp-clienttype': 'WebApp',
-                'x-pbp-version': '2'
+                'x-pbp-version': '2',
+                DNT: '1',
+                'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36',
+                'sec-ch-ua:': "'Chromium';v='115', 'Not/A)Brand';v='99'",
+                'sec-ch-ua-mobile': '?0',
+                'sec-ch-ua-platform': 'macOS'
               },
               params: {
                 parkingAccountId: account_id,
@@ -86,12 +91,18 @@ module ParkingTicket
               url: 'https://consumer.paybyphoneapis.com/identity/profileservice/v1/members/vehicles/paybyphone',
               headers: {
                 accept: 'application/json, text/plain, */*',
-                'accept-language': 'fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7',
+                'accept-language': 'en-US,en;q=0.9',
                 'content-type': 'application/json',
                 'sec-fetch-dest': 'empty',
                 'sec-fetch-mode': 'cors',
                 'sec-fetch-site': 'cross-site',
-                'x-pbp-clienttype': 'WebApp'
+                'x-pbp-clienttype': 'WebApp',
+                DNT: '1',
+                'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36',
+                'sec-ch-ua:': "'Chromium';v='115', 'Not/A)Brand';v='99'",
+                'sec-ch-ua-mobile': '?0',
+                'sec-ch-ua-platform': 'macOS'
+
               },
               token:,
               use_proxy: true
@@ -132,22 +143,29 @@ module ParkingTicket
             Http::Client.get(
               url: "https://consumer.paybyphoneapis.com/parking/accounts/#{account_id}/quote",
               headers: {
-                accept: 'application/json, text/plain, */*',
-                'accept-language': 'fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7',
-                'content-type': 'application/json',
+                Accept: 'application/json, text/plain, */*',
+                'Accept-Language': 'en-US,en;q=0.9',
+                'Content-Type': 'application/json',
                 'sec-fetch-dest': 'empty',
                 'sec-fetch-mode': 'cors',
                 'sec-fetch-site': 'cross-site',
                 'x-pbp-clienttype': 'WebApp',
-                'x-pbp-version': '2'
+                'x-pbp-version': '2',
+                DNT: '1',
+                'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36',
+                'sec-ch-ua:': "'Chromium';v='115', 'Not/A)Brand';v='99'",
+                'sec-ch-ua-mobile': '?0',
+                'sec-ch-ua-platform': 'macOS'
               },
               params: {
                 locationId: zipcode,
                 licensePlate: license_plate,
+                stall: nil,
                 rateOptionId: rate_option_id,
                 durationTimeUnit: time_unit,
                 durationQuantity: quantity,
                 isParkUntil: false,
+                expireTime: nil,
                 parkingAccountId: account_id
               },
               token:,
@@ -230,17 +248,46 @@ module ParkingTicket
             Http::Client.post(
               url: "https://consumer.paybyphoneapis.com/parking/accounts/#{account_id}/sessions/",
               headers: {
-                accept: 'application/json, text/plain, */*',
-                'accept-language': 'fr-FR,fr;q=0.9,en-US;q=0.8,en;q=0.7',
-                'content-type': 'application/json',
+                Accept: 'application/json, text/plain, */*',
+                'Accept-Language': 'en-US,en;q=0.9',
+                'Content-Type': 'application/json',
                 'sec-fetch-dest': 'empty',
                 'sec-fetch-mode': 'cors',
                 'sec-fetch-site': 'cross-site',
                 'x-pbp-clienttype': 'WebApp',
                 'x-pbp-distributionchannel': 'pbp-webapp',
-                'x-pbp-version': '2'
+                'x-pbp-version': '2',
+                DNT: '1',
+                'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36',
+                'sec-ch-ua:': "'Chromium';v='115', 'Not/A)Brand';v='99'",
+                'sec-ch-ua-mobile': '?0',
+                'sec-ch-ua-platform': 'macOS'
               },
               body: JSON.generate(final_data),
+              token:,
+              use_proxy: true
+            ).body
+          end
+
+          sig { params(token: String, quote_id: String).returns(T::Array[T::Hash[String, T.untyped]]) }
+          def request_workflow_confirmation(token, quote_id)
+            Http::Client.get(
+              url: "https://consumer.paybyphoneapis.com/events/workflow/#{quote_id}",
+              headers: {
+                Accept: 'application/json, text/plain, */*',
+                'Accept-Language': 'en-US,en;q=0.9',
+                'Content-Type': 'application/json',
+                'sec-fetch-dest': 'empty',
+                'sec-fetch-mode': 'cors',
+                'sec-fetch-site': 'cross-site',
+                'x-pbp-clienttype': 'WebApp',
+                'x-pbp-version': '2',
+                DNT: '1',
+                'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36',
+                'sec-ch-ua:': "'Chromium';v='115', 'Not/A)Brand';v='99'",
+                'sec-ch-ua-mobile': '?0',
+                'sec-ch-ua-platform': 'macOS'
+              },
               token:,
               use_proxy: true
             ).body
@@ -335,6 +382,10 @@ module ParkingTicket
                                 quote_client_internal_id:,
                                 starts_on:,
                                 payment_method_id:)
+
+          return unless ENV['PERVENCHE_PAYBYPHONE_USE_REQUEST_WORFLOW_CONFIRMATION'] == 'true'
+
+          self.class.request_workflow_confirmation(token, quote_client_internal_id)
         end
 
         private
