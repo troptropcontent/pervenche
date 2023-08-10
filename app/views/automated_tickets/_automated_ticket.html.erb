@@ -1,14 +1,17 @@
 <span class='stack'>   
   <%= render 'components/infocard', color: 'muted' do %>
     <div class="stack stack--no-gap">
-        <span class="cluster">
+        <%= render Uistiti::Alpha::Flex.new(direction: :row, justify_content: 'space-between')  do %>
+          <%= render Uistiti::Alpha::Flex.new(direction: :row)  do %>
             <% if automated_ticket.vehicle_description %>
-                <b><%= automated_ticket.vehicle_description %></b>
-                <p><%= automated_ticket.license_plate %></p>
-                <% else %>
-                <b><%= automated_ticket.license_plate %></b>
+                  <b><%= automated_ticket.vehicle_description %></b>
+                  <p><%= automated_ticket.license_plate %></p>
+                  <% else %>
+                  <b><%= automated_ticket.license_plate %></b>
             <% end %>
-        </span>
+          <% end %>
+          <%= render(Uistiti::Alpha::Toggle.new(automated_ticket, :active)) %>
+        <% end %>
         <p class="text__color--primary">
             <%= t 'partials.automated_ticket.ticket_count', count: automated_ticket.zipcodes.length %>
         </p>

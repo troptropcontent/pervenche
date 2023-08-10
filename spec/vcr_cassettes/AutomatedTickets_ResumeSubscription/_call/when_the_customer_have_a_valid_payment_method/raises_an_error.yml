@@ -1,0 +1,166 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://pervenche-test.chargebee.com/api/v2/subscriptions/198XFzTmAvvY5a3S
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.7.10
+      Authorization:
+      - Basic dGVzdF8yM0g1TWhpZUhpMTFtRXBjc1N6MVNnVlVoY2pSb3paSDo=
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 10 Aug 2023 19:38:04 GMT
+      Content-Type:
+      - application/json;charset=utf-8
+      Content-Length:
+      - '1830'
+      Connection:
+      - keep-alive
+      Cache-Control:
+      - no-store, no-cache, must-revalidate
+      Expires:
+      - Thu, 01 Jan 1970 00:00:00 UTC
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Pragma:
+      - no-cache
+      Server:
+      - ChargeBee
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+            "subscription": {
+                "id": "198XFzTmAvvY5a3S",
+                "billing_period": 1,
+                "billing_period_unit": "month",
+                "trial_end": 1692638777,
+                "customer_id": "BTM8hcTebF5hX7WD",
+                "status": "in_trial",
+                "trial_start": 1691342777,
+                "next_billing_at": 1692638777,
+                "created_at": 1691342777,
+                "started_at": 1691342777,
+                "created_from_ip": "93.23.13.152",
+                "updated_at": 1691342783,
+                "has_scheduled_changes": false,
+                "channel": "web",
+                "resource_version": 1691342783574,
+                "deleted": false,
+                "object": "subscription",
+                "currency_code": "EUR",
+                "subscription_items": [{
+                    "item_price_id": "combustion_car_residential_eur_monthly",
+                    "item_type": "plan",
+                    "quantity": 1,
+                    "unit_price": 900,
+                    "amount": 900,
+                    "free_quantity": 0,
+                    "trial_end": 1692638777,
+                    "object": "subscription_item"
+                }],
+                "due_invoices_count": 0,
+                "has_scheduled_advance_invoices": false,
+                "trial_end_action": "site_default"
+            },
+            "customer": {
+                "id": "BTM8hcTebF5hX7WD",
+                "email": "axel.thorwirth@gmail.com",
+                "auto_collection": "on",
+                "net_term_days": 0,
+                "allow_direct_debit": false,
+                "created_at": 1684402466,
+                "taxability": "taxable",
+                "updated_at": 1684402466,
+                "pii_cleared": "active",
+                "channel": "web",
+                "resource_version": 1684402466517,
+                "deleted": false,
+                "object": "customer",
+                "card_status": "no_card",
+                "promotional_credits": 0,
+                "refundable_credits": 0,
+                "excess_payments": 0,
+                "unbilled_charges": 0,
+                "preferred_currency_code": "EUR",
+                "tax_providers_fields": []
+            }
+        }
+  recorded_at: Thu, 10 Aug 2023 19:38:04 GMT
+- request:
+    method: get
+    uri: https://pervenche-test.chargebee.com/api/v2/customers/BTM8hcTebF5hX7WD
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.7.10
+      Authorization:
+      - Basic dGVzdF8yM0g1TWhpZUhpMTFtRXBjc1N6MVNnVlVoY2pSb3paSDo=
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Thu, 10 Aug 2023 19:38:05 GMT
+      Content-Type:
+      - application/json;charset=utf-8
+      Content-Length:
+      - '612'
+      Connection:
+      - keep-alive
+      Cache-Control:
+      - no-store, no-cache, must-revalidate
+      Expires:
+      - Thu, 01 Jan 1970 00:00:00 UTC
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Pragma:
+      - no-cache
+      Server:
+      - ChargeBee
+    body:
+      encoding: UTF-8
+      string: |-
+        {"customer": {
+            "id": "BTM8hcTebF5hX7WD",
+            "email": "axel.thorwirth@gmail.com",
+            "auto_collection": "on",
+            "net_term_days": 0,
+            "allow_direct_debit": false,
+            "created_at": 1684402466,
+            "taxability": "taxable",
+            "updated_at": 1684402466,
+            "pii_cleared": "active",
+            "channel": "web",
+            "resource_version": 1684402466517,
+            "deleted": false,
+            "object": "customer",
+            "card_status": "no_card",
+            "promotional_credits": 0,
+            "refundable_credits": 0,
+            "excess_payments": 0,
+            "unbilled_charges": 0,
+            "preferred_currency_code": "EUR",
+            "tax_providers_fields": []
+        }}
+  recorded_at: Thu, 10 Aug 2023 19:38:05 GMT
+recorded_with: VCR 6.2.0

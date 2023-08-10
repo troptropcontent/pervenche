@@ -63,6 +63,10 @@ fr:
             next_billing_at_html: "Prochaine échéance le <b>%{next_billing_at}</b>"
             cancelled_at_html: "Fin de l'abonnement le <b>%{cancelled_at}</b>"
             started_at_html: "Depuis le <b>%{started_at}</b>"
+            status:
+              in_trial: "Période d'éssai"
+              active: "En cours"
+              paused: "En pause"
   models:
     billing:
       attributes:

@@ -12,6 +12,9 @@ class AutomatedTicket < ApplicationRecord
   belongs_to :service, optional: true
   belongs_to :user
 
+  scope :active, -> { where(active: true) }
+  scope :not_active, -> { where(active: false) }
+
   SETUP_STEPS = T.let(
     {
       service: [:service_id],
