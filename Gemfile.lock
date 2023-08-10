@@ -513,7 +513,6 @@ GEM
 
 PLATFORMS
   arm64-darwin-20
-  x86_64-linux
 
 DEPENDENCIES
   active_hash (~> 2.3.0)
