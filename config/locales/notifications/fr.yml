@@ -8,3 +8,4 @@ fr:
       charge_bee:
         subscription_created: "💶 Une souscription a été créée 💶\ntype: %{type}\nmontant: %{amount} €\nfin de la période d'essai: %{trial_ends}\nautomated_ticket_id: %{automated_ticket_id}\nuser_email: %{user_email}"
         subscription_pause_error: "🚨 Erreur lors de la desactivation d'un abonnement 🚨\nmessage: %{message}\nautomated_ticket_id: %{automated_ticket_id}\nuser_email: %{user_email}"
+        subscription_resume_error: "🚨 Erreur lors de la reprise d'un abonnement 🚨\nmessage: %{message}\nautomated_ticket_id: %{automated_ticket_id}\nuser_email: %{user_email}"
