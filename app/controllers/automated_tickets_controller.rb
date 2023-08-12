@@ -36,6 +36,7 @@ class AutomatedTicketsController < ApplicationController
   end
 
   def update
+    ActionController::Parameters.new({ automated_ticket: { active: false } })
     actor = AutomatedTickets::Update.result(automated_ticket: @automated_ticket, automated_ticket_params:)
     if actor.success?
       head :no_content
