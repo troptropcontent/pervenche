@@ -6,7 +6,7 @@ AllCops:
   NewCops: enable
   TargetRubyVersion: 3.2.1
   SuggestExtensions: false
-
+    
 Style/ClassAndModuleChildren:
   Enabled: false
 Style/Documentation:
@@ -21,3 +21,13 @@ Metrics/BlockLength:
 Layout/LineLength:
   Exclude:
     - '**/*_spec.rb'
+
+Style/FrozenStringLiteralComment:
+  Exclude:
+    - 'db/schema.rb'
+Metrics/BlockLength:
+  Exclude:
+    - 'db/schema.rb'
+Rails/ThreeStateBooleanColumn:
+  Exclude:
+    - 'db/schema.rb'
