@@ -6,7 +6,11 @@ module AutomatedTickets
     input :automated_ticket_params, type: ActionController::Parameters
 
     play UseParams
-    play PauseSubscription, if: ->(actor) { actor.automated_ticket.saved_change_to_active == [true, false] }
-    play ResumeSubscription, if: ->(actor) { actor.automated_ticket.saved_change_to_active == [false, true] }
+    play PauseSubscription, if: lambda { |actor|
+                                  actor.automated_ticket.charge_bee_subscription_id && actor.automated_ticket.saved_change_to_active == [true, false]
+                                }
+    play ResumeSubscription, if: lambda { |actor|
+                                   actor.automated_ticket.charge_bee_subscription_id && actor.automated_ticket.saved_change_to_active == [false, true]
+                                 }
   end
 end
