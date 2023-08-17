@@ -168,9 +168,12 @@ RSpec.describe 'AutomatedTickets::Setups', type: :request do
               }
             end
 
-            it 'redirect to the root' do |example|
+            it 'redirect to the root and set the automated ticket as ready' do |example|
               run example
               expect(response).to redirect_to('/')
+              expect(automated_ticket.reload.active).to be(true)
+              expect(automated_ticket.reload.last_activated_at).to be_within(1.second).of(Time.zone.now)
+              expect(automated_ticket.reload.status).to eq('ready')
             end
           end
         end

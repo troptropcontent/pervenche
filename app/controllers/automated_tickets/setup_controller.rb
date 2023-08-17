@@ -36,7 +36,7 @@ module AutomatedTickets
       if @automated_ticket.valid?
         complete_all_already_completable_steps
         next_step = SetupStep.current_step(@automated_ticket)
-        @automated_ticket.update!(status: :ready, active: true) unless next_step
+        @automated_ticket.update!(status: :ready, active: true, last_activated_at: Time.zone.now) unless next_step
         flash[:notice] = t("views.setup.flash.#{next_step ? 'information_saved' : 'finished'}")
         redirect_to next_step ? next_step.show_path(@automated_ticket) : root_path
       else
