@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Admin::VehicleAtRiskNotification < Noticed::Base
   deliver_by :database
   deliver_by :discord, class: 'DeliveryMethods::Discord', channel: :vehicle_at_risk

@@ -82,6 +82,8 @@ FactoryBot.define do
       with_payment_methods
       with_charge_bee_subscription_id
       status { :ready }
+      active { true }
+      last_activated_at { Time.zone.now }
     end
 
     trait :without_validations do

@@ -5,7 +5,36 @@
 
 class VehicleAtRiskNotification < Noticed::Base
   deliver_by :database
-  param :coverage_ended_on
-  param :automated_ticket
+
+  param :user_email
+  param :license_plate
   param :zipcode
+  param :uncovered_since
+  param :automated_ticket_id
+
+  after_deliver :notify_admin
+
+  class << self
+    def all
+      Notification.all.where(type: 'VehicleAtRiskNotification')
+    end
+
+    def last_uncovered_since_notified(automated_ticket, zipcode)
+      all.where("(params ->> 'automated_ticket_id')::integer = ? AND params ->> 'zipcode' = ?",
+                automated_ticket.id,
+                zipcode)
+         .order(Arel.sql(
+                  "((params -> 'uncovered_since') ->> 'value')::timestamp ASC"
+                ))
+         .pick(Arel.sql(
+                 "((params -> 'uncovered_since') ->> 'value')::timestamp"
+               ))
+    end
+  end
+
+  private
+
+  def notify_admin
+    Admin::VehicleAtRiskNotification.with(params).deliver_later(recipient)
+  end
 end
