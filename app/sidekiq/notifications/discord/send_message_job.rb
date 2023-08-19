@@ -4,6 +4,7 @@
 class Notifications::Discord::SendMessageJob
   extend T::Sig
   include Sidekiq::Job
+  sidekiq_options queue: :low
 
   sig { params(channel: String, content: String).void }
   def perform(channel, content)

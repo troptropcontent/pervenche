@@ -59,10 +59,10 @@ RSpec.describe AutomatedTicket::Renewer::NotifyVehicleAtRiskIfNeeded,
             }
           end
           it 'should notify the user' do
-            expect { subject }.to change(Sidekiq::Queues['default'], :size).from(0).to(1)
-            enqueded_job = Sidekiq::Queues['default'].dig(0, 'args', 0, 'job_class')
-            enqueded_job_notification_class_argument = Sidekiq::Queues['default'].dig(0, 'args', 0, 'arguments', 0, 'notification_class')
-            enqueded_job_params_argument = Sidekiq::Queues['default'].dig(0, 'args', 0, 'arguments', 0, 'params')
+            expect { subject }.to change(Sidekiq::Queues['critical'], :size).from(0).to(1)
+            enqueded_job = Sidekiq::Queues['critical'].dig(0, 'args', 0, 'job_class')
+            enqueded_job_notification_class_argument = Sidekiq::Queues['critical'].dig(0, 'args', 0, 'arguments', 0, 'notification_class')
+            enqueded_job_params_argument = Sidekiq::Queues['critical'].dig(0, 'args', 0, 'arguments', 0, 'params')
             expect(enqueded_job).to eq('DeliveryMethods::Discord')
             expect(enqueded_job_notification_class_argument).to eq('Admin::VehicleAtRiskNotification')
             expect(enqueded_job_params_argument).to match(expected_enqued_job_params_argument)
@@ -103,10 +103,10 @@ RSpec.describe AutomatedTicket::Renewer::NotifyVehicleAtRiskIfNeeded,
             }
           end
           it 'should notify the user' do
-            expect { subject }.to change(Sidekiq::Queues['default'], :size).from(0).to(1)
-            enqueded_job = Sidekiq::Queues['default'].dig(0, 'args', 0, 'job_class')
-            enqueded_job_notification_class_argument = Sidekiq::Queues['default'].dig(0, 'args', 0, 'arguments', 0, 'notification_class')
-            enqueded_job_params_argument = Sidekiq::Queues['default'].dig(0, 'args', 0, 'arguments', 0, 'params')
+            expect { subject }.to change(Sidekiq::Queues['critical'], :size).from(0).to(1)
+            enqueded_job = Sidekiq::Queues['critical'].dig(0, 'args', 0, 'job_class')
+            enqueded_job_notification_class_argument = Sidekiq::Queues['critical'].dig(0, 'args', 0, 'arguments', 0, 'notification_class')
+            enqueded_job_params_argument = Sidekiq::Queues['critical'].dig(0, 'args', 0, 'arguments', 0, 'params')
             expect(enqueded_job).to eq('DeliveryMethods::Discord')
             expect(enqueded_job_notification_class_argument).to eq('Admin::VehicleAtRiskNotification')
             expect(enqueded_job_params_argument).to match(expected_enqued_job_params_argument)
@@ -158,10 +158,10 @@ RSpec.describe AutomatedTicket::Renewer::NotifyVehicleAtRiskIfNeeded,
                 }
               end
               it 'should notify the user' do
-                expect { subject }.to change(Sidekiq::Queues['default'], :size).from(0).to(1)
-                enqueded_job = Sidekiq::Queues['default'].dig(0, 'args', 0, 'job_class')
-                enqueded_job_notification_class_argument = Sidekiq::Queues['default'].dig(0, 'args', 0, 'arguments', 0, 'notification_class')
-                enqueded_job_params_argument = Sidekiq::Queues['default'].dig(0, 'args', 0, 'arguments', 0, 'params')
+                expect { subject }.to change(Sidekiq::Queues['critical'], :size).from(0).to(1)
+                enqueded_job = Sidekiq::Queues['critical'].dig(0, 'args', 0, 'job_class')
+                enqueded_job_notification_class_argument = Sidekiq::Queues['critical'].dig(0, 'args', 0, 'arguments', 0, 'notification_class')
+                enqueded_job_params_argument = Sidekiq::Queues['critical'].dig(0, 'args', 0, 'arguments', 0, 'params')
                 expect(enqueded_job).to eq('DeliveryMethods::Discord')
                 expect(enqueded_job_notification_class_argument).to eq('Admin::VehicleAtRiskNotification')
                 expect(enqueded_job_params_argument).to match(expected_enqued_job_params_argument)
