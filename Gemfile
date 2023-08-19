@@ -34,6 +34,9 @@ gem 'phonelib'
 gem 'sentry-rails'
 gem 'sentry-ruby'
 
+#Notification
+gem 'noticed'
+
 #view component
 gem "view_component"
 

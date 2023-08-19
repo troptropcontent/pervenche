@@ -4,9 +4,11 @@ module AutomatedTickets
   class UseParams < Actor
     input :automated_ticket, type: AutomatedTicket
     input :automated_ticket_params, type: ActionController::Parameters
+    output :saved_changes
     def call
       save_initial_attributes
       fail!(error: automated_ticket.errors.full_messages) unless automated_ticket.update(automated_ticket_params)
+      self.saved_changes = automated_ticket.saved_changes
     end
 
     def rollback

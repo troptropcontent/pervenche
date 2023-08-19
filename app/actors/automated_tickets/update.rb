@@ -7,10 +7,11 @@ module AutomatedTickets
 
     play UseParams
     play PauseSubscription, if: lambda { |actor|
-                                  actor.automated_ticket.charge_bee_subscription_id && actor.automated_ticket.saved_change_to_active == [true, false]
+                                  actor.automated_ticket.charge_bee_subscription_id && actor.saved_changes['active'] == [true, false]
                                 }
+    play UpdateLastUpdatedAt, if: ->(actor) { actor.saved_changes['active'] == [false, true] }
     play ResumeSubscription, if: lambda { |actor|
-                                   actor.automated_ticket.charge_bee_subscription_id && actor.automated_ticket.saved_change_to_active == [false, true]
+                                   actor.automated_ticket.charge_bee_subscription_id && actor.saved_changes['active'] == [false, true]
                                  }
   end
 end
