@@ -72,7 +72,7 @@ RSpec.describe 'AutomatedTickets', type: :request do
           context 'when the attribute is updated from false to true' do
             let(:initial_automated_ticket_active_attribute) { false }
             params { { automated_ticket: { active: true } } }
-            it 'updates the active attribute and pauses the subscription', vcr: true do |example|
+            it 'updates the active attribute and resumes the subscription', vcr: true do |example|
               expect(Billable::Clients::ChargeBee::Subscription).to receive(:resume).with('BTcd4sThFVEMHRSz').and_call_original
               expect { run example }.to change { automated_ticket.reload.active }.from(false).to(true)
             end
