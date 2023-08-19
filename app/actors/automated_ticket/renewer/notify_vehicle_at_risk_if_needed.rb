@@ -33,10 +33,23 @@ class AutomatedTicket::Renewer::NotifyVehicleAtRiskIfNeeded < Actor
   end
 
   def uncovered_since
-    @uncovered_since ||= Ticket.where(automated_ticket:,
-                                      zipcode:)
-                               .order(ends_on: :desc)
-                               .pick(:ends_on) || automated_ticket.last_activated_at
+    @uncovered_since ||= find_uncovered_since
+  end
+
+  def find_uncovered_since
+    return last_activated_at if last_ticket_ends_on.nil? || last_ticket_ends_on.before?(last_activated_at)
+
+    last_ticket_ends_on
+  end
+
+  def last_ticket_ends_on
+    @last_ticket_ends_on ||= Ticket.where(automated_ticket:, zipcode:)
+                                   .order(ends_on: :desc)
+                                   .pick(:ends_on)
+  end
+
+  def last_activated_at
+    automated_ticket.last_activated_at
   end
 
   def last_uncovered_since_notified
