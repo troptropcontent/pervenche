@@ -12,5 +12,6 @@ class AutomatedTicket::Renewer < Actor
                actor.automated_ticket.should_renew_today? &&
                (actor.last_request_on.nil? || actor.last_request_on <= 5.minutes.ago)
            }
+  play NotifyVehicleAtRiskIfNeeded
   # TO_DO make last_request_on 0 if null this way we can simply do actor.last_request_on <= 5.minutes.ago
 end

@@ -5,6 +5,7 @@ production:
   :concurrency: 5
 
 :queues:
+  - critical
   - default
+  - low
   - mailer
-  - broadcasters

@@ -15,6 +15,7 @@ class User < ApplicationRecord
   has_many :services, dependent: :destroy
   has_many :robots, through: :services
   has_many :automated_tickets, dependent: :destroy
+  has_many :notifications, as: :recipient, dependent: :destroy
 
   def self.from_omniauth(auth)
     find_or_create_by(provider: auth.provider, uid: auth.uid) do |user|

@@ -37,7 +37,6 @@ module AutomatedTickets
       it 'resumes the subscription', vcr: true do
         expect(subject).to eq(nil)
       end
-      icke
     end
   end
 end
