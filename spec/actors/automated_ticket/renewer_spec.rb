@@ -29,11 +29,18 @@ RSpec.describe AutomatedTicket::Renewer, type: :actor do
         expect { subject }.not_to change(TicketRequest, :count)
       end
     end
+    shared_examples 'it does not notify the user' do
+      it 'does not notify the user' do
+        allow(automated_ticket).to receive(:renew!)
+        expect { subject }.not_to change(Notification, :count)
+      end
+    end
     context 'when a running ticket is found in the database' do
       let!(:running_ticket_in_database) do
         FactoryBot.create(:ticket, automated_ticket:, zipcode: '75016', ends_on: 2.hours.from_now)
       end
       it_behaves_like 'it does not request a new ticket'
+      it_behaves_like 'it does not notify the user'
     end
     context 'when a running ticket is not found in the database' do
       context 'when a running_ticket is found in the client' do
@@ -54,6 +61,7 @@ RSpec.describe AutomatedTicket::Renewer, type: :actor do
           end
 
           it_behaves_like 'it does not request a new ticket'
+          it_behaves_like 'it does not notify the user'
           it 'creates a new ticket in the database' do
             expect { subject }.to change(Ticket, :count).by(1)
           end
@@ -61,6 +69,7 @@ RSpec.describe AutomatedTicket::Renewer, type: :actor do
         context 'when a running ticket is not found at the client' do
           context 'when automated ticket should not be renewed today' do
             let(:weekdays) { [Date.today.tomorrow.wday] }
+
             it_behaves_like 'it does not request a new ticket'
           end
           context 'when automated_ticket should be renewed today' do
@@ -88,23 +97,39 @@ RSpec.describe AutomatedTicket::Renewer, type: :actor do
               let(:free) { true }
               let(:expected_payment_method_client_internal_id) { nil }
               it_behaves_like 'it requests a new ticket'
+              it_behaves_like 'it does not notify the user'
             end
             context 'when automated_ticket.payment_method_client_internal_id is not set to free' do
+              it_behaves_like 'it does not notify the user'
               it_behaves_like 'it requests a new ticket'
             end
             context 'when automated_ticket.accepted_time_units contains days' do
               let(:expected_time_unit) { 'days' }
+              it_behaves_like 'it does not notify the user'
               it_behaves_like 'it requests a new ticket'
             end
             context 'when automated_ticket.accepted_time_units does not contain days' do
               let(:accepted_time_units) { ['something_else'] }
               let(:expected_time_unit) { 'hours' }
+              it_behaves_like 'it does not notify the user'
               it_behaves_like 'it requests a new ticket'
             end
 
             context 'when the ticket have been requested less than 5 minutes ago' do
               let(:last_request_on) { 4.minutes.ago }
+              it_behaves_like 'it does not notify the user'
               it_behaves_like 'it does not request a new ticket'
+            end
+
+            context 'when the vehicle is at risk' do
+              before do
+                automated_ticket.last_activated_at = 9.minutes.ago
+              end
+              it_behaves_like 'it requests a new ticket'
+              it 'notifies the user' do
+                allow(automated_ticket).to receive(:renew!)
+                expect { subject }.to change { Notification.where(type: 'VehicleAtRiskNotification').count }.by(1)
+              end
             end
           end
         end
