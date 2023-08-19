@@ -18,14 +18,11 @@ Metrics/BlockLength:
   Exclude:
     - '**/*_spec.rb'
     - 'spec/factories/**/*.rb'
+    - 'db/schema.rb'
 Layout/LineLength:
   Exclude:
     - '**/*_spec.rb'
-
 Style/FrozenStringLiteralComment:
-  Exclude:
-    - 'db/schema.rb'
-Metrics/BlockLength:
   Exclude:
     - 'db/schema.rb'
 Rails/ThreeStateBooleanColumn:
