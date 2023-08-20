@@ -8,6 +8,10 @@ class AdminController < ApplicationController
     @users_onboarded_count = User.joins(:automated_tickets).where(automated_tickets: { status: :ready }).distinct.count
   end
 
+  def automated_tickets_without_tickets
+    @ticket_to_renews = TicketToRenew.all
+  end
+
   private
 
   def authorize_action!

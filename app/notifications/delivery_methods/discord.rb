@@ -9,6 +9,6 @@ class DeliveryMethods::Discord < Noticed::DeliveryMethods::Base
   private
 
   def message
-    notification.t('.discord_message', **params) || notification.send(options[:format])
+    notification.t('.discord_message', **params.symbolize_keys) || notification.send(options[:format])
   end
 end

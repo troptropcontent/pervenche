@@ -22,6 +22,7 @@ class MenuLinksGenerator
     @links << billing_customer_link if @user.operationnal?
     @links << subscriptions_link if @user.has_role?('admin')
     @links << dashboard_link if @user.has_role?('admin')
+    @links << automated_tickets_without_tickets_link if @user.has_role?('admin')
     @links << export_link if @user.has_role?('admin')
     @links << emails_link if @user.has_role?('admin')
     @links
@@ -70,6 +71,15 @@ class MenuLinksGenerator
       path: dashboard_admin_path,
       icon: 'chart',
       text: I18n.t('views.application.menu.dashboard'),
+      color: 'admin'
+    )
+  end
+
+  def automated_tickets_without_tickets_link
+    Ui::Link.new(
+      path: automated_tickets_without_tickets_admin_path,
+      icon: 'alert-triangle',
+      text: I18n.t('views.application.menu.automated_tickets_without_tickets'),
       color: 'admin'
     )
   end

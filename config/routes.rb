@@ -43,6 +43,7 @@ Rails.application.routes.draw do
 
   resource :admin, only: [], controller: 'admin' do
     get 'dashboard'
+    get 'automated_tickets_without_tickets'
     resources :diagnostics, only: [] do
       collection do
         resources :client, only: :show, param: :client_kind, constraints: { client_kind: /pay_by_phone/ },
@@ -64,5 +65,10 @@ Rails.application.routes.draw do
   authenticate :user, ->(user) { user.has_role?('admin') } do
     mount Sidekiq::Web => '/sidekiq'
     mount Blazer::Engine => '/blazer'
+    resources :notifications, only: [] do
+      collection do
+        post '/:type', to: 'notifications#create', as: 'create'
+      end
+    end
   end
 end
