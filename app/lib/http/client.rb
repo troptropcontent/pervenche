@@ -81,7 +81,8 @@ module Http
         conn.request(:authorization, 'Bearer', token) if token
         conn.request :authorization, :basic, user, password || '' if user
         conn.response :logger, Rails.logger, { formatter: JsonFormater } if logger
-        conn.use Faraday::Response::NotifyErrors
+        # Broadcast error on discord in addition to sentry
+        # conn.use Faraday::Response::NotifyErrors
         conn.response :json
       end
     end
