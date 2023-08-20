@@ -23,7 +23,7 @@ class AutomatedTicket::Renewer::NotifyVehicleAtRiskIfNeeded < Actor
   end
 
   def vehicle_at_risk?
-    uncovered_since < uncovered_minutes_threshold.to_i.minutes.ago
+    (uncovered_since < uncovered_minutes_threshold.to_i.minutes.ago) && in_paying_slot?
   end
 
   def uncovered_minutes_threshold
@@ -60,5 +60,11 @@ class AutomatedTicket::Renewer::NotifyVehicleAtRiskIfNeeded < Actor
     @last_uncovered_since_notified ||= VehicleAtRiskNotification.last_uncovered_since_notified(
       automated_ticket, zipcode
     )
+  end
+
+  def in_paying_slot?
+    paying_slot_starts_at = ActiveSupport::TimeZone['Paris'].parse('09:00:00')
+    paying_slot_stops_at = ActiveSupport::TimeZone['Paris'].parse('20:00:00')
+    Time.zone.now.between?(paying_slot_starts_at, paying_slot_stops_at)
   end
 end
