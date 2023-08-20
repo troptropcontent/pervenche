@@ -5,6 +5,7 @@
 
 class VehicleAtRiskNotification < Noticed::Base
   deliver_by :database
+  deliver_by :template_email, class: 'DeliveryMethods::TemplateEmail', queue: :critical
 
   param :user_email
   param :license_plate

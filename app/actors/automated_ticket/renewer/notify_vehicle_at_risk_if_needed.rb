@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class AutomatedTicket::Renewer::NotifyVehicleAtRiskIfNeeded < Actor
-  ACCEPTED_UNCOVERED_MINUTES = 5
+  ACCEPTED_UNCOVERED_MINUTES = 10
   input :automated_ticket
   input :zipcode
   input :jid, default: nil
@@ -23,7 +23,11 @@ class AutomatedTicket::Renewer::NotifyVehicleAtRiskIfNeeded < Actor
   end
 
   def vehicle_at_risk?
-    uncovered_since < ACCEPTED_UNCOVERED_MINUTES.minutes.ago
+    uncovered_since < uncovered_minutes_threshold.to_i.minutes.ago
+  end
+
+  def uncovered_minutes_threshold
+    ENV['PERVENCHE_ACCEPTED_UNCOVERED_MINUTES'] || ACCEPTED_UNCOVERED_MINUTES
   end
 
   def already_notified?

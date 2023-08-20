@@ -17,7 +17,7 @@ RSpec.describe AutomatedTicket::Renewer::NotifyVehicleAtRiskIfNeeded,
                       service:, zipcodes: ['75018'],
                       last_activated_at:)
   end
-  let(:last_activated_at) { 8.minutes.ago }
+  let(:last_activated_at) { 12.minutes.ago }
   let(:user) { FactoryBot.create(:user) }
   let(:service) { FactoryBot.create(:service, :without_validations, username: '+33678901234', password: 'password') }
 
@@ -59,7 +59,7 @@ RSpec.describe AutomatedTicket::Renewer::NotifyVehicleAtRiskIfNeeded,
             }
           end
           it 'should notify the user' do
-            expect { subject }.to change(Sidekiq::Queues['critical'], :size).from(0).to(1)
+            expect { subject }.to change(Sidekiq::Queues['critical'], :size).from(0).to(2)
             enqueded_job = Sidekiq::Queues['critical'].dig(0, 'args', 0, 'job_class')
             enqueded_job_notification_class_argument = Sidekiq::Queues['critical'].dig(0, 'args', 0, 'arguments', 0, 'notification_class')
             enqueded_job_params_argument = Sidekiq::Queues['critical'].dig(0, 'args', 0, 'arguments', 0, 'params')
@@ -69,8 +69,8 @@ RSpec.describe AutomatedTicket::Renewer::NotifyVehicleAtRiskIfNeeded,
           end
         end
       end
-      context 'when the automated ticket have been active for less than 5 minutes' do
-        let(:last_activated_at) { 4.minutes.ago }
+      context 'when the automated ticket have been active for less than 10 minutes' do
+        let(:last_activated_at) { 9.minutes.ago }
         it 'should not notify the user' do
           expect(VehicleAtRiskNotification).not_to receive(:with)
           subject
@@ -85,8 +85,8 @@ RSpec.describe AutomatedTicket::Renewer::NotifyVehicleAtRiskIfNeeded,
                           zipcode: '75018')
       end
       let(:minutes_ago) { 2 }
-      context 'when the last ticket has ended more than 5 minutes ago' do
-        let(:minutes_ago) { 6 }
+      context 'when the last ticket has ended more than 10 minutes ago' do
+        let(:minutes_ago) { 11 }
 
         context 'when the user have not been notified already' do
           let(:expected_enqued_job_params_argument) do
@@ -103,7 +103,7 @@ RSpec.describe AutomatedTicket::Renewer::NotifyVehicleAtRiskIfNeeded,
             }
           end
           it 'should notify the user' do
-            expect { subject }.to change(Sidekiq::Queues['critical'], :size).from(0).to(1)
+            expect { subject }.to change(Sidekiq::Queues['critical'], :size).from(0).to(2)
             enqueded_job = Sidekiq::Queues['critical'].dig(0, 'args', 0, 'job_class')
             enqueded_job_notification_class_argument = Sidekiq::Queues['critical'].dig(0, 'args', 0, 'arguments', 0, 'notification_class')
             enqueded_job_params_argument = Sidekiq::Queues['critical'].dig(0, 'args', 0, 'arguments', 0, 'params')
@@ -134,15 +134,15 @@ RSpec.describe AutomatedTicket::Renewer::NotifyVehicleAtRiskIfNeeded,
         end
 
         context 'when the last ticket ends_on is before the last_activated_at' do
-          context 'when the last_activated_at is less than 5 minutes ago' do
-            let(:last_activated_at) { 4.minutes.ago }
+          context 'when the last_activated_at is less than 10 minutes ago' do
+            let(:last_activated_at) { 9.minutes.ago }
             it 'should not notify the user' do
               expect(VehicleAtRiskNotification).not_to receive(:with)
               subject
             end
           end
           context 'when the last_activated_at is more than 5 minutes ago' do
-            let(:last_activated_at) { 6.minutes.ago }
+            let(:last_activated_at) { 11.minutes.ago }
             context 'when the user have not been notified already' do
               let(:expected_enqued_job_params_argument) do
                 {
@@ -158,7 +158,7 @@ RSpec.describe AutomatedTicket::Renewer::NotifyVehicleAtRiskIfNeeded,
                 }
               end
               it 'should notify the user' do
-                expect { subject }.to change(Sidekiq::Queues['critical'], :size).from(0).to(1)
+                expect { subject }.to change(Sidekiq::Queues['critical'], :size).from(0).to(2)
                 enqueded_job = Sidekiq::Queues['critical'].dig(0, 'args', 0, 'job_class')
                 enqueded_job_notification_class_argument = Sidekiq::Queues['critical'].dig(0, 'args', 0, 'arguments', 0, 'notification_class')
                 enqueded_job_params_argument = Sidekiq::Queues['critical'].dig(0, 'args', 0, 'arguments', 0, 'params')
