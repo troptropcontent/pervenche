@@ -6,7 +6,8 @@ module RequestSpecIncludableHelpers
     message = example.metadata[:message]
     method = example.metadata[:method]
     path = example.metadata[:path]
-    params = example.metadata[:params] || {}
+    body = request_body if respond_to?(:request_body)
+    params = example.metadata[:params] || body || {}
     rehydrated_path = path.gsub(/:[a-z_]+/) { |match| send(match[1..]).to_s }
     send(method, rehydrated_path, params:)
     expect(response.code).to eq(code)

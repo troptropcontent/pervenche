@@ -24,10 +24,10 @@ class VehicleAtRiskNotification < Noticed::Base
                 automated_ticket.id,
                 zipcode)
          .order(Arel.sql(
-                  "((params -> 'uncovered_since') ->> 'value')::timestamp ASC"
+                  "COALESCE(((params -> 'uncovered_since') ->> 'value') , (params->>'uncovered_since'))::timestamp ASC"
                 ))
          .pick(Arel.sql(
-                 "((params -> 'uncovered_since') ->> 'value')::timestamp"
+                 "COALESCE(((params -> 'uncovered_since') ->> 'value') , (params->>'uncovered_since'))::timestamp ASC"
                ))
     end
   end

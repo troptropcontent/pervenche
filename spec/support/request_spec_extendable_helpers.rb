@@ -24,4 +24,8 @@ module RequestSpecExtendableHelpers
   def params(&)
     metadata[:params] = yield
   end
+
+  def request_body(&)
+    let(:request_body, &)
+  end
 end

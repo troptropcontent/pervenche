@@ -8,7 +8,13 @@ class TicketToRenew < ApplicationRecord
 
   def notifications
     Notification.where(
-      "type = 'VehicleAtRiskNotification' AND params->>'automated_ticket_id' = ?::text AND params->>'zipcode' = ? AND ((params -> 'uncovered_since') ->> 'value')::timestamp >= ?", automated_ticket_id, zipcode, uncovered_since
+      "type = 'VehicleAtRiskNotification' " \
+      "AND params->>'automated_ticket_id' = ?::text " \
+      "AND params->>'zipcode' = ?::text " \
+      "AND COALESCE(((params -> 'uncovered_since') ->> 'value') , (params->>'uncovered_since'))::timestamp = ?",
+      automated_ticket_id,
+      zipcode,
+      uncovered_since
     ).order(:created_at)
   end
 end

@@ -40,6 +40,19 @@
       },
       {
         header: t('admin.automated_tickets_without_tickets.datatable.columns.action'),
-        format: ->(ticket_to_renew) {render Uistiti::Alpha::Button.new(color: :primary).with_content('Prevenir')}
+        format: ->(ticket_to_renew) { render ButtonComponent.new(
+          path: create_notifications_path('VehicleAtRiskNotification'), 
+          method: :post, 
+          params: {
+            notification: {
+              recipient_id: ticket_to_renew.automated_ticket.user.id,
+              user_email: ticket_to_renew.automated_ticket.user.email,
+              license_plate: ticket_to_renew.automated_ticket.license_plate,
+              zipcode: ticket_to_renew.zipcode,
+              uncovered_since: ticket_to_renew.uncovered_since,
+              automated_ticket_id: ticket_to_renew.automated_ticket.id
+            }
+          },
+          color: 'primary' ).with_content('Prevenir')}
       }]) %>
 </main>
