@@ -111,6 +111,15 @@ RSpec.describe AutomatedTicket::Renewer::NotifyVehicleAtRiskIfNeeded,
             expect(enqueded_job_notification_class_argument).to eq('Admin::VehicleAtRiskNotification')
             expect(enqueded_job_params_argument).to match(expected_enqued_job_params_argument)
           end
+
+          context 'when we are not during paying hours' do
+            it 'should not notify the user' do
+              travel_to(ActiveSupport::TimeZone['Paris'].parse('20:01:00')) do
+                expect(VehicleAtRiskNotification).not_to receive(:with)
+                subject
+              end
+            end
+          end
         end
 
         context 'when the user have been notified already' do
