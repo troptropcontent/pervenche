@@ -27,7 +27,7 @@ class Ability
     return unless user.has_role?('admin')
 
     # all admin abilities goes here
-    can %i[dashboard], :admin
+    can %i[dashboard automated_tickets_without_tickets], :admin
     can %i[show], Admin::Diagnostics::Client
     can %i[show], Admin::Diagnostics::TicketsToRenew
     can %i[show index destroy], Billing::Subscription

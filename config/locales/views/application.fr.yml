@@ -19,6 +19,7 @@ fr:
         billing_customer: Facturation et moyen de paiement
         subscriptions: Abonnements
         dashboard: Dashboard
+        automated_tickets_without_tickets: Tickets non pris
         export: Export tickets et abonnements
         emails: Emails template
     ui:

@@ -35,6 +35,9 @@ gem 'sentry-ruby'
 gem 'sentry-rails'
 gem 'sentry-sidekiq'
 
+#pagination
+gem 'kaminari'
+
 #Notification
 gem 'noticed'
 
