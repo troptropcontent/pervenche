@@ -5,6 +5,7 @@
 
 class VehicleAtRiskNotification < Noticed::Base
   deliver_by :database
+  deliver_by :template_email, class: 'DeliveryMethods::TemplateEmail', queue: :critical
 
   param :user_email
   param :license_plate
@@ -24,10 +25,10 @@ class VehicleAtRiskNotification < Noticed::Base
                 automated_ticket.id,
                 zipcode)
          .order(Arel.sql(
-                  "((params -> 'uncovered_since') ->> 'value')::timestamp ASC"
+                  "COALESCE(((params -> 'uncovered_since') ->> 'value') , (params->>'uncovered_since'))::timestamp ASC"
                 ))
          .pick(Arel.sql(
-                 "((params -> 'uncovered_since') ->> 'value')::timestamp"
+                 "COALESCE(((params -> 'uncovered_since') ->> 'value') , (params->>'uncovered_since'))::timestamp ASC"
                ))
     end
   end

@@ -3,7 +3,7 @@
       <%= content %>
     <% end %>
   <% else %>
-    <%= button_to @path, method: @method, form_class: 'stack', class: ['btn', "btn--#{@color}"], data: @data  do %>
+    <%= button_to @path, method: @method, params: @params, form_class: 'stack', class: ['btn', "btn--#{@color}"], data: @data  do %>
       <%= content %>
     <% end %>
 <% end %>
