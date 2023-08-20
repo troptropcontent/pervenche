@@ -31,8 +31,9 @@ gem 'stimulus-rails'
 gem 'phonelib'
 
 # Sentry to catch all errrors
-gem 'sentry-rails'
 gem 'sentry-ruby'
+gem 'sentry-rails'
+gem 'sentry-sidekiq'
 
 #Notification
 gem 'noticed'
