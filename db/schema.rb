@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 20_230_817_201_455) do
+ActiveRecord::Schema[7.0].define(version: 20_230_820_112_349) do
   # These are extensions that must be enabled in order to support this database
   enable_extension 'plpgsql'
 
@@ -196,4 +196,30 @@ ActiveRecord::Schema[7.0].define(version: 20_230_817_201_455) do
   add_foreign_key 'services', 'users'
   add_foreign_key 'ticket_requests', 'automated_tickets'
   add_foreign_key 'tickets', 'automated_tickets'
+
+  create_view 'ticket_to_renews', sql_definition: <<-SQL
+      SELECT unnested_automated_tickets.id AS automated_ticket_id,
+      unnested_automated_tickets.zipcode,
+      unnested_automated_tickets.last_activated_at,
+      last_ticket_ends_on_dates.last_ticket_ends_on,
+          CASE
+              WHEN ((last_ticket_ends_on_dates.last_ticket_ends_on IS NULL) OR (last_ticket_ends_on_dates.last_ticket_ends_on < unnested_automated_tickets.last_activated_at)) THEN unnested_automated_tickets.last_activated_at
+              ELSE last_ticket_ends_on_dates.last_ticket_ends_on
+          END AS uncovered_since
+     FROM ((( SELECT automated_tickets.id,
+              automated_tickets.active,
+              automated_tickets.status,
+              automated_tickets.license_plate,
+              unnest(automated_tickets.zipcodes) AS zipcode,
+              automated_tickets.last_activated_at
+             FROM automated_tickets
+            WHERE ((automated_tickets.active = true) AND (automated_tickets.status = 2))) unnested_automated_tickets
+       LEFT JOIN tickets ON (((tickets.automated_ticket_id = unnested_automated_tickets.id) AND (tickets.ends_on >= now()) AND ((tickets.zipcode)::text = (unnested_automated_tickets.zipcode)::text))))
+       LEFT JOIN ( SELECT tickets_1.automated_ticket_id,
+              tickets_1.zipcode,
+              max(tickets_1.ends_on) AS last_ticket_ends_on
+             FROM tickets tickets_1
+            GROUP BY tickets_1.automated_ticket_id, tickets_1.zipcode) last_ticket_ends_on_dates ON (((last_ticket_ends_on_dates.automated_ticket_id = unnested_automated_tickets.id) AND ((last_ticket_ends_on_dates.zipcode)::text = (unnested_automated_tickets.zipcode)::text))))
+    WHERE (tickets.id IS NULL);
+  SQL
 end

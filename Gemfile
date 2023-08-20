@@ -38,6 +38,9 @@ gem 'sentry-sidekiq'
 #pagination
 gem 'kaminari'
 
+#views
+gem "scenic"
+
 #Notification
 gem 'noticed'
 
