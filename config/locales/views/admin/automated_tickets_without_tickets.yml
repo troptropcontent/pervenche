@@ -1,0 +1,19 @@
+fr:
+  admin:
+    automated_tickets_without_tickets:
+      datatable:
+        columns:
+          automated_ticket_id: Id
+          user_email: email
+          zipcode: Zone
+          license_plate: Immat
+          uncovered_since: Depuis
+          last_notified: Alerte
+          kind: Type
+        rows:
+          last_notified:
+            empty: Pas encore notifié
+
+
+
+

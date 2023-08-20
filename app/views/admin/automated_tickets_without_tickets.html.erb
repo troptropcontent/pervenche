@@ -3,8 +3,43 @@
         <div class="center box box--danger">
           <%= render Uistiti::Alpha::Flex.new(direction: :row)  do %>
             <h1>Tickets non pris</h1>
-            <h1><%= 18 %></h1> 
+            <h1><%= @ticket_to_renews.count %></h1> 
           <% end %>
         </div>
     </section>
+    <%= render DatatableComponent.new(
+      rows: @ticket_to_renews, 
+      columns: [
+      {
+        header: t('admin.automated_tickets_without_tickets.datatable.columns.automated_ticket_id'),
+        field: 'automated_ticket_id'
+      },
+      {
+        header: t('admin.automated_tickets_without_tickets.datatable.columns.automated_ticket_id'),
+        format: ->(ticket_to_renew) {ticket_to_renew.automated_ticket.user.email}
+      },
+      {
+        header: t('admin.automated_tickets_without_tickets.datatable.columns.license_plate'),
+        format: ->(ticket_to_renew) {ticket_to_renew.automated_ticket.license_plate}
+      },
+      {
+        header: t('admin.automated_tickets_without_tickets.datatable.columns.zipcode'),
+        field: 'zipcode'
+      },
+      {
+        header: t('admin.automated_tickets_without_tickets.datatable.columns.kind'),
+        format: ->(ticket_to_renew) {AutomatedTicket.human_enum_name(:kinds, ticket_to_renew.automated_ticket.kind)}
+      },
+      {
+        header: t('admin.automated_tickets_without_tickets.datatable.columns.uncovered_since'),
+        format: ->(ticket_to_renew) {time_ago_in_words(ticket_to_renew.uncovered_since)}
+      },
+      {
+        header: t('admin.automated_tickets_without_tickets.datatable.columns.last_notified'),
+        format: ->(ticket_to_renew) { ticket_to_renew.notifications.last ? time_ago_in_words(ticket_to_renew.notifications.last.created_at) :  t('admin.automated_tickets_without_tickets.datatable.rows.last_notified.empty')}
+      },
+      {
+        header: t('admin.automated_tickets_without_tickets.datatable.columns.action'),
+        format: ->(ticket_to_renew) {render Uistiti::Alpha::Button.new(color: :primary).with_content('Prevenir')}
+      }]) %>
 </main>
