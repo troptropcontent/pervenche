@@ -3,6 +3,7 @@
 
 class ApplicationController < ActionController::Base
   include ControllerErrorManager
+  impersonates :user
 
   before_action :authenticate_user!
   load_and_authorize_resource unless: :devise_controller?
@@ -33,7 +34,7 @@ class ApplicationController < ActionController::Base
   def load_layout_variables
     return unless current_user
 
-    @menu_links = MenuLinksGenerator.call(current_user)
+    @menu_links = MenuLinksGenerator.call(current_user, true_user)
   end
 
   def html_request?

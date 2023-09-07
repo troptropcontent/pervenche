@@ -36,5 +36,6 @@ class Ability
 
     can %i[export], AutomatedTicket
     can %i[index show deliver], Emails::Template
+    can %i[index impersonate stop_impersonating], User
   end
 end
