@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
   def operationnal_controller?
     !devise_controller? &&
       !webhooks_controller? &&
-      %w[onboardings shared_views setups setup].exclude?(controller_name) &&
+      %w[onboardings shared_views setups setup users].exclude?(controller_name) &&
       %w[new create update].exclude?(action_name)
   end
 
