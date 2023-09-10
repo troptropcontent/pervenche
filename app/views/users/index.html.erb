@@ -1,0 +1,6 @@
+<%= render Uistiti::Alpha::Flex.new(direction: :column, align_items: :center)  do %>
+  <% @users.each do |user| %>
+    <span class='cluster'>Sign in as <%= button_to user.email, impersonate_user_path(user) %></span>
+  <% end %>
+  <%== pagy_nav(@pagy) if @pagy.pages > 1 %>
+<% end %>

@@ -2,6 +2,14 @@
 
 require 'sidekiq/web'
 Rails.application.routes.draw do
+  # Defines the root path route ("/")
+  root 'roots#index'
+
+  resources :users, only: [:index] do
+    post :impersonate, on: :member
+    post :stop_impersonating, on: :collection
+  end
+
   namespace :emails do
     resources :templates, only: %i[index show] do
       post :deliver
@@ -9,8 +17,6 @@ Rails.application.routes.draw do
   end
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
 
-  # Defines the root path route ("/")
-  root 'automated_tickets#index'
   resources :services, only: %i[new create edit update]
   resources :automated_tickets, only: %i[new index destroy update] do
     collection do

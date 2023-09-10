@@ -22,6 +22,7 @@ fr:
         automated_tickets_without_tickets: Tickets non pris
         export: Export tickets et abonnements
         emails: Emails template
+        back_to_admin: Espace admin
     ui:
       table:
         totals:

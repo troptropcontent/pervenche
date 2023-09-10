@@ -2,6 +2,8 @@
 # typed: true
 
 module ApplicationHelper
+  include Pagy::Frontend
+
   extend T::Sig
   def empty_inputs_for(form, record_class, field)
     input_name = "#{form.object_name}[#{field}]"
