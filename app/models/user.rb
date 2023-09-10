@@ -17,6 +17,9 @@ class User < ApplicationRecord
   has_many :automated_tickets, dependent: :destroy
   has_many :notifications, as: :recipient, dependent: :destroy
 
+  # Check if a user can access something
+  delegate :can?, :cannot?, :authorize!, to: :ability
+
   def self.from_omniauth(auth)
     find_or_create_by(provider: auth.provider, uid: auth.uid) do |user|
       user.email = auth.info.email
@@ -26,6 +29,10 @@ class User < ApplicationRecord
 
   def operationnal?
     services.joins(:automated_tickets).where(automated_tickets: { status: :ready }).present?
+  end
+
+  def ability
+    @ability ||= Ability.new(self)
   end
 
   private

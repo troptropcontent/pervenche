@@ -35,6 +35,12 @@ gem 'sentry-ruby'
 gem 'sentry-rails'
 gem 'sentry-sidekiq'
 
+# allow admin users to sign in as another user
+gem "pretender"
+
+# Pagination
+gem 'pagy'
+
 #pagination
 gem 'kaminari'
 

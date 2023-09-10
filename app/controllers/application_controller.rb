@@ -3,6 +3,7 @@
 
 class ApplicationController < ActionController::Base
   include ControllerErrorManager
+  impersonates :user
 
   before_action :authenticate_user!
   load_and_authorize_resource unless: :devise_controller?
@@ -18,7 +19,7 @@ class ApplicationController < ActionController::Base
   def operationnal_controller?
     !devise_controller? &&
       !webhooks_controller? &&
-      %w[onboardings shared_views setups setup].exclude?(controller_name) &&
+      %w[onboardings shared_views setups setup users].exclude?(controller_name) &&
       %w[new create update].exclude?(action_name)
   end
 
@@ -33,7 +34,7 @@ class ApplicationController < ActionController::Base
   def load_layout_variables
     return unless current_user
 
-    @menu_links = MenuLinksGenerator.call(current_user)
+    @menu_links = MenuLinksGenerator.call(current_user, true_user)
   end
 
   def html_request?
