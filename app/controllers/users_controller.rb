@@ -1,10 +1,12 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController
+  include Pagy::Backend
   skip_load_and_authorize_resource
   before_action :require_admin!
   def index
-    @users = User.where.not(id: current_user.id).order(:id)
+    users = User.where.not(id: current_user.id).order(:email)
+    @pagy, @users = pagy(users)
   end
 
   def impersonate
