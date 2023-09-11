@@ -38,6 +38,9 @@ gem 'sentry-sidekiq'
 # allow admin users to sign in as another user
 gem "pretender"
 
+#erb linting
+gem 'erb_lint', require: false
+
 # Pagination
 gem 'pagy'
 

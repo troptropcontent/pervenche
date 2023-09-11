@@ -35,7 +35,9 @@ Rails.application.routes.draw do
         resource :address, only: %i[update edit]
       end
     end
-    resources :subscriptions, only: %i[index destroy], param: :subscription_id
+    resources :subscriptions, only: %i[index destroy], param: :subscription_id do
+      resources :invoices, only: %i[index], param: :subscription_id
+    end
   end
 
   resource :onboarding, only: :show do
