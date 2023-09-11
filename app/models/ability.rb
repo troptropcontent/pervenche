@@ -21,7 +21,7 @@ class Ability
       can %i[edit update], Billing::Address do |address|
         user.chargebee_customer_id == address.customer.client_id
       end
-      can %i[destroy], Billing::Subscription, customer_id: user.chargebee_customer_id
+      can %i[index destroy], Billing::Subscription, customer_id: user.chargebee_customer_id
     end
 
     return unless user.has_role?('admin')

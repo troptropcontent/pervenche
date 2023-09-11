@@ -34,6 +34,11 @@
         <% end %>
       <% else %>
     <% end %>
+    <% if subscription.invoices.any? %>
+      <%= render Uistiti::Alpha::Link.new(path: billing_subscription_invoices_path(subscription_subscription_id: subscription.id)) do %>
+        <%= t('views.billing.subscriptions.partial.invoices') %>
+      <% end %>
+    <% end %>
     <% if subscription.cancelled_at.nil? %>      
       <%= render ButtonComponent.new(path: billing_subscription_path(subscription_id: subscription.client_id), method: :delete, color: 'danger')  do %>
         <%= t('views.billing.subscriptions.partial.cancel_cta') %>

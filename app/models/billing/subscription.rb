@@ -3,6 +3,7 @@ module Billing
     extend ActiveModel::Naming
     include ActiveModel::Conversion
 
+    const :id, String
     const :customer_id, String
     const :plan_id, String
     const :holder_id, T.nilable(Integer)
@@ -38,6 +39,7 @@ module Billing
 
       def build_subscription_from_hash(subscription_hash)
         new(
+          id: subscription_hash.dig('subscription', 'id'),
           customer_id: subscription_hash.dig('subscription', 'customer_id'),
           client_id: subscription_hash.dig('subscription', 'id'),
           holder_id: subscription_hash.dig('subscription', 'cf_holder_id'),
@@ -100,6 +102,14 @@ module Billing
 
     def customer
       @customer ||= Billing::Customer.find(customer_id)
+    end
+
+    def invoices(cached: true)
+      if cached
+        @invoices ||= Billing::Invoice.list(subscription_id: id)
+      else
+        Billing::Invoice.list(subscription_id: id)
+      end
     end
   end
 end
