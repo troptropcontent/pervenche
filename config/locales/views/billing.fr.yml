@@ -33,6 +33,12 @@ fr:
             header:
               title: Modifier votre addresse de facturation
               subtitle: Cette addresse apparaitra sur vos factures
+        invoices:
+          partial:
+            invoice_from: Facture du %{trial_ends_at}
+            download: Télécharger
+            status:
+              paid: "Payé"
         subscriptions:
           index: 
             title: Abonnements
@@ -60,6 +66,7 @@ fr:
           partial:
             cancel_cta: Terminer l'abonnement
             trial_ends_at_html: "Fin de la période d'éssai le <b>%{trial_ends_at}</b>"
+            invoices: "Consulter les factures pour cet abonnement"
             next_billing_at_html: "Prochaine échéance le <b>%{next_billing_at}</b>"
             cancelled_at_html: "Fin de l'abonnement le <b>%{cancelled_at}</b>"
             started_at_html: "Depuis le <b>%{started_at}</b>"

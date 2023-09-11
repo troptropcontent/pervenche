@@ -1,0 +1,14 @@
+<%= render CardComponent.new(padding: 'm') do %>
+  <%= render Uistiti::Alpha::Flex.new(direction: :row, justify_content: 'space-between', align_items: 'center')  do %>
+   <%= t('views.billing.invoices.partial.invoice_from', trial_ends_at: l(invoice.date, format: :short_no_time)) %>
+
+   <% if invoice.status == 'paid' %>
+        <%= render Uistiti::Alpha::Token.new(color: :success, icon: :done).with_content(t('views.billing.invoices.partial.status.paid')) %>
+      <% end %>
+  <% end %>
+  <% if invoice.download_url %>
+    <%= render Uistiti::Alpha::Link.new(path: invoice.download_url) do %>
+     <%= t('views.billing.invoices.partial.download') %>
+    <% end %>
+  <% end %>
+<% end %>
