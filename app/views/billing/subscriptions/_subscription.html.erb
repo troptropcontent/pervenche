@@ -30,7 +30,7 @@
         <% end %>
       <% elsif subscription.next_billing_at %>
         <%= render TextComponent.new do %>
-          <%= t('views.billing.subscriptions.partial.trial_ends_at_html', trial_ends_at: l(subscription.trial_ends_at, format: :short)) %>
+          <%= t('views.billing.subscriptions.partial.next_billing_at_html', next_billing_at: l(subscription.next_billing_at, format: :short)) %>
         <% end %>
       <% else %>
     <% end %>
