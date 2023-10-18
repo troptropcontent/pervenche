@@ -24,7 +24,7 @@
         <%= render TextComponent.new do %>
           <%= t('views.billing.subscriptions.partial.cancelled_at_html', cancelled_at: l(subscription.cancelled_at, format: :short)) %>
         <% end %>
-      <% elsif subscription.trial_ends_at.future? %>
+      <% elsif subscription.trial_ends_at&.future? %>
         <%= render TextComponent.new do %>
           <%= t('views.billing.subscriptions.partial.trial_ends_at_html', trial_ends_at: l(subscription.trial_ends_at, format: :short)) %>
         <% end %>
