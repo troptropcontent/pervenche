@@ -1,24 +1,11 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is the source code of my personnal project Pervenche wich is no more online. 
 
-Things you may want to cover:
+This application was allowing parisian vehicle owner to automaticaly renew there ârking ticket to avoid fines: 
 
-* Ruby version
+I had to shut it down because Paris regulation changed on September first, it xhanged in the way that all electric scooter can now park anywhere without the need of a 'free ticket', so i lost 90 % of my customer in a day. 
 
-* System dependencies
+Through its 4 months of activity the application gathered 90 daily active users, a max pace of 800 ticket taken everyday and a total amount of 62 000 tickets taken by the system. 
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+I did a meetup a few months ago to explain how i did, the video is [here]([url](https://youtu.be/ERLdFyoEL-A?si=bXLq_K8wgkWKBK_-)https://youtu.be/ERLdFyoEL-A?si=bXLq_K8wgkWKBK_-)
